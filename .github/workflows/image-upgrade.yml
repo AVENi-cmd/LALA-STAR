@@ -56,17 +56,18 @@ jobs:
           from pathlib import Path
           p=Path('index.html')
           s=p.read_text()
-          for name in ['warehouse-hero','food-products','plastic-products','sweets-snacks']:
-              s=s.replace(f"assets/{name}.jpg",f"assets/optimized/{name}-1600.webp")
-          replacements={
-          'food-products':'المواد الغذائية — FOOD PRODUCTS',
-          'plastic-products':'المنتجات البلاستيكية — PLASTIC PRODUCTS',
-          'sweets-snacks':'الحلويات والسناكات — SWEETS & SNACKS'
+          remote={
+            'food-products':'https://images.unsplash.com/photo-1773946836315-bd8269b62b93?auto=format&fit=crop&fm=jpg&q=88&w=2400',
+            'plastic-products':'https://images.unsplash.com/photo-1713900105420-67ae6dbf3595?auto=format&fit=crop&fm=jpg&q=88&w=2400',
+            'sweets-snacks':'https://images.unsplash.com/photo-1759167632930-298bca6b4268?auto=format&fit=crop&fm=jpg&q=88&w=2400',
+            'warehouse-hero':'https://images.unsplash.com/photo-1645736315000-6f788915923b?auto=format&fit=crop&fm=jpg&q=88&w=2400'
           }
-          for name,alt in replacements.items():
-              old=f'<img src="assets/optimized/{name}-1600.webp" alt="{alt}">'
-              new=f'<picture><source type="image/webp" srcset="assets/optimized/{name}-640.webp 640w, assets/optimized/{name}-1280.webp 1280w, assets/optimized/{name}-1600.webp 1600w" sizes="(max-width:850px) 100vw, 50vw"><img src="assets/optimized/{name}-1280.jpg" alt="{alt}" width="1280" height="720" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'assets/{name}.jpg\'"></picture>'
-              s=s.replace(old,new)
+          for name,url in remote.items():
+              s=s.replace(f"assets/optimized/{name}-1600.webp",url)
+              s=s.replace(f"assets/optimized/{name}-1280.jpg",url)
+              s=s.replace(f"assets/{name}.jpg",url)
+              s=s.replace(f"assets/optimized/{name}-640.webp 640w, assets/optimized/{name}-1280.webp 1280w, assets/optimized/{name}-1600.webp 1600w",f"{url}&w=640 640w, {url}&w=1280 1280w, {url} 2400w")
+          s=s.replace('object-fit:contain;background:#fff','object-fit:cover;background:#fff')
           p.write_text(s)
           PY
       - name: Remove model and commit optimized assets
@@ -76,5 +77,5 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add assets/optimized index.html
           git diff --cached --quiet && exit 0
-          git commit -m 'Improve website image quality and responsive delivery'
+          git commit -m 'Use high-resolution activity and warehouse photography'
           git push
