@@ -1,1 +1,0 @@
-Generated category images are being prepared.
