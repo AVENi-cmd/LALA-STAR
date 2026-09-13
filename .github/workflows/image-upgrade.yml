@@ -28,19 +28,16 @@ jobs:
           python - <<'PY'
           import cv2, os
           from PIL import Image, ImageEnhance, ImageFilter
-          model_path='.image-model/EDSR_x4.pb'
           sr=cv2.dnn_superres.DnnSuperResImpl_create()
-          sr.readModel(model_path)
+          sr.readModel('.image-model/EDSR_x4.pb')
           sr.setModel('edsr',4)
-          names=['warehouse-hero','food-products','plastic-products','sweets-snacks']
           os.makedirs('assets/optimized',exist_ok=True)
-          for name in names:
+          for name in ['warehouse-hero','food-products','plastic-products','sweets-snacks']:
               src=f'assets/{name}.jpg'
               im=cv2.imread(src, cv2.IMREAD_COLOR)
               if im is None: raise SystemExit(f'Cannot read {src}')
               up=sr.upsample(im)
-              rgb=cv2.cvtColor(up,cv2.COLOR_BGR2RGB)
-              pil=Image.fromarray(rgb)
+              pil=Image.fromarray(cv2.cvtColor(up,cv2.COLOR_BGR2RGB))
               pil=ImageEnhance.Contrast(pil).enhance(1.04)
               pil=ImageEnhance.Color(pil).enhance(1.03)
               pil=pil.filter(ImageFilter.UnsharpMask(radius=0.9, percent=65, threshold=3))
@@ -54,19 +51,20 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
+          import re
           p=Path('index.html')
           s=p.read_text()
           remote={
-            'food-products':'https://images.unsplash.com/photo-1773946836315-bd8269b62b93?auto=format&fit=crop&fm=jpg&q=88&w=2400',
-            'plastic-products':'https://images.unsplash.com/photo-1713900105420-67ae6dbf3595?auto=format&fit=crop&fm=jpg&q=88&w=2400',
-            'sweets-snacks':'https://images.unsplash.com/photo-1759167632930-298bca6b4268?auto=format&fit=crop&fm=jpg&q=88&w=2400',
-            'warehouse-hero':'https://images.unsplash.com/photo-1645736315000-6f788915923b?auto=format&fit=crop&fm=jpg&q=88&w=2400'
+            'food-products':'https://images.unsplash.com/photo-1773946836315-bd8269b62b93?auto=format&fit=crop&fm=jpg&q=88',
+            'plastic-products':'https://images.unsplash.com/photo-1713900105420-67ae6dbf3595?auto=format&fit=crop&fm=jpg&q=88',
+            'sweets-snacks':'https://images.unsplash.com/photo-1759167632930-298bca6b4268?auto=format&fit=crop&fm=jpg&q=88',
+            'warehouse-hero':'https://images.unsplash.com/photo-1645736315000-6f788915923b?auto=format&fit=crop&fm=jpg&q=88'
           }
           for name,url in remote.items():
-              s=s.replace(f"assets/optimized/{name}-1600.webp",url)
-              s=s.replace(f"assets/optimized/{name}-1280.jpg",url)
-              s=s.replace(f"assets/{name}.jpg",url)
-              s=s.replace(f"assets/optimized/{name}-640.webp 640w, assets/optimized/{name}-1280.webp 1280w, assets/optimized/{name}-1600.webp 1600w",f"{url}&w=640 640w, {url}&w=1280 1280w, {url} 2400w")
+              s=re.sub(r'assets/optimized/'+name+r'-1600\.webp',url+'&w=2400',s)
+              s=re.sub(r'assets/optimized/'+name+r'-1280\.jpg',url+'&w=2400',s)
+              s=re.sub(r'assets/'+name+r'\.jpg',url+'&w=2400',s)
+              s=re.sub(r'srcset="[^"]*assets/optimized/'+name+r'-640\.webp[^\"]*"',f'srcset="{url}&w=640 640w, {url}&w=1280 1280w, {url}&w=2400 2400w"',s)
           s=s.replace('object-fit:contain;background:#fff','object-fit:cover;background:#fff')
           p.write_text(s)
           PY
