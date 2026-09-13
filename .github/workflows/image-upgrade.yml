@@ -22,7 +22,7 @@ jobs:
       - name: Download EDSR 4x model
         run: |
           mkdir -p .image-model
-          curl -L --fail --retry 3 -o .image-model/EDSR_x4.pb https://github.com/fannymonori/TF-ESPCN/raw/master/export/EDSR_x4.pb
+          curl -L --fail --retry 3 -o .image-model/EDSR_x4.pb https://github.com/Saafke/EDSR_Tensorflow/raw/master/models/EDSR_x4.pb
       - name: Generate responsive high-quality images
         run: |
           python - <<'PY'
