@@ -1,0 +1,80 @@
+name: Upgrade website images
+on:
+  push:
+    paths:
+      - 'assets/food-products.jpg'
+      - 'assets/plastic-products.jpg'
+      - 'assets/sweets-snacks.jpg'
+      - 'assets/warehouse-hero.jpg'
+      - '.github/workflows/image-upgrade.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  upgrade:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install image tools
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install opencv-contrib-python-headless pillow numpy
+      - name: Download EDSR 4x model
+        run: |
+          mkdir -p .image-model
+          curl -L --fail --retry 3 -o .image-model/EDSR_x4.pb https://github.com/fannymonori/TF-ESPCN/raw/master/export/EDSR_x4.pb
+      - name: Generate responsive high-quality images
+        run: |
+          python - <<'PY'
+          import cv2, os
+          from PIL import Image, ImageEnhance, ImageFilter
+          model_path='.image-model/EDSR_x4.pb'
+          sr=cv2.dnn_superres.DnnSuperResImpl_create()
+          sr.readModel(model_path)
+          sr.setModel('edsr',4)
+          names=['warehouse-hero','food-products','plastic-products','sweets-snacks']
+          os.makedirs('assets/optimized',exist_ok=True)
+          for name in names:
+              src=f'assets/{name}.jpg'
+              im=cv2.imread(src, cv2.IMREAD_COLOR)
+              if im is None: raise SystemExit(f'Cannot read {src}')
+              up=sr.upsample(im)
+              rgb=cv2.cvtColor(up,cv2.COLOR_BGR2RGB)
+              pil=Image.fromarray(rgb)
+              pil=ImageEnhance.Contrast(pil).enhance(1.04)
+              pil=ImageEnhance.Color(pil).enhance(1.03)
+              pil=pil.filter(ImageFilter.UnsharpMask(radius=0.9, percent=65, threshold=3))
+              for w in (640,1280,1600):
+                  h=round(pil.height*w/pil.width)
+                  out=pil.resize((w,h),Image.Resampling.LANCZOS)
+                  out.save(f'assets/optimized/{name}-{w}.webp','WEBP',quality=82,method=6)
+                  out.save(f'assets/optimized/{name}-{w}.jpg','JPEG',quality=86,optimize=True,progressive=True)
+          PY
+      - name: Update HTML image sources
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          for name in ['warehouse-hero','food-products','plastic-products','sweets-snacks']:
+              s=s.replace(f"assets/{name}.jpg",f"assets/optimized/{name}-1600.webp")
+          replacements={
+          'food-products':'المواد الغذائية — FOOD PRODUCTS',
+          'plastic-products':'المنتجات البلاستيكية — PLASTIC PRODUCTS',
+          'sweets-snacks':'الحلويات والسناكات — SWEETS & SNACKS'
+          }
+          for name,alt in replacements.items():
+              old=f'<img src="assets/optimized/{name}-1600.webp" alt="{alt}">'
+              new=f'<picture><source type="image/webp" srcset="assets/optimized/{name}-640.webp 640w, assets/optimized/{name}-1280.webp 1280w, assets/optimized/{name}-1600.webp 1600w" sizes="(max-width:850px) 100vw, 50vw"><img src="assets/optimized/{name}-1280.jpg" alt="{alt}" width="1280" height="720" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'assets/{name}.jpg\'"></picture>'
+              s=s.replace(old,new)
+          p.write_text(s)
+          PY
+      - name: Remove model and commit optimized assets
+        run: |
+          rm -rf .image-model
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/optimized index.html
+          git diff --cached --quiet && exit 0
+          git commit -m 'Improve website image quality and responsive delivery'
+          git push
