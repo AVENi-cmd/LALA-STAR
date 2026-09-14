@@ -74,5 +74,12 @@ for pattern in secret_patterns:
     if re.search(pattern, html):
         errors.append("Possible credential/private key detected in index.html")
 
+# The production source of truth is assets/optimized. Legacy assets/images is
+# intentionally empty and must not be required by the audit.
+if "assets/images/" in html:
+    errors.append("Legacy assets/images reference remains in index.html")
+if "assets/optimized/" not in html:
+    errors.append("Approved optimized image references are missing from index.html")
+
 fail(errors)
 print(f"Production checks passed: {len(refs)} local image references, {len(parser.ids)} IDs, and all same-page anchors verified.")
