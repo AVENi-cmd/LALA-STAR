@@ -27,11 +27,8 @@ def validate_assets():
                 raise RuntimeError(f"Invalid WebP format: {p}")
 
 def version_assets(html):
-    return re.sub(
-        r'assets/images/(warehouse(?:-desktop|-mobile|-tablet)|food-products(?:-desktop|-mobile|-tablet)|plastic-products(?:-desktop|-mobile|-tablet)|sweets-snacks(?:-desktop|-mobile|-tablet))\.webp(?:\?v=[^\s\"\']+)?',
-        rf'assets/images/\\1.webp?v={ASSET_VERSION}',
-        html,
-    )
+    pattern = r'assets/images/(warehouse(?:-desktop|-mobile|-tablet)|food-products(?:-desktop|-mobile|-tablet)|plastic-products(?:-desktop|-mobile|-tablet)|sweets-snacks(?:-desktop|-mobile|-tablet))\.webp(?:\?v=[^\s\"\']+)?'
+    return re.sub(pattern, rf'assets/images/\1.webp?v={ASSET_VERSION}', html)
 
 def inject_i18n(html):
     html = re.sub(r'<script[^>]*src=["\']assets/i18n\.js[^>]*></script>', '', html)
@@ -57,5 +54,4 @@ def main():
         raise RuntimeError("SEO marker missing")
     INDEX.write_text(html, encoding="utf-8")
 
-if __name__ == "__main__":
-    main()
+if __name__ == "__main__": main()
