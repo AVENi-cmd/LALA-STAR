@@ -5,16 +5,16 @@ from PIL import Image, ImageOps
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_DIR = ROOT / "assets" / "optimized"
 INDEX = ROOT / "index.html"
-ASSET_VERSION = "20260915-4"
+ASSET_VERSION = "20260915-5"
 SOURCES = {"warehouse":"warehouse-hero","food-products":"food-products","plastic-products":"plastic-products","sweets-snacks":"sweets-snacks"}
 SIZES = {"mobile":640,"tablet":1280,"desktop":1600}
 SEO_MARKER = '<meta name="lalastar-seo-v1" content="managed-by-build-webp">'
 
 def build_approved_webp():
-    for base in SOURCES.values():
-        source = SOURCE_DIR / f"{base}-1600.jpg"
-        if not source.is_file() or source.stat().st_size < 50000:
-            raise RuntimeError(f"Missing or suspiciously small approved JPG source: {source}")
+    for name,base in SOURCES.items():
+        source = (ROOT / "assets" / "IMG_3042.jpeg") if name == "warehouse" else (SOURCE_DIR / f"{base}-1600.jpg")
+        if not source.is_file() or source.stat().st_size < 30000:
+            raise RuntimeError(f"Missing or suspiciously small approved image source: {source}")
         with Image.open(source) as im:
             im = im.convert("RGB")
             for size in sorted(set(SIZES.values())):
