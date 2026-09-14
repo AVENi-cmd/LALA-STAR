@@ -1,32 +1,25 @@
 from pathlib import Path
 from PIL import Image, ImageOps
 import re
+import subprocess
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_DIR = ROOT / "assets" / "optimized"
 OUTPUT_DIR = ROOT / "assets" / "images"
 INDEX = ROOT / "index.html"
-
-SOURCES = {
-    "warehouse": SOURCE_DIR / "warehouse-hero-1600.webp",
-    "food-products": SOURCE_DIR / "food-products-1600.webp",
-    "plastic-products": SOURCE_DIR / "plastic-products-1600.webp",
-    "sweets-snacks": SOURCE_DIR / "sweets-snacks-1600.webp",
-}
+SOURCES = {"warehouse": SOURCE_DIR / "warehouse-hero-1600.webp", "food-products": SOURCE_DIR / "food-products-1600.webp", "plastic-products": SOURCE_DIR / "plastic-products-1600.webp", "sweets-snacks": SOURCE_DIR / "sweets-snacks-1600.webp"}
 VARIANTS = {"desktop": (1920, 1080), "tablet": (1024, 1024), "mobile": (750, 1000)}
 QUALITY = 88
 SEO_MARKER = '<meta name="lalastar-seo-v1" content="managed-by-build-webp">'
 SEO_BLOCK = '''<meta name="lalastar-seo-v1" content="managed-by-build-webp"><meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="https://aveni-cmd.github.io/LALA-STAR/"><meta property="og:type" content="website"><meta property="og:locale" content="ar_SA"><meta property="og:site_name" content="شركة لألأة النجوم التجارية | LALA STAR TRADING CO."><meta property="og:title" content="شركة لألأة النجوم التجارية | LALA STAR TRADING CO."><meta property="og:description" content="شركة لألأة النجوم التجارية — بيع المواد الغذائية بالجملة منذ 1993، مع أنشطة البلاستيك والحلويات والوجبات الخفيفة في الدمام والأحساء."><meta property="og:url" content="https://aveni-cmd.github.io/LALA-STAR/"><meta property="og:image" content="https://aveni-cmd.github.io/LALA-STAR/assets/images/warehouse-desktop.webp"><meta property="og:image:type" content="image/webp"><meta property="og:image:width" content="1920"><meta property="og:image:height" content="1080"><meta property="og:image:alt" content="مستودع تجاري للمواد والسلع بالجملة"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="شركة لألأة النجوم التجارية | LALA STAR TRADING CO."><meta name="twitter:description" content="بيع المواد الغذائية بالجملة منذ 1993، مع أنشطة البلاستيك والحلويات والوجبات الخفيفة."><meta name="twitter:image" content="https://aveni-cmd.github.io/LALA-STAR/assets/images/warehouse-desktop.webp"><script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"شركة لألأة النجوم التجارية","alternateName":"LALA STAR TRADING CO.","description":"شركة لبيع المواد الغذائية بالجملة، مع أنشطة مستقلة في المنتجات البلاستيكية والحلويات والوجبات الخفيفة.","foundingDate":"1993","telephone":"0138562508","email":"starcoldstore@yahoo.com","url":"https://aveni-cmd.github.io/LALA-STAR/","logo":"https://aveni-cmd.github.io/LALA-STAR/assets/lala-star-logo.png","address":{"@type":"PostalAddress","addressLocality":"Dammam","addressCountry":"SA"},"areaServed":"SA"}</script>'''
 
-
-def find_source(name: str, preferred: Path) -> Path:
+def find_source(name, preferred):
     if preferred.exists(): return preferred
     candidates = sorted(SOURCE_DIR.glob(f"{name}*.webp"))
     if not candidates: raise FileNotFoundError(f"No valid WebP source found for: {name}")
     return candidates[-1]
 
-
-def build_one(source: Path, output: Path, size: tuple[int, int]) -> None:
+def build_one(source, output, size):
     with Image.open(source) as image:
         image = ImageOps.exif_transpose(image).convert("RGB")
         rendered = ImageOps.fit(image, size, method=Image.Resampling.LANCZOS, centering=(0.5, 0.5))
@@ -38,45 +31,42 @@ def build_one(source: Path, output: Path, size: tuple[int, int]) -> None:
         if check.format != "WEBP" or check.size != size: raise RuntimeError(f"Invalid output metadata: {output}")
     print(f"OK {output} | {size[0]}x{size[1]} | {len(data)} bytes")
 
-
-def replace_unsplash_urls(html: str) -> str:
+def replace_unsplash_urls(html):
     sources = {"1645736315000-6f788915923b":"warehouse","1773946836315-bd8269b62b93":"food-products","1713900105420-67ae6dbf3595":"plastic-products","1759167632930-298bca6b4268":"sweets-snacks"}
-    url_pattern = re.compile(r"https://images\.unsplash\.com/photo-([0-9]+-[a-z0-9]+)\?[^\"'\s>)]+")
-    def repl(match: re.Match[str]) -> str:
+    url_pattern = re.compile(r"https://images\\.unsplash\\.com/photo-([0-9]+-[a-z0-9]+)\\?[^\\\"'\\s>)]+")
+    def repl(match):
         photo_id = match.group(1); name = sources.get(photo_id)
         if not name: return match.group(0)
-        full = match.group(0); width_match = re.search(r"[?&]w=(\d+)", full); width = int(width_match.group(1)) if width_match else 2400
+        full = match.group(0); width_match = re.search(r"[?&]w=(\\d+)", full); width = int(width_match.group(1)) if width_match else 2400
         if name == "warehouse": return "assets/images/warehouse-desktop.webp"
         if width <= 640: return f"assets/images/{name}-mobile.webp"
         if width <= 1280: return f"assets/images/{name}-tablet.webp"
         return f"assets/images/{name}-desktop.webp"
     return url_pattern.sub(repl, html)
 
-
-def optimize_performance_markup(html: str) -> str:
-    html = re.sub(r'(assets/images/(?:food-products|plastic-products|sweets-snacks)-mobile\.webp)\s+\d+w', r'\1 750w', html)
-    html = re.sub(r'(assets/images/(?:food-products|plastic-products|sweets-snacks)-tablet\.webp)\s+\d+w', r'\1 1024w', html)
-    html = re.sub(r'(assets/images/(?:food-products|plastic-products|sweets-snacks)-desktop\.webp)\s+\d+w', r'\1 1920w', html)
-    html = re.sub(r'\s+onerror="this\.onerror=null;this\.src=\'assets/images/(?:food-products|plastic-products|sweets-snacks)-desktop\.webp\'"', '', html)
-    html = re.sub(r'(assets/images/(?:food-products|plastic-products|sweets-snacks)-desktop\.webp"[^>]*?)width="1280" height="720"', r'\1width="1920" height="1080"', html)
+def optimize_performance_markup(html):
+    html = re.sub(r'(assets/images/(?:food-products|plastic-products|sweets-snacks)-mobile\\.webp)\\s+\\d+w', r'\\1 750w', html)
+    html = re.sub(r'(assets/images/(?:food-products|plastic-products|sweets-snacks)-tablet\\.webp)\\s+\\d+w', r'\\1 1024w', html)
+    html = re.sub(r'(assets/images/(?:food-products|plastic-products|sweets-snacks)-desktop\\.webp)\\s+\\d+w', r'\\1 1920w', html)
+    html = re.sub(r'\\s+onerror="this\\.onerror=null;this\\.src=\'assets/images/(?:food-products|plastic-products|sweets-snacks)-desktop\\.webp\'"', '', html)
+    html = re.sub(r'(assets/images/(?:food-products|plastic-products|sweets-snacks)-desktop\\.webp"[^>]*?)width="1280" height="720"', r'\\1width="1920" height="1080"', html)
     preload = '<link rel="preload" as="image" href="assets/images/warehouse-desktop.webp" fetchpriority="high" media="(min-width:851px)"><link rel="preload" as="image" href="assets/images/warehouse-mobile.webp" fetchpriority="high" media="(max-width:850px)">'
-    if 'assets/images/warehouse-desktop.webp" fetchpriority="high"' not in html:
-        html = html.replace('<meta name="viewport"', preload + '<meta name="viewport"', 1)
+    if 'assets/images/warehouse-desktop.webp" fetchpriority="high"' not in html: html = html.replace('<meta name="viewport"', preload + '<meta name="viewport"', 1)
     mobile_bg = "@media(max-width:850px){.hero{background-image:linear-gradient(90deg,rgba(4,20,42,.88),rgba(7,26,54,.6) 48%,rgba(7,26,54,.18)),url('assets/images/warehouse-mobile.webp')}}"
-    if mobile_bg not in html:
-        html = html.replace('</style>', mobile_bg + '</style>', 1)
+    if mobile_bg not in html: html = html.replace('</style>', mobile_bg + '</style>', 1)
     return html
 
-
-def inject_seo(html: str) -> str:
+def inject_seo(html):
     html = re.sub(r'<meta name="lalastar-seo-v1"[^>]*>.*?</script>', '', html, count=1, flags=re.DOTALL)
     marker = '<meta charset="utf-8">'
     if marker not in html: raise RuntimeError("Unable to locate document charset marker for SEO metadata")
     return html.replace(marker, marker + SEO_BLOCK, 1)
 
-
-def rewrite_index() -> None:
-    if not INDEX.exists(): raise FileNotFoundError("index.html not found")
+def main():
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    for name, preferred in SOURCES.items():
+        source = find_source(name, preferred)
+        for variant, size in VARIANTS.items(): build_one(source, OUTPUT_DIR / f"{name}-{variant}.webp", size)
     html = INDEX.read_text(encoding="utf-8")
     html = replace_unsplash_urls(html)
     html = optimize_performance_markup(html)
@@ -91,15 +81,7 @@ def rewrite_index() -> None:
     for required in ('food-products-mobile.webp 750w','food-products-tablet.webp 1024w','food-products-desktop.webp 1920w','warehouse-mobile.webp'):
         if required not in html: raise RuntimeError(f"Performance optimization missing: {required}")
     INDEX.write_text(html, encoding="utf-8")
-    print("Updated index.html with responsive performance and LCP optimizations")
-
-
-def main() -> None:
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    for name, preferred in SOURCES.items():
-        source = find_source(name, preferred)
-        print(f"Source: {source}")
-        for variant, size in VARIANTS.items(): build_one(source, OUTPUT_DIR / f"{name}-{variant}.webp", size)
-    rewrite_index()
+    subprocess.run(["python", str(ROOT / "scripts" / "accessibility-patch.py")], check=True)
+    print("Updated index.html with responsive performance, SEO, and accessibility optimizations")
 
 if __name__ == "__main__": main()
