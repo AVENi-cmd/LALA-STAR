@@ -3,32 +3,45 @@ import re
 from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
-OUTPUT_DIR = ROOT / "assets" / "images"
+SOURCE_DIR = ROOT / "assets" / "optimized"
 INDEX = ROOT / "index.html"
 ASSET_VERSION = "20260914"
-EXPECTED = [
-    "warehouse-desktop.webp", "warehouse-tablet.webp", "warehouse-mobile.webp",
-    "food-products-desktop.webp", "food-products-tablet.webp", "food-products-mobile.webp",
-    "plastic-products-desktop.webp", "plastic-products-tablet.webp", "plastic-products-mobile.webp",
-    "sweets-snacks-desktop.webp", "sweets-snacks-tablet.webp", "sweets-snacks-mobile.webp",
-]
+SOURCES = {
+    "warehouse": "warehouse-hero",
+    "food-products": "food-products",
+    "plastic-products": "plastic-products",
+    "sweets-snacks": "sweets-snacks",
+}
+SIZES = {"mobile": 640, "tablet": 1280, "desktop": 1600}
 SEO_MARKER = '<meta name="lalastar-seo-v1" content="managed-by-build-webp">'
 
-def validate_assets():
-    for name in EXPECTED:
-        p = OUTPUT_DIR / name
-        if not p.exists() or p.stat().st_size == 0:
-            raise RuntimeError(f"Missing image asset: {p}")
-        data = p.read_bytes()
-        if data[:4] != b"RIFF" or data[8:12] != b"WEBP":
-            raise RuntimeError(f"Invalid WebP signature: {p}")
-        with Image.open(p) as im:
-            if im.format != "WEBP":
-                raise RuntimeError(f"Invalid WebP format: {p}")
+def validate_sources():
+    for name, base in SOURCES.items():
+        for size in SIZES.values():
+            p = SOURCE_DIR / f"{base}-{size}.webp"
+            if not p.exists() or p.stat().st_size == 0:
+                raise RuntimeError(f"Missing approved source asset: {p}")
+            data = p.read_bytes()
+            if data[:4] != b"RIFF" or data[8:12] != b"WEBP":
+                raise RuntimeError(f"Invalid WebP signature: {p}")
+            with Image.open(p) as im:
+                if im.format != "WEBP":
+                    raise RuntimeError(f"Invalid WebP format: {p}")
 
-def version_assets(html):
-    pattern = r'assets/images/(warehouse(?:-desktop|-mobile|-tablet)|food-products(?:-desktop|-mobile|-tablet)|plastic-products(?:-desktop|-mobile|-tablet)|sweets-snacks(?:-desktop|-mobile|-tablet))\.webp(?:\?v=[^\s\"\']+)?'
-    return re.sub(pattern, rf'assets/images/\1.webp?v={ASSET_VERSION}', html)
+def replace_image_refs(html):
+    for name, base in SOURCES.items():
+        for variant, size in SIZES.items():
+            html = re.sub(
+                rf'assets/images/{re.escape(name)}-{variant}\.webp(?:\?v=[^\s\"\']+)?',
+                f'assets/optimized/{base}-{size}.webp?v={ASSET_VERSION}',
+                html,
+            )
+    html = re.sub(
+        r'https://images\.unsplash\.com/photo-[^\"\'\s>)]+',
+        'BLOCKED_REMOTE_IMAGE_REFERENCE',
+        html,
+    )
+    return html
 
 def inject_i18n(html):
     html = re.sub(r'<script[^>]*src=["\']assets/i18n\.js[^>]*></script>', '', html)
@@ -36,17 +49,18 @@ def inject_i18n(html):
     return html.replace('</body>', '<script src="assets/i18n.js" defer></script></body>', 1)
 
 def clean_duplicate_preloads(html):
-    preload = '<link rel="preload" as="image" href="assets/images/warehouse-desktop.webp?v=20260914" fetchpriority="high" media="(min-width:851px)"><link rel="preload" as="image" href="assets/images/warehouse-mobile.webp?v=20260914" fetchpriority="high" media="(max-width:850px)">'
-    html = re.sub(r'(?:<link rel="preload" as="image" href="assets/images/warehouse-desktop\.webp\?v=20260914"[^>]*>\s*){2,}', preload, html)
-    html = re.sub(r'(?:<link rel="preload" as="image" href="assets/images/warehouse-mobile\.webp\?v=20260914"[^>]*>\s*){2,}', '', html)
+    desktop = 'assets/optimized/warehouse-hero-1600.webp?v=20260914'
+    mobile = 'assets/optimized/warehouse-hero-640.webp?v=20260914'
+    html = re.sub(r'(?:<link rel="preload" as="image" href="assets/(?:images|optimized)/warehouse[^>]*>\s*){2,}', '', html)
+    html = html.replace('<meta name="viewport"', f'<link rel="preload" as="image" href="{desktop}" fetchpriority="high" media="(min-width:851px)"><link rel="preload" as="image" href="{mobile}" fetchpriority="high" media="(max-width:850px)"><meta name="viewport"', 1) if 'warehouse-hero-1600.webp?v=20260914' not in html else html
     return html
 
 def main():
-    validate_assets()
+    validate_sources()
     html = INDEX.read_text(encoding="utf-8")
-    if "images.unsplash.com" in html:
-        raise RuntimeError("Remote Unsplash references remain in index.html")
-    html = version_assets(html)
+    html = replace_image_refs(html)
+    if "images.unsplash.com" in html or "BLOCKED_REMOTE_IMAGE_REFERENCE" in html:
+        raise RuntimeError("Remote image references remain in index.html")
     html = clean_duplicate_preloads(html)
     html = inject_i18n(html)
     if 'assets/i18n.js' not in html:
