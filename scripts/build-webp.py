@@ -1,88 +1,61 @@
 from pathlib import Path
-from PIL import Image, ImageOps
 import re
+from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE_DIR = ROOT / "assets" / "optimized"
 OUTPUT_DIR = ROOT / "assets" / "images"
 INDEX = ROOT / "index.html"
-SOURCES = {
-    "warehouse": SOURCE_DIR / "warehouse-hero-1600.webp",
-    "food-products": SOURCE_DIR / "food-products-1600.webp",
-    "plastic-products": SOURCE_DIR / "plastic-products-1600.webp",
-    "sweets-snacks": SOURCE_DIR / "sweets-snacks-1600.webp",
-}
-VARIANTS = {"desktop": (1920, 1080), "tablet": (1024, 1024), "mobile": (750, 1000)}
-QUALITY = 88
 ASSET_VERSION = "20260914"
+EXPECTED = [
+    "warehouse-desktop.webp", "warehouse-tablet.webp", "warehouse-mobile.webp",
+    "food-products-desktop.webp", "food-products-tablet.webp", "food-products-mobile.webp",
+    "plastic-products-desktop.webp", "plastic-products-tablet.webp", "plastic-products-mobile.webp",
+    "sweets-snacks-desktop.webp", "sweets-snacks-tablet.webp", "sweets-snacks-mobile.webp",
+]
 SEO_MARKER = '<meta name="lalastar-seo-v1" content="managed-by-build-webp">'
-SEO_BLOCK = '''<meta name="lalastar-seo-v1" content="managed-by-build-webp"><meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="https://aveni-cmd.github.io/LALA-STAR/"><meta property="og:type" content="website"><meta property="og:locale" content="ar_SA"><meta property="og:site_name" content="شركة لألأة النجوم التجارية | LALA STAR TRADING CO."><meta property="og:title" content="شركة لألأة النجوم التجارية | LALA STAR TRADING CO."><meta property="og:description" content="شركة لألأة النجوم التجارية — بيع المواد الغذائية بالجملة منذ 1993، مع أنشطة البلاستيك والحلويات والوجبات الخفيفة في الدمام والأحساء."><meta property="og:url" content="https://aveni-cmd.github.io/LALA-STAR/"><meta property="og:image" content="https://aveni-cmd.github.io/LALA-STAR/assets/images/warehouse-desktop.webp?v=20260914"><meta property="og:image:type" content="image/webp"><meta property="og:image:width" content="1920"><meta property="og:image:height" content="1080"><meta property="og:image:alt" content="مستودع تجاري للمواد والسلع بالجملة"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="شركة لألأة النجوم التجارية | LALA STAR TRADING CO."><meta name="twitter:description" content="بيع المواد الغذائية بالجملة منذ 1993، مع أنشطة البلاستيك والحلويات والوجبات الخفيفة."><meta name="twitter:image" content="https://aveni-cmd.github.io/LALA-STAR/assets/images/warehouse-desktop.webp?v=20260914"><script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"شركة لألأة النجوم التجارية","alternateName":"LALA STAR TRADING CO.","description":"شركة لبيع المواد الغذائية بالجملة، مع أنشطة مستقلة في المنتجات البلاستيكية والحلويات والوجبات الخفيفة.","foundingDate":"1993","telephone":"0138562508","email":"starcoldstore@yahoo.com","url":"https://aveni-cmd.github.io/LALA-STAR/","logo":"https://aveni-cmd.github.io/LALA-STAR/assets/lala-star-logo.png","address":{"@type":"PostalAddress","addressLocality":"Dammam","addressCountry":"SA"},"areaServed":"SA"}</script>'''
-MENU_SCRIPT = '''<script>(()=>{const menu=document.querySelector('.menu'),nav=document.querySelector('.links');if(!menu||!nav)return;const close=()=>{nav.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.setAttribute('aria-label','فتح القائمة')};menu.addEventListener('click',()=>{const open=menu.getAttribute('aria-expanded')!=='true';nav.classList.toggle('open',open);menu.setAttribute('aria-expanded',String(open));menu.setAttribute('aria-label',open?'إغلاق القائمة':'فتح القائمة')});nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',close));document.addEventListener('keydown',e=>{if(e.key==='Escape'&&nav.classList.contains('open')){close();menu.focus()}});window.addEventListener('resize',()=>{if(window.innerWidth>850)close()})})();</script>'''
 
-def source_for(name, preferred):
-    if preferred.exists(): return preferred
-    matches = sorted(SOURCE_DIR.glob(f"{name}*.webp"))
-    if not matches: raise FileNotFoundError(f"No WebP source for {name}")
-    return matches[-1]
-
-def build(source, output, size):
-    with Image.open(source) as im:
-        im = ImageOps.exif_transpose(im).convert("RGB")
-        ImageOps.fit(im, size, method=Image.Resampling.LANCZOS).save(output, "WEBP", quality=QUALITY, method=6)
-    data = output.read_bytes()
-    if data[:4] != b"RIFF" or data[8:12] != b"WEBP": raise RuntimeError(f"Invalid WebP: {output}")
-    with Image.open(output) as check:
-        if check.size != size or check.format != "WEBP": raise RuntimeError(f"Invalid metadata: {output}")
-
-def replace_remote(html):
-    ids = {"1645736315000-6f788915923b":"warehouse","1773946836315-bd8269b62b93":"food-products","1713900105420-67ae6dbf3595":"plastic-products","1759167632930-298bca6b4268":"sweets-snacks"}
-    pattern = re.compile(r"https://images\.unsplash\.com/photo-([0-9]+-[a-z0-9]+)\?[^\"'\s>)]+")
-    def repl(m):
-        name = ids.get(m.group(1))
-        if not name: return m.group(0)
-        if name == "warehouse": return f"assets/images/warehouse-desktop.webp?v={ASSET_VERSION}"
-        width = int(re.search(r"[?&]w=(\d+)", m.group(0)).group(1)) if re.search(r"[?&]w=(\d+)", m.group(0)) else 2400
-        variant = "mobile" if width <= 640 else "tablet" if width <= 1280 else "desktop"
-        return f"assets/images/{name}-{variant}.webp?v={ASSET_VERSION}"
-    return pattern.sub(repl, html)
+def validate_assets():
+    for name in EXPECTED:
+        p = OUTPUT_DIR / name
+        if not p.exists() or p.stat().st_size == 0:
+            raise RuntimeError(f"Missing image asset: {p}")
+        data = p.read_bytes()
+        if data[:4] != b"RIFF" or data[8:12] != b"WEBP":
+            raise RuntimeError(f"Invalid WebP signature: {p}")
+        with Image.open(p) as im:
+            if im.format != "WEBP":
+                raise RuntimeError(f"Invalid WebP format: {p}")
 
 def version_assets(html):
-    html = re.sub(r'assets/images/(warehouse(?:-desktop|-mobile|-tablet)|food-products(?:-desktop|-mobile|-tablet)|plastic-products(?:-desktop|-mobile|-tablet)|sweets-snacks(?:-desktop|-mobile|-tablet))\.webp(?:\?v=[^\s\"\']+)?', rf'assets/images/\1.webp?v={ASSET_VERSION}', html)
+    return re.sub(
+        r'assets/images/(warehouse(?:-desktop|-mobile|-tablet)|food-products(?:-desktop|-mobile|-tablet)|plastic-products(?:-desktop|-mobile|-tablet)|sweets-snacks(?:-desktop|-mobile|-tablet))\.webp(?:\?v=[^\s\"\']+)?',
+        rf'assets/images/\\1.webp?v={ASSET_VERSION}',
+        html,
+    )
+
+def inject_i18n(html):
+    html = re.sub(r'<script[^>]*src=["\']assets/i18n\.js[^>]*></script>', '', html)
+    return html.replace('</body>', '<script src="assets/i18n.js" defer></script></body>', 1)
+
+def clean_duplicate_preloads(html):
+    preload = '<link rel="preload" as="image" href="assets/images/warehouse-desktop.webp?v=20260914" fetchpriority="high" media="(min-width:851px)"><link rel="preload" as="image" href="assets/images/warehouse-mobile.webp?v=20260914" fetchpriority="high" media="(max-width:850px)">'
+    html = re.sub(r'(?:<link rel="preload" as="image" href="assets/images/warehouse-desktop\.webp\?v=20260914"[^>]*>\s*){2,}', preload, html)
+    html = re.sub(r'(?:<link rel="preload" as="image" href="assets/images/warehouse-mobile\.webp\?v=20260914"[^>]*>\s*){2,}', '', html)
     return html
-
-def optimize(html):
-    for variant, width in (("mobile", 750), ("tablet", 1024), ("desktop", 1920)):
-        html = re.sub(rf'(assets/images/(?:food-products|plastic-products|sweets-snacks)-{variant}\.webp)(?:\?v=[^\s\"\']+)?\s+\d+w', rf'\1?v={ASSET_VERSION} {width}w', html)
-    html = re.sub(r"\s+onerror=\"this\.onerror=null;this\.src='assets/images/(?:food-products|plastic-products|sweets-snacks)-desktop\.webp'\"", "", html)
-    html = re.sub(r'(assets/images/(?:food-products|plastic-products|sweets-snacks)-desktop\.webp[^>]*?)width="1280" height="720"', r'\1width="1920" height="1080"', html)
-    preload = f'<link rel="preload" as="image" href="assets/images/warehouse-desktop.webp?v={ASSET_VERSION}" fetchpriority="high" media="(min-width:851px)"><link rel="preload" as="image" href="assets/images/warehouse-mobile.webp?v={ASSET_VERSION}" fetchpriority="high" media="(max-width:850px)">'
-    if 'warehouse-desktop.webp" fetchpriority="high"' not in html: html = html.replace('<meta name="viewport"', preload + '<meta name="viewport"', 1)
-    mobile = f"@media(max-width:850px){{.hero{{background-image:linear-gradient(90deg,rgba(4,20,42,.88),rgba(7,26,54,.6) 48%,rgba(7,26,54,.18)),url('assets/images/warehouse-mobile.webp?v={ASSET_VERSION}')}}}}"
-    if 'warehouse-mobile.webp' not in html or f'warehouse-mobile.webp?v={ASSET_VERSION}' not in html: html = html.replace('</style>', mobile + '</style>', 1)
-    return html
-
-def seo(html):
-    html = re.sub(r'<meta name="lalastar-seo-v1"[^>]*>.*?</script>', '', html, count=1, flags=re.DOTALL)
-    return html.replace('<meta charset="utf-8">', '<meta charset="utf-8">' + SEO_BLOCK, 1)
-
-def inject_menu_script(html):
-    return html.replace('</body>', MENU_SCRIPT + '</body>', 1) if '</body>' in html and "querySelector('.menu')" not in html else html
 
 def main():
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    for name, preferred in SOURCES.items():
-        src = source_for(name, preferred)
-        for variant, size in VARIANTS.items(): build(src, OUTPUT_DIR / f"{name}-{variant}.webp", size)
-    html = inject_menu_script(seo(optimize(replace_remote(INDEX.read_text(encoding="utf-8")))))
+    validate_assets()
+    html = INDEX.read_text(encoding="utf-8")
+    if "images.unsplash.com" in html:
+        raise RuntimeError("Remote Unsplash references remain in index.html")
     html = version_assets(html)
-    if "images.unsplash.com" in html: raise RuntimeError("Remote Unsplash references remain")
-    for name in ("food-products", "plastic-products", "sweets-snacks"):
-        for variant in VARIANTS:
-            if f"assets/images/{name}-{variant}.webp?v={ASSET_VERSION}" not in html: raise RuntimeError(f"Missing versioned {name}-{variant}")
-    if f"warehouse-desktop.webp?v={ASSET_VERSION}" not in html or f"warehouse-mobile.webp?v={ASSET_VERSION}" not in html: raise RuntimeError("Missing versioned warehouse responsive references")
-    if "querySelector('.menu')" not in html or "aria-expanded" not in html: raise RuntimeError("Missing mobile menu behavior")
-    for required in (SEO_MARKER, 'rel="canonical"', 'property="og:title"', 'name="twitter:card"', 'application/ld+json', f'food-products-mobile.webp?v={ASSET_VERSION} 750w', f'food-products-tablet.webp?v={ASSET_VERSION} 1024w', f'food-products-desktop.webp?v={ASSET_VERSION} 1920w'):
-        if required not in html: raise RuntimeError(f"Missing required markup: {required}")
+    html = clean_duplicate_preloads(html)
+    html = inject_i18n(html)
+    if 'assets/i18n.js' not in html:
+        raise RuntimeError("i18n script was not wired into index.html")
+    if SEO_MARKER not in html:
+        raise RuntimeError("SEO marker missing")
     INDEX.write_text(html, encoding="utf-8")
 
-if __name__ == "__main__": main()
+if __name__ == "__main__":
+    main()
