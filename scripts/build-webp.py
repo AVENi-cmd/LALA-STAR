@@ -11,6 +11,7 @@ VARIANTS = {"desktop": (1920, 1080), "tablet": (1024, 1024), "mobile": (750, 100
 QUALITY = 88
 SEO_MARKER = '<meta name="lalastar-seo-v1" content="managed-by-build-webp">'
 SEO_BLOCK = '''<meta name="lalastar-seo-v1" content="managed-by-build-webp"><meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="https://aveni-cmd.github.io/LALA-STAR/"><meta property="og:type" content="website"><meta property="og:locale" content="ar_SA"><meta property="og:site_name" content="شركة لألأة النجوم التجارية | LALA STAR TRADING CO."><meta property="og:title" content="شركة لألأة النجوم التجارية | LALA STAR TRADING CO."><meta property="og:description" content="شركة لألأة النجوم التجارية — بيع المواد الغذائية بالجملة منذ 1993، مع أنشطة البلاستيك والحلويات والوجبات الخفيفة في الدمام والأحساء."><meta property="og:url" content="https://aveni-cmd.github.io/LALA-STAR/"><meta property="og:image" content="https://aveni-cmd.github.io/LALA-STAR/assets/images/warehouse-desktop.webp"><meta property="og:image:type" content="image/webp"><meta property="og:image:width" content="1920"><meta property="og:image:height" content="1080"><meta property="og:image:alt" content="مستودع تجاري للمواد والسلع بالجملة"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="شركة لألأة النجوم التجارية | LALA STAR TRADING CO."><meta name="twitter:description" content="بيع المواد الغذائية بالجملة منذ 1993، مع أنشطة البلاستيك والحلويات والوجبات الخفيفة."><meta name="twitter:image" content="https://aveni-cmd.github.io/LALA-STAR/assets/images/warehouse-desktop.webp"><script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"شركة لألأة النجوم التجارية","alternateName":"LALA STAR TRADING CO.","description":"شركة لبيع المواد الغذائية بالجملة، مع أنشطة مستقلة في المنتجات البلاستيكية والحلويات والوجبات الخفيفة.","foundingDate":"1993","telephone":"0138562508","email":"starcoldstore@yahoo.com","url":"https://aveni-cmd.github.io/LALA-STAR/","logo":"https://aveni-cmd.github.io/LALA-STAR/assets/lala-star-logo.png","address":{"@type":"PostalAddress","addressLocality":"Dammam","addressCountry":"SA"},"areaServed":"SA"}</script>'''
+MENU_SCRIPT = '''<script>(()=>{const menu=document.querySelector('.menu'),nav=document.querySelector('.links');if(!menu||!nav)return;const close=()=>{nav.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.setAttribute('aria-label','فتح القائمة')};menu.addEventListener('click',()=>{const open=menu.getAttribute('aria-expanded')!=='true';nav.classList.toggle('open',open);menu.setAttribute('aria-expanded',String(open));menu.setAttribute('aria-label',open?'إغلاق القائمة':'فتح القائمة')});nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',close));document.addEventListener('keydown',e=>{if(e.key==='Escape'&&nav.classList.contains('open')){close();menu.focus()}});window.addEventListener('resize',()=>{if(window.innerWidth>850)close()})})();</script>'''
 
 def source_for(name, preferred):
     if preferred.exists(): return preferred
@@ -54,17 +55,22 @@ def seo(html):
     html = re.sub(r'<meta name="lalastar-seo-v1"[^>]*>.*?</script>', '', html, count=1, flags=re.DOTALL)
     return html.replace('<meta charset="utf-8">', '<meta charset="utf-8">' + SEO_BLOCK, 1)
 
+def inject_menu_script(html):
+    html = re.sub(r'<script>\(\(\)=>\{const menu=document\.querySelector\(\'\.menu\'\).*?</script>', '', html, count=1, flags=re.DOTALL)
+    return html.replace('</body>', MENU_SCRIPT + '</body>', 1) if '</body>' in html else html + MENU_SCRIPT
+
 def main():
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     for name, preferred in SOURCES.items():
         src = source_for(name, preferred)
         for variant, size in VARIANTS.items(): build(src, OUTPUT_DIR / f"{name}-{variant}.webp", size)
-    html = seo(optimize(replace_remote(INDEX.read_text(encoding="utf-8"))))
+    html = inject_menu_script(seo(optimize(replace_remote(INDEX.read_text(encoding="utf-8")))))
     if "images.unsplash.com" in html: raise RuntimeError("Remote Unsplash references remain")
     for name in ("food-products", "plastic-products", "sweets-snacks"):
         for variant in VARIANTS:
             if f"assets/images/{name}-{variant}.webp" not in html: raise RuntimeError(f"Missing {name}-{variant}")
     if "warehouse-desktop.webp" not in html or "warehouse-mobile.webp" not in html: raise RuntimeError("Missing warehouse responsive references")
+    if "querySelector('.menu')" not in html or "aria-expanded" not in html: raise RuntimeError("Missing mobile menu behavior")
     for required in (SEO_MARKER, 'rel="canonical"', 'property="og:title"', 'name="twitter:card"', 'application/ld+json', 'food-products-mobile.webp 750w', 'food-products-tablet.webp 1024w', 'food-products-desktop.webp 1920w'):
         if required not in html: raise RuntimeError(f"Missing required markup: {required}")
     INDEX.write_text(html, encoding="utf-8")
