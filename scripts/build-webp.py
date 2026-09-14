@@ -5,7 +5,7 @@ from PIL import Image, ImageOps
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_DIR = ROOT / "assets" / "optimized"
 INDEX = ROOT / "index.html"
-ASSET_VERSION = "20260915-6"
+ASSET_VERSION = "20260915-7"
 SOURCES = {"warehouse":"warehouse-hero","food-products":"food-products","plastic-products":"plastic-products","sweets-snacks":"sweets-snacks"}
 SIZES = {"mobile":640,"tablet":1280,"desktop":1600}
 SEO_MARKER = '<meta name="lalastar-seo-v1" content="managed-by-build-webp">'
@@ -38,7 +38,8 @@ def replace_image_refs(html):
 
 def inject_i18n(html):
     html=re.sub(r'<script[^>]*src=["\']assets/i18n\.js[^>]*></script>','',html)
-    html=re.sub(r'<script>const btn=document\.getElementById\(["\']langBtn["\']\).*?</script>','',html,flags=re.DOTALL)
+    # Remove any old inline language handler. The standalone i18n.js is the only handler.
+    html=re.sub(r'<script[^>]*>.*?document\.getElementById\(["\']langBtn["\']\).*?</script>','',html,flags=re.DOTALL)
     return html.replace('</body>','<script src="assets/i18n.js" defer></script></body>',1)
 
 def clean_preloads(html):
@@ -54,7 +55,6 @@ def main():
     html=clean_preloads(html)
     html=inject_i18n(html)
     if 'assets/i18n.js' not in html: raise RuntimeError('i18n script was not wired into index.html')
-    if 'const btn=document.getElementById("langBtn")' in html or "const btn=document.getElementById('langBtn')" in html: raise RuntimeError('Legacy language handler remains in index.html')
     if SEO_MARKER not in html: raise RuntimeError('SEO marker missing')
     INDEX.write_text(html,encoding='utf-8')
 
