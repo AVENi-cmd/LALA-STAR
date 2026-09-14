@@ -1,1 +1,0 @@
-Generated responsive WebP assets are built by GitHub Actions from validated optimized image sources.
