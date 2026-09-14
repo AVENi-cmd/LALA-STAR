@@ -59,7 +59,7 @@ def replace_unsplash_urls(html: str) -> str:
         "1759167632930-298bca6b4268": "sweets-snacks",
     }
 
-    url_pattern = re.compile(r"https://images\\.unsplash\\.com/photo-([0-9]+-[a-z0-9]+)\\?[^\\\"'\\s>)]+")
+    url_pattern = re.compile(r"https://images\.unsplash\.com/photo-([0-9]+-[a-z0-9]+)\?[^\"'\s>)]+")
 
     def repl(match: re.Match[str]) -> str:
         photo_id = match.group(1)
@@ -67,7 +67,7 @@ def replace_unsplash_urls(html: str) -> str:
         if not name:
             return match.group(0)
         full = match.group(0)
-        width_match = re.search(r"[?&]w=(\\d+)", full)
+        width_match = re.search(r"[?&]w=(\d+)", full)
         width = int(width_match.group(1)) if width_match else 2400
         if name == "warehouse":
             return "assets/images/warehouse-desktop.webp"
@@ -81,7 +81,6 @@ def replace_unsplash_urls(html: str) -> str:
 
 
 def inject_seo(html: str) -> str:
-    # Remove a previous managed SEO block, if present, so repeated workflow runs stay idempotent.
     html = re.sub(r'<meta name="lalastar-seo-v1"[^>]*>.*?</script>', '', html, count=1, flags=re.DOTALL)
     marker = '<meta charset="utf-8">'
     if marker not in html:
@@ -106,13 +105,7 @@ def rewrite_index() -> None:
                 raise RuntimeError(f"Responsive {variant} asset is not referenced for {name}")
     if "assets/images/warehouse-desktop.webp" not in html:
         raise RuntimeError("Warehouse WebP asset is not referenced")
-    for required in (
-        SEO_MARKER,
-        'rel="canonical"',
-        'property="og:title"',
-        'name="twitter:card"',
-        'application/ld+json',
-    ):
+    for required in (SEO_MARKER, 'rel="canonical"', 'property="og:title"', 'name="twitter:card"', 'application/ld+json'):
         if required not in html:
             raise RuntimeError(f"SEO metadata missing: {required}")
 
