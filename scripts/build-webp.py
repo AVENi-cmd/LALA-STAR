@@ -5,23 +5,22 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_DIR = ROOT / "assets" / "optimized"
 INDEX = ROOT / "index.html"
-ASSET_VERSION = "20260915-2"
+ASSET_VERSION = "20260915-3"
 SOURCES = {"warehouse":"warehouse-hero","food-products":"food-products","plastic-products":"plastic-products","sweets-snacks":"sweets-snacks"}
-# The 640px variants are visibly soft on modern phones. Use the approved 1280px
-# source for both mobile and tablet, and 1600px for desktop.
-SIZES = {"mobile":1280,"tablet":1280,"desktop":1600}
+# Always serve the high-resolution approved source. This removes the 640/1280
+# responsive variants that were responsible for the visible quality drop.
+SIZES = {"mobile":1600,"tablet":1600,"desktop":1600}
 SEO_MARKER = '<meta name="lalastar-seo-v1" content="managed-by-build-webp">'
 
 def validate_sources():
     for base in SOURCES.values():
-        for size in sorted(set(SIZES.values())):
-            p=SOURCE_DIR/f"{base}-{size}.webp"
-            if not p.is_file() or p.stat().st_size < 30000: raise RuntimeError(f"Missing or suspiciously small approved source asset: {p}")
-            data=p.read_bytes()
-            if data[:4]!=b"RIFF" or data[8:12]!=b"WEBP": raise RuntimeError(f"Invalid WebP signature: {p}")
-            with Image.open(p) as im:
-                if im.format!="WEBP": raise RuntimeError(f"Invalid WebP format: {p}")
-                if im.width < 1200: raise RuntimeError(f"Unexpectedly low source dimensions: {p} -> {im.size}")
+        p=SOURCE_DIR/f"{base}-1600.webp"
+        if not p.is_file() or p.stat().st_size < 30000: raise RuntimeError(f"Missing or suspiciously small approved source asset: {p}")
+        data=p.read_bytes()
+        if data[:4]!=b"RIFF" or data[8:12]!=b"WEBP": raise RuntimeError(f"Invalid WebP signature: {p}")
+        with Image.open(p) as im:
+            if im.format!="WEBP": raise RuntimeError(f"Invalid WebP format: {p}")
+            if im.width < 1200: raise RuntimeError(f"Unexpectedly low source dimensions: {p} -> {im.size}")
 
 def replace_image_refs(html):
     for name,base in SOURCES.items():
@@ -37,7 +36,7 @@ def inject_i18n(html):
 
 def clean_preloads(html):
     html=re.sub(r'<link rel="preload" as="image" href="assets/(?:images|optimized)/warehouse[^>]*>','',html)
-    pre=f'<link rel="preload" as="image" href="assets/optimized/warehouse-hero-1600.webp?v={ASSET_VERSION}" fetchpriority="high" media="(min-width:851px)"><link rel="preload" as="image" href="assets/optimized/warehouse-hero-1280.webp?v={ASSET_VERSION}" fetchpriority="high" media="(max-width:850px)">'
+    pre=f'<link rel="preload" as="image" href="assets/optimized/warehouse-hero-1600.webp?v={ASSET_VERSION}" fetchpriority="high" media="(min-width:851px)"><link rel="preload" as="image" href="assets/optimized/warehouse-hero-1600.webp?v={ASSET_VERSION}" fetchpriority="high" media="(max-width:850px)">'
     return html.replace('<meta name="viewport"',pre+'<meta name="viewport"',1)
 
 def main():
