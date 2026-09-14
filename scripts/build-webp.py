@@ -6,11 +6,17 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE_DIR = ROOT / "assets" / "optimized"
 OUTPUT_DIR = ROOT / "assets" / "images"
 INDEX = ROOT / "index.html"
-SOURCES = {n: SOURCE_DIR / f"{n if n != 'warehouse' else 'warehouse-hero'}-1600.webp" for n in ("warehouse", "food-products", "plastic-products", "sweets-snacks")}
+SOURCES = {
+    "warehouse": SOURCE_DIR / "warehouse-hero-1600.webp",
+    "food-products": SOURCE_DIR / "food-products-1600.webp",
+    "plastic-products": SOURCE_DIR / "plastic-products-1600.webp",
+    "sweets-snacks": SOURCE_DIR / "sweets-snacks-1600.webp",
+}
 VARIANTS = {"desktop": (1920, 1080), "tablet": (1024, 1024), "mobile": (750, 1000)}
 QUALITY = 88
+ASSET_VERSION = "20260914"
 SEO_MARKER = '<meta name="lalastar-seo-v1" content="managed-by-build-webp">'
-SEO_BLOCK = '''<meta name="lalastar-seo-v1" content="managed-by-build-webp"><meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="https://aveni-cmd.github.io/LALA-STAR/"><meta property="og:type" content="website"><meta property="og:locale" content="ar_SA"><meta property="og:site_name" content="شركة لألأة النجوم التجارية | LALA STAR TRADING CO."><meta property="og:title" content="شركة لألأة النجوم التجارية | LALA STAR TRADING CO."><meta property="og:description" content="شركة لألأة النجوم التجارية — بيع المواد الغذائية بالجملة منذ 1993، مع أنشطة البلاستيك والحلويات والوجبات الخفيفة في الدمام والأحساء."><meta property="og:url" content="https://aveni-cmd.github.io/LALA-STAR/"><meta property="og:image" content="https://aveni-cmd.github.io/LALA-STAR/assets/images/warehouse-desktop.webp"><meta property="og:image:type" content="image/webp"><meta property="og:image:width" content="1920"><meta property="og:image:height" content="1080"><meta property="og:image:alt" content="مستودع تجاري للمواد والسلع بالجملة"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="شركة لألأة النجوم التجارية | LALA STAR TRADING CO."><meta name="twitter:description" content="بيع المواد الغذائية بالجملة منذ 1993، مع أنشطة البلاستيك والحلويات والوجبات الخفيفة."><meta name="twitter:image" content="https://aveni-cmd.github.io/LALA-STAR/assets/images/warehouse-desktop.webp"><script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"شركة لألأة النجوم التجارية","alternateName":"LALA STAR TRADING CO.","description":"شركة لبيع المواد الغذائية بالجملة، مع أنشطة مستقلة في المنتجات البلاستيكية والحلويات والوجبات الخفيفة.","foundingDate":"1993","telephone":"0138562508","email":"starcoldstore@yahoo.com","url":"https://aveni-cmd.github.io/LALA-STAR/","logo":"https://aveni-cmd.github.io/LALA-STAR/assets/lala-star-logo.png","address":{"@type":"PostalAddress","addressLocality":"Dammam","addressCountry":"SA"},"areaServed":"SA"}</script>'''
+SEO_BLOCK = '''<meta name="lalastar-seo-v1" content="managed-by-build-webp"><meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="https://aveni-cmd.github.io/LALA-STAR/"><meta property="og:type" content="website"><meta property="og:locale" content="ar_SA"><meta property="og:site_name" content="شركة لألأة النجوم التجارية | LALA STAR TRADING CO."><meta property="og:title" content="شركة لألأة النجوم التجارية | LALA STAR TRADING CO."><meta property="og:description" content="شركة لألأة النجوم التجارية — بيع المواد الغذائية بالجملة منذ 1993، مع أنشطة البلاستيك والحلويات والوجبات الخفيفة في الدمام والأحساء."><meta property="og:url" content="https://aveni-cmd.github.io/LALA-STAR/"><meta property="og:image" content="https://aveni-cmd.github.io/LALA-STAR/assets/images/warehouse-desktop.webp?v=20260914"><meta property="og:image:type" content="image/webp"><meta property="og:image:width" content="1920"><meta property="og:image:height" content="1080"><meta property="og:image:alt" content="مستودع تجاري للمواد والسلع بالجملة"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="شركة لألأة النجوم التجارية | LALA STAR TRADING CO."><meta name="twitter:description" content="بيع المواد الغذائية بالجملة منذ 1993، مع أنشطة البلاستيك والحلويات والوجبات الخفيفة."><meta name="twitter:image" content="https://aveni-cmd.github.io/LALA-STAR/assets/images/warehouse-desktop.webp?v=20260914"><script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"شركة لألأة النجوم التجارية","alternateName":"LALA STAR TRADING CO.","description":"شركة لبيع المواد الغذائية بالجملة، مع أنشطة مستقلة في المنتجات البلاستيكية والحلويات والوجبات الخفيفة.","foundingDate":"1993","telephone":"0138562508","email":"starcoldstore@yahoo.com","url":"https://aveni-cmd.github.io/LALA-STAR/","logo":"https://aveni-cmd.github.io/LALA-STAR/assets/lala-star-logo.png","address":{"@type":"PostalAddress","addressLocality":"Dammam","addressCountry":"SA"},"areaServed":"SA"}</script>'''
 MENU_SCRIPT = '''<script>(()=>{const menu=document.querySelector('.menu'),nav=document.querySelector('.links');if(!menu||!nav)return;const close=()=>{nav.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.setAttribute('aria-label','فتح القائمة')};menu.addEventListener('click',()=>{const open=menu.getAttribute('aria-expanded')!=='true';nav.classList.toggle('open',open);menu.setAttribute('aria-expanded',String(open));menu.setAttribute('aria-label',open?'إغلاق القائمة':'فتح القائمة')});nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',close));document.addEventListener('keydown',e=>{if(e.key==='Escape'&&nav.classList.contains('open')){close();menu.focus()}});window.addEventListener('resize',()=>{if(window.innerWidth>850)close()})})();</script>'''
 
 def source_for(name, preferred):
@@ -34,21 +40,25 @@ def replace_remote(html):
     def repl(m):
         name = ids.get(m.group(1))
         if not name: return m.group(0)
-        if name == "warehouse": return "assets/images/warehouse-desktop.webp"
+        if name == "warehouse": return f"assets/images/warehouse-desktop.webp?v={ASSET_VERSION}"
         width = int(re.search(r"[?&]w=(\d+)", m.group(0)).group(1)) if re.search(r"[?&]w=(\d+)", m.group(0)) else 2400
         variant = "mobile" if width <= 640 else "tablet" if width <= 1280 else "desktop"
-        return f"assets/images/{name}-{variant}.webp"
+        return f"assets/images/{name}-{variant}.webp?v={ASSET_VERSION}"
     return pattern.sub(repl, html)
+
+def version_assets(html):
+    html = re.sub(r'assets/images/(warehouse(?:-desktop|-mobile|-tablet)|food-products(?:-desktop|-mobile|-tablet)|plastic-products(?:-desktop|-mobile|-tablet)|sweets-snacks(?:-desktop|-mobile|-tablet))\.webp(?:\?v=[^\s\"\']+)?', rf'assets/images/\1.webp?v={ASSET_VERSION}', html)
+    return html
 
 def optimize(html):
     for variant, width in (("mobile", 750), ("tablet", 1024), ("desktop", 1920)):
-        html = re.sub(rf'(assets/images/(?:food-products|plastic-products|sweets-snacks)-{variant}\.webp)\s+\d+w', rf'\1 {width}w', html)
+        html = re.sub(rf'(assets/images/(?:food-products|plastic-products|sweets-snacks)-{variant}\.webp)(?:\?v=[^\s\"\']+)?\s+\d+w', rf'\1?v={ASSET_VERSION} {width}w', html)
     html = re.sub(r"\s+onerror=\"this\.onerror=null;this\.src='assets/images/(?:food-products|plastic-products|sweets-snacks)-desktop\.webp'\"", "", html)
-    html = re.sub(r'(assets/images/(?:food-products|plastic-products|sweets-snacks)-desktop\.webp"[^>]*?)width="1280" height="720"', r'\1width="1920" height="1080"', html)
-    preload = '<link rel="preload" as="image" href="assets/images/warehouse-desktop.webp" fetchpriority="high" media="(min-width:851px)"><link rel="preload" as="image" href="assets/images/warehouse-mobile.webp" fetchpriority="high" media="(max-width:850px)">'
+    html = re.sub(r'(assets/images/(?:food-products|plastic-products|sweets-snacks)-desktop\.webp[^>]*?)width="1280" height="720"', r'\1width="1920" height="1080"', html)
+    preload = f'<link rel="preload" as="image" href="assets/images/warehouse-desktop.webp?v={ASSET_VERSION}" fetchpriority="high" media="(min-width:851px)"><link rel="preload" as="image" href="assets/images/warehouse-mobile.webp?v={ASSET_VERSION}" fetchpriority="high" media="(max-width:850px)">'
     if 'warehouse-desktop.webp" fetchpriority="high"' not in html: html = html.replace('<meta name="viewport"', preload + '<meta name="viewport"', 1)
-    mobile = "@media(max-width:850px){.hero{background-image:linear-gradient(90deg,rgba(4,20,42,.88),rgba(7,26,54,.6) 48%,rgba(7,26,54,.18)),url('assets/images/warehouse-mobile.webp')}}"
-    if mobile not in html: html = html.replace('</style>', mobile + '</style>', 1)
+    mobile = f"@media(max-width:850px){{.hero{{background-image:linear-gradient(90deg,rgba(4,20,42,.88),rgba(7,26,54,.6) 48%,rgba(7,26,54,.18)),url('assets/images/warehouse-mobile.webp?v={ASSET_VERSION}')}}}}"
+    if 'warehouse-mobile.webp' not in html or f'warehouse-mobile.webp?v={ASSET_VERSION}' not in html: html = html.replace('</style>', mobile + '</style>', 1)
     return html
 
 def seo(html):
@@ -64,13 +74,14 @@ def main():
         src = source_for(name, preferred)
         for variant, size in VARIANTS.items(): build(src, OUTPUT_DIR / f"{name}-{variant}.webp", size)
     html = inject_menu_script(seo(optimize(replace_remote(INDEX.read_text(encoding="utf-8")))))
+    html = version_assets(html)
     if "images.unsplash.com" in html: raise RuntimeError("Remote Unsplash references remain")
     for name in ("food-products", "plastic-products", "sweets-snacks"):
         for variant in VARIANTS:
-            if f"assets/images/{name}-{variant}.webp" not in html: raise RuntimeError(f"Missing {name}-{variant}")
-    if "warehouse-desktop.webp" not in html or "warehouse-mobile.webp" not in html: raise RuntimeError("Missing warehouse responsive references")
+            if f"assets/images/{name}-{variant}.webp?v={ASSET_VERSION}" not in html: raise RuntimeError(f"Missing versioned {name}-{variant}")
+    if f"warehouse-desktop.webp?v={ASSET_VERSION}" not in html or f"warehouse-mobile.webp?v={ASSET_VERSION}" not in html: raise RuntimeError("Missing versioned warehouse responsive references")
     if "querySelector('.menu')" not in html or "aria-expanded" not in html: raise RuntimeError("Missing mobile menu behavior")
-    for required in (SEO_MARKER, 'rel="canonical"', 'property="og:title"', 'name="twitter:card"', 'application/ld+json', 'food-products-mobile.webp 750w', 'food-products-tablet.webp 1024w', 'food-products-desktop.webp 1920w'):
+    for required in (SEO_MARKER, 'rel="canonical"', 'property="og:title"', 'name="twitter:card"', 'application/ld+json', f'food-products-mobile.webp?v={ASSET_VERSION} 750w', f'food-products-tablet.webp?v={ASSET_VERSION} 1024w', f'food-products-desktop.webp?v={ASSET_VERSION} 1920w'):
         if required not in html: raise RuntimeError(f"Missing required markup: {required}")
     INDEX.write_text(html, encoding="utf-8")
 
