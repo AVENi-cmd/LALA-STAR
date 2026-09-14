@@ -22,6 +22,9 @@ VARIANTS = {
 
 QUALITY = 88
 
+SEO_MARKER = '<meta name="lalastar-seo-v1" content="managed-by-build-webp">'
+SEO_BLOCK = '''<meta name="lalastar-seo-v1" content="managed-by-build-webp"><meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="https://aveni-cmd.github.io/LALA-STAR/"><meta property="og:type" content="website"><meta property="og:locale" content="ar_SA"><meta property="og:site_name" content="شركة لألأة النجوم التجارية | LALA STAR TRADING CO."><meta property="og:title" content="شركة لألأة النجوم التجارية | LALA STAR TRADING CO."><meta property="og:description" content="شركة لألأة النجوم التجارية — بيع المواد الغذائية بالجملة منذ 1993، مع أنشطة البلاستيك والحلويات والوجبات الخفيفة في الدمام والأحساء."><meta property="og:url" content="https://aveni-cmd.github.io/LALA-STAR/"><meta property="og:image" content="https://aveni-cmd.github.io/LALA-STAR/assets/images/warehouse-desktop.webp"><meta property="og:image:alt" content="مستودع تجاري للمواد والسلع بالجملة"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="شركة لألأة النجوم التجارية | LALA STAR TRADING CO."><meta name="twitter:description" content="بيع المواد الغذائية بالجملة منذ 1993، مع أنشطة البلاستيك والحلويات والوجبات الخفيفة."><meta name="twitter:image" content="https://aveni-cmd.github.io/LALA-STAR/assets/images/warehouse-desktop.webp"><script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"شركة لألأة النجوم التجارية","alternateName":"LALA STAR TRADING CO.","description":"شركة لبيع المواد الغذائية بالجملة، مع أنشطة مستقلة في المنتجات البلاستيكية والحلويات والوجبات الخفيفة.","foundingDate":"1993","telephone":"0138562508","email":"starcoldstore@yahoo.com","url":"https://aveni-cmd.github.io/LALA-STAR/","logo":"https://aveni-cmd.github.io/LALA-STAR/assets/lala-star-logo.png","address":{"@type":"PostalAddress","addressLocality":"Dammam","addressCountry":"SA"},"areaServed":"SA"}</script>'''
+
 
 def find_source(name: str, preferred: Path) -> Path:
     if preferred.exists():
@@ -56,7 +59,7 @@ def replace_unsplash_urls(html: str) -> str:
         "1759167632930-298bca6b4268": "sweets-snacks",
     }
 
-    url_pattern = re.compile(r"https://images\.unsplash\.com/photo-([0-9]+-[a-z0-9]+)\?[^\"'\s>)]+")
+    url_pattern = re.compile(r"https://images\\.unsplash\\.com/photo-([0-9]+-[a-z0-9]+)\\?[^\\\"'\\s>)]+")
 
     def repl(match: re.Match[str]) -> str:
         photo_id = match.group(1)
@@ -64,7 +67,7 @@ def replace_unsplash_urls(html: str) -> str:
         if not name:
             return match.group(0)
         full = match.group(0)
-        width_match = re.search(r"[?&]w=(\d+)", full)
+        width_match = re.search(r"[?&]w=(\\d+)", full)
         width = int(width_match.group(1)) if width_match else 2400
         if name == "warehouse":
             return "assets/images/warehouse-desktop.webp"
@@ -77,12 +80,22 @@ def replace_unsplash_urls(html: str) -> str:
     return url_pattern.sub(repl, html)
 
 
+def inject_seo(html: str) -> str:
+    # Remove a previous managed SEO block, if present, so repeated workflow runs stay idempotent.
+    html = re.sub(r'<meta name="lalastar-seo-v1"[^>]*>.*?</script>', '', html, count=1, flags=re.DOTALL)
+    marker = '<meta charset="utf-8">'
+    if marker not in html:
+        raise RuntimeError("Unable to locate document charset marker for SEO metadata")
+    return html.replace(marker, marker + SEO_BLOCK, 1)
+
+
 def rewrite_index() -> None:
     if not INDEX.exists():
         raise FileNotFoundError("index.html not found")
 
     html = INDEX.read_text(encoding="utf-8")
     html = replace_unsplash_urls(html)
+    html = inject_seo(html)
 
     if "images.unsplash.com" in html:
         raise RuntimeError("Remote Unsplash image references remain in index.html")
@@ -93,9 +106,18 @@ def rewrite_index() -> None:
                 raise RuntimeError(f"Responsive {variant} asset is not referenced for {name}")
     if "assets/images/warehouse-desktop.webp" not in html:
         raise RuntimeError("Warehouse WebP asset is not referenced")
+    for required in (
+        SEO_MARKER,
+        'rel="canonical"',
+        'property="og:title"',
+        'name="twitter:card"',
+        'application/ld+json',
+    ):
+        if required not in html:
+            raise RuntimeError(f"SEO metadata missing: {required}")
 
     INDEX.write_text(html, encoding="utf-8")
-    print("Updated index.html to use local responsive WebP assets")
+    print("Updated index.html to use local responsive WebP assets and managed SEO metadata")
 
 
 def main() -> None:
