@@ -1,0 +1,5 @@
+Mobile navigation contract:
+- Button exposes aria-expanded and aria-controls.
+- Opening adds .menu-open.
+- Closing via a navigation link removes .menu-open.
+- Escape closes the menu and returns focus to the menu button.
