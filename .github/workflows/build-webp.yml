@@ -92,7 +92,7 @@ jobs:
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add assets/images index.html
+          git add assets/images index.html assets/optimized/food-products-1600.webp assets/optimized/plastic-products-1600.webp assets/optimized/sweets-snacks-1600.webp
           if git diff --cached --quiet; then echo 'No generated changes to commit.'; exit 0; fi
           git commit -m 'fix(images): update generated assets and bilingual page [skip ci]'
       - name: Rebase and push
