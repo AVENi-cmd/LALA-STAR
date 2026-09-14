@@ -6,9 +6,11 @@ on:
       - main
       - feature/section-images
       - fix/seo-metadata-pr
+      - feat/accessibility
     paths:
       - 'assets/optimized/**'
       - 'scripts/build-webp.py'
+      - 'scripts/accessibility-patch.py'
       - '.github/workflows/build-webp.yml'
   workflow_dispatch:
 
