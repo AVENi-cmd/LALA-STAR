@@ -10,6 +10,7 @@ on:
       - 'assets/food-products.jpg'
       - 'assets/plastic-products.jpg'
       - 'assets/sweets-snacks.jpg'
+      - 'assets/optimized/**'
       - 'scripts/build-webp.py'
       - '.github/workflows/build-webp.yml'
   workflow_dispatch:
@@ -49,39 +50,20 @@ jobs:
           set -euo pipefail
           shopt -s nullglob
           files=(assets/images/*.webp)
-
-          if [ "${#files[@]}" -eq 0 ]; then
-            echo 'ERROR: No WebP files generated.'
-            exit 1
-          fi
-
+          if [ "${#files[@]}" -eq 0 ]; then echo 'ERROR: No WebP files generated.'; exit 1; fi
           for file in "${files[@]}"; do
-            echo "Validating $file"
             size=$(stat -c%s "$file")
-            if [ "$size" -le 0 ]; then
-              echo "ERROR: Empty file: $file"
-              exit 1
-            fi
-            if [ "$size" -gt 5242880 ]; then
-              echo "ERROR: File exceeds 5 MiB: $file"
-              exit 1
-            fi
-
+            if [ "$size" -le 0 ] || [ "$size" -gt 5242880 ]; then echo "ERROR: invalid file size: $file"; exit 1; fi
             python - "$file" <<'PY'
           import sys
           from pathlib import Path
-
-          p = Path(sys.argv[1])
-          data = p.read_bytes()
-          if len(data) < 12:
-              raise SystemExit(f'Invalid WebP: {p} is shorter than 12 bytes')
-          if data[:4] != b'RIFF' or data[8:12] != b'WEBP':
+          p = Path(sys.argv[1]); data = p.read_bytes()
+          if len(data) < 12 or data[:4] != b'RIFF' or data[8:12] != b'WEBP':
               raise SystemExit(f'Invalid WebP RIFF header: {p}')
           if data[:1].isdigit() or all(32 <= b < 127 or b in (9, 10, 13) for b in data[:128]):
               raise SystemExit(f'File appears to contain text/Base64 instead of binary WebP: {p}')
           print(f'OK: {p} | {len(data)} bytes | RIFF/WEBP')
           PY
-
             file "$file"
           done
 
@@ -89,17 +71,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-
           git add assets/images
-
-          if git diff --cached --quiet; then
-            echo 'No WebP changes to commit.'
-            exit 0
-          fi
-
+          if git diff --cached --quiet; then echo 'No WebP changes to commit.'; exit 0; fi
           git commit -m 'fix(images): generate valid binary WebP assets [skip ci]'
 
       - name: Rebase and push
