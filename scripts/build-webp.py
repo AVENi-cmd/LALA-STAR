@@ -12,6 +12,10 @@ QUALITY = 88
 SEO_MARKER = '<meta name="lalastar-seo-v1" content="managed-by-build-webp">'
 SEO_BLOCK = '''<meta name="lalastar-seo-v1" content="managed-by-build-webp"><meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="https://aveni-cmd.github.io/LALA-STAR/"><meta property="og:type" content="website"><meta property="og:locale" content="ar_SA"><meta property="og:site_name" content="شركة لألأة النجوم التجارية | LALA STAR TRADING CO."><meta property="og:title" content="شركة لألأة النجوم التجارية | LALA STAR TRADING CO."><meta property="og:description" content="شركة لألأة النجوم التجارية — بيع المواد الغذائية بالجملة منذ 1993، مع أنشطة البلاستيك والحلويات والوجبات الخفيفة في الدمام والأحساء."><meta property="og:url" content="https://aveni-cmd.github.io/LALA-STAR/"><meta property="og:image" content="https://aveni-cmd.github.io/LALA-STAR/assets/images/warehouse-desktop.webp"><meta property="og:image:type" content="image/webp"><meta property="og:image:width" content="1920"><meta property="og:image:height" content="1080"><meta property="og:image:alt" content="مستودع تجاري للمواد والسلع بالجملة"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="شركة لألأة النجوم التجارية | LALA STAR TRADING CO."><meta name="twitter:description" content="بيع المواد الغذائية بالجملة منذ 1993، مع أنشطة البلاستيك والحلويات والوجبات الخفيفة."><meta name="twitter:image" content="https://aveni-cmd.github.io/LALA-STAR/assets/images/warehouse-desktop.webp"><script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"شركة لألأة النجوم التجارية","alternateName":"LALA STAR TRADING CO.","description":"شركة لبيع المواد الغذائية بالجملة، مع أنشطة مستقلة في المنتجات البلاستيكية والحلويات والوجبات الخفيفة.","foundingDate":"1993","telephone":"0138562508","email":"starcoldstore@yahoo.com","url":"https://aveni-cmd.github.io/LALA-STAR/","logo":"https://aveni-cmd.github.io/LALA-STAR/assets/lala-star-logo.png","address":{"@type":"PostalAddress","addressLocality":"Dammam","addressCountry":"SA"},"areaServed":"SA"}</script>'''
 
+ACCESSIBILITY_CSS = '''.skip-link{position:fixed;top:-100px;right:16px;z-index:1000;background:var(--navy);color:#fff;padding:10px 16px;border-radius:7px;font-weight:700}.skip-link:focus{top:16px}.links a:focus-visible,.lang:focus-visible,.menu:focus-visible,.btn:focus-visible,.map:focus-visible,.brand:focus-visible{outline:3px solid var(--red);outline-offset:3px;border-radius:5px}@media(max-width:850px){.nav.menu-open .links{display:flex;position:absolute;top:75px;right:0;left:0;margin:0;padding:14px 20px;flex-direction:column;align-items:stretch;gap:0;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 8px 20px rgba(7,26,54,.08);font-size:15px}.nav.menu-open .links a{padding:11px 0;border-bottom:1px solid var(--line)}.nav.menu-open .links a:last-child{border-bottom:0}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}}'''
+
+ACCESSIBILITY_JS = '''<script>document.addEventListener("DOMContentLoaded",function(){var menu=document.querySelector(".menu"),nav=document.querySelector(".links"),wrap=document.querySelector(".nav");if(!menu||!nav||!wrap)return;function setOpen(open,focusMenu){menu.setAttribute("aria-expanded",String(open));menu.setAttribute("aria-label",open?"إغلاق القائمة":"فتح القائمة");wrap.classList.toggle("menu-open",open);if(focusMenu)menu.focus()}menu.addEventListener("click",function(){setOpen(menu.getAttribute("aria-expanded")!=="true",false)});nav.addEventListener("click",function(e){if(e.target.closest("a"))setOpen(false,false)});document.addEventListener("keydown",function(e){if(e.key==="Escape"&&menu.getAttribute("aria-expanded")==="true")setOpen(false,true)})});</script>'''
+
 def source_for(name, preferred):
     if preferred.exists(): return preferred
     matches = sorted(SOURCE_DIR.glob(f"{name}*.webp"))
@@ -34,7 +38,8 @@ def replace_remote(html):
         name = ids.get(m.group(1))
         if not name: return m.group(0)
         if name == "warehouse": return "assets/images/warehouse-desktop.webp"
-        width = int(re.search(r"[?&]w=(\d+)", m.group(0)).group(1)) if re.search(r"[?&]w=(\d+)", m.group(0)) else 2400
+        match = re.search(r"[?&]w=(\d+)", m.group(0))
+        width = int(match.group(1)) if match else 2400
         variant = "mobile" if width <= 640 else "tablet" if width <= 1280 else "desktop"
         return f"assets/images/{name}-{variant}.webp"
     return pattern.sub(repl, html)
@@ -50,6 +55,17 @@ def optimize(html):
     if mobile not in html: html = html.replace('</style>', mobile + '</style>', 1)
     return html
 
+def accessibility(html):
+    if 'class="skip-link"' not in html: html = html.replace('<body>', '<body><a class="skip-link" href="#main-content">تخطي إلى المحتوى الرئيسي</a>', 1)
+    html = html.replace('<main>', '<main id="main-content">', 1)
+    html = html.replace('<nav class="links">', '<nav class="links" id="site-nav" aria-label="التنقل الرئيسي">', 1)
+    html = html.replace('<button class="menu" aria-label="القائمة">', '<button class="menu" type="button" aria-label="فتح القائمة" aria-controls="site-nav" aria-expanded="false">', 1)
+    html = html.replace('<button class="menu" type="button" aria-label="القائمة">', '<button class="menu" type="button" aria-label="فتح القائمة" aria-controls="site-nav" aria-expanded="false">', 1)
+    html = html.replace('<button class="lang" id="langBtn">EN</button>', '<button class="lang" id="langBtn" type="button" aria-label="تغيير اللغة">EN</button>', 1)
+    if '.skip-link{' not in html: html = html.replace('</style>', ACCESSIBILITY_CSS + '</style>', 1)
+    if 'LALA_STAR_ACCESSIBILITY_MENU' not in html: html = html.replace('</body>', '<!-- LALA_STAR_ACCESSIBILITY_MENU -->' + ACCESSIBILITY_JS + '</body>', 1)
+    return html
+
 def seo(html):
     html = re.sub(r'<meta name="lalastar-seo-v1"[^>]*>.*?</script>', '', html, count=1, flags=re.DOTALL)
     return html.replace('<meta charset="utf-8">', '<meta charset="utf-8">' + SEO_BLOCK, 1)
@@ -59,13 +75,13 @@ def main():
     for name, preferred in SOURCES.items():
         src = source_for(name, preferred)
         for variant, size in VARIANTS.items(): build(src, OUTPUT_DIR / f"{name}-{variant}.webp", size)
-    html = seo(optimize(replace_remote(INDEX.read_text(encoding="utf-8"))))
+    html = accessibility(seo(optimize(replace_remote(INDEX.read_text(encoding="utf-8")))))
     if "images.unsplash.com" in html: raise RuntimeError("Remote Unsplash references remain")
     for name in ("food-products", "plastic-products", "sweets-snacks"):
         for variant in VARIANTS:
             if f"assets/images/{name}-{variant}.webp" not in html: raise RuntimeError(f"Missing {name}-{variant}")
     if "warehouse-desktop.webp" not in html or "warehouse-mobile.webp" not in html: raise RuntimeError("Missing warehouse responsive references")
-    for required in (SEO_MARKER, 'rel="canonical"', 'property="og:title"', 'name="twitter:card"', 'application/ld+json', 'food-products-mobile.webp 750w', 'food-products-tablet.webp 1024w', 'food-products-desktop.webp 1920w'):
+    for required in (SEO_MARKER, 'rel="canonical"', 'property="og:title"', 'name="twitter:card"', 'application/ld+json', 'food-products-mobile.webp 750w', 'food-products-tablet.webp 1024w', 'food-products-desktop.webp 1920w', 'class="skip-link"', 'id="main-content"', 'id="site-nav"', 'aria-controls="site-nav"', 'aria-expanded="false"', 'LALA_STAR_ACCESSIBILITY_MENU', 'prefers-reduced-motion:reduce'):
         if required not in html: raise RuntimeError(f"Missing required markup: {required}")
     INDEX.write_text(html, encoding="utf-8")
 
