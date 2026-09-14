@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - feature/section-images
+      - fix/seo-metadata-pr
     paths:
       - 'assets/optimized/**'
       - 'scripts/build-webp.py'
