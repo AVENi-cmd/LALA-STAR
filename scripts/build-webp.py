@@ -32,6 +32,7 @@ def version_assets(html):
 
 def inject_i18n(html):
     html = re.sub(r'<script[^>]*src=["\']assets/i18n\.js[^>]*></script>', '', html)
+    html = re.sub(r'<script>const btn=document\.getElementById\(["\']langBtn["\']\).*?</script>', '', html, flags=re.DOTALL)
     return html.replace('</body>', '<script src="assets/i18n.js" defer></script></body>', 1)
 
 def clean_duplicate_preloads(html):
@@ -50,6 +51,8 @@ def main():
     html = inject_i18n(html)
     if 'assets/i18n.js' not in html:
         raise RuntimeError("i18n script was not wired into index.html")
+    if 'const btn=document.getElementById("langBtn")' in html or "const btn=document.getElementById('langBtn')" in html:
+        raise RuntimeError("Legacy language handler remains in index.html")
     if SEO_MARKER not in html:
         raise RuntimeError("SEO marker missing")
     INDEX.write_text(html, encoding="utf-8")
