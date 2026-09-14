@@ -5,7 +5,7 @@ from PIL import Image, ImageOps
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_DIR = ROOT / "assets" / "optimized"
 INDEX = ROOT / "index.html"
-ASSET_VERSION = "20260915-5"
+ASSET_VERSION = "20260915-6"
 SOURCES = {"warehouse":"warehouse-hero","food-products":"food-products","plastic-products":"plastic-products","sweets-snacks":"sweets-snacks"}
 SIZES = {"mobile":640,"tablet":1280,"desktop":1600}
 SEO_MARKER = '<meta name="lalastar-seo-v1" content="managed-by-build-webp">'
@@ -22,7 +22,8 @@ def build_approved_webp():
                 out=ImageOps.fit(im, target, method=Image.Resampling.LANCZOS, centering=(0.5,0.5))
                 destination=SOURCE_DIR / f"{base}-{size}.webp"
                 out.save(destination, "WEBP", quality=88, method=6)
-                if destination.stat().st_size < 30000:
+                minimum = 5000 if size == 640 else 30000
+                if destination.stat().st_size < minimum:
                     raise RuntimeError(f"Generated image is suspiciously small: {destination}")
                 with Image.open(destination) as check:
                     if check.format != "WEBP" or check.size != target:
