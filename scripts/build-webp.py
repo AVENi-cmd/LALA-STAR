@@ -1,26 +1,32 @@
 from pathlib import Path
 import re
-from PIL import Image
+from PIL import Image, ImageOps
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_DIR = ROOT / "assets" / "optimized"
 INDEX = ROOT / "index.html"
-ASSET_VERSION = "20260915-3"
+ASSET_VERSION = "20260915-4"
 SOURCES = {"warehouse":"warehouse-hero","food-products":"food-products","plastic-products":"plastic-products","sweets-snacks":"sweets-snacks"}
-# Always serve the high-resolution approved source. This removes the 640/1280
-# responsive variants that were responsible for the visible quality drop.
-SIZES = {"mobile":1600,"tablet":1600,"desktop":1600}
+SIZES = {"mobile":640,"tablet":1280,"desktop":1600}
 SEO_MARKER = '<meta name="lalastar-seo-v1" content="managed-by-build-webp">'
 
-def validate_sources():
+def build_approved_webp():
     for base in SOURCES.values():
-        p=SOURCE_DIR/f"{base}-1600.webp"
-        if not p.is_file() or p.stat().st_size < 30000: raise RuntimeError(f"Missing or suspiciously small approved source asset: {p}")
-        data=p.read_bytes()
-        if data[:4]!=b"RIFF" or data[8:12]!=b"WEBP": raise RuntimeError(f"Invalid WebP signature: {p}")
-        with Image.open(p) as im:
-            if im.format!="WEBP": raise RuntimeError(f"Invalid WebP format: {p}")
-            if im.width < 1200: raise RuntimeError(f"Unexpectedly low source dimensions: {p} -> {im.size}")
+        source = SOURCE_DIR / f"{base}-1600.jpg"
+        if not source.is_file() or source.stat().st_size < 50000:
+            raise RuntimeError(f"Missing or suspiciously small approved JPG source: {source}")
+        with Image.open(source) as im:
+            im = im.convert("RGB")
+            for size in sorted(set(SIZES.values())):
+                target=(size, round(size*9/16))
+                out=ImageOps.fit(im, target, method=Image.Resampling.LANCZOS, centering=(0.5,0.5))
+                destination=SOURCE_DIR / f"{base}-{size}.webp"
+                out.save(destination, "WEBP", quality=88, method=6)
+                if destination.stat().st_size < 30000:
+                    raise RuntimeError(f"Generated image is suspiciously small: {destination}")
+                with Image.open(destination) as check:
+                    if check.format != "WEBP" or check.size != target:
+                        raise RuntimeError(f"Generated WebP validation failed: {destination} -> {check.format} {check.size}")
 
 def replace_image_refs(html):
     for name,base in SOURCES.items():
@@ -36,11 +42,11 @@ def inject_i18n(html):
 
 def clean_preloads(html):
     html=re.sub(r'<link rel="preload" as="image" href="assets/(?:images|optimized)/warehouse[^>]*>','',html)
-    pre=f'<link rel="preload" as="image" href="assets/optimized/warehouse-hero-1600.webp?v={ASSET_VERSION}" fetchpriority="high" media="(min-width:851px)"><link rel="preload" as="image" href="assets/optimized/warehouse-hero-1600.webp?v={ASSET_VERSION}" fetchpriority="high" media="(max-width:850px)">'
+    pre=f'<link rel="preload" as="image" href="assets/optimized/warehouse-hero-1600.webp?v={ASSET_VERSION}" fetchpriority="high" media="(min-width:851px)"><link rel="preload" as="image" href="assets/optimized/warehouse-hero-640.webp?v={ASSET_VERSION}" fetchpriority="high" media="(max-width:850px)">'
     return html.replace('<meta name="viewport"',pre+'<meta name="viewport"',1)
 
 def main():
-    validate_sources()
+    build_approved_webp()
     html=INDEX.read_text(encoding="utf-8")
     html=replace_image_refs(html)
     if 'images.unsplash.com' in html or 'BLOCKED_REMOTE_IMAGE_REFERENCE' in html: raise RuntimeError('Remote image references remain in index.html')
