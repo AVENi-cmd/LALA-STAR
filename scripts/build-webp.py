@@ -5,7 +5,7 @@ from PIL import Image, ImageOps
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_DIR = ROOT / "assets" / "optimized"
 INDEX = ROOT / "index.html"
-ASSET_VERSION = "20260915-7"
+ASSET_VERSION = "20260915-8"
 SOURCES = {"warehouse":"warehouse-hero","food-products":"food-products","plastic-products":"plastic-products","sweets-snacks":"sweets-snacks"}
 SIZES = {"mobile":640,"tablet":1280,"desktop":1600}
 SEO_MARKER = '<meta name="lalastar-seo-v1" content="managed-by-build-webp">'
@@ -31,8 +31,19 @@ def build_approved_webp():
 
 def replace_image_refs(html):
     for name,base in SOURCES.items():
+        # Explicit replacements cover the current desktop/tablet/mobile naming and
+        # the optimized naming used by previous build revisions.
         for variant,size in SIZES.items():
-            html=re.sub(rf'assets/(?:images|optimized)/{re.escape(name)}-{variant}\.webp(?:\?v=[^\s\"\']+)?',f'assets/optimized/{base}-{size}.webp?v={ASSET_VERSION}',html)
+            old_names = (f"assets/images/{name}-{variant}.webp", f"assets/optimized/{name}-{variant}.webp")
+            new = f"assets/optimized/{base}-{size}.webp?v={ASSET_VERSION}"
+            for old in old_names:
+                html = re.sub(re.escape(old) + r'(?:\?v=[^\s\"\']+)?', new, html)
+        # Also repair any legacy direct desktop reference.
+        html = re.sub(
+            rf'assets/(?:images|optimized)/{re.escape(name)}-desktop\.webp(?:\?v=[^\s\"\']+)?',
+            f'assets/optimized/{base}-1600.webp?v={ASSET_VERSION}',
+            html,
+        )
     html=re.sub(r'https://images\.unsplash\.com/photo-[^\"\'\s>)]+','BLOCKED_REMOTE_IMAGE_REFERENCE',html)
     return html
 
