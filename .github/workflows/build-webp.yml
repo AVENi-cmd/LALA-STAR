@@ -6,10 +6,6 @@ on:
       - main
       - feature/section-images
     paths:
-      - 'assets/warehouse-hero.jpg'
-      - 'assets/food-products.jpg'
-      - 'assets/plastic-products.jpg'
-      - 'assets/sweets-snacks.jpg'
       - 'assets/optimized/**'
       - 'scripts/build-webp.py'
       - '.github/workflows/build-webp.yml'
@@ -41,10 +37,10 @@ jobs:
       - name: Install Pillow
         run: python -m pip install --upgrade Pillow
 
-      - name: Build real WebP binary files
+      - name: Build and wire local WebP assets
         run: python scripts/build-webp.py
 
-      - name: Validate WebP signatures and sizes
+      - name: Validate WebP signatures, sizes, and source references
         shell: bash
         run: |
           set -euo pipefail
@@ -60,22 +56,30 @@ jobs:
           p = Path(sys.argv[1]); data = p.read_bytes()
           if len(data) < 12 or data[:4] != b'RIFF' or data[8:12] != b'WEBP':
               raise SystemExit(f'Invalid WebP RIFF header: {p}')
-          if data[:1].isdigit() or all(32 <= b < 127 or b in (9, 10, 13) for b in data[:128]):
+          if all(32 <= b < 127 or b in (9, 10, 13) for b in data[:128]):
               raise SystemExit(f'File appears to contain text/Base64 instead of binary WebP: {p}')
           print(f'OK: {p} | {len(data)} bytes | RIFF/WEBP')
           PY
             file "$file"
           done
+          if grep -q 'images.unsplash.com' index.html; then echo 'ERROR: Remote Unsplash image references remain.'; exit 1; fi
+          for name in food-products plastic-products sweets-snacks; do
+            grep -q "assets/images/${name}-desktop.webp" index.html
+            grep -q "assets/images/${name}-tablet.webp" index.html
+            grep -q "assets/images/${name}-mobile.webp" index.html
+          done
+          grep -q 'assets/images/warehouse-desktop.webp' index.html
+          echo 'OK: index.html uses local WebP assets.'
 
-      - name: Commit generated binary assets
+      - name: Commit generated assets and index wiring
         shell: bash
         run: |
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add assets/images
-          if git diff --cached --quiet; then echo 'No WebP changes to commit.'; exit 0; fi
-          git commit -m 'fix(images): generate valid binary WebP assets [skip ci]'
+          git add assets/images index.html
+          if git diff --cached --quiet; then echo 'No generated changes to commit.'; exit 0; fi
+          git commit -m 'fix(images): wire valid responsive WebP assets [skip ci]'
 
       - name: Rebase and push
         shell: bash
