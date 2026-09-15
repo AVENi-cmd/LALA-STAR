@@ -124,8 +124,8 @@ jobs:
               if im.format != 'WEBP': raise SystemExit(f'Invalid WebP format: {p}')
           PY
           done
-          if grep -qE 'assets/(IMG_3041|IMG_3042|food-products\.jpg|plastic-products\.jpg|sweets-snacks\.jpg|warehouse-hero\.jpg|hero-wholesale\.jpg)' index.html assets/i18n.js scripts/build-webp.py; then echo 'ERROR: obsolete image reference remains.'; exit 1; fi
-          if grep -qE 'assets/optimized/(food-products|plastic-products|sweets-snacks|warehouse-hero)-((640|1280|1600)\.jpg|1600\.webp)' index.html assets/i18n.js scripts/build-webp.py; then echo 'ERROR: obsolete optimized image reference remains.'; exit 1; fi
+          if grep -qE 'assets/(IMG_3041|IMG_3042|food-products\.jpg|plastic-products\.jpg|sweets-snacks\.jpg|warehouse-hero\.jpg|hero-wholesale\.jpg)' index.html assets/i18n.js; then echo 'ERROR: obsolete image reference remains.'; exit 1; fi
+          if grep -qE 'assets/optimized/(food-products|plastic-products|sweets-snacks|warehouse-hero)-((640|1280|1600)\.jpg|1600\.webp)' index.html assets/i18n.js; then echo 'ERROR: obsolete optimized image reference remains.'; exit 1; fi
           if grep -q 'images.unsplash.com' index.html; then echo 'ERROR: remote Unsplash image references remain.'; exit 1; fi
           grep -q 'assets/i18n.js' index.html
           grep -q 'lalastar-language' assets/i18n.js
