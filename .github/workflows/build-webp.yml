@@ -79,9 +79,9 @@ jobs:
             assets/optimized/food-products-640.jpg assets/optimized/food-products-1280.jpg assets/optimized/food-products-1600.jpg
             assets/optimized/food-products-640.webp assets/optimized/food-products-1280.webp assets/optimized/food-products-1600.webp
             assets/optimized/plastic-products-640.jpg assets/optimized/plastic-products-1280.jpg assets/optimized/plastic-products-1600.jpg
-            assets/optimized/plastic-products-640.webp assets/optimized/plastic-products-1280.webp assets/optimized/plastic-products-1600.webp
+            assets/optimized/plastic-products-1600.webp
             assets/optimized/sweets-snacks-640.jpg assets/optimized/sweets-snacks-1280.jpg assets/optimized/sweets-snacks-1600.jpg
-            assets/optimized/sweets-snacks-640.webp assets/optimized/sweets-snacks-1280.webp assets/optimized/sweets-snacks-1600.webp
+            assets/optimized/sweets-snacks-1600.webp
             assets/optimized/warehouse-hero-640.jpg assets/optimized/warehouse-hero-1280.jpg assets/optimized/warehouse-hero-1600.jpg
             assets/optimized/warehouse-hero-640.webp assets/optimized/warehouse-hero-1280.webp assets/optimized/warehouse-hero-1600.webp
           )
@@ -91,8 +91,6 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Install Pillow
-        run: python -m pip install --upgrade Pillow
       - name: Validate approved image assets and wire full-page i18n
         run: python scripts/build-webp.py
       - name: Validate approved assets, references, and i18n
@@ -125,7 +123,7 @@ jobs:
           PY
           done
           if grep -qE 'assets/(IMG_3041|IMG_3042|food-products\.jpg|plastic-products\.jpg|sweets-snacks\.jpg|warehouse-hero\.jpg|hero-wholesale\.jpg)' index.html assets/i18n.js scripts/build-webp.py; then echo 'ERROR: obsolete image reference remains.'; exit 1; fi
-          if grep -qE 'assets/optimized/(food-products|plastic-products|sweets-snacks|warehouse-hero)-((640|1280|1600)\.(jpg|webp))' index.html assets/i18n.js scripts/build-webp.py; then echo 'ERROR: obsolete optimized image reference remains.'; exit 1; fi
+          if grep -qE 'assets/optimized/(food-products|plastic-products|sweets-snacks|warehouse-hero)-((640|1280|1600)\.jpg|1600\.webp)' index.html assets/i18n.js scripts/build-webp.py; then echo 'ERROR: obsolete optimized image reference remains.'; exit 1; fi
           if grep -q 'images.unsplash.com' index.html; then echo 'ERROR: remote Unsplash image references remain.'; exit 1; fi
           grep -q 'assets/i18n.js' index.html
           grep -q 'lalastar-language' assets/i18n.js
