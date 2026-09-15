@@ -91,6 +91,8 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Install Pillow
+        run: python -m pip install --upgrade Pillow
       - name: Validate approved image assets and wire full-page i18n
         run: python scripts/build-webp.py
       - name: Validate approved assets, references, and i18n
