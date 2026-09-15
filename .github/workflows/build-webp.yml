@@ -12,6 +12,18 @@ on:
       - 'assets/i18n.js'
       - 'scripts/build-webp.py'
       - '.github/workflows/build-webp.yml'
+      - 'food-products-ahsa-640.webp'
+      - 'food-products-ahsa-1280.webp'
+      - 'food-products-dammam-640.webp'
+      - 'food-products-dammam-1280.webp'
+      - 'plastic-products-640.webp'
+      - 'plastic-products-1280.webp'
+      - 'sweets-snacks-640.webp'
+      - 'sweets-snacks-1280.webp'
+      - 'wholesale-warehouse-ahsa-640.webp'
+      - 'wholesale-warehouse-ahsa-1280.webp'
+      - 'wholesale-warehouse-ahsa-1920.webp'
+      - 'ASSET-MANIFEST.json'
   workflow_dispatch:
 
 permissions:
@@ -30,6 +42,35 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: true
+      - name: Relocate manually uploaded approved assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p assets/optimized
+          moved=0
+          for file in \
+            food-products-ahsa-640.webp \
+            food-products-ahsa-1280.webp \
+            food-products-dammam-640.webp \
+            food-products-dammam-1280.webp \
+            plastic-products-640.webp \
+            plastic-products-1280.webp \
+            sweets-snacks-640.webp \
+            sweets-snacks-1280.webp \
+            wholesale-warehouse-ahsa-640.webp \
+            wholesale-warehouse-ahsa-1280.webp \
+            wholesale-warehouse-ahsa-1920.webp \
+            ASSET-MANIFEST.json; do
+            if [ -f "$file" ]; then
+              git mv "$file" "assets/optimized/$file"
+              moved=1
+            fi
+          done
+          if [ "$moved" -eq 1 ]; then
+            echo 'OK: relocated uploaded approved assets into assets/optimized/.'
+          else
+            echo 'OK: no root-level approved assets required relocation.'
+          fi
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
@@ -38,7 +79,7 @@ jobs:
         run: python -m pip install --upgrade Pillow
       - name: Build approved image assets and wire full-page i18n
         run: python scripts/build-webp.py
-      - name: Validate generated assets and i18n
+      - name: Validate generated and approved assets and i18n
         shell: bash
         run: |
           set -euo pipefail
@@ -57,6 +98,20 @@ jobs:
           print(f'OK: {p} | {len(data)} bytes | RIFF/WEBP')
           PY
           done
+          for file in \
+            assets/optimized/food-products-ahsa-640.webp \
+            assets/optimized/food-products-ahsa-1280.webp \
+            assets/optimized/food-products-dammam-640.webp \
+            assets/optimized/food-products-dammam-1280.webp \
+            assets/optimized/plastic-products-640.webp \
+            assets/optimized/plastic-products-1280.webp \
+            assets/optimized/sweets-snacks-640.webp \
+            assets/optimized/sweets-snacks-1280.webp \
+            assets/optimized/wholesale-warehouse-ahsa-640.webp \
+            assets/optimized/wholesale-warehouse-ahsa-1280.webp \
+            assets/optimized/wholesale-warehouse-ahsa-1920.webp; do
+            [ -f "$file" ] || { echo "ERROR: approved asset missing: $file"; exit 1; }
+          done
           if grep -q 'images.unsplash.com' index.html; then echo 'ERROR: Remote Unsplash image references remain.'; exit 1; fi
           grep -q 'assets/i18n.js' index.html
           grep -q 'assets/optimized/food-products-1600.webp' index.html
@@ -69,15 +124,15 @@ jobs:
           grep -q 'Our Branches & Locations' assets/i18n.js
           grep -q 'Contact LALA STAR TRADING CO.' assets/i18n.js
           echo 'OK: approved image sources and full-page bilingual validation passed.'
-      - name: Commit generated index wiring
+      - name: Commit generated index wiring and relocated assets
         shell: bash
         run: |
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add index.html assets/optimized/*-640.webp assets/optimized/*-1280.webp assets/optimized/*-1600.webp
+          git add index.html assets/optimized/*-640.webp assets/optimized/*-1280.webp assets/optimized/*-1600.webp assets/optimized/ASSET-MANIFEST.json
           if git diff --cached --quiet; then echo 'No generated changes to commit.'; exit 0; fi
-          git commit -m 'fix(site): wire approved images and full bilingual page [skip ci]'
+          git commit -m 'fix(images): place approved uploaded assets in optimized directory [skip ci]'
       - name: Rebase and push
         shell: bash
         run: |
