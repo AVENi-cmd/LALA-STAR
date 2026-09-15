@@ -1,0 +1,18 @@
+{
+  "repository": "AVENi-cmd/LALA-STAR",
+  "upload_root": "assets/optimized/",
+  "files": [
+    "food-products-ahsa-1280.webp",
+    "food-products-ahsa-640.webp",
+    "food-products-dammam-1280.webp",
+    "food-products-dammam-640.webp",
+    "plastic-products-1280.webp",
+    "plastic-products-640.webp",
+    "sweets-snacks-1280.webp",
+    "sweets-snacks-640.webp",
+    "wholesale-warehouse-ahsa-1280.webp",
+    "wholesale-warehouse-ahsa-1920.webp",
+    "wholesale-warehouse-ahsa-640.webp"
+  ],
+  "note": "These are the approved real-photo assets referenced by assets/i18n.js. Upload them without renaming."
+}
