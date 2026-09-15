@@ -5,7 +5,7 @@ import re
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE_DIR = ROOT / "assets" / "optimized"
 INDEX = ROOT / "index.html"
-ASSET_VERSION = "20260915-9"
+ASSET_VERSION = "20260915-11"
 SOURCES = {"warehouse":"warehouse-hero","food-products":"food-products","plastic-products":"plastic-products","sweets-snacks":"sweets-snacks"}
 SIZES = {"mobile":640,"tablet":1280,"desktop":1600}
 SEO_MARKER = '<meta name="lalastar-seo-v1" content="managed-by-build-webp">'
@@ -54,6 +54,12 @@ def clean_preloads(html):
     )
     return html.replace('<meta name="viewport"', pre + '<meta name="viewport"', 1)
 
+def ensure_title(html):
+    if '<title>' in html and '</title>' in html:
+        return html
+    title = '<title>شركة لألأة النجوم التجارية | LALA STAR TRADING CO.</title>'
+    return html.replace('</head>', title + '</head>', 1)
+
 def main():
     build_approved_webp()
     html = INDEX.read_text(encoding="utf-8")
@@ -61,6 +67,7 @@ def main():
     if 'images.unsplash.com' in html or 'BLOCKED_REMOTE_IMAGE_REFERENCE' in html:
         raise RuntimeError('Remote image references remain in index.html')
     html = clean_preloads(html)
+    html = ensure_title(html)
     html = inject_i18n(html)
     if 'assets/i18n.js' not in html:
         raise RuntimeError('i18n script was not wired into index.html')
