@@ -41,6 +41,47 @@
   };
   const arabicTitle='شركة لألأة النجوم التجارية | LALA STAR TRADING CO.';
   const arabicDescription='شركة لألأة النجوم التجارية — تجارة المواد الغذائية بالجملة منذ 1993.';
+  const assets={
+    foodAhsa:{small:'assets/optimized/food-products-ahsa-640.webp',large:'assets/optimized/food-products-ahsa-1280.webp'},
+    foodDammam:{small:'assets/optimized/food-products-dammam-640.webp',large:'assets/optimized/food-products-dammam-1280.webp'},
+    plastic:{small:'assets/optimized/plastic-products-640.webp',large:'assets/optimized/plastic-products-1280.webp'},
+    sweets:{small:'assets/optimized/sweets-snacks-640.webp',large:'assets/optimized/sweets-snacks-1280.webp'},
+    warehouse:{small:'assets/optimized/wholesale-warehouse-ahsa-640.webp',large:'assets/optimized/wholesale-warehouse-ahsa-1280.webp',hero:'assets/optimized/wholesale-warehouse-ahsa-1920.webp'}
+  };
+  const setResponsiveImage=(img,a,alt)=>{
+    if(!img||!a)return;
+    img.src=a.large;
+    img.srcset=`${a.small} 640w, ${a.large} 1280w`;
+    img.sizes='(max-width: 850px) 100vw, 1180px';
+    img.loading=img.closest('.hero')?'eager':'lazy';
+    img.decoding='async';
+    if(alt)img.alt=alt;
+    const picture=img.closest('picture');
+    if(picture){picture.querySelectorAll('source').forEach(source=>{source.srcset=`${a.small} 640w, ${a.large} 1280w`;source.sizes='(max-width: 850px) 100vw, 1180px';});}
+  };
+  const wireApprovedImages=()=>{
+    document.querySelectorAll('.business').forEach(card=>{
+      const title=(card.querySelector('h3')?.textContent||'').trim();
+      const img=card.querySelector('img');
+      if(title.includes('المواد الغذائية')) setResponsiveImage(img,assets.foodAhsa,'صورة حقيقية لمستودع المواد الغذائية بالجملة في الأحساء');
+      else if(title.includes('المنتجات البلاستيكية')) setResponsiveImage(img,assets.plastic,'صورة حقيقية لمستودع المنتجات البلاستيكية');
+      else if(title.includes('الحلويات والسناكات')) setResponsiveImage(img,assets.sweets,'صورة حقيقية للحلويات والسناكات في الأحساء');
+    });
+    document.querySelectorAll('.branch').forEach(card=>{
+      const title=(card.querySelector('h3')?.textContent||'').trim();
+      const img=card.querySelector('img');
+      if(title.includes('الدمام')) setResponsiveImage(img,assets.foodDammam,'واجهة فرع شركة لألأة النجوم التجارية للمواد الغذائية بالجملة في الدمام');
+      else if(title.includes('الأحساء')) setResponsiveImage(img,assets.foodAhsa,'واجهة فرع شركة لألأة النجوم التجارية للمواد الغذائية بالجملة في الأحساء');
+    });
+    const story=document.querySelector('.photo img');
+    setResponsiveImage(story,assets.warehouse,'مستودع المواد الغذائية بالجملة في الأحساء');
+    const hero=document.querySelector('.hero');
+    if(hero){
+      const applyHero=()=>{const small=window.matchMedia('(max-width:850px)').matches?assets.warehouse.small:assets.warehouse.hero;hero.style.backgroundImage=`linear-gradient(90deg,rgba(4,20,42,.88),rgba(7,26,54,.6) 48%,rgba(7,26,54,.18)),url('${small}')`;};
+      applyHero();
+      if(!hero.dataset.heroResizeBound){window.addEventListener('resize',applyHero,{passive:true});hero.dataset.heroResizeBound='1';}
+    }
+  };
   const setMeta=(en)=>{
     document.title=en?meta.title:arabicTitle;
     const d=document.querySelector('meta[name="description"]'); if(d)d.content=en?meta.description:arabicDescription;
@@ -67,6 +108,6 @@
     });
     document.querySelectorAll('img[alt]').forEach(img=>{const ar=img.alt.trim(),en=translations[ar];if(en){img.dataset.altAr=ar;img.dataset.altEn=en;}});
   };
-  const init=()=>{prepare();document.querySelectorAll('img[data-alt-ar]').forEach(img=>img.alt=img.dataset.altAr);document.querySelectorAll('.links a[data-ar]').forEach(a=>{a.dataset.i18nAr=a.dataset.ar;a.dataset.i18nEn=a.dataset.en});const saved=localStorage.getItem(KEY);apply(saved==='en'?'en':'ar');const btn=document.getElementById('langBtn');if(btn)btn.addEventListener('click',()=>{const next=document.documentElement.lang==='en'?'ar':'en';localStorage.setItem(KEY,next);document.querySelectorAll('img[data-alt-ar]').forEach(img=>img.alt=next==='en'?img.dataset.altEn:img.dataset.altAr);apply(next);});};
+  const init=()=>{prepare();wireApprovedImages();document.querySelectorAll('img[data-alt-ar]').forEach(img=>img.alt=img.dataset.altAr);document.querySelectorAll('.links a[data-ar]').forEach(a=>{a.dataset.i18nAr=a.dataset.ar;a.dataset.i18nEn=a.dataset.en});const saved=localStorage.getItem(KEY);apply(saved==='en'?'en':'ar');const btn=document.getElementById('langBtn');if(btn)btn.addEventListener('click',()=>{const next=document.documentElement.lang==='en'?'ar':'en';localStorage.setItem(KEY,next);document.querySelectorAll('img[data-alt-ar]').forEach(img=>img.alt=next==='en'?img.dataset.altEn:img.dataset.altAr);apply(next);});};
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
