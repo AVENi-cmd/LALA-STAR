@@ -62,12 +62,13 @@ jobs:
             wholesale-warehouse-ahsa-1920.webp \
             ASSET-MANIFEST.json; do
             if [ -f "$file" ]; then
-              git mv "$file" "assets/optimized/$file"
+              cp -f "$file" "assets/optimized/$file"
+              rm -f "$file"
               moved=1
             fi
           done
           if [ "$moved" -eq 1 ]; then
-            echo 'OK: relocated uploaded approved assets into assets/optimized/.'
+            echo 'OK: copied uploaded approved assets into assets/optimized and removed root duplicates.'
           else
             echo 'OK: no root-level approved assets required relocation.'
           fi
@@ -130,9 +131,9 @@ jobs:
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add index.html assets/optimized/*-640.webp assets/optimized/*-1280.webp assets/optimized/*-1600.webp assets/optimized/ASSET-MANIFEST.json
+          git add -A index.html assets/optimized food-products-ahsa-640.webp food-products-ahsa-1280.webp food-products-dammam-640.webp food-products-dammam-1280.webp plastic-products-640.webp plastic-products-1280.webp sweets-snacks-640.webp sweets-snacks-1280.webp wholesale-warehouse-ahsa-640.webp wholesale-warehouse-ahsa-1280.webp wholesale-warehouse-ahsa-1920.webp ASSET-MANIFEST.json
           if git diff --cached --quiet; then echo 'No generated changes to commit.'; exit 0; fi
-          git commit -m 'fix(images): place approved uploaded assets in optimized directory [skip ci]'
+          git commit -m 'fix(images): install approved uploaded assets in optimized directory [skip ci]'
       - name: Rebase and push
         shell: bash
         run: |
