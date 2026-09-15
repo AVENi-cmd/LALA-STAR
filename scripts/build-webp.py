@@ -4,7 +4,7 @@ import re
 ROOT = Path(__file__).resolve().parents[1]
 INDEX = ROOT / "index.html"
 ASSET_DIR = ROOT / "assets" / "optimized"
-ASSET_VERSION = "20260915-12"
+ASSET_VERSION = "20260915-13"
 SEO_MARKER = '<meta name="lalastar-seo-v1" content="managed-by-build-webp">'
 
 APPROVED = {
@@ -24,7 +24,6 @@ APPROVED = {
 
 def validate_approved_assets():
     from PIL import Image
-
     for name, path in APPROVED.items():
         if not path.is_file() or path.stat().st_size < 5000:
             raise RuntimeError(f"Missing or suspiciously small approved image: {name} -> {path}")
@@ -38,43 +37,34 @@ def validate_approved_assets():
 
 def replace_image_refs(html):
     replacements = {
-        "assets/optimized/warehouse-hero-1600.webp": f"assets/optimized/wholesale-warehouse-ahsa-1920.webp?v={ASSET_VERSION}",
-        "assets/optimized/warehouse-hero-1280.webp": f"assets/optimized/wholesale-warehouse-ahsa-1280.webp?v={ASSET_VERSION}",
-        "assets/optimized/warehouse-hero-640.webp": f"assets/optimized/wholesale-warehouse-ahsa-640.webp?v={ASSET_VERSION}",
-        "assets/images/warehouse-desktop.webp": f"assets/optimized/wholesale-warehouse-ahsa-1920.webp?v={ASSET_VERSION}",
-        "assets/images/warehouse-tablet.webp": f"assets/optimized/wholesale-warehouse-ahsa-1280.webp?v={ASSET_VERSION}",
-        "assets/images/warehouse-mobile.webp": f"assets/optimized/wholesale-warehouse-ahsa-640.webp?v={ASSET_VERSION}",
-        "assets/optimized/food-products-1600.webp": f"assets/optimized/food-products-ahsa-1280.webp?v={ASSET_VERSION}",
-        "assets/optimized/food-products-1280.webp": f"assets/optimized/food-products-ahsa-1280.webp?v={ASSET_VERSION}",
-        "assets/optimized/food-products-640.webp": f"assets/optimized/food-products-ahsa-640.webp?v={ASSET_VERSION}",
-        "assets/optimized/plastic-products-1600.webp": f"assets/optimized/plastic-products-1280.webp?v={ASSET_VERSION}",
-        "assets/optimized/plastic-products-1280.webp": f"assets/optimized/plastic-products-1280.webp?v={ASSET_VERSION}",
-        "assets/optimized/plastic-products-640.webp": f"assets/optimized/plastic-products-640.webp?v={ASSET_VERSION}",
-        "assets/optimized/sweets-snacks-1600.webp": f"assets/optimized/sweets-snacks-1280.webp?v={ASSET_VERSION}",
-        "assets/optimized/sweets-snacks-1280.webp": f"assets/optimized/sweets-snacks-1280.webp?v={ASSET_VERSION}",
-        "assets/optimized/sweets-snacks-640.webp": f"assets/optimized/sweets-snacks-640.webp?v={ASSET_VERSION}",
+        r"assets/optimized/warehouse-hero-1600\.webp(?:\?v=[^\"'\s)]+)?": f"assets/optimized/wholesale-warehouse-ahsa-1920.webp?v={ASSET_VERSION}",
+        r"assets/optimized/warehouse-hero-1280\.webp(?:\?v=[^\"'\s)]+)?": f"assets/optimized/wholesale-warehouse-ahsa-1280.webp?v={ASSET_VERSION}",
+        r"assets/optimized/warehouse-hero-640\.webp(?:\?v=[^\"'\s)]+)?": f"assets/optimized/wholesale-warehouse-ahsa-640.webp?v={ASSET_VERSION}",
+        r"assets/images/warehouse-(?:desktop|tablet|mobile)\.webp(?:\?v=[^\"'\s)]+)?": f"assets/optimized/wholesale-warehouse-ahsa-1920.webp?v={ASSET_VERSION}",
+        r"assets/optimized/food-products-1600\.webp(?:\?v=[^\"'\s)]+)?": f"assets/optimized/food-products-ahsa-1280.webp?v={ASSET_VERSION}",
+        r"assets/optimized/food-products-1280\.webp(?:\?v=[^\"'\s)]+)?": f"assets/optimized/food-products-ahsa-1280.webp?v={ASSET_VERSION}",
+        r"assets/optimized/food-products-640\.webp(?:\?v=[^\"'\s)]+)?": f"assets/optimized/food-products-ahsa-640.webp?v={ASSET_VERSION}",
+        r"assets/optimized/plastic-products-1600\.webp(?:\?v=[^\"'\s)]+)?": f"assets/optimized/plastic-products-1280.webp?v={ASSET_VERSION}",
+        r"assets/optimized/plastic-products-1280\.webp(?:\?v=[^\"'\s)]+)?": f"assets/optimized/plastic-products-1280.webp?v={ASSET_VERSION}",
+        r"assets/optimized/plastic-products-640\.webp(?:\?v=[^\"'\s)]+)?": f"assets/optimized/plastic-products-640.webp?v={ASSET_VERSION}",
+        r"assets/optimized/sweets-snacks-1600\.webp(?:\?v=[^\"'\s)]+)?": f"assets/optimized/sweets-snacks-1280.webp?v={ASSET_VERSION}",
+        r"assets/optimized/sweets-snacks-1280\.webp(?:\?v=[^\"'\s)]+)?": f"assets/optimized/sweets-snacks-1280.webp?v={ASSET_VERSION}",
+        r"assets/optimized/sweets-snacks-640\.webp(?:\?v=[^\"'\s)]+)?": f"assets/optimized/sweets-snacks-640.webp?v={ASSET_VERSION}",
+        r"assets/images/food-products-(?:desktop|tablet)\.webp(?:\?v=[^\"'\s)]+)?": f"assets/optimized/food-products-ahsa-1280.webp?v={ASSET_VERSION}",
+        r"assets/images/food-products-mobile\.webp(?:\?v=[^\"'\s)]+)?": f"assets/optimized/food-products-ahsa-640.webp?v={ASSET_VERSION}",
+        r"assets/images/plastic-products-(?:desktop|tablet)\.webp(?:\?v=[^\"'\s)]+)?": f"assets/optimized/plastic-products-1280.webp?v={ASSET_VERSION}",
+        r"assets/images/plastic-products-mobile\.webp(?:\?v=[^\"'\s)]+)?": f"assets/optimized/plastic-products-640.webp?v={ASSET_VERSION}",
+        r"assets/images/sweets-snacks-(?:desktop|tablet)\.webp(?:\?v=[^\"'\s)]+)?": f"assets/optimized/sweets-snacks-1280.webp?v={ASSET_VERSION}",
+        r"assets/images/sweets-snacks-mobile\.webp(?:\?v=[^\"'\s)]+)?": f"assets/optimized/sweets-snacks-640.webp?v={ASSET_VERSION}",
     }
-    for old, new in replacements.items():
-        html = html.replace(old, new)
-    for old, new in {
-        "assets/images/food-products-desktop.webp": "assets/optimized/food-products-ahsa-1280.webp",
-        "assets/images/food-products-tablet.webp": "assets/optimized/food-products-ahsa-1280.webp",
-        "assets/images/food-products-mobile.webp": "assets/optimized/food-products-ahsa-640.webp",
-        "assets/images/plastic-products-desktop.webp": "assets/optimized/plastic-products-1280.webp",
-        "assets/images/plastic-products-tablet.webp": "assets/optimized/plastic-products-1280.webp",
-        "assets/images/plastic-products-mobile.webp": "assets/optimized/plastic-products-640.webp",
-        "assets/images/sweets-snacks-desktop.webp": "assets/optimized/sweets-snacks-1280.webp",
-        "assets/images/sweets-snacks-tablet.webp": "assets/optimized/sweets-snacks-1280.webp",
-        "assets/images/sweets-snacks-mobile.webp": "assets/optimized/sweets-snacks-640.webp",
-    }.items():
-        html = html.replace(old, new)
-    html = re.sub(r'https://images\\.unsplash\\.com/photo-[^\"\'\\s>)]+', 'BLOCKED_REMOTE_IMAGE_REFERENCE', html)
+    for pattern, new in replacements.items():
+        html = re.sub(pattern, new, html)
     return html
 
 
 def inject_i18n(html):
-    html = re.sub(r'<script[^>]*src=["\']assets/i18n\\.js[^>]*></script>', '', html)
-    html = re.sub(r'<script[^>]*>.*?document\\.getElementById\\(["\']langBtn["\']\\).*?</script>', '', html, flags=re.DOTALL)
+    html = re.sub(r'<script[^>]*src=["\']assets/i18n\.js[^>]*></script>', '', html)
+    html = re.sub(r'<script[^>]*>.*?document\.getElementById\(["\']langBtn["\']\).*?</script>', '', html, flags=re.DOTALL)
     return html.replace('</body>', '<script src="assets/i18n.js" defer></script></body>', 1)
 
 
@@ -97,7 +87,7 @@ def main():
     validate_approved_assets()
     html = INDEX.read_text(encoding="utf-8")
     html = replace_image_refs(html)
-    if 'images.unsplash.com' in html or 'BLOCKED_REMOTE_IMAGE_REFERENCE' in html:
+    if 'images.unsplash.com' in html:
         raise RuntimeError('Remote image references remain in index.html')
     html = clean_preloads(html)
     html = ensure_title(html)
