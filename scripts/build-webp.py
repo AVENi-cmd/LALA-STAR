@@ -1,67 +1,100 @@
 from pathlib import Path
-from PIL import Image, ImageOps
 import re
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE_DIR = ROOT / "assets" / "optimized"
 INDEX = ROOT / "index.html"
-ASSET_VERSION = "20260915-11"
-SOURCES = {"warehouse":"warehouse-hero","food-products":"food-products","plastic-products":"plastic-products","sweets-snacks":"sweets-snacks"}
-SIZES = {"mobile":640,"tablet":1280,"desktop":1600}
+ASSET_DIR = ROOT / "assets" / "optimized"
+ASSET_VERSION = "20260915-12"
 SEO_MARKER = '<meta name="lalastar-seo-v1" content="managed-by-build-webp">'
 
-def build_approved_webp():
-    for name, base in SOURCES.items():
-        source = (ROOT / "assets" / "IMG_3042.jpeg") if name == "warehouse" else (SOURCE_DIR / f"{base}-1600.jpg")
-        if not source.is_file() or source.stat().st_size < 30000:
-            raise RuntimeError(f"Missing or suspiciously small approved image source: {source}")
-        with Image.open(source) as im:
-            im = im.convert("RGB")
-            for size in sorted(set(SIZES.values())):
-                target = (size, round(size * 9 / 16))
-                out = ImageOps.fit(im, target, method=Image.Resampling.LANCZOS, centering=(0.5, 0.5))
-                destination = SOURCE_DIR / f"{base}-{size}.webp"
-                out.save(destination, "WEBP", quality=88, method=6)
-                minimum = 5000 if size == 640 else 30000
-                if destination.stat().st_size < minimum:
-                    raise RuntimeError(f"Generated image is suspiciously small: {destination}")
-                with Image.open(destination) as check:
-                    if check.format != "WEBP" or check.size != target:
-                        raise RuntimeError(f"Generated WebP validation failed: {destination} -> {check.format} {check.size}")
+APPROVED = {
+    "food-ahsa-640": ASSET_DIR / "food-products-ahsa-640.webp",
+    "food-ahsa-1280": ASSET_DIR / "food-products-ahsa-1280.webp",
+    "food-dammam-640": ASSET_DIR / "food-products-dammam-640.webp",
+    "food-dammam-1280": ASSET_DIR / "food-products-dammam-1280.webp",
+    "plastic-640": ASSET_DIR / "plastic-products-640.webp",
+    "plastic-1280": ASSET_DIR / "plastic-products-1280.webp",
+    "sweets-640": ASSET_DIR / "sweets-snacks-640.webp",
+    "sweets-1280": ASSET_DIR / "sweets-snacks-1280.webp",
+    "warehouse-640": ASSET_DIR / "wholesale-warehouse-ahsa-640.webp",
+    "warehouse-1280": ASSET_DIR / "wholesale-warehouse-ahsa-1280.webp",
+    "warehouse-1920": ASSET_DIR / "wholesale-warehouse-ahsa-1920.webp",
+}
+
+
+def validate_approved_assets():
+    from PIL import Image
+
+    for name, path in APPROVED.items():
+        if not path.is_file() or path.stat().st_size < 5000:
+            raise RuntimeError(f"Missing or suspiciously small approved image: {name} -> {path}")
+        data = path.read_bytes()
+        if data[:4] != b"RIFF" or data[8:12] != b"WEBP":
+            raise RuntimeError(f"Invalid WebP signature: {path}")
+        with Image.open(path) as im:
+            if im.format != "WEBP":
+                raise RuntimeError(f"Invalid WebP format: {path}")
+
 
 def replace_image_refs(html):
-    for name, base in SOURCES.items():
-        for variant, size in SIZES.items():
-            new = f"assets/optimized/{base}-{size}.webp?v={ASSET_VERSION}"
-            for prefix in ("assets/images", "assets/optimized"):
-                html = html.replace(f"{prefix}/{name}-{variant}.webp", new)
-        html = html.replace(f"assets/images/{name}-desktop.webp", f"assets/optimized/{base}-1600.webp?v={ASSET_VERSION}")
-        html = html.replace(f"assets/images/{name}-tablet.webp", f"assets/optimized/{base}-1280.webp?v={ASSET_VERSION}")
-        html = html.replace(f"assets/images/{name}-mobile.webp", f"assets/optimized/{base}-640.webp?v={ASSET_VERSION}")
-    html = re.sub(r'https://images\.unsplash\.com/photo-[^\"\'\s>)]+', 'BLOCKED_REMOTE_IMAGE_REFERENCE', html)
+    replacements = {
+        "assets/optimized/warehouse-hero-1600.webp": f"assets/optimized/wholesale-warehouse-ahsa-1920.webp?v={ASSET_VERSION}",
+        "assets/optimized/warehouse-hero-1280.webp": f"assets/optimized/wholesale-warehouse-ahsa-1280.webp?v={ASSET_VERSION}",
+        "assets/optimized/warehouse-hero-640.webp": f"assets/optimized/wholesale-warehouse-ahsa-640.webp?v={ASSET_VERSION}",
+        "assets/images/warehouse-desktop.webp": f"assets/optimized/wholesale-warehouse-ahsa-1920.webp?v={ASSET_VERSION}",
+        "assets/images/warehouse-tablet.webp": f"assets/optimized/wholesale-warehouse-ahsa-1280.webp?v={ASSET_VERSION}",
+        "assets/images/warehouse-mobile.webp": f"assets/optimized/wholesale-warehouse-ahsa-640.webp?v={ASSET_VERSION}",
+        "assets/optimized/food-products-1600.webp": f"assets/optimized/food-products-ahsa-1280.webp?v={ASSET_VERSION}",
+        "assets/optimized/food-products-1280.webp": f"assets/optimized/food-products-ahsa-1280.webp?v={ASSET_VERSION}",
+        "assets/optimized/food-products-640.webp": f"assets/optimized/food-products-ahsa-640.webp?v={ASSET_VERSION}",
+        "assets/optimized/plastic-products-1600.webp": f"assets/optimized/plastic-products-1280.webp?v={ASSET_VERSION}",
+        "assets/optimized/plastic-products-1280.webp": f"assets/optimized/plastic-products-1280.webp?v={ASSET_VERSION}",
+        "assets/optimized/plastic-products-640.webp": f"assets/optimized/plastic-products-640.webp?v={ASSET_VERSION}",
+        "assets/optimized/sweets-snacks-1600.webp": f"assets/optimized/sweets-snacks-1280.webp?v={ASSET_VERSION}",
+        "assets/optimized/sweets-snacks-1280.webp": f"assets/optimized/sweets-snacks-1280.webp?v={ASSET_VERSION}",
+        "assets/optimized/sweets-snacks-640.webp": f"assets/optimized/sweets-snacks-640.webp?v={ASSET_VERSION}",
+    }
+    for old, new in replacements.items():
+        html = html.replace(old, new)
+    for old, new in {
+        "assets/images/food-products-desktop.webp": "assets/optimized/food-products-ahsa-1280.webp",
+        "assets/images/food-products-tablet.webp": "assets/optimized/food-products-ahsa-1280.webp",
+        "assets/images/food-products-mobile.webp": "assets/optimized/food-products-ahsa-640.webp",
+        "assets/images/plastic-products-desktop.webp": "assets/optimized/plastic-products-1280.webp",
+        "assets/images/plastic-products-tablet.webp": "assets/optimized/plastic-products-1280.webp",
+        "assets/images/plastic-products-mobile.webp": "assets/optimized/plastic-products-640.webp",
+        "assets/images/sweets-snacks-desktop.webp": "assets/optimized/sweets-snacks-1280.webp",
+        "assets/images/sweets-snacks-tablet.webp": "assets/optimized/sweets-snacks-1280.webp",
+        "assets/images/sweets-snacks-mobile.webp": "assets/optimized/sweets-snacks-640.webp",
+    }.items():
+        html = html.replace(old, new)
+    html = re.sub(r'https://images\\.unsplash\\.com/photo-[^\"\'\\s>)]+', 'BLOCKED_REMOTE_IMAGE_REFERENCE', html)
     return html
 
+
 def inject_i18n(html):
-    html = re.sub(r'<script[^>]*src=["\']assets/i18n\.js[^>]*></script>', '', html)
-    html = re.sub(r'<script[^>]*>.*?document\.getElementById\(["\']langBtn["\']\).*?</script>', '', html, flags=re.DOTALL)
+    html = re.sub(r'<script[^>]*src=["\']assets/i18n\\.js[^>]*></script>', '', html)
+    html = re.sub(r'<script[^>]*>.*?document\\.getElementById\\(["\']langBtn["\']\\).*?</script>', '', html, flags=re.DOTALL)
     return html.replace('</body>', '<script src="assets/i18n.js" defer></script></body>', 1)
+
 
 def clean_preloads(html):
     html = re.sub(r'<link rel="preload" as="image" href="assets/(?:images|optimized)/warehouse[^>]*>', '', html)
     pre = (
-        f'<link rel="preload" as="image" href="assets/optimized/warehouse-hero-1600.webp?v={ASSET_VERSION}" fetchpriority="high" media="(min-width:851px)">'
-        f'<link rel="preload" as="image" href="assets/optimized/warehouse-hero-640.webp?v={ASSET_VERSION}" fetchpriority="high" media="(max-width:850px)">'
+        f'<link rel="preload" as="image" href="assets/optimized/wholesale-warehouse-ahsa-1920.webp?v={ASSET_VERSION}" fetchpriority="high" media="(min-width:851px)">'
+        f'<link rel="preload" as="image" href="assets/optimized/wholesale-warehouse-ahsa-640.webp?v={ASSET_VERSION}" fetchpriority="high" media="(max-width:850px)">'
     )
     return html.replace('<meta name="viewport"', pre + '<meta name="viewport"', 1)
+
 
 def ensure_title(html):
     if '<title>' in html and '</title>' in html:
         return html
-    title = '<title>شركة لألأة النجوم التجارية | LALA STAR TRADING CO.</title>'
-    return html.replace('</head>', title + '</head>', 1)
+    return html.replace('</head>', '<title>شركة لألأة النجوم التجارية | LALA STAR TRADING CO.</title></head>', 1)
+
 
 def main():
-    build_approved_webp()
+    validate_approved_assets()
     html = INDEX.read_text(encoding="utf-8")
     html = replace_image_refs(html)
     if 'images.unsplash.com' in html or 'BLOCKED_REMOTE_IMAGE_REFERENCE' in html:
@@ -74,6 +107,7 @@ def main():
     if SEO_MARKER not in html:
         raise RuntimeError('SEO marker missing')
     INDEX.write_text(html, encoding='utf-8')
+
 
 if __name__ == '__main__':
     main()
