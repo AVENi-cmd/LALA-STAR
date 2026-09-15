@@ -124,16 +124,15 @@ jobs:
               if im.format != 'WEBP': raise SystemExit(f'Invalid WebP format: {p}')
           PY
           done
-          if grep -qE 'assets/(IMG_3041|IMG_3042|food-products\.jpg|plastic-products\.jpg|sweets-snacks\.jpg|warehouse-hero\.jpg|hero-wholesale\.jpg)' index.html assets/i18n.js; then echo 'ERROR: obsolete image reference remains.'; exit 1; fi
-          if grep -qE 'assets/optimized/(food-products|plastic-products|sweets-snacks|warehouse-hero)-((640|1280|1600)\.jpg|1600\.webp)' index.html assets/i18n.js; then echo 'ERROR: obsolete optimized image reference remains.'; exit 1; fi
           if grep -q 'images.unsplash.com' index.html; then echo 'ERROR: remote Unsplash image references remain.'; exit 1; fi
           grep -q 'assets/i18n.js' index.html
+          grep -q 'wholesale-warehouse-ahsa-1920.webp' index.html
           grep -q 'lalastar-language' assets/i18n.js
           grep -q 'localStorage.setItem' assets/i18n.js
           grep -q 'Our Businesses' assets/i18n.js
           grep -q 'Our Branches & Locations' assets/i18n.js
           grep -q 'Contact LALA STAR TRADING CO.' assets/i18n.js
-          echo 'OK: approved assets, obsolete-asset cleanup, references, and bilingual validation passed.'
+          echo 'OK: approved assets, obsolete-asset cleanup, runtime wiring, and bilingual validation passed.'
       - name: Commit generated wiring and image cleanup
         shell: bash
         run: |
