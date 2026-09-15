@@ -67,38 +67,38 @@ jobs:
               moved=1
             fi
           done
-          if [ "$moved" -eq 1 ]; then
-            echo 'OK: copied uploaded approved assets into assets/optimized and removed root duplicates.'
-          else
-            echo 'OK: no root-level approved assets required relocation.'
-          fi
+          if [ "$moved" -eq 1 ]; then echo 'OK: approved uploads moved into assets/optimized.'; fi
+      - name: Remove obsolete image assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          obsolete=(
+            assets/IMG_3041.jpeg assets/IMG_3042.jpeg
+            assets/food-products.jpg assets/plastic-products.jpg assets/sweets-snacks.jpg
+            assets/warehouse-hero.jpg assets/hero-wholesale.jpg
+            assets/optimized/food-products-640.jpg assets/optimized/food-products-1280.jpg assets/optimized/food-products-1600.jpg
+            assets/optimized/food-products-640.webp assets/optimized/food-products-1280.webp assets/optimized/food-products-1600.webp
+            assets/optimized/plastic-products-640.jpg assets/optimized/plastic-products-1280.jpg assets/optimized/plastic-products-1600.jpg
+            assets/optimized/plastic-products-640.webp assets/optimized/plastic-products-1280.webp assets/optimized/plastic-products-1600.webp
+            assets/optimized/sweets-snacks-640.jpg assets/optimized/sweets-snacks-1280.jpg assets/optimized/sweets-snacks-1600.jpg
+            assets/optimized/sweets-snacks-640.webp assets/optimized/sweets-snacks-1280.webp assets/optimized/sweets-snacks-1600.webp
+            assets/optimized/warehouse-hero-640.jpg assets/optimized/warehouse-hero-1280.jpg assets/optimized/warehouse-hero-1600.jpg
+            assets/optimized/warehouse-hero-640.webp assets/optimized/warehouse-hero-1280.webp assets/optimized/warehouse-hero-1600.webp
+          )
+          for file in "${obsolete[@]}"; do rm -f "$file"; done
+          echo 'OK: obsolete image assets removed; Git history remains the backup.'
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
       - name: Install Pillow
         run: python -m pip install --upgrade Pillow
-      - name: Build approved image assets and wire full-page i18n
+      - name: Validate approved image assets and wire full-page i18n
         run: python scripts/build-webp.py
-      - name: Validate generated and approved assets and i18n
+      - name: Validate approved assets, references, and i18n
         shell: bash
         run: |
           set -euo pipefail
-          for file in assets/optimized/*-640.webp assets/optimized/*-1280.webp assets/optimized/*-1600.webp; do
-            [ -f "$file" ] || continue
-            size=$(stat -c%s "$file")
-            if [ "$size" -le 0 ] || [ "$size" -gt 5242880 ]; then echo "ERROR: invalid file size: $file"; exit 1; fi
-            python - "$file" <<'PY'
-          import sys
-          from pathlib import Path
-          from PIL import Image
-          p=Path(sys.argv[1]); data=p.read_bytes()
-          if len(data)<12 or data[:4]!=b'RIFF' or data[8:12]!=b'WEBP': raise SystemExit(f'Invalid WebP RIFF header: {p}')
-          with Image.open(p) as im:
-              if im.format != 'WEBP': raise SystemExit(f'Invalid WebP format: {p}')
-          print(f'OK: {p} | {len(data)} bytes | RIFF/WEBP')
-          PY
-          done
           for file in \
             assets/optimized/food-products-ahsa-640.webp \
             assets/optimized/food-products-ahsa-1280.webp \
@@ -112,28 +112,37 @@ jobs:
             assets/optimized/wholesale-warehouse-ahsa-1280.webp \
             assets/optimized/wholesale-warehouse-ahsa-1920.webp; do
             [ -f "$file" ] || { echo "ERROR: approved asset missing: $file"; exit 1; }
+            size=$(stat -c%s "$file")
+            [ "$size" -gt 5000 ] || { echo "ERROR: suspiciously small asset: $file"; exit 1; }
+            python - "$file" <<'PY'
+          import sys
+          from pathlib import Path
+          from PIL import Image
+          p=Path(sys.argv[1]); data=p.read_bytes()
+          if data[:4] != b'RIFF' or data[8:12] != b'WEBP': raise SystemExit(f'Invalid WebP signature: {p}')
+          with Image.open(p) as im:
+              if im.format != 'WEBP': raise SystemExit(f'Invalid WebP format: {p}')
+          PY
           done
-          if grep -q 'images.unsplash.com' index.html; then echo 'ERROR: Remote Unsplash image references remain.'; exit 1; fi
+          if grep -qE 'assets/(IMG_3041|IMG_3042|food-products\.jpg|plastic-products\.jpg|sweets-snacks\.jpg|warehouse-hero\.jpg|hero-wholesale\.jpg)' index.html assets/i18n.js scripts/build-webp.py; then echo 'ERROR: obsolete image reference remains.'; exit 1; fi
+          if grep -qE 'assets/optimized/(food-products|plastic-products|sweets-snacks|warehouse-hero)-((640|1280|1600)\.(jpg|webp))' index.html assets/i18n.js scripts/build-webp.py; then echo 'ERROR: obsolete optimized image reference remains.'; exit 1; fi
+          if grep -q 'images.unsplash.com' index.html; then echo 'ERROR: remote Unsplash image references remain.'; exit 1; fi
           grep -q 'assets/i18n.js' index.html
-          grep -q 'assets/optimized/food-products-1600.webp' index.html
-          grep -q 'assets/optimized/plastic-products-1600.webp' index.html
-          grep -q 'assets/optimized/sweets-snacks-1600.webp' index.html
-          grep -q 'assets/optimized/warehouse-hero-1600.webp' index.html
           grep -q 'lalastar-language' assets/i18n.js
           grep -q 'localStorage.setItem' assets/i18n.js
           grep -q 'Our Businesses' assets/i18n.js
           grep -q 'Our Branches & Locations' assets/i18n.js
           grep -q 'Contact LALA STAR TRADING CO.' assets/i18n.js
-          echo 'OK: approved image sources and full-page bilingual validation passed.'
-      - name: Commit generated index wiring and relocated assets
+          echo 'OK: approved assets, obsolete-asset cleanup, references, and bilingual validation passed.'
+      - name: Commit generated wiring and image cleanup
         shell: bash
         run: |
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -A index.html assets/optimized food-products-ahsa-640.webp food-products-ahsa-1280.webp food-products-dammam-640.webp food-products-dammam-1280.webp plastic-products-640.webp plastic-products-1280.webp sweets-snacks-640.webp sweets-snacks-1280.webp wholesale-warehouse-ahsa-640.webp wholesale-warehouse-ahsa-1280.webp wholesale-warehouse-ahsa-1920.webp ASSET-MANIFEST.json
+          git add -A
           if git diff --cached --quiet; then echo 'No generated changes to commit.'; exit 0; fi
-          git commit -m 'fix(images): install approved uploaded assets in optimized directory [skip ci]'
+          git commit -m 'fix(images): remove obsolete assets and use approved images [skip ci]'
       - name: Rebase and push
         shell: bash
         run: |
