@@ -1,0 +1,48 @@
+name: Fix Arabic Default Language
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set Arabic as default language
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          index = Path('index.html')
+          text = index.read_text(encoding='utf-8')
+          text = text.replace('<html lang="en" dir="ltr">', '<html lang="ar" dir="rtl">', 1)
+          text = text.replace('<html lang="en">', '<html lang="ar" dir="rtl">', 1)
+          if '<html lang="ar" dir="rtl">' not in text:
+              raise SystemExit('Could not confirm Arabic html root')
+          index.write_text(text, encoding='utf-8')
+
+          js = Path('assets/i18n.js')
+          text = js.read_text(encoding='utf-8')
+          text = text.replace("const KEY='pref_lang_v2';", "const KEY='site_lang';\nconst defaultLang='ar';", 1)
+          text = text.replace("const current=localStorage.getItem(KEY)==='en'?'en':'ar';", "const current=localStorage.getItem(KEY)||defaultLang;", 1)
+          js.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Commit changes and remove temporary workflow
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          rm -f .github/workflows/fix-arabic-default.yml
+          git add index.html assets/i18n.js .github/workflows/fix-arabic-default.yml
+          git diff --cached --quiet && exit 0
+          git commit -m "fix(i18n): make Arabic the default language"
+          git push
