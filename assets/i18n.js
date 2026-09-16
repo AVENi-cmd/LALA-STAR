@@ -95,7 +95,8 @@ function injectContacts(){
      const rows=ahsa?[
        {label:'مبيعات المواد الغذائية — خط 1',key:'foodAhsa1',message:messages.foodAhsa},
        {label:'مبيعات المواد الغذائية — خط 2',key:'foodAhsa2',message:messages.foodAhsa},
-       {label:'مبيعات المنتجات البلاستيكية',key:'plasticAhsa',message:messages.plasticAhsa}
+       {label:'مبيعات المنتجات البلاستيكية',key:'plasticAhsa',message:messages.plasticAhsa},
+       {label:'مبيعات الحلويات والمقرمشات',key:'sweets',message:messages.sweets}
      ]:[
        {label:'مبيعات المواد الغذائية',key:'foodDammam',message:messages.foodDammam},
        {label:'مبيعات المنتجات البلاستيكية',key:'plasticDammam',message:messages.plasticDammam}
@@ -117,7 +118,8 @@ function injectContacts(){
    wrap.appendChild(contactCard('قسم مبيعات الأحساء',[
      contactRow('المواد الغذائية — خط 1','foodAhsa1',messages.foodAhsa),
      contactRow('المواد الغذائية — خط 2','foodAhsa2',messages.foodAhsa),
-     contactRow('المنتجات البلاستيكية','plasticAhsa',messages.plasticAhsa)
+     contactRow('المنتجات البلاستيكية','plasticAhsa',messages.plasticAhsa),
+     contactRow('الحلويات والمقرمشات','sweets',messages.sweets)
    ]));
    wrap.appendChild(contactCard(labels[current].office,[contactRow(labels[current].office,'office','')]));
  }
