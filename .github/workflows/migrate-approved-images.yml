@@ -23,6 +23,14 @@ jobs:
           fetch-depth: 0
           persist-credentials: true
 
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Pillow
+        run: python -m pip install --upgrade Pillow
+
       - name: Build optimized approved images
         shell: python
         run: |
