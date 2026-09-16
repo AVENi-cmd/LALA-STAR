@@ -164,6 +164,7 @@ function setLanguage(lang){
  const button=document.querySelector('.lang,[data-lang-toggle]');
  if(button)button.textContent=current==='ar'?'English':'العربية';
 }
+window.addEventListener('pageshow',()=>{const saved=localStorage.getItem(KEY);if(saved==='ar'||saved==='en'){current=saved;translate();}});
 window.setLanguage=setLanguage;
 window.toggleLanguage=()=>setLanguage(current==='ar'?'en':'ar');
 document.addEventListener('click',e=>{const button=e.target.closest('.lang,[data-lang-toggle]');if(button){e.preventDefault();window.toggleLanguage()}});
