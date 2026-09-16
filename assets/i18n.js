@@ -35,7 +35,8 @@ const dictionary={
 };
 const meta={ar:{title:'شركة لألأة النجوم التجارية | LALA STAR TRADING CO.',description:'شركة لألأة النجوم التجارية — تجارة المواد الغذائية بالجملة منذ 1993.'},en:{title:'LALA STAR TRADING CO. | Wholesale Food Products Since 1993',description:'LALA STAR TRADING CO. — wholesale food products since 1993, with plastics, sweets, and snacks activities in Dammam and Al-Ahsa.'}};
 const wholesaleData={ar:{title:'حجم التوريد والخدمة التجارية',kicker:'WHOLESALE SUPPLY',stats:[['+5,000','صنف غذائي ومستلزم تجاري نشط'],['+30','عاماً من الخبرة منذ 1993'],['فرعان','مستودعات مركزية في الدمام والأحساء'],['توريد فوري','للطبالي والكراتين للمتاجر والمطاعم']]},en:{title:'Wholesale Supply Scale & Service',kicker:'WHOLESALE SUPPLY',stats:[['+5,000','active food & commercial items'],['+30','years of experience since 1993'],['2','central warehouse branches in Dammam & Al-Ahsa'],['Immediate Supply','pallet and carton orders for stores & restaurants']]}};
-const current=localStorage.getItem(KEY)||defaultLang;
+let current=localStorage.getItem(KEY)||defaultLang;
+if(current!=='ar'&&current!=='en')current=defaultLang;
 const wa=(n,text)=>`https://wa.me/${n}?text=${encodeURIComponent(text)}`;
 const tel=n=>`tel:+${n}`;
 const num=(value)=>`<span class="contact-number" dir="ltr" style="unicode-bidi:isolate;">${value}</span>`;
@@ -94,13 +95,13 @@ function injectContacts(){
    [...branches.querySelectorAll('.branch')].forEach(card=>{
      const ahsa=/الأحساء|Al-Ahsa/i.test(card.textContent);const body=card.querySelector('.branch-body');if(!body)return;
      const rows=ahsa?[
-       {label:'مبيعات المواد الغذائية — خط 1',key:'foodAhsa1',message:messages.foodAhsa},
-       {label:'مبيعات المواد الغذائية — خط 2',key:'foodAhsa2',message:messages.foodAhsa},
-       {label:'مبيعات المنتجات البلاستيكية',key:'plasticAhsa',message:messages.plasticAhsa},
-       {label:'مبيعات الحلويات والمقرمشات',key:'sweets',message:messages.sweets}
+       {label:`${labels[current].foodSales} — ${current==='ar'?'خط 1':'Line 1'}`,key:'foodAhsa1',message:messages.foodAhsa},
+       {label:`${labels[current].foodSales} — ${current==='ar'?'خط 2':'Line 2'}`,key:'foodAhsa2',message:messages.foodAhsa},
+       {label:labels[current].plasticSales,key:'plasticAhsa',message:messages.plasticAhsa},
+       {label:current==='ar'?'مبيعات الحلويات والمقرمشات':'Sweets & Snacks Sales',key:'sweets',message:messages.sweets}
      ]:[
-       {label:'مبيعات المواد الغذائية',key:'foodDammam',message:messages.foodDammam},
-       {label:'مبيعات المنتجات البلاستيكية',key:'plasticDammam',message:messages.plasticDammam}
+       {label:labels[current].foodSales,key:'foodDammam',message:messages.foodDammam},
+       {label:labels[current].plasticSales,key:'plasticDammam',message:messages.plasticDammam}
      ];
      body.querySelectorAll('.map').forEach(x=>{x.style.marginTop='8px'});
      body.appendChild(activityBlock(rows));
@@ -112,23 +113,60 @@ function injectContacts(){
    const container=contact.querySelector('.container')||contact;
    container.querySelector('.cards')?.remove();
    const wrap=document.createElement('div');wrap.className='contact-channels';
-   wrap.appendChild(contactCard('قسم مبيعات الدمام',[
-     contactRow('المواد الغذائية','foodDammam',messages.foodDammam),
-     contactRow('المنتجات البلاستيكية','plasticDammam',messages.plasticDammam)
+   wrap.appendChild(contactCard(current==='ar'?'قسم مبيعات الدمام':'Dammam Sales',[
+     contactRow(current==='ar'?'المواد الغذائية':'Wholesale Food Products','foodDammam',messages.foodDammam),
+     contactRow(current==='ar'?'المنتجات البلاستيكية':'Plastic Products','plasticDammam',messages.plasticDammam)
    ]));
-   wrap.appendChild(contactCard('قسم مبيعات الأحساء',[
-     contactRow('المواد الغذائية — خط 1','foodAhsa1',messages.foodAhsa),
-     contactRow('المواد الغذائية — خط 2','foodAhsa2',messages.foodAhsa),
-     contactRow('المنتجات البلاستيكية','plasticAhsa',messages.plasticAhsa),
-     contactRow('الحلويات والمقرمشات','sweets',messages.sweets)
+   wrap.appendChild(contactCard(current==='ar'?'قسم مبيعات الأحساء':'Al-Ahsa Sales',[
+     contactRow(current==='ar'?'المواد الغذائية — خط 1':'Wholesale Food Products — Line 1','foodAhsa1',messages.foodAhsa),
+     contactRow(current==='ar'?'المواد الغذائية — خط 2':'Wholesale Food Products — Line 2','foodAhsa2',messages.foodAhsa),
+     contactRow(current==='ar'?'المنتجات البلاستيكية':'Plastic Products','plasticAhsa',messages.plasticAhsa),
+     contactRow(current==='ar'?'الحلويات والمقرمشات':'Sweets & Snacks','sweets',messages.sweets)
    ]));
    wrap.appendChild(contactCard(labels[current].office,[contactRow(labels[current].office,'office','')]));
+   container.appendChild(wrap);
  }
 }
-function injectWholesale(){const anchor=document.querySelector('#branches,.branches,.contact');if(!anchor||document.querySelector('[data-wholesale-injected]'))return;const section=document.createElement('section');section.className='section alt';section.dataset.wholesaleInjected='1';section.innerHTML=`<div class="container"><div class="head"><div><div class="kicker">${wholesaleData[current].kicker}</div><h2>${wholesaleData[current].title}</h2></div><p>${current==='ar'?'توريد بالجملة للمتاجر والمطاعم والمنشآت التجارية في المنطقة الشرقية.':'Wholesale supply for stores, restaurants, and commercial establishments in the Eastern Region.'}</p></div><div class="stats-grid">${wholesaleData[current].stats.map(s=>`<div class="stat"><strong>${s[0]}</strong><small>${s[1]}</small></div>`).join('')}</div></div></section>`;anchor.parentNode.insertBefore(section,anchor)}
-function translate(){document.documentElement.lang=current;document.documentElement.dir=current==='ar'?'rtl':'ltr';document.title=meta[current].title;const desc=document.querySelector('meta[name="description"]');if(desc)desc.content=meta[current].description;document.querySelectorAll('[data-ar][data-en]').forEach(el=>{el.textContent=current==='ar'?el.dataset.ar:el.dataset.en});const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);while(walker.nextNode()){const t=walker.currentNode.textContent.trim();if(dictionary[t])walker.currentNode.textContent=dictionary[t]}}
+function injectWholesale(){
+ const anchor=document.querySelector('#branches,.branches,.contact');
+ if(!anchor)return;
+ document.querySelector('[data-wholesale-injected]')?.remove();
+ const section=document.createElement('section');section.className='section alt';section.dataset.wholesaleInjected='1';
+ section.innerHTML=`<div class="container"><div class="head"><div><div class="kicker">${wholesaleData[current].kicker}</div><h2>${wholesaleData[current].title}</h2></div><p>${current==='ar'?'توريد بالجملة للمتاجر والمطاعم والمنشآت التجارية في المنطقة الشرقية.':'Wholesale supply for stores, restaurants, and commercial establishments in the Eastern Region.'}</p></div><div class="stats-grid">${wholesaleData[current].stats.map(s=>`<div class="stat"><strong>${s[0]}</strong><small>${s[1]}</small></div>`).join('')}</div></div></section>`;
+ anchor.parentNode.insertBefore(section,anchor)
+}
+const reverseDictionary=Object.fromEntries(Object.entries(dictionary).map(([ar,en])=>[en,ar]));
+function translate(){
+ document.documentElement.lang=current;
+ document.documentElement.dir=current==='ar'?'rtl':'ltr';
+ document.title=meta[current].title;
+ const desc=document.querySelector('meta[name="description"]');if(desc)desc.content=meta[current].description;
+ document.querySelectorAll('[data-ar][data-en]').forEach(el=>{el.textContent=current==='ar'?el.dataset.ar:el.dataset.en});
+ const map=current==='ar'?reverseDictionary:dictionary;
+ const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+ while(walker.nextNode()){
+   const node=walker.currentNode;
+   const t=node.textContent.trim();
+   if(map[t])node.textContent=map[t];
+ }
+}
 function floating(){document.querySelectorAll('.floating-whatsapp').forEach(x=>x.remove());const root=document.createElement('div');root.className='floating-whatsapp';const option=(key,label,message)=>`<a class="wa-option" target="_blank" rel="noopener noreferrer" href="${message?wa(numbers[key],message):`https://wa.me/${numbers[key]}`}"><span class="wa-dot"></span><span>${label}<small dir="ltr" style="unicode-bidi:isolate;">${display[key]}</small></span></a>`;root.innerHTML=`<button class="floating-whatsapp-toggle" type="button" aria-label="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0C5.6 0 .3 5.3.3 11.8c0 2.1.6 4.1 1.6 5.9L.2 24l6.5-1.7c1.8.9 3.5 1.3 5.4 1.3h.1c6.5 0 11.8-5.3 11.8-11.8 0-3.1-1.3-6.1-3.5-8.3ZM12.2 21.6h-.1c-1.7 0-3.4-.5-4.8-1.3l-.3-.2-3.9 1 1-3.8-.2-.3a9.8 9.8 0 1 1 8.3 4.6Zm5.4-7.3c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-1.9-.9-3.1-1.6-4.3-3.6-.3-.5.3-.5.8-1.7.1-.3 0-.5-.1-.7-.1-.2-.7-1.7-1-1-.3-.5-.5-.4-.7-.4h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.6s1.1 3 1.3 3.2c.2.2 2.2 3.4 5.3 4.8 2 .9 2.8 1 3.8.9.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.1-.3-.2-.6-.4Z"/></svg></button><div class="floating-whatsapp-menu"><h4>${labels[current].channels}</h4>${option('foodDammam',`${labels[current].foodSales} — ${labels[current].dammam}`,messages.foodDammam)}${option('foodAhsa1',`${labels[current].foodSales} — ${labels[current].ahsa}`,messages.foodAhsa)}${option('plasticDammam',`${labels[current].plasticSales} — ${labels[current].dammam}`,messages.plasticDammam)}${option('plasticAhsa',`${labels[current].plasticSales} — ${labels[current].ahsa}`,messages.plasticAhsa)}${option('sweets',current==='ar'?'مبيعات الحلويات والمقرمشات — الأحساء':'Sweets & Snacks Sales — Al-Ahsa','')}</div>`;document.body.appendChild(root);root.querySelector('button').addEventListener('click',()=>root.classList.toggle('open'));document.addEventListener('click',e=>{if(!root.contains(e.target))root.classList.remove('open')})}
 function secure(){document.querySelectorAll('a[href^="https://wa.me/"],a[href^="https://www.google.com/maps/"]').forEach(a=>{a.target='_blank';a.rel='noopener noreferrer'});document.querySelectorAll('a[href^="tel:"]').forEach(a=>{if(!a.dataset.salesChannel)a.dataset.salesChannel='1'});document.querySelectorAll('.contact-number,.activity-contact-number,.wa-option small').forEach(el=>{el.setAttribute('dir','ltr');el.style.unicodeBidi='isolate'})}
-function init(){translate();injectWholesale();injectContacts();floating();secure()}
+function setLanguage(lang){
+ if(lang!=='ar'&&lang!=='en')return;
+ current=lang;
+ localStorage.setItem(KEY,current);
+ translate();
+ injectWholesale();
+ injectContacts();
+ floating();
+ secure();
+ const button=document.querySelector('.lang,[data-lang-toggle]');
+ if(button)button.textContent=current==='ar'?'English':'العربية';
+}
+window.setLanguage=setLanguage;
+window.toggleLanguage=()=>setLanguage(current==='ar'?'en':'ar');
+document.addEventListener('click',e=>{const button=e.target.closest('.lang,[data-lang-toggle]');if(button){e.preventDefault();window.toggleLanguage()}});
+function init(){translate();injectWholesale();injectContacts();floating();secure();const button=document.querySelector('.lang,[data-lang-toggle]');if(button)button.textContent=current==='ar'?'English':'العربية'}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
