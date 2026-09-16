@@ -42,3 +42,4 @@ jobs:
           git rm .github/workflows/finalize-sweets-message.yml
           git commit -m "chore: remove temporary sweets finalization workflow"
           git push
+# trigger
