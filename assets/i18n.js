@@ -1,62 +1,143 @@
 (()=>{
   const CORE='assets/i18n-core.js';
   const pairs={
+    'الرئيسية':'Home',
+    'من نحن':'About Us',
+    'الأقسام التجارية':'Categories',
+    'أنشطتنا':'Our Businesses',
+    'فروعنا':'Branches',
+    'تواصل معنا':'Contact Us',
+    'طلب توريد جملة':'Request Quote',
+    'طلب تسعيرة للجملة':'Wholesale Quote Request',
+    'شركة لألأة النجوم التجارية · المملكة العربية السعودية':'LALA STAR TRADING CO. · Saudi Arabia',
+    'تجارة المواد الغذائية بالجملة منذ 1993':'Wholesale Food Products Since 1993',
+    'تجارة وتوزيع بالجملة':'Wholesale Trade & Distribution',
     'المواد الغذائية بالجملة':'Wholesale Food Products',
-    'النشاط الأساسي للشركة.':"The company's core activity.",
+    'النشاط الرئيسي للشركة.':'The company’s core activity.',
     'المنتجات البلاستيكية':'Plastic Products',
-    'المنتجات البلاستيكية والمستلزمات الاستهلاكية.':'Plastic products and household supplies.',
+    'المنتجات البلاستيكية والتعبئة والتغليف':'Plastic Products & Packaging',
+    'منتجات البلاستيك والأدوات المنزلية.':'Plastic products and household supplies.',
+    'البلاستيك والمنتجات الورقية':'Plastics & Paper Products',
     'الحلويات والسناكات':'Sweets & Snacks',
+    'الحلويات والمقرمشات':'Sweets & Snacks',
+    'الحلويات والسناكات (الأحساء)':'Sweets & Snacks (Al-Ahsa)',
+    'حلويات ووجبات خفيفة.':'Sweets and snack products.',
     'أصناف الحلويات والوجبات الخفيفة.':'Sweets and snack products.',
+    'الأحساء فقط':'Al-Ahsa Only',
     'فرع الأحساء فقط':'Al-Ahsa Only',
     'أسعار جملة تنافسية':'Competitive Wholesale Pricing',
+    'أسطول توزيع يغطي الشرقية':'Distribution Fleet Covering the Eastern Region',
     'أسطول توزيع يغطي المنطقة الشرقية':'Distribution Fleet Covering the Eastern Region',
+    'سلامة التخزين وجودة الأصناف':'Safe Storage & Product Quality',
     'تخزين آمن وجودة منتجات موثوقة':'Safe Storage & Product Quality',
-    'خبرة تجارية راسخة منذ 1993':'Established Commercial Experience Since 1993'
+    'خبرة تجارية راسخة منذ 1993':'Established Commercial Experience Since 1993',
+    'أكثر من 5,000 صنف جاهز للتوزيع الفوري':'Over 5,000 Products Ready for Distribution',
+    'استعراض الأصناف':'Explore Products',
+    'عرض المزيد':'View More',
+    'الفرع الرئيسي — الدمام':'Main Branch — Dammam',
+    'فرع الأحساء':'Al-Ahsa Branch',
+    'قسم المواد الغذائية':'Foodstuffs Division',
+    'قسم البلاستيك والورقيات':'Plastics Division',
+    'قسم الحلويات':'Sweets Division',
+    'اتصال هاتفي':'Call Us',
+    'محادثة واتساب':'WhatsApp Order',
+    'ساعات العمل':'Working Hours',
+    'السبت – الخميس':'Saturday – Thursday',
+    'شركة لألأة النجوم لتجارة المواد الغذائية بالجملة':'Trading Company for Wholesale Food Stuffs',
+    'السجل التجاري':'Commercial Register',
+    'جميع الحقوق محفوظة © 2026 شركة لألأة النجوم التجارية':'All Rights Reserved © 2026 Lala Star Trading Co.',
+    'منصة التوريد المعتمدة لقطاع الأعمال (B2B)':'Designed for Wholesale Excellence',
+    'فتح الموقع على الخرائط ↗':'Open Location in Maps ↗',
+    'اتصال':'Call',
+    'واتساب':'WhatsApp',
+    'البريد الإلكتروني':'Email',
+    'الهاتف':'Phone',
+    'استفسار':'Inquiry',
+    'الأسئلة الشائعة':'Frequently Asked Questions',
+    'FAQ':'Frequently Asked Questions'
   };
   const aliases={
-    'النشاط الرئيسي للشركة.':'النشاط الأساسي للشركة.',
-    'منتجات البلاستيك والأدوات المنزلية.':'المنتجات البلاستيكية والمستلزمات الاستهلاكية.',
-    'حلويات ووجبات خفيفة.':'أصناف الحلويات والوجبات الخفيفة.',
-    'أسطول توزيع يغطي الشرقية':'أسطول توزيع يغطي المنطقة الشرقية',
+    'النشاط الأساسي للشركة.':'النشاط الرئيسي للشركة.',
+    'منتجات البلاستيك والأدوات المنزلية.':'المنتجات البلاستيكية والتعبئة والتغليف',
+    'حلويات ووجبات خفيفة.':'الحلويات والسناكات',
     'سلامة التخزين وجودة الأصناف':'تخزين آمن وجودة منتجات موثوقة',
     'الأحساء فقط':'فرع الأحساء فقط'
   };
   const arByEn=Object.fromEntries(Object.entries(pairs).map(([ar,en])=>[en,ar]));
+
   const style=()=>{
     if(document.querySelector('style[data-b2b-hero-polish]'))return;
-    const s=document.createElement('style');s.dataset.b2bHeroPolish='1';s.textContent=`
+    const s=document.createElement('style');
+    s.dataset.b2bHeroPolish='1';
+    s.textContent=`
 .hero, #hero, .hero-section {
   background: linear-gradient(135deg, #0b1524 0%, #112238 50%, #080f1a 100%) !important;
   color: #ffffff !important;
 }
-.hero h1, .hero h2, .hero p, .hero span { color: #ffffff !important; }
-`;document.head.appendChild(s);
+.hero h1, .hero h2, .hero p, .hero span {
+  color: #ffffff !important;
+}
+`;
+    document.head.appendChild(s);
   };
+
+  const setText= (el,value)=>{
+    const textNodes=[...el.childNodes].filter(n=>n.nodeType===3 && n.nodeValue.trim());
+    if(textNodes.length){textNodes[0].nodeValue=value;for(let i=1;i<textNodes.length;i++)textNodes[i].nodeValue='';}
+    else if(el.children.length===0)el.textContent=value;
+  };
+
   const mark=()=>{
     style();
     const lang=document.documentElement.lang==='en'?'en':'ar';
-    document.querySelectorAll('h3,p,span,.kicker').forEach(el=>{
-      const raw=el.textContent.trim();
+    document.documentElement.lang=lang;
+    document.documentElement.dir=lang==='en'?'ltr':'rtl';
+    const selectors='h1,h2,h3,h4,h5,h6,p,span,a,button,small,strong,label,li,.kicker';
+    document.querySelectorAll(selectors).forEach(el=>{
+      if(el.closest('script,style,noscript'))return;
+      const raw=el.textContent.replace(/\s+/g,' ').trim();
+      if(!raw || el.children.length>0 && ![...el.childNodes].some(n=>n.nodeType===3 && n.nodeValue.trim()))return;
       let ar=el.getAttribute('data-ar')||'';
       let en=el.getAttribute('data-en')||'';
       if(aliases[raw]){ar=aliases[raw];en=pairs[ar]||en;}
-      else if(!ar&&!en){
-        if(pairs[raw]){ar=raw;en=pairs[raw];}
-        else if(arByEn[raw]){en=raw;ar=arByEn[raw];}
-        else if(raw==='FAQ'){ar='الأسئلة الشائعة';en='FAQ';}
-      }
+      else if(pairs[raw]){ar=raw;en=pairs[raw];}
+      else if(arByEn[raw]){en=raw;ar=arByEn[raw];}
       if(!ar||!en)return;
-      el.setAttribute('data-ar',ar);el.setAttribute('data-en',en);el.setAttribute('data-i18n',el.getAttribute('data-i18n')||ar);
-      el.textContent=lang==='en'?en:ar;
+      el.setAttribute('data-ar',ar);
+      el.setAttribute('data-en',en);
+      el.setAttribute('data-i18n',el.getAttribute('data-i18n')||ar);
+      setText(el,lang==='en'?en:ar);
     });
-    document.querySelectorAll('a[href^="tel:"]').forEach(a=>{if(a.textContent.trim()){a.setAttribute('data-ar','اتصال');a.setAttribute('data-en','Call');a.textContent=lang==='en'?'Call':'اتصال';}});
-    document.querySelectorAll('a[href*="wa.me"]').forEach(a=>{if(a.textContent.trim()){a.setAttribute('data-ar','واتساب');a.setAttribute('data-en','WhatsApp');a.textContent=lang==='en'?'WhatsApp':'واتساب';}});
+    document.querySelectorAll('a[href^="tel:"]').forEach(a=>{
+      if(!a.textContent.trim())return;
+      a.setAttribute('data-ar','اتصال');
+      a.setAttribute('data-en','Call');
+      setText(a,lang==='en'?'Call':'اتصال');
+    });
+    document.querySelectorAll('a[href*="wa.me"]').forEach(a=>{
+      if(!a.textContent.trim())return;
+      a.setAttribute('data-ar','واتساب');
+      a.setAttribute('data-en','WhatsApp');
+      setText(a,lang==='en'?'WhatsApp':'واتساب');
+    });
   };
-  const s=document.createElement('script');s.src=CORE;s.onload=()=>{
+
+  const boot=()=>{
     const original=window.setLanguage;
-    window.setLanguage=(lang)=>{if(original)original(lang);setTimeout(mark,0);};
+    if(typeof original==='function'){
+      window.setLanguage=(lang)=>{original(lang);setTimeout(mark,0);};
+    }
     const originalToggle=window.toggleLanguage;
-    if(originalToggle)window.toggleLanguage=()=>{originalToggle();setTimeout(mark,0);};
+    if(typeof originalToggle==='function'){
+      window.toggleLanguage=()=>{originalToggle();setTimeout(mark,0);};
+    }
     setTimeout(mark,0);
-  };document.head.appendChild(s);
+    const observer=new MutationObserver(()=>{clearTimeout(observer._timer);observer._timer=setTimeout(mark,30);});
+    observer.observe(document.body,{subtree:true,childList:true,characterData:true});
+  };
+
+  const s=document.createElement('script');
+  s.src=CORE;
+  s.onload=boot;
+  document.head.appendChild(s);
 })();
