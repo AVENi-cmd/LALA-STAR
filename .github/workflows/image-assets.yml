@@ -37,6 +37,8 @@ jobs:
           warehouse_small = 'assets/optimized/wholesale-warehouse-ahsa-1280.webp?v=20260917-5'
           dammam = 'assets/optimized/food-products-dammam-1280.webp?v=20260917-5'
           ahsa = 'assets/optimized/food-products-ahsa-1280.webp?v=20260917-5'
+          plastic = 'assets/optimized/plastic-products-960.webp?v=20260917-1'
+          sweets = 'assets/optimized/sweets-snacks-960.webp?v=20260917-1'
 
           if '/* Approved warehouse Hero image */' not in html:
               hero_css = f'''\n    /* Approved warehouse Hero image */\n    .hero, #hero, .hero-section {{\n      background-image: linear-gradient(135deg, rgba(11,21,36,.72) 0%, rgba(17,34,56,.64) 50%, rgba(8,15,26,.78) 100%), url("{warehouse}") !important;\n      background-size: cover !important;\n      background-position: center !important;\n      background-repeat: no-repeat !important;\n    }}\n'''
@@ -55,12 +57,22 @@ jobs:
           )
           html = html.replace(
               '<article class="business"><picture></picture><div class="business-body"><h3>المنتجات البلاستيكية</h3>',
-              '<article class="business business-no-image"><div class="business-placeholder" aria-hidden="true"></div><div class="business-body"><h3>المنتجات البلاستيكية</h3>',
+              f'<article class="business"><picture><img src="{plastic}" alt="المنتجات البلاستيكية" loading="lazy" decoding="async"></picture><div class="business-body"><h3>المنتجات البلاستيكية</h3>',
               1
           )
           html = html.replace(
               '<article class="business"><picture></picture><div class="business-body"><h3>الحلويات والسناكات</h3>',
+              f'<article class="business"><picture><img src="{sweets}" alt="الحلويات والسناكات" loading="lazy" decoding="async"></picture><div class="business-body"><h3>الحلويات والسناكات</h3>',
+              1
+          )
+          html = html.replace(
+              '<article class="business business-no-image"><div class="business-placeholder" aria-hidden="true"></div><div class="business-body"><h3>المنتجات البلاستيكية</h3>',
+              f'<article class="business"><picture><img src="{plastic}" alt="المنتجات البلاستيكية" loading="lazy" decoding="async"></picture><div class="business-body"><h3>المنتجات البلاستيكية</h3>',
+              1
+          )
+          html = html.replace(
               '<article class="business business-no-image"><div class="business-placeholder" aria-hidden="true"></div><div class="business-body"><h3>الحلويات والسناكات</h3>',
+              f'<article class="business"><picture><img src="{sweets}" alt="الحلويات والسناكات" loading="lazy" decoding="async"></picture><div class="business-body"><h3>الحلويات والسناكات</h3>',
               1
           )
 
@@ -106,6 +118,8 @@ jobs:
               'assets/optimized/wholesale-warehouse-ahsa-1280.webp',
               'assets/optimized/food-products-ahsa-1280.webp',
               'assets/optimized/food-products-dammam-1280.webp',
+              'assets/optimized/plastic-products-960.webp',
+              'assets/optimized/sweets-snacks-960.webp',
           ]
           for ref in required:
               if not (root / ref).is_file():
@@ -125,7 +139,7 @@ jobs:
               if path.suffix.lower() in {'.jpg', '.jpeg'} and (not data.startswith(b'\xff\xd8\xff') or not data.endswith(b'\xff\xd9')):
                   errors.append(f'Invalid JPEG signature: {ref}')
 
-          for bad in ['<div class="photo"><div class="caption">', '<div class="branch-img"></div>', '<picture></picture>']:
+          for bad in ['<div class="photo"><div class="caption">', '<div class="branch-img"></div>', '<picture></picture>', '<div class="business-placeholder"']:
               if bad in html:
                   errors.append(f'Empty image container remains: {bad}')
 
@@ -146,5 +160,5 @@ jobs:
             echo 'No image wiring changes required.'
             exit 0
           fi
-          git commit -m 'fix(images): align Dammam branch image'
+          git commit -m 'fix(images): wire plastic and sweets cards'
           git push origin main
