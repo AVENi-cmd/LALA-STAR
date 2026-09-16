@@ -1,0 +1,140 @@
+name: Complete remaining i18n bindings v2
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Bind remaining English text and add locale map
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+          import re
+
+          index_path = Path('index.html')
+          i18n_path = Path('assets/i18n.js')
+          html = index_path.read_text(encoding='utf-8')
+          js = i18n_path.read_text(encoding='utf-8')
+
+          translations = {
+              'Home': ('nav.home', 'الرئيسية'),
+              'About Us': ('nav.about', 'من نحن'),
+              'Categories': ('nav.categories', 'الأقسام التجارية'),
+              'Branches': ('nav.branches', 'فروعنا'),
+              'Contact Us': ('nav.contact', 'تواصل معنا'),
+              'Order Wholesale': ('nav.wholesale', 'طلب توريد جملة'),
+              'Request Quote': ('nav.wholesale', 'طلب توريد جملة'),
+              'Wholesale Foodstuffs': ('category.food', 'المواد الغذائية بالجملة'),
+              'Plastics & Paper Products': ('category.plastics', 'البلاستيك والمنتجات الورقية'),
+              'Sweets & Snacks': ('category.sweets', 'الحلويات والمقرمشات'),
+              'Explore Products': ('category.explore', 'استعراض الأصناف'),
+              'View More': ('category.explore', 'استعراض الأصناف'),
+              'Over 5,000 Products Ready for Distribution': ('category.stats', 'أكثر من 5,000 صنف جاهز للتوزيع الفوري'),
+              'Main Branch — Dammam': ('branch.main', 'الفرع الرئيسي — الدمام'),
+              'Al-Ahsa Branch': ('branch.ahsa', 'فرع الأحساء'),
+              'Foodstuffs Division': ('division.food', 'قسم المواد الغذائية'),
+              'Plastics Division': ('division.plastics', 'قسم البلاستيك والورقيات'),
+              'Sweets Division': ('division.sweets', 'قسم الحلويات'),
+              'Call Us': ('contact.call', 'اتصال هاتفي'),
+              'WhatsApp Order': ('contact.whatsapp', 'محادثة واتساب'),
+              'Working Hours': ('contact.hours', 'ساعات العمل'),
+              'Saturday – Thursday': ('contact.days', 'السبت – الخميس'),
+              'Saturday - Thursday': ('contact.days', 'السبت – الخميس'),
+              'Trading Company for Wholesale Food Stuffs': ('footer.description', 'شركة لألأة النجوم لتجارة المواد الغذائية بالجملة'),
+              'Commercial Register': ('footer.cr', 'السجل التجاري'),
+              'CR': ('footer.cr', 'السجل التجاري'),
+              'All Rights Reserved © 2026 Lala Star Trading Co.': ('footer.rights', 'جميع الحقوق محفوظة © 2026 شركة لألأة النجوم التجارية'),
+              'Designed for Wholesale Excellence': ('footer.tagline', 'منصة التوريد المعتمدة لقطاع الأعمال (B2B)'),
+          }
+
+          def bind_text(source, phrase, key):
+              pattern = re.compile(r'(<(?P<tag>[A-Za-z][\\w:-]*)(?P<attrs>[^>]*)>)(?P<before>\\s*)' + re.escape(phrase) + r'(?P<after>\\s*)(</(?P=tag)>)')
+
+              def repl(match):
+                  attrs = match.group('attrs')
+                  if re.search(r'data-i18n\\s*=', attrs, flags=re.I):
+                      attrs = re.sub(r'\\sdata-i18n\\s*=\\s*["\\\'][^"\\\']*["\\\']', f' data-i18n="{key}"', attrs, count=1, flags=re.I)
+                  else:
+                      attrs += f' data-i18n="{key}"'
+                  return f'<{match.group("tag")}{attrs}>{match.group("before")}{phrase}{match.group("after")}</{match.group("tag")}>'
+
+              return pattern.sub(repl, source)
+
+          before = html
+          for phrase, (key, _) in translations.items():
+              html = bind_text(html, phrase, key)
+
+          if before == html:
+              raise SystemExit('No requested English text nodes were found; refusing a no-op patch.')
+
+          ui = '''const uiText={
+            ar:{
+              'nav.home':'الرئيسية','nav.about':'من نحن','nav.categories':'الأقسام التجارية','nav.branches':'فروعنا','nav.contact':'تواصل معنا','nav.wholesale':'طلب توريد جملة',
+              'category.food':'المواد الغذائية بالجملة','category.plastics':'البلاستيك والمنتجات الورقية','category.sweets':'الحلويات والمقرمشات','category.explore':'استعراض الأصناف','category.stats':'أكثر من 5,000 صنف جاهز للتوزيع الفوري',
+              'branch.main':'الفرع الرئيسي — الدمام','branch.ahsa':'فرع الأحساء','division.food':'قسم المواد الغذائية','division.plastics':'قسم البلاستيك والورقيات','division.sweets':'قسم الحلويات',
+              'contact.call':'اتصال هاتفي','contact.whatsapp':'محادثة واتساب','contact.hours':'ساعات العمل','contact.days':'السبت – الخميس',
+              'footer.description':'شركة لألأة النجوم لتجارة المواد الغذائية بالجملة','footer.cr':'السجل التجاري','footer.rights':'جميع الحقوق محفوظة © 2026 شركة لألأة النجوم التجارية','footer.tagline':'منصة التوريد المعتمدة لقطاع الأعمال (B2B)'
+            },
+            en:{
+              'nav.home':'Home','nav.about':'About Us','nav.categories':'Categories','nav.branches':'Branches','nav.contact':'Contact Us','nav.wholesale':'Request Quote',
+              'category.food':'Wholesale Foodstuffs','category.plastics':'Plastics & Paper Products','category.sweets':'Sweets & Snacks','category.explore':'Explore Products','category.stats':'Over 5,000 Products Ready for Distribution',
+              'branch.main':'Main Branch — Dammam','branch.ahsa':'Al-Ahsa Branch','division.food':'Foodstuffs Division','division.plastics':'Plastics Division','division.sweets':'Sweets Division',
+              'contact.call':'Call Us','contact.whatsapp':'WhatsApp Order','contact.hours':'Working Hours','contact.days':'Saturday – Thursday',
+              'footer.description':'Trading Company for Wholesale Food Stuffs','footer.cr':'Commercial Register','footer.rights':'All Rights Reserved © 2026 Lala Star Trading Co.','footer.tagline':'Designed for Wholesale Excellence'
+            }
+          };
+          '''
+
+          if 'const uiText={' not in js:
+              marker = 'const meta='
+              if marker not in js:
+                  raise SystemExit('i18n.js marker not found')
+              js = js.replace(marker, ui + marker, 1)
+
+          old = "const value=labels[current]?.[key]??(current==='en'?dictionary[key]:reverseDictionary[key]);"
+          new = "const value=uiText[current]?.[key]??labels[current]?.[key]??(current==='en'?dictionary[key]:reverseDictionary[key]);"
+          if old in js:
+              js = js.replace(old, new, 1)
+          elif new not in js:
+              raise SystemExit('translate() data-i18n resolver not found')
+
+          index_path.write_text(html, encoding='utf-8')
+          i18n_path.write_text(js, encoding='utf-8')
+
+          missing = [key for phrase, (key, _) in translations.items() if f'data-i18n="{key}"' not in html]
+          if missing:
+              raise SystemExit('Missing data-i18n bindings: ' + ', '.join(sorted(set(missing))))
+          print('Verified', len(set(key for key, _ in translations.values())), 'locale keys and requested bindings.')
+          PY
+
+      - name: Validate HTML and JavaScript syntax
+        run: |
+          node --check assets/i18n.js
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          html = Path('index.html').read_text(encoding='utf-8')
+          assert '<html lang="ar" dir="rtl">' in html
+          assert 'assets/i18n.js' in html
+          assert html.count('data-i18n=') >= 24
+          print('HTML/i18n binding validation passed.')
+          PY
+
+      - name: Commit final i18n changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html assets/i18n.js
+          git commit -m "fix(i18n): complete remaining English text bindings"
+          git push
