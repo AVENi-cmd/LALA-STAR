@@ -1,5 +1,6 @@
 (()=>{
-const KEY='pref_lang_v2';
+const KEY='site_lang';
+const defaultLang='ar';
 const numbers={
   foodDammam:'966546273827',foodAhsa1:'966500517660',foodAhsa2:'966533511159',sweets:'966558423342',
   plasticDammam:'966550561719',plasticAhsa:'966506744437',office:'966138562508',email:'starcoldstore@yahoo.com'
@@ -34,7 +35,7 @@ const dictionary={
 };
 const meta={ar:{title:'شركة لألأة النجوم التجارية | LALA STAR TRADING CO.',description:'شركة لألأة النجوم التجارية — تجارة المواد الغذائية بالجملة منذ 1993.'},en:{title:'LALA STAR TRADING CO. | Wholesale Food Products Since 1993',description:'LALA STAR TRADING CO. — wholesale food products since 1993, with plastics, sweets, and snacks activities in Dammam and Al-Ahsa.'}};
 const wholesaleData={ar:{title:'حجم التوريد والخدمة التجارية',kicker:'WHOLESALE SUPPLY',stats:[['+5,000','صنف غذائي ومستلزم تجاري نشط'],['+30','عاماً من الخبرة منذ 1993'],['فرعان','مستودعات مركزية في الدمام والأحساء'],['توريد فوري','للطبالي والكراتين للمتاجر والمطاعم']]},en:{title:'Wholesale Supply Scale & Service',kicker:'WHOLESALE SUPPLY',stats:[['+5,000','active food & commercial items'],['+30','years of experience since 1993'],['2','central warehouse branches in Dammam & Al-Ahsa'],['Immediate Supply','pallet and carton orders for stores & restaurants']]}};
-const current=localStorage.getItem(KEY)==='en'?'en':'ar';
+const current=localStorage.getItem(KEY)||defaultLang;
 const wa=(n,text)=>`https://wa.me/${n}?text=${encodeURIComponent(text)}`;
 const tel=n=>`tel:+${n}`;
 const num=(value)=>`<span class="contact-number" dir="ltr" style="unicode-bidi:isolate;">${value}</span>`;
