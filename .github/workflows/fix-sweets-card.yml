@@ -1,0 +1,39 @@
+name: Correct Sweets Card Contact Routing
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Correct sweets card number and WhatsApp
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('assets/i18n.js')
+          s = p.read_text(encoding='utf-8')
+          old = "function sweetsInquiry(){const d=document.createElement('div');d.className='sweets-inquiry';d.innerHTML=`<a class=\"contact-action whatsapp\" href=\"${wa(numbers.foodAhsa1,messages.sweets)}\" target=\"_blank\" rel=\"noopener noreferrer\">${current==='ar'?'استفسار عن توفر الحلويات بالجملة':'Ask about wholesale sweets availability'}</a>`;return d}"
+          new = "function sweetsInquiry(){const d=document.createElement('div');d.className='sweets-inquiry';d.innerHTML=`<div class=\"contact-row\"><div><div class=\"contact-label\">${labels[current].sweets}</div>${num(display.sweets)}</div>${action(numbers.sweets,messages.sweets)}</div>`;return d}"
+          if old not in s:
+              raise SystemExit('Expected sweets card function not found')
+          s = s.replace(old, new, 1)
+          p.write_text(s, encoding='utf-8')
+          PY
+          node --check assets/i18n.js
+      - name: Commit and remove workflow
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/i18n.js .github/workflows/fix-sweets-card.yml
+          git commit -m "fix(contact): route sweets card to dedicated sales line"
+          git rm .github/workflows/fix-sweets-card.yml
+          git commit -m "chore: remove temporary sweets card workflow"
+          git push
