@@ -33,6 +33,17 @@ const dictionary={
 'قطاعات العملاء':'Our Target Clients','متاجر التجزئة والتموينات':'Retail Stores & Groceries','المطاعم والمطابخ المركزية':'Restaurants & Central Kitchens','شركات الإعاشة':'Catering Companies','منافذ بيع البلاستيك ومواد التغليف':'Plastic & Packaging Outlets',
 'الأسئلة الشائعة':'Frequently Asked Questions','شركة لألأة النجوم التجارية':'LALA STAR TRADING CO.','مستودع تجاري للسلع والمواد بالجملة':'Commercial warehouse for wholesale goods and products','المواد الغذائية — FOOD PRODUCTS':'Wholesale Food Products — FOOD PRODUCTS','المنتجات البلاستيكية — PLASTIC PRODUCTS':'Plastic Products — PLASTIC PRODUCTS','الحلويات والسناكات — SWEETS & SNACKS':'Sweets & Snacks — SWEETS & SNACKS'
 };
+const uiText={ar:{
+'nav.home':'الرئيسية','nav.about':'من نحن','nav.categories':'الأقسام التجارية','nav.branches':'فروعنا','nav.contact':'تواصل معنا','nav.wholesale':'طلب توريد جملة',
+'category.food':'المواد الغذائية بالجملة','category.plastics':'البلاستيك والمنتجات الورقية','category.sweets':'الحلويات والمقرمشات','category.explore':'استعراض الأصناف','category.stats':'أكثر من 5,000 صنف جاهز للتوزيع الفوري',
+'branch.main':'الفرع الرئيسي — الدمام','branch.ahsa':'فرع الأحساء','division.food':'قسم المواد الغذائية','division.plastics':'قسم البلاستيك والورقيات','division.sweets':'قسم الحلويات',
+'contact.call':'اتصال هاتفي','contact.whatsapp':'محادثة واتساب','contact.hours':'ساعات العمل','contact.days':'السبت – الخميس',
+'footer.description':'شركة لألأة النجوم لتجارة المواد الغذائية بالجملة','footer.cr':'السجل التجاري','footer.rights':'جميع الحقوق محفوظة © 2026 شركة لألأة النجوم التجارية','footer.tagline':'منصة التوريد المعتمدة لقطاع الأعمال (B2B)'},en:{
+'nav.home':'Home','nav.about':'About Us','nav.categories':'Categories','nav.branches':'Branches','nav.contact':'Contact Us','nav.wholesale':'Request Quote',
+'category.food':'Wholesale Foodstuffs','category.plastics':'Plastics & Paper Products','category.sweets':'Sweets & Snacks','category.explore':'Explore Products','category.stats':'Over 5,000 Products Ready for Distribution',
+'branch.main':'Main Branch — Dammam','branch.ahsa':'Al-Ahsa Branch','division.food':'Foodstuffs Division','division.plastics':'Plastics Division','division.sweets':'Sweets Division',
+'contact.call':'Call Us','contact.whatsapp':'WhatsApp Order','contact.hours':'Working Hours','contact.days':'Saturday – Thursday',
+'footer.description':'Trading Company for Wholesale Food Stuffs','footer.cr':'Commercial Register','footer.rights':'All Rights Reserved © 2026 Lala Star Trading Co.','footer.tagline':'Designed for Wholesale Excellence'}};
 const meta={ar:{title:'شركة لألأة النجوم التجارية | LALA STAR TRADING CO.',description:'شركة لألأة النجوم التجارية — تجارة المواد الغذائية بالجملة منذ 1993.'},en:{title:'LALA STAR TRADING CO. | Wholesale Food Products Since 1993',description:'LALA STAR TRADING CO. — wholesale food products since 1993, with plastics, sweets, and snacks activities in Dammam and Al-Ahsa.'}};
 const wholesaleData={ar:{title:'حجم التوريد والخدمة التجارية',kicker:'WHOLESALE SUPPLY',stats:[['+5,000','صنف غذائي ومستلزم تجاري نشط'],['+30','عاماً من الخبرة منذ 1993'],['فرعان','مستودعات مركزية في الدمام والأحساء'],['توريد فوري','للطبالي والكراتين للمتاجر والمطاعم']]},en:{title:'Wholesale Supply Scale & Service',kicker:'WHOLESALE SUPPLY',stats:[['+5,000','active food & commercial items'],['+30','years of experience since 1993'],['2','central warehouse branches in Dammam & Al-Ahsa'],['Immediate Supply','pallet and carton orders for stores & restaurants']]}};
 const savedLang=localStorage.getItem(KEY);
@@ -143,7 +154,7 @@ function translate(){
  document.title=meta[current].title;
  const desc=document.querySelector('meta[name="description"]');if(desc)desc.content=meta[current].description;
  document.querySelectorAll('[data-ar][data-en]').forEach(el=>{el.textContent=current==='ar'?el.dataset.ar:el.dataset.en});
- document.querySelectorAll('[data-i18n]').forEach(el=>{const key=el.dataset.i18n;const value=labels[current]?.[key]??(current==='en'?dictionary[key]:reverseDictionary[key]);if(value)el.textContent=value;});
+ document.querySelectorAll('[data-i18n]').forEach(el=>{const key=el.dataset.i18n;const bilingual=el.getAttribute(`data-${current}`);const value=bilingual??uiText[current]?.[key]??labels[current]?.[key]??(current==='en'?dictionary[key]:reverseDictionary[key]);if(value)el.textContent=value;});
  const map=current==='ar'?reverseDictionary:dictionary;
  const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
  while(walker.nextNode()){
