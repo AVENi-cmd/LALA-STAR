@@ -30,32 +30,27 @@ jobs:
         shell: python
         run: |
           from pathlib import Path
-          import re
 
           p = Path('index.html')
           html = p.read_text(encoding='utf-8')
-          warehouse = 'assets/optimized/wholesale-warehouse-ahsa-1920.webp?v=20260917-4'
-          warehouse_small = 'assets/optimized/wholesale-warehouse-ahsa-1280.webp?v=20260917-4'
-          dammam = 'assets/optimized/food-products-dammam-1280.webp?v=20260917-4'
-          ahsa = 'assets/optimized/food-products-ahsa-1280.webp?v=20260917-4'
+          warehouse = 'assets/optimized/wholesale-warehouse-ahsa-1920.webp?v=20260917-5'
+          warehouse_small = 'assets/optimized/wholesale-warehouse-ahsa-1280.webp?v=20260917-5'
+          dammam = 'assets/optimized/food-products-dammam-1280.webp?v=20260917-5'
+          ahsa = 'assets/optimized/food-products-ahsa-1280.webp?v=20260917-5'
 
-          # Hero: keep the approved deep navy treatment while actually loading the approved warehouse image.
           if '/* Approved warehouse Hero image */' not in html:
-              hero_css = '''\n    /* Approved warehouse Hero image */\n    .hero, #hero, .hero-section {\n      background-image: linear-gradient(135deg, rgba(11,21,36,.72) 0%, rgba(17,34,56,.64) 50%, rgba(8,15,26,.78) 100%), url("%s") !important;\n      background-size: cover !important;\n      background-position: center !important;\n      background-repeat: no-repeat !important;\n    }\n''' % warehouse
+              hero_css = f'''\n    /* Approved warehouse Hero image */\n    .hero, #hero, .hero-section {{\n      background-image: linear-gradient(135deg, rgba(11,21,36,.72) 0%, rgba(17,34,56,.64) 50%, rgba(8,15,26,.78) 100%), url("{warehouse}") !important;\n      background-size: cover !important;\n      background-position: center !important;\n      background-repeat: no-repeat !important;\n    }}\n'''
               html = html.replace('</style>', hero_css + '  </style>', 1)
 
-          # Empty story image container.
           html = html.replace(
               '<div class="photo"><div class="caption">تجارة وتوزيع بالجملة</div></div>',
-              '<div class="photo"><img src="%s" alt="مستودع لألأة النجوم التجارية للجملة" width="1280" height="720" loading="lazy" decoding="async"><div class="caption">تجارة وتوزيع بالجملة</div></div>' % warehouse_small,
+              f'<div class="photo"><img src="{warehouse_small}" alt="مستودع لألأة النجوم التجارية للجملة" width="1280" height="720" loading="lazy" decoding="async"><div class="caption">تجارة وتوزيع بالجملة</div></div>',
               1
           )
 
-          # Business image: wire the approved food image. Plastic/sweets source images are not currently present in main,
-          # so their cards are deliberately kept as clean visual placeholders rather than pointing to nonexistent files.
           html = html.replace(
               '<article class="business"><picture></picture><div class="business-body">',
-              '<article class="business"><picture><img src="%s" alt="المواد الغذائية بالجملة" width="1280" height="720" loading="lazy" decoding="async"></picture><div class="business-body">' % ahsa,
+              f'<article class="business"><picture><img src="{ahsa}" alt="المواد الغذائية بالجملة" width="1280" height="720" loading="lazy" decoding="async"></picture><div class="business-body">',
               1
           )
           html = html.replace(
@@ -69,15 +64,14 @@ jobs:
               1
           )
 
-          # Branch images.
           html = html.replace(
               '<article class="branch"><div class="branch-img"></div>',
-              '<article class="branch"><div class="branch-img"><img src="%s" alt="فرع المواد الغذائية في الدمام" width="1280" height="720" loading="lazy" decoding="async"></div>' % dammam,
+              f'<article class="branch"><div class="branch-img"><img src="{dammam}" alt="فرع المواد الغذائية في الدمام" width="1280" height="720" loading="lazy" decoding="async"></div>',
               1
           )
           html = html.replace(
               '<article class="branch"><div class="branch-img"></div>',
-              '<article class="branch"><div class="branch-img"><img src="%s" alt="فرع المواد الغذائية في الأحساء" width="1280" height="720" loading="lazy" decoding="async"></div>' % ahsa,
+              f'<article class="branch"><div class="branch-img"><img src="{ahsa}" alt="فرع المواد الغذائية في الأحساء" width="1280" height="720" loading="lazy" decoding="async"></div>',
               1
           )
 
@@ -118,19 +112,12 @@ jobs:
               if not data:
                   errors.append(f'Empty asset: {ref}')
                   continue
-              if path.suffix.lower() == '.webp':
-                  if len(data) < 12 or data[:4] != b'RIFF' or data[8:12] != b'WEBP':
-                      errors.append(f'Invalid WebP RIFF header: {ref}')
-              elif path.suffix.lower() in {'.jpg', '.jpeg'}:
-                  if not data.startswith(b'\xff\xd8\xff') or not data.endswith(b'\xff\xd9'):
-                      errors.append(f'Invalid JPEG signature: {ref}')
+              if path.suffix.lower() == '.webp' and (len(data) < 12 or data[:4] != b'RIFF' or data[8:12] != b'WEBP'):
+                  errors.append(f'Invalid WebP RIFF header: {ref}')
+              if path.suffix.lower() in {'.jpg', '.jpeg'} and (not data.startswith(b'\xff\xd8\xff') or not data.endswith(b'\xff\xd9')):
+                  errors.append(f'Invalid JPEG signature: {ref}')
 
-          # Fail if the source still contains empty containers for sections that must display images.
-          for bad in [
-              '<div class="photo"><div class="caption">',
-              '<div class="branch-img"></div>',
-              '<picture></picture>',
-          ]:
+          for bad in ['<div class="photo"><div class="caption">', '<div class="branch-img"></div>', '<picture></picture>']:
               if bad in html:
                   errors.append(f'Empty image container remains: {bad}')
 
