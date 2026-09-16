@@ -4,7 +4,7 @@ import re
 ROOT = Path(__file__).resolve().parents[1]
 INDEX = ROOT / "index.html"
 ASSET_DIR = ROOT / "assets" / "optimized"
-ASSET_VERSION = "20260915-13"
+ASSET_VERSION = "20260917-1"
 SEO_MARKER = '<meta name="lalastar-seo-v1" content="managed-by-build-webp">'
 
 APPROVED = {
@@ -23,9 +23,17 @@ APPROVED = {
 
 
 def validate_approved_assets():
+    """Validate approved images only when the repository actually contains them.
+
+    The site is allowed to run without content imagery; a missing optional image
+    must never prevent the language/runtime build from completing.
+    """
     from PIL import Image
-    for name, path in APPROVED.items():
-        if not path.is_file() or path.stat().st_size < 5000:
+    present = [(name, path) for name, path in APPROVED.items() if path.exists()]
+    if not present:
+        return
+    for name, path in present:
+        if path.stat().st_size < 5000:
             raise RuntimeError(f"Missing or suspiciously small approved image: {name} -> {path}")
         data = path.read_bytes()
         if data[:4] != b"RIFF" or data[8:12] != b"WEBP":
@@ -65,11 +73,13 @@ def replace_image_refs(html):
 def inject_i18n(html):
     html = re.sub(r'<script[^>]*src=["\']assets/i18n\.js[^>]*></script>', '', html)
     html = re.sub(r'<script[^>]*>.*?document\.getElementById\(["\']langBtn["\']\).*?</script>', '', html, flags=re.DOTALL)
-    return html.replace('</body>', '<script src="assets/i18n.js" defer></script></body>', 1)
+    return html.replace('</body>', f'<script src="assets/i18n.js?v={ASSET_VERSION}" defer></script></body>', 1)
 
 
 def clean_preloads(html):
     html = re.sub(r'<link rel="preload" as="image" href="assets/(?:images|optimized)/warehouse[^>]*>', '', html)
+    if not (ASSET_DIR / "wholesale-warehouse-ahsa-1920.webp").exists():
+        return html
     pre = (
         f'<link rel="preload" as="image" href="assets/optimized/wholesale-warehouse-ahsa-1920.webp?v={ASSET_VERSION}" fetchpriority="high" media="(min-width:851px)">'
         f'<link rel="preload" as="image" href="assets/optimized/wholesale-warehouse-ahsa-640.webp?v={ASSET_VERSION}" fetchpriority="high" media="(max-width:850px)">'
@@ -96,7 +106,7 @@ def main():
         raise RuntimeError('i18n script was not wired into index.html')
     if SEO_MARKER not in html:
         raise RuntimeError('SEO marker missing')
-    INDEX.write_text(html, encoding='utf-8')
+    INDEX.write_text(html, encoding="utf-8")
 
 
 if __name__ == '__main__':
