@@ -75,6 +75,14 @@ jobs:
               1
           )
 
+          # The Dammam branch should reuse the same warehouse image as the
+          # "المواد الغذائية بالجملة" business card.
+          html = html.replace(
+              f'<img src="{dammam}" alt="فرع المواد الغذائية في الدمام" width="1280" height="720" loading="lazy" decoding="async">',
+              f'<img src="{ahsa}" alt="فرع المواد الغذائية في الدمام" width="1280" height="720" loading="lazy" decoding="async">',
+              1
+          )
+
           if '.business-placeholder {' not in html:
               css = '''\n    .business-placeholder { height:330px; background:linear-gradient(135deg,#d8dee7 0%,#aeb7c4 52%,#7f8997 100%); position:relative; overflow:hidden; }\n    .business-placeholder:after { content:""; position:absolute; inset:0; background:linear-gradient(135deg,rgba(255,255,255,.28),transparent 45%,rgba(15,30,54,.16)); }\n    @media(max-width:850px){.business-placeholder{height:300px}}\n    @media(max-width:520px){.business-placeholder{height:260px}}\n'''
               html = html.replace('</style>', css + '  </style>', 1)
@@ -138,5 +146,5 @@ jobs:
             echo 'No image wiring changes required.'
             exit 0
           fi
-          git commit -m 'fix(images): wire approved local image assets'
+          git commit -m 'fix(images): align Dammam branch image'
           git push origin main
