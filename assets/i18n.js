@@ -35,8 +35,9 @@ const dictionary={
 };
 const meta={ar:{title:'شركة لألأة النجوم التجارية | LALA STAR TRADING CO.',description:'شركة لألأة النجوم التجارية — تجارة المواد الغذائية بالجملة منذ 1993.'},en:{title:'LALA STAR TRADING CO. | Wholesale Food Products Since 1993',description:'LALA STAR TRADING CO. — wholesale food products since 1993, with plastics, sweets, and snacks activities in Dammam and Al-Ahsa.'}};
 const wholesaleData={ar:{title:'حجم التوريد والخدمة التجارية',kicker:'WHOLESALE SUPPLY',stats:[['+5,000','صنف غذائي ومستلزم تجاري نشط'],['+30','عاماً من الخبرة منذ 1993'],['فرعان','مستودعات مركزية في الدمام والأحساء'],['توريد فوري','للطبالي والكراتين للمتاجر والمطاعم']]},en:{title:'Wholesale Supply Scale & Service',kicker:'WHOLESALE SUPPLY',stats:[['+5,000','active food & commercial items'],['+30','years of experience since 1993'],['2','central warehouse branches in Dammam & Al-Ahsa'],['Immediate Supply','pallet and carton orders for stores & restaurants']]}};
-let current=localStorage.getItem(KEY)||defaultLang;
-if(current!=='ar'&&current!=='en')current=defaultLang;
+const savedLang=localStorage.getItem(KEY);
+let currentLang=(savedLang==='ar'||savedLang==='en')?savedLang:defaultLang;
+let current=currentLang;
 const wa=(n,text)=>`https://wa.me/${n}?text=${encodeURIComponent(text)}`;
 const tel=n=>`tel:+${n}`;
 const num=(value)=>`<span class="contact-number" dir="ltr" style="unicode-bidi:isolate;">${value}</span>`;
@@ -142,6 +143,7 @@ function translate(){
  document.title=meta[current].title;
  const desc=document.querySelector('meta[name="description"]');if(desc)desc.content=meta[current].description;
  document.querySelectorAll('[data-ar][data-en]').forEach(el=>{el.textContent=current==='ar'?el.dataset.ar:el.dataset.en});
+ document.querySelectorAll('[data-i18n]').forEach(el=>{const key=el.dataset.i18n;const value=labels[current]?.[key]??(current==='en'?dictionary[key]:reverseDictionary[key]);if(value)el.textContent=value;});
  const map=current==='ar'?reverseDictionary:dictionary;
  const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
  while(walker.nextNode()){
@@ -155,6 +157,7 @@ function secure(){document.querySelectorAll('a[href^="https://wa.me/"],a[href^="
 function setLanguage(lang){
  if(lang!=='ar'&&lang!=='en')return;
  current=lang;
+ currentLang=lang;
  localStorage.setItem(KEY,current);
  translate();
  injectWholesale();
@@ -164,7 +167,7 @@ function setLanguage(lang){
  const button=document.querySelector('.lang,[data-lang-toggle]');
  if(button)button.textContent=current==='ar'?'English':'العربية';
 }
-window.addEventListener('pageshow',()=>{const saved=localStorage.getItem(KEY);if(saved==='ar'||saved==='en'){current=saved;translate();}});
+window.addEventListener('pageshow',()=>{const saved=localStorage.getItem(KEY);current=(saved==='ar'||saved==='en')?saved:defaultLang;currentLang=current;translate();injectWholesale();injectContacts();floating();secure();const b=document.querySelector('.lang,[data-lang-toggle]');if(b)b.textContent=current==='ar'?'English':'العربية';});
 window.setLanguage=setLanguage;
 window.toggleLanguage=()=>setLanguage(current==='ar'?'en':'ar');
 document.addEventListener('click',e=>{const button=e.target.closest('.lang,[data-lang-toggle]');if(button){e.preventDefault();window.toggleLanguage()}});
