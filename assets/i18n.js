@@ -1,5 +1,5 @@
 (()=>{
-const KEY='pref_lang';
+const KEY='pref_lang_v2';
 const numbers={
   foodDammam:'966546273827',foodAhsa1:'966500517660',foodAhsa2:'966533511159',sweets:'966558423342',
   plasticDammam:'966550561719',plasticAhsa:'966506744437',office:'966138562508',email:'starcoldstore@yahoo.com'
