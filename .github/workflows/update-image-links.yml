@@ -1,0 +1,79 @@
+name: Update LALA STAR Image Links
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Replace image sources and verify image loading
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+
+          hero = 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1600&q=80'
+          food = 'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=80'
+          plastic = 'https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?auto=format&fit=crop&w=800&q=80'
+          sweets = 'https://images.unsplash.com/photo-1582293041079-7814c2f12063?auto=format&fit=crop&w=800&q=80'
+          logistics = 'https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&w=800&q=80'
+
+          # Hero metadata/preload and CSS background.
+          s = re.sub(r'https://aveni-cmd\.github\.io/LALA-STAR/assets/optimized/wholesale-warehouse-ahsa-1920\.webp\?v=20260915-13', hero, s)
+          s = re.sub(r'assets/optimized/wholesale-warehouse-ahsa-1920\.webp\?v=20260915-13', hero, s)
+          s = re.sub(r'assets/optimized/wholesale-warehouse-ahsa-640\.webp\?v=20260915-13', hero, s)
+
+          # About/story image follows the same high-resolution warehouse visual.
+          s = re.sub(r'assets/optimized/wholesale-warehouse-ahsa-1920\.webp\?v=20260915-13', hero, s)
+
+          # Business card image sources (picture/srcset + img fallback).
+          s = re.sub(r'assets/optimized/food-products-ahsa-(?:640|1280)\.webp\?v=20260915-13', food, s)
+          s = re.sub(r'assets/optimized/plastic-products-(?:640|1280)\.webp\?v=20260915-13', plastic, s)
+          s = re.sub(r'assets/optimized/sweets-snacks-(?:640|1280)\.webp\?v=20260915-13', sweets, s)
+
+          # Branch/logistics imagery: both branch cards use the supplied logistics image.
+          s = re.sub(r'assets/IMG_3041\.jpeg', logistics, s)
+          s = re.sub(r'assets/IMG_3042\.jpeg', logistics, s)
+
+          # Keep lower-page images lazy-loaded. Add it if a matching image lacks the attribute.
+          def ensure_lazy(match):
+              tag = match.group(0)
+              if 'loading=' not in tag:
+                  tag = tag.replace('<img ', '<img loading="lazy" ', 1)
+              return tag
+          s = re.sub(r'<img\b[^>]*>', ensure_lazy, s, flags=re.I)
+
+          # Content images should remain cropped cleanly; preserve the brand logo's contain rule.
+          css_marker = 'img{display:block;max-width:100%}'
+          css_replacement = 'img{display:block;max-width:100%}.photo img,.business img,.branch-img img{object-fit:cover}'
+          s = s.replace(css_marker, css_replacement, 1)
+
+          required = [hero, food, plastic, sweets, logistics]
+          for url in required:
+              if url not in s:
+                  raise SystemExit(f'Missing required image URL: {url}')
+          for path in ['assets/optimized/food-products-ahsa-640.webp?v=20260915-13','assets/optimized/food-products-ahsa-1280.webp?v=20260915-13','assets/optimized/plastic-products-640.webp?v=20260915-13','assets/optimized/plastic-products-1280.webp?v=20260915-13','assets/optimized/sweets-snacks-640.webp?v=20260915-13','assets/optimized/sweets-snacks-1280.webp?v=20260915-13','assets/IMG_3041.jpeg','assets/IMG_3042.jpeg']:
+              if path in s:
+                  raise SystemExit(f'Old image path remains: {path}')
+
+          p.write_text(s, encoding='utf-8')
+          PY
+      - name: Commit image update and remove temporary workflow
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html .github/workflows/update-image-links.yml
+          git commit -m "perf(images): update site imagery to Unsplash WebP sources"
+          git rm .github/workflows/update-image-links.yml
+          git commit -m "chore: remove temporary image update workflow"
+          git push
