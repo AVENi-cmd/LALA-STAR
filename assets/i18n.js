@@ -67,7 +67,7 @@ function action(n,text){return `<span class="contact-actions"><a class="contact-
 function contactRow(label,n,message){return `<div class="contact-row"><div><div class="contact-label">${label}</div>${num(display[n]||n)}</div>${action(numbers[n]||n,message)}</div>`}
 function contactCard(title,rows){const d=document.createElement('div');d.className='contact-channel';d.innerHTML=`<h4>${title}</h4>`+rows.join('');return d}
 function activityBlock(rows){const d=document.createElement('div');d.className='activity-contacts';d.innerHTML=rows.map(r=>`<div class="activity-contact"><div class="activity-contact-main"><strong>${r.label}</strong><span class="activity-contact-number" dir="ltr" style="unicode-bidi:isolate;">${display[r.key]}</span></div>${action(numbers[r.key],r.message)}</div>`).join('');return d}
-function sweetsInquiry(){const d=document.createElement('div');d.className='sweets-inquiry';d.innerHTML=`<a class="contact-action whatsapp" href="${wa(numbers.foodAhsa1,messages.sweets)}" target="_blank" rel="noopener noreferrer">${current==='ar'?'استفسار عن توفر الحلويات بالجملة':'Ask about wholesale sweets availability'}</a>`;return d}
+function sweetsInquiry(){const d=document.createElement('div');d.className='sweets-inquiry';d.innerHTML=`<div class="contact-row"><div><div class="contact-label">${labels[current].sweets}</div>${num(display.sweets)}</div>${action(numbers.sweets,messages.sweets)}</div>`;return d}
 function injectContacts(){
  injectStyle();
  const businesses=document.querySelector('#businesses,.businesses');
