@@ -1,0 +1,90 @@
+name: Fix Arabic Static Index
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Make index Arabic-first
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+          import re
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+
+          # Exact visible/default text replacements requested by the owner.
+          replacements = {
+            'Home':'الرئيسية','About Us':'من نحن','Categories':'الأقسام التجارية','Branches':'فروعنا','Contact Us':'تواصل معنا',
+            'Order Wholesale':'طلب توريد جملة','Request Quote':'طلب توريد جملة',
+            'Coverage':'تغطية شاملة للمنطقة الشرقية','Warehouses':'مستودعات مركزية بطاقة استيعابية ضخمة','Fleet':'أسطول توزيع يومي مباشر','Quality':'أعلى معايير جودة وتخزين البضائع',
+            'Main Office':'فرع الدمام الرئيسي','Dammam Branch':'فرع الدمام الرئيسي','Al-Ahsa Branch':'فرع الأحساء',
+            'Wholesale Foodstuffs':'المواد الغذائية بالجملة','Plastics & Paper Products':'البلاستيك والمنتجات الورقية','Sweets & Snacks':'الحلويات والمقرمشات',
+            'Explore Products':'استعراض الأصناف','View More':'استعراض الأصناف','Over 5,000 Products Ready for Distribution':'أكثر من 5,000 صنف جاهز للتوزيع الفوري',
+            'Foodstuffs Division':'قسم المواد الغذائية','Plastics Division':'قسم البلاستيك والورقيات','Sweets Division':'قسم الحلويات',
+            'Call Us':'اتصال هاتفي','WhatsApp Order':'محادثة واتساب','Working Hours':'ساعات العمل','Saturday – Thursday':'السبت – الخميس',
+            'Trading Company for Wholesale Food Stuffs':'شركة لألأة النجوم لتجارة المواد الغذائية بالجملة',
+            'Commercial Register':'السجل التجاري','All Rights Reserved © 2026 Lala Star Trading Co.':'جميع الحقوق محفوظة © 2026 شركة لألأة النجوم التجارية',
+            'Designed for Wholesale Excellence':'منصة التوريد المعتمدة لقطاع الأعمال (B2B)',
+          }
+          for a,b in replacements.items():
+            s = s.replace(a,b)
+
+          # Make navigation defaults deterministic and Arabic, regardless of i18n.js timing.
+          nav = {
+            '#home':'الرئيسية','#about':'من نحن','#businesses':'الأقسام التجارية','#branches':'فروعنا','#contact':'تواصل معنا'
+          }
+          def nav_repl(m):
+            href, attrs, text = m.group(1), m.group(2), m.group(3)
+            if href in nav:
+              text = nav[href]
+            return f'<a href="{href}"{attrs}>{text}</a>'
+          s = re.sub(r'<a href="(#[^"]+)"([^>]*)>(.*?)</a>', nav_repl, s, flags=re.S)
+
+          # Every telephone/WhatsApp action has an Arabic static label.
+          s = re.sub(r'(<a\b[^>]*href=["\']tel:[^"\']+["\'][^>]*>)(.*?)(</a>)', r'\1اتصال هاتفي\3', s, flags=re.S|re.I)
+          s = re.sub(r'(<a\b[^>]*href=["\']https://wa\.me/[^"\']+["\'][^>]*>)(.*?)(</a>)', r'\1محادثة واتساب\3', s, flags=re.S|re.I)
+
+          # Arabic-first data attributes for the requested labels.
+          attrs = {
+            'nav.home':('الرئيسية','Home'),'nav.about':('من نحن','About Us'),'nav.categories':('الأقسام التجارية','Categories'),'nav.branches':('فروعنا','Branches'),'nav.contact':('تواصل معنا','Contact Us'),'nav.wholesale':('طلب توريد جملة','Request Quote'),
+            'category.food':('المواد الغذائية بالجملة','Wholesale Foodstuffs'),'category.plastics':('البلاستيك والمنتجات الورقية','Plastics & Paper Products'),'category.sweets':('الحلويات والمقرمشات','Sweets & Snacks'),'category.explore':('استعراض الأصناف','Explore Products'),'category.stats':('أكثر من 5,000 صنف جاهز للتوزيع الفوري','Over 5,000 Products Ready for Distribution'),
+            'branch.main':('فرع الدمام الرئيسي','Main Branch — Dammam'),'branch.ahsa':('فرع الأحساء','Al-Ahsa Branch'),'contact.call':('اتصال هاتفي','Call Us'),'contact.whatsapp':('محادثة واتساب','WhatsApp Order'),'contact.hours':('ساعات العمل','Working Hours'),'contact.days':('السبت – الخميس','Saturday – Thursday'),
+            'footer.description':('شركة لألأة النجوم لتجارة المواد الغذائية بالجملة','Trading Company for Wholesale Food Stuffs'),'footer.cr':('السجل التجاري','Commercial Register'),'footer.rights':('جميع الحقوق محفوظة © 2026 شركة لألأة النجوم التجارية','All Rights Reserved © 2026 Lala Star Trading Co.'),'footer.tagline':('منصة التوريد المعتمدة لقطاع الأعمال (B2B)','Designed for Wholesale Excellence')
+          }
+          for key,(ar,en) in attrs.items():
+            pattern = rf'(<[^>]+data-i18n=["\']{re.escape(key)}["\'][^>]*>)(.*?)(</[^>]+>)'
+            s = re.sub(pattern, lambda m: m.group(1).replace('data-en="'+en+'"','data-en="'+en+'"') + ar + m.group(3), s, flags=re.S)
+
+          p.write_text(s, encoding='utf-8')
+          PY
+      - name: Validate
+        run: |
+          test -f index.html
+          grep -q 'الرئيسية' index.html
+          grep -q 'طلب توريد جملة' index.html
+          grep -q 'تغطية شاملة للمنطقة الشرقية' index.html
+          grep -q 'اتصال هاتفي' index.html
+          grep -q 'محادثة واتساب' index.html
+          grep -q 'السجل التجاري' index.html
+          node --check assets/i18n.js
+      - name: Commit Arabic-first index
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'fix(i18n): make index Arabic-first by default'
+          git push origin main
