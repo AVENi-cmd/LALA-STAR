@@ -1,0 +1,107 @@
+name: Enforce Bilingual Language Switching
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'assets/i18n.js'
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Patch bilingual HTML and runtime
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+
+          pairs = {
+            'الرئيسية':'Home','من نحن':'About Us','الأقسام التجارية':'Categories','فروعنا':'Branches','تواصل معنا':'Contact Us',
+            'طلب توريد جملة':'Wholesale Order','تغطية شاملة للمنطقة الشرقية':'Comprehensive Eastern Region Coverage',
+            'مستودعات مركزية بطاقة استيعابية ضخمة':'Central Warehouses with Massive Capacity','أسطول توزيع يومي مباشر':'Daily Direct Distribution Fleet',
+            'أعلى معايير جودة وتخزين البضائع':'Highest Standards of Quality and Goods Storage',
+            'فرع الدمام الرئيسي':'Main Dammam Branch','فرع الأحساء':'Al-Ahsa Branch',
+            'المواد الغذائية بالجملة':'Wholesale Foodstuffs','البلاستيك والمنتجات الورقية':'Plastics & Paper Products','الحلويات والمقرمشات':'Sweets & Snacks',
+            'استعراض الأصناف':'View Products','اتصال هاتفي':'Call Now','محادثة واتساب':'WhatsApp',
+            'ساعات العمل':'Working Hours','السبت – الخميس':'Saturday – Thursday',
+            'شركة لألأة النجوم لتجارة المواد الغذائية بالجملة':'Lala Star Trading Co. for Wholesale Foodstuffs',
+            'السجل التجاري':'Commercial Registration','جميع الحقوق محفوظة © 2026 شركة لألأة النجوم التجارية':'All Rights Reserved © 2026 Lala Star Trading Co.',
+            'منصة التوريد المعتمدة لقطاع الأعمال (B2B)':'Trusted B2B Wholesale Supply Platform'
+          }
+
+          # Add data-i18n/data-en to text-bearing HTML elements whose complete text is one of our Arabic defaults.
+          for ar, en in pairs.items():
+            pat = re.compile(r'(<(?P<tag>[A-Za-z][\w:-]*)(?P<attrs>[^>]*?)(?:data-i18n="[^"]*"|data-en="[^"]*")?[^>]*>)(?P<text>\s*)' + re.escape(ar) + r'(?P<tail>\s*)(</(?P=tag)>)')
+            def repl(m):
+              opening = m.group(1)
+              if 'data-i18n=' not in opening:
+                opening = opening[:-1] + ' data-i18n="' + ar.replace('"','&quot;') + '" data-en="' + en.replace('"','&quot;') + '">'
+              else:
+                if 'data-en=' not in opening:
+                  opening = opening[:-1] + ' data-en="' + en.replace('"','&quot;') + '">'
+              return opening + m.group('text') + ar + m.group('tail') + m.group(5)
+            s = pat.sub(repl, s)
+
+          # Ensure tel/WhatsApp visible labels are explicitly bilingual.
+          s = re.sub(r'(<a\b[^>]*href="tel:[^"]+"[^>]*)(>)(\s*)[^<]*?(\s*</a>)', lambda m: m.group(1)+' data-i18n="اتصال هاتفي" data-en="Call Now"'+m.group(2)+m.group(3)+'اتصال هاتفي'+m.group(4), s, flags=re.I)
+          s = re.sub(r'(<a\b[^>]*href="https://wa\.me/[^\"]+"[^>]*)(>)(\s*)[^<]*?(\s*</a>)', lambda m: m.group(1)+' data-i18n="محادثة واتساب" data-en="WhatsApp"'+m.group(2)+m.group(3)+'محادثة واتساب'+m.group(4), s, flags=re.I)
+
+          p.write_text(s, encoding='utf-8')
+
+          js = Path('assets/i18n.js')
+          j = js.read_text(encoding='utf-8')
+          j = re.sub(r'function\s+translate\s*\([^)]*\)\s*\{.*?\n\}', r'''function translate(root = document) {
+            const lang = current === 'en' ? 'en' : 'ar';
+            const elements = root.querySelectorAll('[data-i18n], [data-en]');
+            elements.forEach((el) => {
+              const ar = el.getAttribute('data-i18n') || '';
+              const en = el.getAttribute('data-en') || '';
+              const value = lang === 'en' ? en : ar;
+              if (!value) return;
+              Array.from(el.childNodes).forEach((node) => {
+                if (node.nodeType === Node.TEXT_NODE && node.textContent.trim()) node.remove();
+              });
+              const textNode = document.createTextNode(value);
+              el.insertBefore(textNode, el.firstChild || null);
+            });
+            document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
+              const key = el.getAttribute('data-i18n-placeholder');
+              const value = dictionary[lang]?.[key] || el.getAttribute(`data-placeholder-${lang}`) || '';
+              if (value) el.setAttribute('placeholder', value);
+            });
+          }''', j, count=1, flags=re.S)
+          # Force robust direction/language state in setLanguage without changing the rest of the implementation.
+          j = re.sub(r"document\.documentElement\.lang\s*=\s*.*?;\s*document\.documentElement\.dir\s*=\s*.*?;", "document.documentElement.lang = next === 'en' ? 'en' : 'ar';\n    document.documentElement.dir = next === 'en' ? 'ltr' : 'rtl';", j, count=1)
+          js.write_text(j, encoding='utf-8')
+
+      - name: Validate
+        run: |
+          grep -q 'data-i18n="الرئيسية"' index.html
+          grep -q 'data-en="Home"' index.html
+          grep -q 'data-i18n="اتصال هاتفي"' index.html
+          grep -q 'data-en="Call Now"' index.html
+          grep -q "document.documentElement.lang = next === 'en' ? 'en' : 'ar';" assets/i18n.js
+          node --check assets/i18n.js
+
+      - name: Commit changes
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html assets/i18n.js
+          if git diff --cached --quiet; then echo 'No changes'; exit 0; fi
+          git commit -m 'fix(i18n): make Arabic defaults and English switching complete'
+          git push origin main
