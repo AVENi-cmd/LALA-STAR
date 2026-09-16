@@ -1,0 +1,53 @@
+name: Remove site photos
+on:
+  push:
+    branches: [main]
+jobs:
+  remove-photos:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Remove content images and references
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+          # Remove remote hero image metadata/preload references.
+          s=re.sub(r'<meta property="og:image"[^>]*>','',s)
+          s=re.sub(r'<meta name="twitter:image"[^>]*>','',s)
+          s=re.sub(r'<link rel="preload" as="image"[^>]*>','',s)
+          # Remove Unsplash hero background while keeping the dark hero treatment.
+          s=re.sub(r",?url\(['\"]https://images\.unsplash\.com/[^'\"]+['\"]\)", '', s)
+          # Remove all non-logo image markup from the page.
+          def keep_or_remove(m):
+              tag=m.group(0)
+              return tag if 'lala-star-logo' in tag else ''
+          s=re.sub(r'<img\b[^>]*>', keep_or_remove, s, flags=re.I)
+          # Remove now-empty picture wrappers used by content photography.
+          s=re.sub(r'<picture\b[^>]*>\s*</picture>', '', s, flags=re.I)
+          # Remove image-only source tags left behind.
+          s=re.sub(r'<source\b[^>]*(?:src|srcset)=[^>]*>', '', s, flags=re.I)
+          # Remove local optimized-photo references from remaining HTML.
+          s=re.sub(r'url\([\'\"]?(?:assets/)?optimized/[^)\'\"]+[\'\"]?\)', 'none', s, flags=re.I)
+          p.write_text(s, encoding='utf-8')
+          PY
+          rm -f assets/optimized/*.webp assets/optimized/ASSET-MANIFEST.json
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'chore(images): remove site photography'
+          git push
+      - name: Remove temporary workflow
+        if: always()
+        shell: bash
+        run: |
+          git rm -f .github/workflows/remove-site-images.yml || true
+          git commit -m 'chore(workflow): remove temporary image cleanup' || true
+          git push || true
