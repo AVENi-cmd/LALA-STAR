@@ -1,0 +1,39 @@
+name: Finalize Sweets Floating WhatsApp Link
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Use bare WhatsApp URL for sweets floating option
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('assets/i18n.js')
+          s = p.read_text(encoding='utf-8')
+          old = "const option=(key,label,message)=>`<a class=\"wa-option\" target=\"_blank\" rel=\"noopener noreferrer\" href=\"${wa(numbers[key],message)}\">"
+          new = "const option=(key,label,message)=>`<a class=\"wa-option\" target=\"_blank\" rel=\"noopener noreferrer\" href=\"${message?wa(numbers[key],message):`https://wa.me/${numbers[key]}`}\">"
+          if old not in s:
+              raise SystemExit('Expected floating option helper not found')
+          s = s.replace(old, new, 1)
+          p.write_text(s, encoding='utf-8')
+          PY
+          node --check assets/i18n.js
+      - name: Commit and remove workflow
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/i18n.js .github/workflows/final-sweets-floating-link.yml
+          git commit -m "fix(contact): use direct sweets WhatsApp floating link"
+          git rm .github/workflows/final-sweets-floating-link.yml
+          git commit -m "chore: remove temporary sweets floating workflow"
+          git push
