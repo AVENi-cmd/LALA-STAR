@@ -1,0 +1,96 @@
+name: Migrate Approved Warehouse Images
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'assets/images/lala-ahsa.webp'
+      - 'assets/images/lala-dammam.webp'
+      - 'assets/images/lala-wholesale.webp'
+      - '.github/workflows/migrate-approved-images.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Build optimized approved images
+        shell: python
+        run: |
+          from pathlib import Path
+          from PIL import Image
+
+          root = Path('.')
+          out = root / 'assets' / 'optimized'
+          out.mkdir(parents=True, exist_ok=True)
+
+          sources = {
+              'lala-wholesale.webp': 'wholesale-warehouse-ahsa',
+              'lala-ahsa.webp': 'food-products-ahsa',
+              'lala-dammam.webp': 'food-products-dammam',
+          }
+
+          for source_name, target in sources.items():
+              source = root / 'assets' / 'images' / source_name
+              if not source.exists():
+                  raise SystemExit(f'Missing approved source: {source}')
+              with Image.open(source) as im:
+                  im = im.convert('RGB')
+                  for width in (640, 1280):
+                      ratio = width / im.width
+                      height = round(im.height * ratio)
+                      resized = im.resize((width, height), Image.Resampling.LANCZOS)
+                      resized.save(out / f'{target}-{width}.webp', 'WEBP', quality=92, method=6)
+                  if target == 'wholesale-warehouse-ahsa':
+                      im.save(out / f'{target}-1920.webp', 'WEBP', quality=94, method=6)
+
+          print('Approved warehouse images optimized successfully.')
+
+      - name: Wire optimized images and remove legacy uploads
+        shell: bash
+        run: |
+          set -euo pipefail
+          python scripts/build-webp.py
+          rm -f assets/images/lala-ahsa.webp assets/images/lala-dammam.webp assets/images/lala-wholesale.webp
+          rmdir assets/images 2>/dev/null || true
+          git rm --ignore-unmatch .github/workflows/migrate-approved-images.yml
+
+      - name: Validate
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f assets/optimized/wholesale-warehouse-ahsa-1920.webp
+          test -f assets/optimized/wholesale-warehouse-ahsa-1280.webp
+          test -f assets/optimized/wholesale-warehouse-ahsa-640.webp
+          test -f assets/optimized/food-products-ahsa-1280.webp
+          test -f assets/optimized/food-products-ahsa-640.webp
+          test -f assets/optimized/food-products-dammam-1280.webp
+          test -f assets/optimized/food-products-dammam-640.webp
+          ! grep -q 'assets/images/lala-' index.html
+          ! grep -q 'images.unsplash.com' index.html
+          echo 'Approved image migration validation passed.'
+
+      - name: Commit and push
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          if git diff --cached --quiet; then
+            echo 'No migration changes to commit.'
+            exit 0
+          fi
+          git commit -m 'fix(images): move approved warehouse assets to optimized pipeline [skip ci]'
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
