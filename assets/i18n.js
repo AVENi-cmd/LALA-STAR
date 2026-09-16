@@ -10,7 +10,7 @@ const messages={
   foodAhsa:'السلام عليكم، استفسار عن مواد غذائية - فرع الأحساء',
   plasticDammam:'السلام عليكم، استفسار عن منتجات البلاستيك - فرع الدمام',
   plasticAhsa:'السلام عليكم، استفسار عن منتجات البلاستيك - فرع الأحساء',
-  sweets:'استفسار عن قسم الحلويات والمقرمشات - فرع الأحساء'
+  sweets:'السلام عليكم، استفسار عن قطاع الحلويات والسناكات - فرع الأحساء'
 };
 const labels={
   ar:{food:'المواد الغذائية بالجملة',plastic:'المنتجات البلاستيكية والتعبئة والتغليف',sweets:'الحلويات والسناكات (الأحساء)',dammam:'الدمام',ahsa:'الأحساء',foodSales:'مبيعات المواد الغذائية',plasticSales:'مبيعات المنتجات البلاستيكية',office:'الإدارة المركزية',call:'اتصال',wa:'واتساب',map:'فتح الخريطة',inquiry:'استفسار',contact:'تواصل معنا',channels:'قنوات المبيعات والتواصل',email:'البريد الإلكتروني'},
@@ -51,14 +51,15 @@ function injectStyle(){
 .contact-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center;flex:0 0 auto}
 .contact-action{display:inline-flex;align-items:center;justify-content:center;min-height:34px;padding:6px 10px;border-radius:9px;font-size:12px;font-weight:800;border:1px solid #dbe3ec;background:#fff;color:#1e293b;white-space:nowrap}
 .contact-action.whatsapp{background:#16a34a;border-color:#16a34a;color:#fff}.contact-action.call{color:#15803d}
+.sweets-inquiry{display:flex;margin-top:14px}.sweets-inquiry .contact-action{width:100%;min-height:42px;text-align:center}.sweets-inquiry .contact-action.whatsapp{justify-content:center}
 .activity-contacts{display:grid;gap:8px;margin-top:14px}.activity-contact{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px;border-radius:11px;background:#f8fafc;border:1px solid #e8edf3}
 .activity-contact-main{min-width:0}.activity-contact strong{display:block;font-size:12px;color:#1e293b}.activity-contact-number{display:block;margin-top:2px;font-family:Inter,Arial,sans-serif;font-size:12px;font-weight:800;direction:ltr;unicode-bidi:isolate;color:#475569;white-space:nowrap}
 .floating-whatsapp{position:fixed;inset-inline-end:20px;bottom:20px;z-index:1000}.floating-whatsapp-toggle{width:58px;height:58px;border:0;border-radius:50%;display:grid;place-items:center;background:#16a34a;color:#fff;box-shadow:0 12px 28px rgba(22,163,74,.3);cursor:pointer}
 .floating-whatsapp-toggle svg{width:28px;height:28px;fill:currentColor}.floating-whatsapp-menu{position:absolute;inset-inline-end:0;bottom:68px;width:min(340px,calc(100vw - 32px));padding:10px;border:1px solid #dbe3ec;border-radius:18px;background:rgba(255,255,255,.97);backdrop-filter:blur(16px);box-shadow:0 18px 45px rgba(15,30,54,.18);opacity:0;visibility:hidden;transform:translateY(8px);transition:.2s ease}
 .floating-whatsapp.open .floating-whatsapp-menu{opacity:1;visibility:visible;transform:none}.floating-whatsapp-menu h4{margin:4px 6px 9px;color:#1e293b;font-size:14px}
 .wa-option{display:flex;align-items:center;gap:10px;width:100%;padding:11px 10px;border:0;border-radius:12px;background:transparent;color:#1e293b;text-align:start;cursor:pointer}.wa-option:hover{background:#f0fdf4}.wa-dot{width:10px;height:10px;flex:0 0 10px;border-radius:50%;background:#16a34a}.wa-option small{display:block;color:#64748b;margin-top:2px;font-family:Inter,Arial,sans-serif;direction:ltr;unicode-bidi:isolate;text-align:start;white-space:nowrap}
-@media(max-width:850px){.contact-channels{grid-template-columns:1fr}.activity-contact{align-items:flex-start}.contact-row{flex-direction:column}.contact-actions{width:100%}.contact-action{flex:0 0 auto}.floating-whatsapp{inset-inline-end:14px;bottom:14px}.floating-whatsapp-toggle{width:54px;height:54px}}
-@media(max-width:520px){.activity-contact{display:block}.activity-contact .contact-actions{margin-top:7px}.contact-actions{gap:8px}}
+@media(max-width:850px){.contact-channels{grid-template-columns:1fr}.activity-contact{align-items:flex-start}.contact-row{flex-direction:column}.contact-actions{width:100%}.contact-action{flex:0 0 auto}.sweets-inquiry .contact-action{width:100%}.floating-whatsapp{inset-inline-end:14px;bottom:14px}.floating-whatsapp-toggle{width:54px;height:54px}}
+@media(max-width:520px){.activity-contact{display:block}.activity-contact .contact-actions{margin-top:7px}.contact-actions{gap:8px}.sweets-inquiry{margin-top:12px}}
 `;
  document.head.appendChild(s)
 }
@@ -66,11 +67,12 @@ function action(n,text){return `<span class="contact-actions"><a class="contact-
 function contactRow(label,n,message){return `<div class="contact-row"><div><div class="contact-label">${label}</div>${num(display[n]||n)}</div>${action(numbers[n]||n,message)}</div>`}
 function contactCard(title,rows){const d=document.createElement('div');d.className='contact-channel';d.innerHTML=`<h4>${title}</h4>`+rows.join('');return d}
 function activityBlock(rows){const d=document.createElement('div');d.className='activity-contacts';d.innerHTML=rows.map(r=>`<div class="activity-contact"><div class="activity-contact-main"><strong>${r.label}</strong><span class="activity-contact-number" dir="ltr" style="unicode-bidi:isolate;">${display[r.key]}</span></div>${action(numbers[r.key],r.message)}</div>`).join('');return d}
+function sweetsInquiry(){const d=document.createElement('div');d.className='sweets-inquiry';d.innerHTML=`<a class="contact-action whatsapp" href="${wa(numbers.foodAhsa1,messages.sweets)}" target="_blank" rel="noopener noreferrer">${current==='ar'?'استفسار عن توفر الحلويات بالجملة':'Ask about wholesale sweets availability'}</a>`;return d}
 function injectContacts(){
  injectStyle();
  const businesses=document.querySelector('#businesses,.businesses');
  if(businesses){
-   businesses.querySelectorAll('.activity-contacts').forEach(x=>x.remove());
+   businesses.querySelectorAll('.activity-contacts,.sweets-inquiry').forEach(x=>x.remove());
    const cards=[...businesses.querySelectorAll('.business')];
    const food=cards.find(x=>/المواد الغذائية|Wholesale Food/i.test(x.textContent));
    const plastic=cards.find(x=>/البلاستيك|Plastic/i.test(x.textContent));
@@ -83,7 +85,7 @@ function injectContacts(){
      {label:`${labels[current].plasticSales} — ${labels[current].dammam}`,key:'plasticDammam',message:messages.plasticDammam},
      {label:`${labels[current].plasticSales} — ${labels[current].ahsa}`,key:'plasticAhsa',message:messages.plasticAhsa}
    ]));
-   if(sweets)sweets.querySelector('.business-body')?.appendChild(activityBlock([{label:labels[current].inquiry,key:'foodAhsa1',message:messages.sweets}]));
+   if(sweets)sweets.querySelector('.business-body')?.appendChild(sweetsInquiry());
  }
  const branches=document.querySelector('#branches,.branches');
  if(branches){
@@ -117,35 +119,13 @@ function injectContacts(){
      contactRow('المواد الغذائية — خط 2','foodAhsa2',messages.foodAhsa),
      contactRow('المنتجات البلاستيكية','plasticAhsa',messages.plasticAhsa)
    ]));
-   const office=document.createElement('div');office.className='contact-channel';office.innerHTML=`<h4>${labels[current].office}</h4><div class="contact-row"><div><div class="contact-label">الهاتف الثابت</div>${num(display.office)}</div>${action(numbers.office,'السلام عليكم، استفسار عن التواصل مع الإدارة المركزية')}</div><div class="contact-row"><div><div class="contact-label">${labels[current].email}</div><span class="contact-number" dir="ltr" style="unicode-bidi:isolate;font-size:12px;">${numbers.email}</span></div><a class="contact-action" href="mailto:${numbers.email}">${labels[current].contact}</a></div>`;
-   wrap.appendChild(office);container.appendChild(wrap);
+   wrap.appendChild(contactCard(labels[current].office,[contactRow(labels[current].office,'office','')]).replaceChildren);
  }
- floating();secure();
 }
-function floating(){
- document.querySelectorAll('.floating-whatsapp').forEach(x=>x.remove());
- const root=document.createElement('div');root.className='floating-whatsapp';
- const option=(key,label,message)=>`<a class="wa-option" target="_blank" rel="noopener noreferrer" href="${wa(numbers[key],message)}"><span class="wa-dot"></span><span>${label}<small dir="ltr" style="unicode-bidi:isolate;">${display[key]}</small></span></a>`;
- root.innerHTML=`<button class="floating-whatsapp-toggle" type="button" aria-label="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0C5.6 0 .3 5.3.3 11.8c0 2.1.6 4.1 1.6 5.9L.2 24l6.5-1.7c1.8.9 3.5 1.3 5.4 1.3h.1c6.5 0 11.8-5.3 11.8-11.8 0-3.1-1.3-6.1-3.5-8.3ZM12.2 21.6h-.1c-1.7 0-3.4-.5-4.8-1.3l-.3-.2-3.9 1 1-3.8-.2-.3a9.8 9.8 0 1 1 8.3 4.6Zm5.4-7.3c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-1.9-.9-3.1-1.6-4.3-3.6-.3-.5.3-.5.8-1.7.1-.3 0-.5-.1-.7-.1-.2-.7-1.7-1-1-.3-.5-.5-.4-.7-.4h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.6s1.1 3 1.3 3.2c.2.2 2.2 3.4 5.3 4.8 2 .9 2.8 1 3.8.9.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.1-.3-.2-.6-.4Z"/></svg></button><div class="floating-whatsapp-menu"><h4>${labels[current].channels}</h4>${option('foodDammam',`${labels[current].foodSales} — ${labels[current].dammam}`,messages.foodDammam)}${option('foodAhsa1',`${labels[current].foodSales} — ${labels[current].ahsa}`,messages.foodAhsa)}${option('plasticDammam',`${labels[current].plasticSales} — ${labels[current].dammam}`,messages.plasticDammam)}${option('plasticAhsa',`${labels[current].plasticSales} — ${labels[current].ahsa}`,messages.plasticAhsa)}</div>`;
- document.body.appendChild(root);root.querySelector('button').addEventListener('click',()=>root.classList.toggle('open'));document.addEventListener('click',e=>{if(!root.contains(e.target))root.classList.remove('open')});
-}
-function translate(){
- document.documentElement.lang=current;document.documentElement.dir=current==='ar'?'rtl':'ltr';document.title=meta[current].title;
- const desc=document.querySelector('meta[name="description"]');if(desc)desc.content=meta[current].description;
- const reverse=Object.fromEntries(Object.entries(dictionary).map(([a,b])=>[b,a]));
- const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
- nodes.forEach(n=>{const t=n.nodeValue.trim();if(!t)return;const replacement=current==='en'?dictionary[t]:reverse[t];if(replacement)n.nodeValue=n.nodeValue.replace(t,replacement)});
- const lang=document.querySelector('.lang');if(lang){lang.textContent=current==='ar'?'EN':'AR';lang.onclick=()=>{localStorage.setItem(KEY,current==='ar'?'en':'ar');location.reload()}}
-}
-function injectWholesale(){
- if(document.querySelector('[data-wholesale-extra]'))return;const anchor=document.querySelector('#branches,.branches');if(!anchor)return;const w=wholesaleData[current];
- const d=document.createElement('section');d.className='section alt';d.dataset.wholesaleExtra='1';d.innerHTML=`<div class="container"><div class="head"><div><div class="kicker">${w.kicker}</div><h2>${w.title}</h2></div></div><div class="benefits-grid">${w.stats.map(x=>`<div class="benefit"><div class="client-num">${x[0]}</div><h3>${x[1]}</h3></div>`).join('')}</div></div></section>`;anchor.parentNode.insertBefore(d,anchor)
-}
-function secure(){
- document.querySelectorAll('a[href^="https://wa.me/"],a[href^="https://www.google.com/maps/"]').forEach(a=>{a.target='_blank';a.rel='noopener noreferrer'});
- document.querySelectorAll('a[href^="tel:"]').forEach(a=>{if(!a.dataset.salesChannel)a.dataset.salesChannel='1'});
- document.querySelectorAll('.contact-number,.activity-contact-number,.wa-option small').forEach(el=>{el.setAttribute('dir','ltr');el.style.unicodeBidi='isolate'});
-}
-function init(){translate();injectWholesale();injectContacts()}
+function injectWholesale(){const anchor=document.querySelector('#branches,.branches,.contact');if(!anchor||document.querySelector('[data-wholesale-injected]'))return;const section=document.createElement('section');section.className='section alt';section.dataset.wholesaleInjected='1';section.innerHTML=`<div class="container"><div class="head"><div><div class="kicker">${wholesaleData[current].kicker}</div><h2>${wholesaleData[current].title}</h2></div><p>${current==='ar'?'توريد بالجملة للمتاجر والمطاعم والمنشآت التجارية في المنطقة الشرقية.':'Wholesale supply for stores, restaurants, and commercial establishments in the Eastern Region.'}</p></div><div class="stats-grid">${wholesaleData[current].stats.map(s=>`<div class="stat"><strong>${s[0]}</strong><small>${s[1]}</small></div>`).join('')}</div></div></section>`;anchor.parentNode.insertBefore(section,anchor)}
+function translate(){document.documentElement.lang=current;document.documentElement.dir=current==='ar'?'rtl':'ltr';document.title=meta[current].title;const desc=document.querySelector('meta[name="description"]');if(desc)desc.content=meta[current].description;document.querySelectorAll('[data-ar][data-en]').forEach(el=>{el.textContent=current==='ar'?el.dataset.ar:el.dataset.en});const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);while(walker.nextNode()){const t=walker.currentNode.textContent.trim();if(dictionary[t])walker.currentNode.textContent=dictionary[t]}}
+function floating(){document.querySelectorAll('.floating-whatsapp').forEach(x=>x.remove());const root=document.createElement('div');root.className='floating-whatsapp';const option=(key,label,message)=>`<a class="wa-option" target="_blank" rel="noopener noreferrer" href="${wa(numbers[key],message)}"><span class="wa-dot"></span><span>${label}<small dir="ltr" style="unicode-bidi:isolate;">${display[key]}</small></span></a>`;root.innerHTML=`<button class="floating-whatsapp-toggle" type="button" aria-label="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5A11.8 11.8 0 0 0 12.1 0C5.6 0 .3 5.3.3 11.8c0 2.1.6 4.1 1.6 5.9L.2 24l6.5-1.7c1.8.9 3.5 1.3 5.4 1.3h.1c6.5 0 11.8-5.3 11.8-11.8 0-3.1-1.3-6.1-3.5-8.3ZM12.2 21.6h-.1c-1.7 0-3.4-.5-4.8-1.3l-.3-.2-3.9 1 1-3.8-.2-.3a9.8 9.8 0 1 1 8.3 4.6Zm5.4-7.3c-.3-.2-1.8-.9-2.1-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-1.9-.9-3.1-1.6-4.3-3.6-.3-.5.3-.5.8-1.7.1-.3 0-.5-.1-.7-.1-.2-.7-1.7-1-1-.3-.5-.5-.4-.7-.4h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.6s1.1 3 1.3 3.2c.2.2 2.2 3.4 5.3 4.8 2 .9 2.8 1 3.8.9.6-.1 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.1-.3-.2-.6-.4Z"/></svg></button><div class="floating-whatsapp-menu"><h4>${labels[current].channels}</h4>${option('foodDammam',`${labels[current].foodSales} — ${labels[current].dammam}`,messages.foodDammam)}${option('foodAhsa1',`${labels[current].foodSales} — ${labels[current].ahsa}`,messages.foodAhsa)}${option('plasticDammam',`${labels[current].plasticSales} — ${labels[current].dammam}`,messages.plasticDammam)}${option('plasticAhsa',`${labels[current].plasticSales} — ${labels[current].ahsa}`,messages.plasticAhsa)}</div>`;document.body.appendChild(root);root.querySelector('button').addEventListener('click',()=>root.classList.toggle('open'));document.addEventListener('click',e=>{if(!root.contains(e.target))root.classList.remove('open')})}
+function secure(){document.querySelectorAll('a[href^="https://wa.me/"],a[href^="https://www.google.com/maps/"]').forEach(a=>{a.target='_blank';a.rel='noopener noreferrer'});document.querySelectorAll('a[href^="tel:"]').forEach(a=>{if(!a.dataset.salesChannel)a.dataset.salesChannel='1'});document.querySelectorAll('.contact-number,.activity-contact-number,.wa-option small').forEach(el=>{el.setAttribute('dir','ltr');el.style.unicodeBidi='isolate'})}
+function init(){translate();injectWholesale();injectContacts();floating();secure()}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
