@@ -1,0 +1,36 @@
+name: Cleanup temporary i18n workflows
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Remove temporary workflow files
+        run: |
+          rm -f \
+            .github/workflows/complete-i18n-remaining.yml \
+            .github/workflows/complete-i18n-v2.yml \
+            .github/workflows/complete-i18n-v3.yml \
+            .github/workflows/complete-i18n-v4.yml \
+            .github/workflows/complete-i18n-v5.yml \
+            .github/workflows/complete-i18n-v6.yml \
+            .github/workflows/inspect-i18n-text.yml \
+            .github/workflows/finalize-i18n-bindings.yml \
+            .github/workflows/finalize-i18n-v2.yml \
+            .github/workflows/final-i18n-commit.yml \
+            .github/i18n-trigger.txt \
+            .github/workflows/cleanup-i18n-temp.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "chore(i18n): remove temporary localization workflows"
+          git push
