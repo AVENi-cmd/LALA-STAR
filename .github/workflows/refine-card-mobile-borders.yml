@@ -1,0 +1,100 @@
+name: Temporary Card Style Updater
+
+on:
+  push:
+    branches: [main]
+    paths: ['index.html']
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    if: ${{ !startsWith(github.event.head_commit.message, 'fix(ui): strengthen mobile card borders') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Update only the style block
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+          import subprocess
+
+          p = Path('index.html')
+          text = p.read_text(encoding='utf-8')
+          m = re.search(r'<style>(.*?)</style>', text, flags=re.S)
+          if not m:
+              raise SystemExit('Missing <style> block')
+
+          before = text[:m.start(1)]
+          css = m.group(1)
+          after = text[m.end(1):]
+
+          original_img_tags = re.findall(r'<img\b[^>]*>', text, flags=re.I | re.S)
+
+          replacements = [
+              (
+                  r'\.benefit,\.client-card,\.business,\.branch,\.faq-item\{background:var\(--card\);border:1px solid rgba\(15,30,54,\.08\);',
+                  '.benefit,.client-card,.business,.branch,.faq-item{background:var(--card);border:1px solid rgba(15,23,42,.16) !important;border-right:3.5px solid #dc2626 !important;'
+              ),
+              (
+                  r'\.benefit,\.client-card\{border-radius:20px;padding:26px 22px;transition:transform \.4s cubic-bezier\(\.16,1,\.3,1\),box-shadow \.4s ease,border-color \.3s ease\}',
+                  '.benefit,.client-card{border-radius:20px;padding:26px 22px;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}'
+              ),
+              (
+                  r'\.benefit:hover,\.client-card:hover\{transform:translateY\(-4px\) scale\(1\.02\);box-shadow:0 18px 35px -8px rgba\(15,30,54,\.13\),0 10px 14px -8px rgba\(15,30,54,\.05\);border-color:rgba\(229,29,53,\.2\)\}',
+                  '.benefit:hover,.client-card:hover{transform:translateY(-2px);box-shadow:0 10px 25px -5px rgba(15,23,42,.06);border-color:rgba(220,38,38,.2)}'
+              ),
+              (
+                  r'\.business\{border-radius:20px;overflow:hidden;position:relative;transition:transform \.4s cubic-bezier\(\.16,1,\.3,1\),box-shadow \.4s ease\}',
+                  '.business{border-radius:20px;overflow:hidden;position:relative;transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}'
+              ),
+              (
+                  r'\.business:hover\{transform:translateY\(-4px\) scale\(1\.02\);box-shadow:0 18px 35px -8px rgba\(15,30,54,\.15\)\}',
+                  '.business:hover{transform:translateY(-2px);box-shadow:0 10px 25px -5px rgba(15,23,42,.06);border-color:rgba(220,38,38,.2)}'
+              ),
+          ]
+
+          for pattern, replacement in replacements:
+              css, count = re.subn(pattern, replacement, css, count=1)
+              if count != 1:
+                  raise SystemExit(f'Expected exactly one CSS replacement, got {count}: {pattern}')
+
+          touch_rule = '\n    .benefit:active,.client-card:active,.business:active{transform:scale(.99);}\n'
+          if touch_rule.strip() not in css:
+              css += touch_rule
+
+          new_text = before + css + after
+
+          if new_text[:m.start(1)] != text[:m.start(1)] or new_text[len(before) + len(css):] != after:
+              raise SystemExit('Content outside <style> changed')
+          if re.findall(r'<img\b[^>]*>', new_text, flags=re.I | re.S) != original_img_tags:
+              raise SystemExit('Image tags changed')
+
+          p.write_text(new_text, encoding='utf-8')
+
+          # Verify the working tree contains only the intended index.html style-block change.
+          diff = subprocess.check_output(['git', 'diff', '--', 'index.html'], text=True)
+          if '<style>' in diff or '</style>' in diff:
+              pass
+          if any(line.startswith(('+','-')) and not line.startswith(('+++','---')) and '<style' not in line and '</style>' not in line for line in diff.splitlines()):
+              # Diff lines are expected to be CSS only; reject any non-CSS HTML changes by checking the surrounding source.
+              old = subprocess.check_output(['git', 'show', 'HEAD:index.html'], text=True)
+              old_m = re.search(r'<style>(.*?)</style>', old, flags=re.S)
+              if old[:old_m.start(1)] != new_text[:old_m.start(1)] or old[old_m.end(1):] != new_text[m.end(1):]:
+                  raise SystemExit('Detected changes outside <style>')
+
+      - name: Commit and push
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git diff --cached --quiet && { echo 'No changes to commit'; exit 0; }
+          git commit -m 'fix(ui): strengthen mobile card borders'
+          git push origin HEAD:main
