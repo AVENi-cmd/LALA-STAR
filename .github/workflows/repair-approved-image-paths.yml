@@ -1,0 +1,67 @@
+name: Repair approved image paths
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - 'assets/i18n.js'
+      - '.github/workflows/image-assets.yml'
+      - '.github/workflows/repair-approved-image-paths.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Restore approved image paths without changing image files
+        shell: bash
+        run: |
+          set -euo pipefail
+          sed -i 's#assets/optimized/plastic-products-960.webp?v=20260917-1#assets/wide_high_resolution_supermarket_warehouse_aisle.png#g' index.html assets/i18n.js .github/workflows/image-assets.yml
+          sed -i 's#assets/optimized/sweets-snacks-960.webp?v=20260917-1#assets/sweets-snacks.webp#g' index.html assets/i18n.js .github/workflows/image-assets.yml
+          git diff --check
+
+      - name: Validate referenced approved images
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+          import sys
+          root = Path('.')
+          html = (root / 'index.html').read_text(encoding='utf-8')
+          refs = sorted(set(re.findall(r'assets/[A-Za-z0-9_./?=-]+\.(?:webp|jpg|jpeg|png)', html)))
+          errors = []
+          for ref in refs:
+              path = root / ref.split('?', 1)[0]
+              if not path.is_file():
+                  errors.append(f'Missing asset: {ref}')
+          for bad in ['assets/optimized/plastic-products-960.webp', 'assets/optimized/sweets-snacks-960.webp']:
+              if bad in html:
+                  errors.append(f'Broken optimized image path remains: {bad}')
+          if errors:
+              print('\n'.join(errors))
+              sys.exit(1)
+          print(f'Validated {len(refs)} referenced image paths.')
+
+      - name: Commit path repair
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html assets/i18n.js .github/workflows/image-assets.yml
+          if git diff --cached --quiet; then
+            echo 'No approved image path repair required.'
+            exit 0
+          fi
+          git commit -m 'fix(images): restore approved image paths'
+          git push origin main
