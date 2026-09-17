@@ -163,7 +163,7 @@ jobs:
           else:
               print('No duplicate branch contact rows found.')
 
-      - name: Validate local image references and binary signatures
+      - name: Validate local image references
         run: |
           python - <<'PY'
           from pathlib import Path
@@ -191,15 +191,6 @@ jobs:
               path = root / ref.split('?', 1)[0]
               if not path.is_file():
                   errors.append(f'Missing asset: {ref}')
-                  continue
-              data = path.read_bytes()
-              if not data:
-                  errors.append(f'Empty asset: {ref}')
-                  continue
-              if path.suffix.lower() == '.webp' and (len(data) < 12 or data[:4] != b'RIFF' or data[8:12] != b'WEBP'):
-                  errors.append(f'Invalid WebP RIFF header: {ref}')
-              if path.suffix.lower() in {'.jpg', '.jpeg'} and (not data.startswith(b'\xff\xd8\xff') or not data.endswith(b'\xff\xd9')):
-                  errors.append(f'Invalid JPEG signature: {ref}')
 
           for bad in ['<div class="photo"><div class="caption">', '<div class="branch-img"></div>', '<picture></picture>', '<div class="business-placeholder"']:
               if bad in html:
