@@ -1,10 +1,12 @@
 name: temp-approved-content-fix
 on:
-  workflow_dispatch:
+  push:
+    branches: [main]
 permissions:
   contents: write
 jobs:
   fix:
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -30,14 +32,11 @@ jobs:
           s=s.replace('<a class="btn secondary" href="#contact">تواصل معنا</a>','<a class="btn secondary" href="#contact">اطلب تسعيرة جملة</a>')
           old='''<div class="faq-list"><article class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span>هل توفرون التوصيل للدمام والأحساء وضواحيها؟</span><span aria-hidden="true">+</span></button><div class="faq-answer"><div class="faq-answer-inner">نعم، يتوفر أسطول نقل منتظم للمنشآت التجارية.</div></div></article><article class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span>ما هي آلية الحصول على قائمة الأسعار والكميات؟</span><span aria-hidden="true">+</span></button><div class="faq-answer"><div class="faq-answer-inner">حضورك ورؤية المنتجات واختيار المنتج المناسب لك أو الإتصال عبر الهاتف للحصول على تسعيرة فورية.</div></div></article><article class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span>هل يمكن طلب تسعيرة حسب الفرع؟</span><span aria-hidden="true">+</span></button><div class="faq-answer"><div class="faq-answer-inner">نعم، يمكن تحديد الفرع المستهدف عند التواصل لإرسال طلب التسعيرة المناسب.</div></div></article><article class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span>كيف أبدأ التعامل التجاري مع الشركة؟</span><span aria-hidden="true">+</span></button><div class="faq-answer"><div class="faq-answer-inner">يمكنك التواصل عبر الهاتف أو البريد الإلكتروني وذكر نشاط المنشأة والأصناف والكميات المطلوبة للبدء.</div></div></article></div>'''
           new='''<div class="faq-list"><details class="faq-item"><summary class="faq-question">هل توفرون التوصيل للدمام والأحساء وضواحيها؟</summary><div class="faq-answer"><div class="faq-answer-inner">نعم، يتوفر أسطول نقل منتظم للمنشآت التجارية.</div></div></details><details class="faq-item"><summary class="faq-question">ما هي آلية الحصول على قائمة الأسعار والكميات؟</summary><div class="faq-answer"><div class="faq-answer-inner">يمكنك الحضور ورؤية المنتجات واختيار المنتج المناسب لك أو الاتصال عبر الهاتف للحصول على تسعيرة فورية.</div></div></details><details class="faq-item"><summary class="faq-question">هل يمكن طلب تسعيرة حسب الفرع؟</summary><div class="faq-answer"><div class="faq-answer-inner">نعم، يمكن تحديد الفرع المستهدف عند التواصل لإرسال طلب التسعيرة المناسب.</div></div></details><details class="faq-item"><summary class="faq-question">كيف أبدأ التعامل التجاري مع الشركة؟</summary><div class="faq-answer"><div class="faq-answer-inner">يمكنك التواصل عبر الهاتف أو البريد الإلكتروني وذكر نشاط المنشأة والأصناف والكميات المطلوبة للبدء.</div></div></details></div>'''
-          if old not in s: raise SystemExit('FAQ block not found')
-          s=s.replace(old,new)
+          if old in s: s=s.replace(old,new)
           needle='.faq-list{max-width:900px;margin:auto;display:grid;gap:12px}'
           css=needle+' .faq-list details{margin:0;padding:0;border:1px solid rgba(15,30,54,.12);border-radius:12px;background:rgba(255,255,255,.65);overflow:hidden}.faq-list details summary{list-style:none;cursor:pointer}.faq-list details summary::-webkit-details-marker{display:none}.faq-list details[open] summary{border-bottom:1px solid rgba(15,30,54,.1)}.faq-list details .faq-answer-inner{padding:14px 22px 18px}'
-          if needle not in s: raise SystemExit('FAQ CSS anchor not found')
-          s=s.replace(needle,css,1)
+          if needle in s and '.faq-list details{margin:0' not in s: s=s.replace(needle,css,1)
           old_js="document.querySelectorAll('.faq-question').forEach(btn=>btn.addEventListener('click',()=>{const item=btn.closest('.faq-item'),open=item.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(i=>{i.classList.remove('open');i.querySelector('.faq-question').setAttribute('aria-expanded','false')});if(!open){item.classList.add('open');btn.setAttribute('aria-expanded','true')}}));"
-          if old_js not in s: raise SystemExit('FAQ JS block not found')
           s=s.replace(old_js,'')
           p.write_text(s)
           PY
