@@ -19,15 +19,14 @@ jobs:
           from pathlib import Path
           p=Path('index.html')
           s=p.read_text(encoding='utf-8')
-          old='.faq-list{max-width:900px;margin:auto;display:grid;gap:12px}.faq-list details{margin:0;padding:0;border:1px solid rgba(15,30,54,.12);border-radius:12px;background:rgba(255,255,255,.65);overflow:hidden}.faq-list details summary{list-style:none;cursor:pointer}.faq-list details summary::-webkit-details-marker{display:none}.faq-list details[open] summary{border-bottom:1px solid rgba(15,30,54,.1)}.faq-list details .faq-answer-inner{padding:14px 22px 18px}'
-          new='.faq-list{max-width:900px;margin:auto;display:grid;gap:12px}.faq-list details{margin:0;padding:0;border:1px solid rgba(15,30,54,.12);border-radius:12px;background:rgba(255,255,255,.65);height:auto !important;max-height:none !important;overflow:visible !important}.faq-list details summary{display:list-item;cursor:pointer;padding:18px 22px;font-weight:700}.faq-list details summary::-webkit-details-marker{display:inline-block}.faq-list details summary::marker{font-size:1em}.faq-list details[open] summary{border-bottom:1px solid rgba(15,30,54,.1)}.faq-list details .faq-answer{height:auto !important;max-height:none !important;overflow:visible !important}.faq-list details .faq-answer-inner{padding:14px 22px 18px;color:#555;line-height:1.8}'
-          if old not in s:
-              raise SystemExit('Expected FAQ CSS block not found')
-          s=s.replace(old,new,1)
+          css='''\n    /* FAQ accordion expansion and readable answers */\n    .faq-list details{height:auto !important;max-height:none !important;overflow:visible !important}\n    .faq-list details summary{display:list-item;cursor:pointer;padding:18px 22px;font-weight:700}\n    .faq-list details summary::-webkit-details-marker{display:inline-block}\n    .faq-list details summary::marker{font-size:1em}\n    .faq-list details .faq-answer{height:auto !important;max-height:none !important;overflow:visible !important;color:#555}\n    .faq-list details .faq-answer-inner{padding:14px 22px 18px;color:#555;line-height:1.8}\n'''
+          if '/* FAQ accordion expansion and readable answers */' not in s:
+              s=s.replace('</style>',css+'  </style>',1)
           p.write_text(s,encoding='utf-8')
           PY
           grep -Fq '<details class="faq-item">' index.html
           grep -Fq '<summary class="faq-question">' index.html
+          grep -Fq '/* FAQ accordion expansion and readable answers */' index.html
           grep -Fq 'overflow:visible !important' index.html
           grep -Fq 'height:auto !important' index.html
           grep -Fq 'color:#555' index.html
