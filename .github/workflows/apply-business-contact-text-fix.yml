@@ -1,0 +1,97 @@
+name: Apply business contact text fix
+
+on:
+  push:
+    paths:
+      - '.github/workflows/apply-business-contact-text-fix.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+
+      - name: Apply text-only changes
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+          import subprocess
+
+          index = Path('index.html')
+          i18n = Path('assets/i18n.js')
+          core = Path('assets/i18n-core.js')
+
+          before_index = index.read_text(encoding='utf-8')
+          before_i18n = i18n.read_text(encoding='utf-8')
+          before_core = core.read_text(encoding='utf-8')
+
+          def img_srcs(text):
+              return re.findall(r'<img\\b[^>]*?\\bsrc=["\\']([^"\\']+)["\\']', text, flags=re.I)
+
+          def image_code_paths(text):
+              return re.findall(r"(?:const items=\\[|\\['[^']*placeholder','|img\\.src=)\\s*[^\\n]*?(assets/[^'\\\"`]+)", text)
+
+          index_imgs_before = img_srcs(before_index)
+          i18n_image_refs_before = re.findall(r"assets/(?:optimized/[^'\\\"`]+|wide_high_resolution_supermarket_warehouse_aisle\\.png|sweets-snacks\\.webp)", before_i18n)
+
+          # 1) Static business card title + explicit English data-en.
+          old_sweets = '<h3>الحلويات والسناكات</h3>'
+          new_sweets = '<h3 data-ar="مذاق راقي للحلويات" data-en="Mazaq Raqi Sweets">مذاق راقي للحلويات</h3>'
+          if old_sweets not in before_index:
+              raise SystemExit('Expected sweets business title was not found in index.html')
+          after_index = before_index.replace(old_sweets, new_sweets, 1)
+
+          # 2) Remove only the business-card contact injection block; keep the bottom contact channels intact.
+          start = after_index.find('<script src="assets/i18n.js')
+          if start < 0:
+              raise SystemExit('Expected i18n.js script tag was not found in index.html')
+          # No static business-card contact buttons exist in index.html; the injected ones are handled in i18n-core.js.
+
+          # 3) Stop i18n-core from injecting Call/WhatsApp/phone rows into Our Businesses cards.
+          marker = ' const businesses=document.querySelector(\'#businesses,.businesses\');'
+          bstart = before_core.find(marker)
+          if bstart < 0:
+              raise SystemExit('Expected businesses injection block was not found in i18n-core.js')
+          bend = before_core.find(' const contact=document.querySelector(\'#contact,.contact\');', bstart)
+          if bend < 0:
+              raise SystemExit('Expected contact injection boundary was not found in i18n-core.js')
+          after_core = before_core[:bstart] + before_core[bend:]
+
+          # Keep the branch/business contact behavior focused on the lower contact section.
+          # Update the core English sweets label to the requested transliteration.
+          after_core = after_core.replace("'الحلويات والسناكات (الأحساء)'", "'مذاق راقي للحلويات'")
+          after_core = after_core.replace("'Sweets & Snacks (Al-Ahsa)'", "'Mazaq Raqi Sweets'")
+
+          # 4) Keep i18n.js mappings synchronized with the exact requested labels.
+          after_i18n = before_i18n
+          after_i18n = after_i18n.replace("'مذاق راقي للحلويات':'MATHAQ RAKI SWEETS - AL-AHSA'", "'مذاق راقي للحلويات':'Mazaq Raqi Sweets'")
+          after_i18n = after_i18n.replace("'لألأة النجوم للبلاستيك والمنظفات - الأحساء':'LALA STAR PLASTICS & DETERGENTS - AL-AHSA'", "'لألأة النجوم للبلاستيك والمنظفات':'LALA STAR PLASTICS & DETERGENTS - AL-AHSA'")
+          after_i18n = after_i18n.replace("'المنتجات البلاستيكية':'لألأة النجوم للبلاستيك والمنظفات - الأحساء'", "'المنتجات البلاستيكية':'لألأة النجوم للبلاستيك والمنظفات'")
+          after_i18n = after_i18n.replace("'Sweets & Snacks':'MATHAQ RAKI SWEETS - AL-AHSA'", "'Sweets & Snacks':'Mazaq Raqi Sweets'")
+          after_i18n = after_i18n.replace("'مذاق راقي للحلويات':'MATHAQ RAKI SWEETS - AL-AHSA'", "'مذاق راقي للحلويات':'Mazaq Raqi Sweets'")
+
+          # Explicit requested Dammam plastic mapping.
+          if "'قمة الهامات للبلاستيك والمنظفات':'QIMAT AL-HAMAT PLASTICS & DETERGENTS'" not in after_i18n:
+              raise SystemExit('Requested Dammam plastic mapping is missing')
+
+          # 5) Safety checks: image tags and image references must remain byte-for-byte identical.
+          if img_srcs(after_index) != index_imgs_before:
+              raise SystemExit('ABORT: index.html image src values changed')
+          i18n_image_refs_after = re.findall(r"assets/(?:optimized/[^'\\\"`]+|wide_high_resolution_supermarket_warehouse_aisle\\.png|sweets-snacks\\.webp)", after_i18n)
+          if i18n_image_refs_after != i18n_image_refs_before:
+              raise SystemExit('ABORT: i18n.js image paths changed')
+
+          index.write_text(after_index, encoding='utf-8')
+          i18n.write_text(after_i18n, encoding='utf-8')
+          core.write_text(after_core, encoding='utf-8')
+
+          subprocess.run(['git','config','user.name','github-actions[bot]'], check=True)
+          subprocess.run(['git','config','user.email','41898282+github-actions[bot]@users.noreply.github.com'], check=True)
+          subprocess.run(['git','add','index.html','assets/i18n.js','assets/i18n-core.js'], check=True)
+          subprocess.run(['git','commit','-m','fix(content): remove business contact actions and update labels'], check=True)
+          subprocess.run(['git','push','origin','HEAD:main'], check=True)
