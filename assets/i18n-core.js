@@ -14,8 +14,8 @@ const messages={
   sweets:'السلام عليكم، استفسار عن أسعار وطلبيات الحلويات والمقرمشات - فرع الأحساء'
 };
 const labels={
-  ar:{food:'المواد الغذائية بالجملة',plastic:'المنتجات البلاستيكية والتعبئة والتغليف',sweets:'الحلويات والسناكات (الأحساء)',dammam:'الدمام',ahsa:'الأحساء',foodSales:'مبيعات المواد الغذائية',plasticSales:'مبيعات المنتجات البلاستيكية',office:'الإدارة المركزية',call:'اتصال',wa:'واتساب',map:'فتح الخريطة',inquiry:'استفسار',contact:'تواصل معنا',channels:'قنوات المبيعات والتواصل',email:'البريد الإلكتروني'},
-  en:{food:'Wholesale Food Products',plastic:'Plastic Products & Packaging',sweets:'Sweets & Snacks (Al-Ahsa)',dammam:'Dammam',ahsa:'Al-Ahsa',foodSales:'Food Sales',plasticSales:'Plastic Products Sales',office:'Central Administration',call:'Call',wa:'WhatsApp',map:'Open Map',inquiry:'Inquiry',contact:'Contact Us',channels:'Sales & Contact Channels',email:'Email'}
+  ar:{food:'المواد الغذائية بالجملة',plastic:'المنتجات البلاستيكية والتعبئة والتغليف',sweets:'مذاق راقي للحلويات',dammam:'الدمام',ahsa:'الأحساء',foodSales:'مبيعات المواد الغذائية',plasticSales:'مبيعات المنتجات البلاستيكية',office:'الإدارة المركزية',call:'اتصال',wa:'واتساب',map:'فتح الخريطة',inquiry:'استفسار',contact:'تواصل معنا',channels:'قنوات المبيعات والتواصل',email:'البريد الإلكتروني'},
+  en:{food:'Wholesale Food Products',plastic:'Plastic Products & Packaging',sweets:'Mazaq Raqi Sweets',dammam:'Dammam',ahsa:'Al-Ahsa',foodSales:'Food Sales',plasticSales:'Plastic Products Sales',office:'Central Administration',call:'Call',wa:'WhatsApp',map:'Open Map',inquiry:'Inquiry',contact:'Contact Us',channels:'Sales & Contact Channels',email:'Email'}
 };
 const dictionary={
 'تخطي إلى المحتوى الرئيسي':'Skip to main content','من نحن':'About Us','أنشطتنا':'Our Businesses','فروعنا':'Branches','تواصل معنا':'Contact Us',
@@ -84,23 +84,6 @@ function activityBlock(rows){const d=document.createElement('div');d.className='
 function sweetsInquiry(){const d=document.createElement('div');d.className='sweets-inquiry';d.innerHTML=`<div class="contact-row"><div><div class="contact-label">${labels[current].sweets}</div>${num(display.sweets)}</div>${action(numbers.sweets,messages.sweets)}</div>`;return d}
 function injectContacts(){
  injectStyle();
- const businesses=document.querySelector('#businesses,.businesses');
- if(businesses){
-   businesses.querySelectorAll('.activity-contacts,.sweets-inquiry').forEach(x=>x.remove());
-   const cards=[...businesses.querySelectorAll('.business')];
-   const food=cards.find(x=>/المواد الغذائية|Wholesale Food/i.test(x.textContent));
-   const plastic=cards.find(x=>/البلاستيك|Plastic/i.test(x.textContent));
-   const sweets=cards.find(x=>/الحلويات|Sweets/i.test(x.textContent));
-   if(food)food.querySelector('.business-body')?.appendChild(activityBlock([
-     {label:`${labels[current].foodSales} — ${labels[current].dammam}`,key:'foodDammam',message:messages.foodDammam},
-     {label:`${labels[current].foodSales} — ${labels[current].ahsa}`,key:'foodAhsa1',message:messages.foodAhsa}
-   ]));
-   if(plastic)plastic.querySelector('.business-body')?.appendChild(activityBlock([
-     {label:`${labels[current].plasticSales} — ${labels[current].dammam}`,key:'plasticDammam',message:messages.plasticDammam},
-     {label:`${labels[current].plasticSales} — ${labels[current].ahsa}`,key:'plasticAhsa',message:messages.plasticAhsa}
-   ]));
-   if(sweets)sweets.querySelector('.business-body')?.appendChild(sweetsInquiry());
- }
  const contact=document.querySelector('#contact,.contact');
  if(contact){
    contact.querySelectorAll('.contact-channels').forEach(x=>x.remove());
