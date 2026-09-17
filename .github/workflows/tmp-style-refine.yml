@@ -1,0 +1,96 @@
+name: Temporary CSS Refinement
+
+on:
+  push:
+    branches:
+      - tmp/style-refine-20260917
+
+permissions:
+  contents: write
+
+jobs:
+  refine:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Apply style-only refinement
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          path = Path('index.html')
+          original = path.read_text(encoding='utf-8')
+          match = re.search(r'<style>(.*?)</style>', original, flags=re.S)
+          if not match:
+              raise SystemExit('No style block found')
+
+          style = match.group(1)
+          style = re.sub(r'\n\s*/\* Premium card and separator refinement \*/.*?(?=\n\s*</style>)', '', style, flags=re.S)
+
+          addition = r'''
+    /* Premium card and separator refinement */
+    .benefit,.client-card,.business{
+      border:1px solid rgba(15,23,42,0.08);
+      transition:transform 0.25s ease,box-shadow 0.25s ease,border-color 0.25s ease;
+    }
+    .benefit:hover,.client-card:hover,.business:hover{
+      transform:translateY(-2px);
+      box-shadow:0 10px 25px -5px rgba(15,23,42,0.06);
+      border-color:rgba(220,38,38,0.2);
+    }
+    .client-card .client-num{color:#e51d35;}
+    .stats,.stat{border-color:rgba(15,23,42,0.08);}
+    .footer-number{
+      direction:ltr;
+      unicode-bidi:isolate;
+      white-space:nowrap;
+      color:inherit !important;
+      text-decoration:none !important;
+      -webkit-text-decoration:none !important;
+    }
+    .footer-number a,a .footer-number{
+      color:inherit !important;
+      text-decoration:none !important;
+      -webkit-text-decoration:none !important;
+    }
+'''
+          updated_style = style.rstrip() + addition
+          updated = original[:match.start(1)] + updated_style + original[match.end(1):]
+
+          before = re.sub(r'(<style>).*?(</style>)', r'\1STYLE_CONTENT\2', original, flags=re.S)
+          after = re.sub(r'(<style>).*?(</style>)', r'\1STYLE_CONTENT\2', updated, flags=re.S)
+          if before != after:
+              raise SystemExit('Guard failed: content outside <style> changed')
+
+          images_before = re.findall(r'<img\b[^>]*>', original, flags=re.S)
+          images_after = re.findall(r'<img\b[^>]*>', updated, flags=re.S)
+          if images_before != images_after:
+              raise SystemExit('Guard failed: image tags changed')
+
+          path.write_text(updated, encoding='utf-8')
+          PY
+
+      - name: Validate and commit directly to main
+        shell: bash
+        run: |
+          git diff --cached --check
+          git add index.html
+          git diff --cached --check
+          git diff --cached --name-only | grep -Fx 'index.html'
+          git diff --cached --quiet -- .github || true
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "fix(ui): refine cards and section separators"
+          git push origin HEAD:main
+
+      - name: Remove temporary branch
+        if: ${{ success() }}
+        shell: bash
+        run: git push origin --delete tmp/style-refine-20260917 || true
