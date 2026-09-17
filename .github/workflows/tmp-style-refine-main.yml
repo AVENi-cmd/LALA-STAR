@@ -7,7 +7,6 @@ permissions:
 
 jobs:
   refine:
-    if: ${{ github.ref == 'refs/heads/main' && github.event.head_commit.message == 'chore: stage CSS refinement on main' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout staged main
