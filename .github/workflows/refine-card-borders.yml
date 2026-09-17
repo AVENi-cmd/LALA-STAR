@@ -1,0 +1,64 @@
+name: Refine Card Borders
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  refine:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+
+      - name: Apply CSS-only refinement
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          path = Path('index.html')
+          original = path.read_text(encoding='utf-8')
+          match = re.search(r'<style>(.*?)</style>', original, flags=re.S)
+          if not match:
+              raise SystemExit('No style block found')
+
+          style = match.group(1)
+          marker = '/* Refined activity and benefit card borders */'
+          if marker in style:
+              raise SystemExit(0)
+
+          addition = '\n    /* Refined activity and benefit card borders */\n    .benefit,.business{border:1px solid rgba(15,23,42,0.09)}\n'
+          updated_style = style.rstrip() + addition
+          updated = original[:match.start(1)] + updated_style + original[match.end(1):]
+
+          # Only the contents of <style> may change.
+          before = re.sub(r'(<style>).*?(</style>)', r'\1STYLE_CONTENT\2', original, flags=re.S)
+          after = re.sub(r'(<style>).*?(</style>)', r'\1STYLE_CONTENT\2', updated, flags=re.S)
+          if before != after:
+              raise SystemExit('Guard failed: content outside <style> changed')
+
+          # Image tags must remain byte-for-byte identical.
+          images_before = re.findall(r'<img\b[^>]*>', original, flags=re.S)
+          images_after = re.findall(r'<img\b[^>]*>', updated, flags=re.S)
+          if images_before != images_after:
+              raise SystemExit('Guard failed: image tags changed')
+
+          path.write_text(updated, encoding='utf-8')
+          PY
+
+      - name: Commit final change and remove temporary workflow
+        shell: bash
+        run: |
+          rm -f .github/workflows/refine-card-borders.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html .github/workflows/refine-card-borders.yml
+          git diff --cached --check
+          git commit -m "fix(ui): refine activity and benefit card borders"
+          git push origin HEAD:main
