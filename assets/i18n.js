@@ -16,12 +16,12 @@
   };
   const businessImages=()=>{
     const items=[
-      ['.business-no-image:nth-child(2) .business-placeholder','assets/optimized/plastic-products-960.webp','المنتجات البلاستيكية'],
-      ['.business-no-image:nth-child(3) .business-placeholder','assets/optimized/sweets-snacks-960.webp','الحلويات والسناكات']
+      ['.business-no-image:nth-child(2) .business-placeholder','assets/wide_high_resolution_supermarket_warehouse_aisle.png','المنتجات البلاستيكية'],
+      ['.business-no-image:nth-child(3) .business-placeholder','assets/sweets-snacks.webp','الحلويات والسناكات']
     ];
     items.forEach(([selector,src,alt])=>{
       const box=document.querySelector(selector); if(!box || box.querySelector('img'))return;
-      const img=document.createElement('img'); img.src=src; img.alt=alt; img.width=960; img.height=540; img.loading='lazy'; img.decoding='async'; img.style.width='100%'; img.style.height='100%'; img.style.objectFit='cover'; img.style.display='block'; box.textContent=''; box.appendChild(img);
+      const img=document.createElement('img'); img.src=src; img.alt=alt; img.width=1536; img.height=1024; img.loading='lazy'; img.decoding='async'; img.style.width='100%'; img.style.height='100%'; img.style.objectFit='cover'; img.style.display='block'; box.textContent=''; box.appendChild(img);
     });
   };
   const style=()=>{if(document.querySelector('style[data-b2b-hero-polish]'))return;const s=document.createElement('style');s.dataset.b2bHeroPolish='1';s.textContent=`
