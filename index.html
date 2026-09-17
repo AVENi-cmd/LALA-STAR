@@ -69,7 +69,15 @@
 
     /* Approved mobile touch-target refinement */
     .menu,.lang{min-width:44px;min-height:44px;} .map,.quote-options a{min-height:44px;display:inline-flex;align-items:center;justify-content:center;}
-</style>
+
+    /* FAQ accordion expansion and readable answers */
+    .faq-list details{height:auto !important;max-height:none !important;overflow:visible !important}
+    .faq-list details summary{display:list-item;cursor:pointer;padding:18px 22px;font-weight:700}
+    .faq-list details summary::-webkit-details-marker{display:inline-block}
+    .faq-list details summary::marker{font-size:1em}
+    .faq-list details .faq-answer{height:auto !important;max-height:none !important;overflow:visible !important;color:#555}
+    .faq-list details .faq-answer-inner{padding:14px 22px 18px;color:#555;line-height:1.8}
+  </style>
 </head>
 <body>
   <a class="skip-link" href="#main-content">تخطي إلى المحتوى الرئيسي</a>
