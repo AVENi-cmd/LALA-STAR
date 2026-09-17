@@ -78,7 +78,7 @@ function injectStyle(){
  document.head.appendChild(s)
 }
 function action(n,text){return `<span class="contact-actions"><a class="contact-action call" href="${tel(n)}">${labels[current].call}</a><a class="contact-action whatsapp" href="${wa(n,text)}" target="_blank" rel="noopener noreferrer">${labels[current].wa}</a></span>`}
-function contactRow(label,n,message){return `<div class="contact-row"><div><div class="contact-label">${label}</div>${num(display[n]||n)}</div>${action(numbers[n]||n,message)}</div>`}
+function contactRow(label,n,message,enLabel=label){return `<div class="contact-row"><div><div class="contact-label" data-ar="${label}" data-en="${enLabel}">${current==='ar'?label:enLabel}</div>${num(display[n]||n)}</div>${action(numbers[n]||n,message)}</div>`}
 function contactCard(title,rows){const d=document.createElement('div');d.className='contact-channel';d.innerHTML=`<h4>${title}</h4>`+rows.join('');return d}
 function activityBlock(rows){const d=document.createElement('div');d.className='activity-contacts';d.innerHTML=rows.map(r=>`<div class="activity-contact"><div class="activity-contact-main"><strong>${r.label}</strong><span class="activity-contact-number" dir="ltr" style="unicode-bidi:isolate;">${display[r.key]}</span></div>${action(numbers[r.key],r.message)}</div>`).join('');return d}
 function sweetsInquiry(){const d=document.createElement('div');d.className='sweets-inquiry';d.innerHTML=`<div class="contact-row"><div><div class="contact-label">${labels[current].sweets}</div>${num(display.sweets)}</div>${action(numbers.sweets,messages.sweets)}</div>`;return d}
@@ -101,24 +101,6 @@ function injectContacts(){
    ]));
    if(sweets)sweets.querySelector('.business-body')?.appendChild(sweetsInquiry());
  }
- const branches=document.querySelector('#branches,.branches');
- if(branches){
-   branches.querySelectorAll('.activity-contacts').forEach(x=>x.remove());
-   [...branches.querySelectorAll('.branch')].forEach(card=>{
-     const ahsa=/الأحساء|Al-Ahsa/i.test(card.textContent);const body=card.querySelector('.branch-body');if(!body)return;
-     const rows=ahsa?[
-       {label:`${labels[current].foodSales} — ${current==='ar'?'خط 1':'Line 1'}`,key:'foodAhsa1',message:messages.foodAhsa},
-       {label:`${labels[current].foodSales} — ${current==='ar'?'خط 2':'Line 2'}`,key:'foodAhsa2',message:messages.foodAhsa},
-       {label:labels[current].plasticSales,key:'plasticAhsa',message:messages.plasticAhsa},
-       {label:current==='ar'?'مبيعات الحلويات والمقرمشات':'Sweets & Snacks Sales',key:'sweets',message:messages.sweets}
-     ]:[
-       {label:labels[current].foodSales,key:'foodDammam',message:messages.foodDammam},
-       {label:labels[current].plasticSales,key:'plasticDammam',message:messages.plasticDammam}
-     ];
-     body.querySelectorAll('.map').forEach(x=>{x.style.marginTop='8px'});
-     body.appendChild(activityBlock(rows));
-   });
- }
  const contact=document.querySelector('#contact,.contact');
  if(contact){
    contact.querySelectorAll('.contact-channels').forEach(x=>x.remove());
@@ -127,13 +109,13 @@ function injectContacts(){
    const wrap=document.createElement('div');wrap.className='contact-channels';
    wrap.appendChild(contactCard(current==='ar'?'قسم مبيعات الدمام':'Dammam Sales',[
      contactRow(current==='ar'?'المواد الغذائية':'Wholesale Food Products','foodDammam',messages.foodDammam),
-     contactRow(current==='ar'?'المنتجات البلاستيكية':'Plastic Products','plasticDammam',messages.plasticDammam)
+     contactRow(current==='ar'?'المنتجات البلاستيكية':'Plastic Products','plasticDammam',messages.plasticDammam,'QIMAT AL-HAMAT PLASTICS & DETERGENTS')
    ]));
    wrap.appendChild(contactCard(current==='ar'?'قسم مبيعات الأحساء':'Al-Ahsa Sales',[
      contactRow(current==='ar'?'المواد الغذائية — خط 1':'Wholesale Food Products — Line 1','foodAhsa1',messages.foodAhsa),
      contactRow(current==='ar'?'المواد الغذائية — خط 2':'Wholesale Food Products — Line 2','foodAhsa2',messages.foodAhsa),
-     contactRow(current==='ar'?'المنتجات البلاستيكية':'Plastic Products','plasticAhsa',messages.plasticAhsa),
-     contactRow(current==='ar'?'الحلويات والمقرمشات':'Sweets & Snacks','sweets',messages.sweets)
+     contactRow(current==='ar'?'لألأة النجوم للبلاستيك والمنظفات':'LALA STAR PLASTICS & DETERGENTS - AL-AHSA','plasticAhsa',messages.plasticAhsa,'LALA STAR PLASTICS & DETERGENTS - AL-AHSA'),
+     contactRow(current==='ar'?'مذاق راقي للحلويات':'MATHAQ RAKI SWEETS - AL-AHSA','sweets',messages.sweets,'MATHAQ RAKI SWEETS - AL-AHSA')
    ]));
    wrap.appendChild(contactCard(labels[current].office,[contactRow(labels[current].office,'office','')]));
    container.appendChild(wrap);
