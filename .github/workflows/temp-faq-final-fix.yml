@@ -1,0 +1,65 @@
+name: temp FAQ final fix
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Apply guarded FAQ fix
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+          image_lines='\n'.join(line for line in s.splitlines() if '<img' in line or ('assets/' in line and ('.png' in line or '.webp' in line or '.jpg' in line or '.jpeg' in line)))
+          start=s.find('    /* FAQ accordion layout fix */')
+          if start < 0:
+              raise SystemExit('FAQ CSS block not found')
+          end=s.find('  </style>', start)
+          if end < 0:
+              raise SystemExit('style closing tag not found')
+          new='''    /* FAQ accordion — collapsed by default, expanded only when opened */
+    .faq-list{display:grid;gap:14px;width:100%;}
+    .faq-list details{display:block;height:auto !important;max-height:none !important;overflow:visible !important;margin:0 0 2px;padding:0;width:100%;box-sizing:border-box;}
+    .faq-list details summary{display:block;position:relative;cursor:pointer;padding:18px 52px 18px 22px;font-weight:700;line-height:1.7;list-style:none;box-sizing:border-box;}
+    .faq-list details summary::-webkit-details-marker{display:none;}
+    .faq-list details summary::marker{content:"";display:none;}
+    .faq-list details summary::after{content:"+";position:absolute;inset-inline-start:20px;top:50%;transform:translateY(-50%);font-family:Arial,sans-serif;font-size:24px;font-weight:400;line-height:1;color:#1e293b;}
+    .faq-list details[open] summary::after{content:"−";}
+    .faq-list details .faq-answer{display:none !important;height:auto !important;max-height:none !important;overflow:visible !important;opacity:0;visibility:hidden;color:#333 !important;margin:0;padding:0;box-sizing:border-box;}
+    .faq-list details[open] .faq-answer{display:block !important;height:auto !important;max-height:none !important;overflow:visible !important;opacity:1;visibility:visible;color:#333 !important;margin:0;}
+    .faq-list details .faq-answer-inner{display:block;padding:15px 22px 18px;color:#333 !important;line-height:1.8;margin:0;box-sizing:border-box;}
+    @media (max-width:850px){
+      .faq-list{gap:12px;}
+      .faq-list details summary{padding:16px 48px 16px 18px;overflow-wrap:anywhere;word-break:normal;}
+      .faq-list details .faq-answer-inner{padding:15px 18px 18px;overflow-wrap:anywhere;word-break:normal;}
+    }
+'''
+          s=s[:start]+new+s[end:]
+          if image_lines != '\n'.join(line for line in s.splitlines() if '<img' in line or ('assets/' in line and ('.png' in line or '.webp' in line or '.jpg' in line or '.jpeg' in line))):
+              raise SystemExit('IMAGE PATHS CHANGED — aborting')
+          p.write_text(s,encoding='utf-8')
+          PY
+          git diff --check
+          grep -Fq '.faq-list details .faq-answer{display:none !important' index.html
+          grep -Fq '.faq-list details[open] .faq-answer{display:block !important' index.html
+          grep -Fq 'summary::after{content:"+"' index.html
+          grep -Fq 'details[open] summary::after{content:"−"' index.html
+          grep -Fq 'height:auto !important' index.html
+          grep -Fq 'overflow:visible !important' index.html
+          grep -Fq 'opacity:0;visibility:hidden' index.html
+          grep -Fq 'opacity:1;visibility:visible' index.html
+      - name: Commit and push
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git diff --cached --quiet || git commit -m 'fix(ui): isolate FAQ collapsed and expanded states'
+          git push origin main
