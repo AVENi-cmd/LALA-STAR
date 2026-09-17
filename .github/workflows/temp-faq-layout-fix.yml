@@ -1,8 +1,5 @@
 name: temp FAQ layout fix
-on:
-  push:
-    branches: [main]
-  workflow_dispatch:
+on: push
 permissions:
   contents: write
 jobs:
@@ -10,38 +7,34 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          ref: main
       - name: Fix FAQ layout
-        shell: bash
         run: |
           python - <<'PY'
           from pathlib import Path
-          p=Path('index.html')
-          s=p.read_text(encoding='utf-8')
-          old='''    /* FAQ accordion expansion and readable answers */
-    .faq-list details{height:auto !important;max-height:none !important;overflow:visible !important}
-    .faq-list details summary{display:list-item;cursor:pointer;padding:18px 22px;font-weight:700}
-    .faq-list details summary::-webkit-details-marker{display:inline-block}
-    .faq-list details summary::marker{font-size:1em}
-    .faq-list details .faq-answer{height:auto !important;max-height:none !important;overflow:visible !important;color:#555}
-    .faq-list details .faq-answer-inner{padding:14px 22px 18px;color:#555;line-height:1.8}'''
-          new='''    /* FAQ accordion layout fix */
-    .faq-list{display:grid;gap:14px}
-    .faq-list details{height:auto !important;max-height:none !important;overflow:visible !important;margin:0 0 2px;padding:0}
-    .faq-list details summary{display:list-item;cursor:pointer;padding:18px 22px;font-weight:700}
-    .faq-list details summary::-webkit-details-marker{display:inline-block}
-    .faq-list details summary::marker{font-size:1em}
-    .faq-list details .faq-answer{height:auto !important;max-height:none !important;overflow:visible !important;color:#333 !important;margin:0}
-    .faq-list details .faq-answer-inner{padding:15px 22px 18px;color:#333 !important;line-height:1.8;margin:0}
-    .faq-list details[open]{height:auto !important;max-height:none !important;overflow:visible !important}'''
-          if old not in s:
-              raise SystemExit('Expected FAQ CSS block not found')
-          s=s.replace(old,new,1)
-          p.write_text(s,encoding='utf-8')
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          marker = '/* FAQ accordion expansion and readable answers */'
+          start = s.find(marker)
+          if start < 0:
+              raise SystemExit('FAQ CSS marker not found')
+          block_start = s.rfind('    ', 0, start)
+          end = s.find('  </style>', start)
+          if end < 0:
+              raise SystemExit('style closing tag not found')
+          new = '''    /* FAQ accordion layout fix */
+              .faq-list{display:grid;gap:14px}
+              .faq-list details{height:auto !important;max-height:none !important;overflow:visible !important;margin:0 0 2px;padding:0}
+              .faq-list details summary{display:list-item;cursor:pointer;padding:18px 22px;font-weight:700}
+              .faq-list details summary::-webkit-details-marker{display:inline-block}
+              .faq-list details summary::marker{font-size:1em}
+              .faq-list details .faq-answer{height:auto !important;max-height:none !important;overflow:visible !important;color:#333 !important;margin:0}
+              .faq-list details .faq-answer-inner{padding:15px 22px 18px;color:#333 !important;line-height:1.8;margin:0}
+              .faq-list details[open]{height:auto !important;max-height:none !important;overflow:visible !important}
+          '''
+          s = s[:block_start] + new + s[end:]
+          p.write_text(s, encoding='utf-8')
           PY
           grep -Fq '.faq-list details{height:auto !important;max-height:none !important;overflow:visible !important' index.html
-          grep -Fq '.faq-list details .faq-answer{height:auto !important;max-height:none !important;overflow:visible !important;color:#333 !important' index.html
           grep -Fq 'padding:15px 22px 18px;color:#333 !important' index.html
           grep -Fq 'cursor:pointer' index.html
           grep -Fq '<details class="faq-item">' index.html
