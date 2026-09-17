@@ -56,7 +56,57 @@
 .hero h1, .hero h2, .hero p, .hero span { color: #ffffff !important; }
 `;document.head.appendChild(s);};
   const setText=(el,value)=>{const textNodes=[...el.childNodes].filter(n=>n.nodeType===3 && n.nodeValue.trim());if(textNodes.length){textNodes[0].nodeValue=value;for(let i=1;i<textNodes.length;i++)textNodes[i].nodeValue='';}else if(el.children.length===0)el.textContent=value;};
-  const mark=()=>{style();businessImages();const lang=document.documentElement.lang==='en'?'en':'ar';document.documentElement.lang=lang;document.documentElement.dir=lang==='en'?'ltr':'rtl';const selectors='h1,h2,h3,h4,h5,h6,p,span,a,button,small,strong,label,li,.kicker';document.querySelectorAll(selectors).forEach(el=>{if(el.closest('script,style,noscript'))return;const raw=el.textContent.replace(/\s+/g,' ').trim();if(!raw || el.children.length>0 && ![...el.childNodes].some(n=>n.nodeType===3 && n.nodeValue.trim()))return;let ar=el.getAttribute('data-ar')||'';let en=el.getAttribute('data-en')||'';const sales=salesNames(el,raw);if(sales){[ar,en]=sales;}else if(aliases[raw]){ar=aliases[raw];en=pairs[ar]||en;}else if(pairs[raw]){ar=raw;en=pairs[raw];}else if(arByEn[raw]){en=raw;ar=arByEn[raw];}if(!ar||!en)return;el.setAttribute('data-ar',ar);el.setAttribute('data-en',en);el.setAttribute('data-i18n',el.getAttribute('data-i18n')||ar);setText(el,lang==='en'?en:ar);});document.querySelectorAll('a[href^="tel:"]').forEach(a=>{if(!a.textContent.trim())return;a.setAttribute('data-ar','اتصال');a.setAttribute('data-en','Call');setText(a,lang==='en'?'Call':'اتصال');});document.querySelectorAll('a[href*="wa.me"]').forEach(a=>{if(!a.textContent.trim())return;a.setAttribute('data-ar','واتساب');a.setAttribute('data-en','WhatsApp');setText(a,lang==='en'?'WhatsApp':'واتساب');});};
-  const boot=()=>{const original=window.setLanguage;if(typeof original==='function'){window.setLanguage=(lang)=>{original(lang);setTimeout(mark,0);};}const originalToggle=window.toggleLanguage;if(typeof originalToggle==='function'){window.toggleLanguage=()=>{originalToggle();setTimeout(mark,0);};}setTimeout(mark,0);const observer=new MutationObserver(()=>{clearTimeout(observer._timer);observer._timer=setTimeout(mark,30);});observer.observe(document.body,{subtree:true,childList:true,characterData:true});};
+  const translateNode=(node,lang)=>{
+    const raw=node.nodeValue.replace(/\s+/g,' ').trim();
+    if(!raw)return;
+    let ar=arByEn[raw]||raw;
+    let en=pairs[raw]||raw;
+    if(aliases[raw]){ar=aliases[raw];en=pairs[ar]||en;}
+    if(lang==='en' && pairs[raw]){node.nodeValue=node.nodeValue.replace(raw,en);}
+    else if(lang==='ar' && arByEn[raw]){node.nodeValue=node.nodeValue.replace(raw,ar);}
+  };
+  const mark=()=>{
+    style();
+    businessImages();
+    const lang=document.documentElement.lang==='en'?'en':'ar';
+    document.documentElement.lang=lang;
+    document.documentElement.dir=lang==='en'?'ltr':'rtl';
+    const selectors='h1,h2,h3,h4,h5,h6,p,span,a,button,small,strong,label,li,.kicker';
+    document.querySelectorAll(selectors).forEach(el=>{
+      if(el.closest('script,style,noscript'))return;
+      const raw=el.textContent.replace(/\s+/g,' ').trim();
+      if(!raw)return;
+      let ar=el.getAttribute('data-ar')||'';
+      let en=el.getAttribute('data-en')||'';
+      const sales=salesNames(el,raw);
+      if(sales){[ar,en]=sales;}
+      else if(aliases[raw]){ar=aliases[raw];en=pairs[ar]||en;}
+      else if(pairs[raw]){ar=raw;en=pairs[raw];}
+      else if(arByEn[raw]){en=raw;ar=arByEn[raw];}
+      if(ar&&en){el.setAttribute('data-ar',ar);el.setAttribute('data-en',en);el.setAttribute('data-i18n',el.getAttribute('data-i18n')||ar);setText(el,lang==='en'?en:ar);}
+    });
+    const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+    const nodes=[];
+    while(walker.nextNode())nodes.push(walker.currentNode);
+    nodes.forEach(node=>{
+      if(node.parentElement?.closest('script,style,noscript'))return;
+      const raw=node.nodeValue.replace(/\s+/g,' ').trim();
+      if(!raw)return;
+      if(lang==='en' && pairs[raw])node.nodeValue=node.nodeValue.replace(raw,pairs[raw]);
+      else if(lang==='ar' && arByEn[raw])node.nodeValue=node.nodeValue.replace(raw,arByEn[raw]);
+    });
+    document.querySelectorAll('a[href^="tel:"]').forEach(a=>{if(!a.textContent.trim())return;a.setAttribute('data-ar','اتصال');a.setAttribute('data-en','Call');setText(a,lang==='en'?'Call':'اتصال');});
+    document.querySelectorAll('a[href*="wa.me"]').forEach(a=>{if(!a.textContent.trim())return;a.setAttribute('data-ar','واتساب');a.setAttribute('data-en','WhatsApp');setText(a,lang==='en'?'WhatsApp':'واتساب');});
+  };
+  const boot=()=>{
+    const original=window.setLanguage;
+    if(typeof original==='function')window.setLanguage=(lang)=>{original(lang);setTimeout(mark,0);setTimeout(mark,120);};
+    const originalToggle=window.toggleLanguage;
+    if(typeof originalToggle==='function')window.toggleLanguage=()=>{originalToggle();setTimeout(mark,0);setTimeout(mark,120);};
+    setTimeout(mark,0);
+    setTimeout(mark,150);
+    const observer=new MutationObserver(()=>{clearTimeout(observer._timer);observer._timer=setTimeout(mark,30);});
+    observer.observe(document.body,{subtree:true,childList:true,characterData:true});
+  };
   const s=document.createElement('script');s.src=CORE;s.onload=boot;document.head.appendChild(s);
 })();
