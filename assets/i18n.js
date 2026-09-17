@@ -56,6 +56,15 @@
 .hero h1, .hero h2, .hero p, .hero span { color: #ffffff !important; }
 `;document.head.appendChild(s);};
   const setText=(el,value)=>{const textNodes=[...el.childNodes].filter(n=>n.nodeType===3 && n.nodeValue.trim());if(textNodes.length){textNodes[0].nodeValue=value;for(let i=1;i<textNodes.length;i++)textNodes[i].nodeValue='';}else if(el.children.length===0)el.textContent=value;};
+  const footerVerification=(lang)=>{
+    const footer=document.querySelector('.verification[data-i18n-footer="1"]');
+    if(!footer)return;
+    footer.querySelectorAll('[data-footer-ar][data-footer-en]').forEach(el=>{
+      el.textContent=lang==='en'?el.getAttribute('data-footer-en'):el.getAttribute('data-footer-ar');
+    });
+    const numbers=footer.querySelectorAll('.footer-number');
+    ['2252101993','310275588900003'].forEach((value,i)=>{if(numbers[i])numbers[i].textContent=value;});
+  };
   const translateNode=(node,lang)=>{
     const raw=node.nodeValue.replace(/\s+/g,' ').trim();
     if(!raw)return;
@@ -73,7 +82,7 @@
     document.documentElement.dir=lang==='en'?'ltr':'rtl';
     const selectors='h1,h2,h3,h4,h5,h6,p,span,a,button,small,strong,label,li,.kicker';
     document.querySelectorAll(selectors).forEach(el=>{
-      if(el.closest('script,style,noscript'))return;
+      if(el.closest('script,style,noscript,.verification[data-i18n-footer="1"]'))return;
       const raw=el.textContent.replace(/\s+/g,' ').trim();
       if(!raw)return;
       let ar=el.getAttribute('data-ar')||'';
@@ -89,13 +98,14 @@
     const nodes=[];
     while(walker.nextNode())nodes.push(walker.currentNode);
     nodes.forEach(node=>{
-      if(node.parentElement?.closest('script,style,noscript'))return;
+      if(node.parentElement?.closest('script,style,noscript,.verification[data-i18n-footer="1"]'))return;
       const raw=node.nodeValue.replace(/\s+/g,' ').trim();
       if(!raw)return;
       if(lang==='en' && pairs[raw])node.nodeValue=node.nodeValue.replace(raw,pairs[raw]);
       else if(lang==='ar' && arByEn[raw])node.nodeValue=node.nodeValue.replace(raw,arByEn[raw]);
     });
     document.querySelectorAll('a[href^="tel:"]').forEach(a=>{if(!a.textContent.trim())return;a.setAttribute('data-ar','اتصال');a.setAttribute('data-en','Call');setText(a,lang==='en'?'Call':'اتصال');});
+    footerVerification(lang);
     document.querySelectorAll('a[href*="wa.me"]').forEach(a=>{if(!a.textContent.trim())return;a.setAttribute('data-ar','واتساب');a.setAttribute('data-en','WhatsApp');setText(a,lang==='en'?'WhatsApp':'واتساب');});
   };
   const boot=()=>{
