@@ -1,0 +1,42 @@
+name: temp FAQ accordion fix
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Fix FAQ accordion CSS
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+          old='.faq-list{max-width:900px;margin:auto;display:grid;gap:12px}.faq-list details{margin:0;padding:0;border:1px solid rgba(15,30,54,.12);border-radius:12px;background:rgba(255,255,255,.65);overflow:hidden}.faq-list details summary{list-style:none;cursor:pointer}.faq-list details summary::-webkit-details-marker{display:none}.faq-list details[open] summary{border-bottom:1px solid rgba(15,30,54,.1)}.faq-list details .faq-answer-inner{padding:14px 22px 18px}'
+          new='.faq-list{max-width:900px;margin:auto;display:grid;gap:12px}.faq-list details{margin:0;padding:0;border:1px solid rgba(15,30,54,.12);border-radius:12px;background:rgba(255,255,255,.65);height:auto !important;max-height:none !important;overflow:visible !important}.faq-list details summary{display:list-item;cursor:pointer;padding:18px 22px;font-weight:700}.faq-list details summary::-webkit-details-marker{display:inline-block}.faq-list details summary::marker{font-size:1em}.faq-list details[open] summary{border-bottom:1px solid rgba(15,30,54,.1)}.faq-list details .faq-answer{height:auto !important;max-height:none !important;overflow:visible !important}.faq-list details .faq-answer-inner{padding:14px 22px 18px;color:#555;line-height:1.8}'
+          if old not in s:
+              raise SystemExit('Expected FAQ CSS block not found')
+          s=s.replace(old,new,1)
+          p.write_text(s,encoding='utf-8')
+          PY
+          grep -Fq '<details class="faq-item">' index.html
+          grep -Fq '<summary class="faq-question">' index.html
+          grep -Fq 'overflow:visible !important' index.html
+          grep -Fq 'height:auto !important' index.html
+          grep -Fq 'color:#555' index.html
+          grep -Fq 'cursor:pointer' index.html
+          git diff --check
+      - name: Commit and push
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git diff --cached --quiet || git commit -m 'fix(ui): make FAQ accordion expandable'
+          git push origin main
