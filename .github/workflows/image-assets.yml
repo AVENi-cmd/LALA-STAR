@@ -41,7 +41,7 @@ jobs:
           sweets = 'assets/optimized/sweets-snacks-960.webp?v=20260917-1'
 
           if '/* Approved warehouse Hero image */' not in html:
-              hero_css = f'''\n    /* Approved warehouse Hero image */\n    .hero, #hero, .hero-section {{\n      background-image: linear-gradient(135deg, rgba(11,21,36,.72) 0%, rgba(17,34,56,.64) 50%, rgba(8,15,26,.78) 100%), url("{warehouse}") !important;\n      background-size: cover !important;\n      background-position: center !important;\n      background-repeat: no-repeat !important;\n    }}\n'''
+              hero_css = f'''\n    /* Approved warehouse Hero image */\n    .hero, #hero, .hero-section {{\n      background-image: linear-gradient(135deg, rgba(11,21,36,.72) 0%, rgba(17,34,56,.64) 50%, rgba(8,15,26,.78) 100%), url(\"{warehouse}\") !important;\n      background-size: cover !important;\n      background-position: center !important;\n      background-repeat: no-repeat !important;\n    }}\n'''
               html = html.replace('</style>', hero_css + '  </style>', 1)
 
           html = html.replace(
@@ -101,6 +101,68 @@ jobs:
 
           p.write_text(html, encoding='utf-8')
 
+      - name: Remove duplicate branch contact rows
+        shell: python
+        run: |
+          from pathlib import Path
+          import re
+
+          p = Path('index.html')
+          html = p.read_text(encoding='utf-8')
+          tag_re = re.compile(r'</?div\b[^>]*>', re.I)
+          phone_re = re.compile(r'(?:05|٠٥)\s*[0-9٠-٩](?:[\s-]*[0-9٠-٩]){7,10}|(?:\+966|٩٦٦)\s*[0-9٠-٩](?:[\s-]*[0-9٠-٩]){7,10}', re.I)
+          contact_re = re.compile(r'واتساب|اتصال|مبيعات', re.I)
+
+          def matching_div_end(text, start):
+              depth = 1
+              for t in tag_re.finditer(text, start):
+                  if t.group(0).startswith('</'):
+                      depth -= 1
+                      if depth == 0:
+                          return t.end()
+                  else:
+                      depth += 1
+              return None
+
+          def strip_branch_contacts(text):
+              cursor = 0
+              result = []
+              branch_pat = re.compile(r'<div\b[^>]*class=[\"\'][^\"\']*\bbranch-body\b[^\"\']*[\"\'][^>]*>', re.I)
+              for m in list(branch_pat.finditer(text)):
+                  if m.start() < cursor:
+                      continue
+                  end = matching_div_end(text, m.end())
+                  if end is None:
+                      continue
+                  inner_end = end - len('</div>')
+                  inner = text[m.end():inner_end]
+                  changed = True
+                  while changed:
+                      changed = False
+                      for child in list(re.finditer(r'<div\b[^>]*>', inner, re.I)):
+                          child_end = matching_div_end(inner, child.end())
+                          if child_end is None:
+                              continue
+                          child_html = inner[child.start():child_end]
+                          if phone_re.search(child_html) or contact_re.search(child_html):
+                              inner = inner[:child.start()] + inner[child_end:]
+                              changed = True
+                              break
+                  inner = re.sub(r'<a\b[^>]*>.*?</a>', lambda a: '' if contact_re.search(a.group(0)) else a.group(0), inner, flags=re.I|re.S)
+                  result.append(text[cursor:m.end()])
+                  result.append(inner)
+                  result.append('</div>')
+                  cursor = end
+              result.append(text[cursor:])
+              return ''.join(result)
+
+          updated = strip_branch_contacts(html)
+          if updated != html:
+              p.write_text(updated, encoding='utf-8')
+              print('Removed duplicate contact rows from Locations branch cards.')
+          else:
+              print('No duplicate branch contact rows found.')
+
       - name: Validate local image references and binary signatures
         run: |
           python - <<'PY'
@@ -157,8 +219,8 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add index.html
           if git diff --cached --quiet; then
-            echo 'No image wiring changes required.'
+            echo 'No image wiring or branch contact changes required.'
             exit 0
           fi
-          git commit -m 'fix(images): wire plastic and sweets cards'
+          git commit -m 'fix(locations): remove duplicate contact rows'
           git push origin main
