@@ -1,5 +1,7 @@
 name: temp phone image fix
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
