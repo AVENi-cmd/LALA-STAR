@@ -195,6 +195,7 @@
       <a class="brand" href="#home" aria-label="شركة لألأة النجوم التجارية">
         <img loading="eager" fetchpriority="high" src="assets/lala-star-logo.png" alt="شركة لألأة النجوم التجارية" onerror="this.style.display='none'">
       </a>
+      <button class="menu" id="menuBtn" type="button" aria-label="فتح القائمة" aria-expanded="false">☰</button>
       <nav class="links" id="site-nav">
         <a href="#about" data-i18n="nav.about">من نحن</a>
         <a href="#benefits">مزايا التوريد</a>
@@ -700,7 +701,7 @@
     </svg>
   </a>
 
-  <!-- سكربت فلترة الكتالوج والترجمة السلسة -->
+  <!-- سكربت فلترة الكتالوج والترجمة والقائمة -->
   <script>
     function filterCatalog(category, clickedBtn) {
       const cards = document.querySelectorAll('.prod-card');
@@ -718,13 +719,254 @@
       });
     }
 
+    const i18n = {
+      "من نحن":"About Us",
+      "مزايا التوريد":"Supply Advantages",
+      "أنشطتنا":"Our Activities",
+      "كتالوج الأصناف":"Product Catalog",
+      "الفروع والمستودعات":"Branches & Warehouses",
+      "الأسئلة الشائعة":"FAQ",
+      "الكتالوج والطلب":"Catalog & Order",
+      "حلول التوريد الشاملة لقطاع الأعمال والشركات":"Comprehensive Supply Solutions for Businesses & Companies",
+      "موردكم المعتمد للمواد الغذائية والبلاستيك ومستلزمات الحلويات":"Your Trusted Supplier of Food Products, Plastics & Confectionery Supplies",
+      "نوفر لسلاسل المطاعم، الفنادق، المخابز، وشركات الإعاشة في المنطقة الشرقية (الدمام والأحساء) أعلى معايير الجودة وبأسعار جملة تنافسية منذ 1993م.":"We supply restaurant chains, hotels, bakeries, and catering companies across the Eastern Province (Dammam and Al Ahsa) with high quality standards and competitive wholesale prices since 1993.",
+      "عرض كتالوج الأصناف":"View Product Catalog",
+      "فروع ومستودعات التوزيع":"Distribution Branches & Warehouses",
+      "عاماً من الخبرة في التوريد":"Years of Supply Experience",
+      "صنف معتمد بالمستودعات":"Approved Products in Warehouses",
+      "فرعان":"Two Branches",
+      "مستودعات الدمام والأحساء":"Dammam & Al Ahsa Warehouses",
+      "التزام بمواعيد التوصيل":"Commitment to Delivery Schedules",
+      "طلب تسعيرات فورية":"Instant Quote Requests",
+      "كتالوج أصناف التوريد والجملة":"Wholesale Supply Product Catalog",
+      "اختر التصنيف واطلب تسعيرتك للفرع الأقرب لنشاطك التجاري بكل سهولة وسرعة.":"Choose a category and request a quote from the branch closest to your business quickly and easily.",
+      "الكل":"All",
+      "مواد غذائية وتموين":"Food & Catering Supplies",
+      "حلويات ومخابز":"Confectionery & Bakery",
+      "بلاستيك وتغليف":"Plastic & Packaging",
+      "مجمدات وإعاشة":"Frozen & Catering",
+      "منظفات ومستهلكات":"Cleaning & Consumables",
+      "أغذية وتموين":"Food & Catering",
+      "أرز بسمتي ومزة درجة أولى":"Premium Basmati & Mazza Rice",
+      "توريد شوالات 40 كجم و10 كجم مخصصة للمطابخ والمطاعم الكبرى والإعاشة.":"Supply of 40 kg and 10 kg sacks for large kitchens, restaurants, and catering operations.",
+      "التعبئة: كيس 40 كجم / طبلية جملة":"Packaging: 40 kg bag / Wholesale pallet",
+      "فرع الدمام":"Dammam Branch",
+      "فرع الأحساء":"Al Ahsa Branch",
+      "زيوت قلي وطبخ جملة":"Wholesale Cooking & Frying Oils",
+      "زيوت نباتية وزيت دوار الشمس بعبوات اقتصادية للمطاعم ومطابخ الولائم.":"Vegetable and sunflower oils in economical packages for restaurants and banquet kitchens.",
+      "التعبئة: كرتون (4×1.5 لتر) / جركل 17 لتر":"Packaging: Carton (4×1.5 L) / 17 L jerrycan",
+      "شوكولاتة خام وحشوات كيك":"Raw Chocolate & Cake Fillings",
+      "شوكولاتة خام، حشوات مكسرات وفواكه، وزبدة فستق ولوتس للمخابز ومحلات الحلا.":"Raw chocolate, nut and fruit fillings, and pistachio and Lotus spreads for bakeries and confectionery shops.",
+      "التعبئة: سطل 5 - 10 كجم / كراتين جملة":"Packaging: 5–10 kg bucket / Wholesale cartons",
+      "مذاق راقي للحلويات والمخابز":"Mazaq Raqi for Confectionery & Bakeries",
+      "مكسرات، سكر ناعم، ودقيق فاخر":"Nuts, Powdered Sugar & Premium Flour",
+      "لوز شرائح، فستق حلبي، سكر مطحون للمخابز، ونشا ذرة بكميات تجارية لتصنيع الحلويات.":"Sliced almonds, pistachios, powdered sugar for bakeries, and corn starch in commercial quantities for confectionery production.",
+      "التعبئة: كيس 25 كجم / كرتون 10 كجم":"Packaging: 25 kg bag / 10 kg carton",
+      "علب مايكرويف وقصدير سفري":"Microwave Containers & Takeaway Foil",
+      "تشكيلة علب حفظ حرارية سوداء وشفافة، وصحون قصدير مخصصة للمطاعم ومحلات المأكولات.":"A range of black and clear thermal food containers and foil trays for restaurants and food outlets.",
+      "التعبئة: كرتون 250 - 500 حبة":"Packaging: Carton of 250–500 pieces",
+      "قمة الهامات - الدمام":"Qimmah Al Hammat - Dammam",
+      "لألأة النجوم - الأحساء":"LALA STAR - Al Ahsa",
+      "أكياس ورقية وبلاستيك وسفرة":"Paper & Plastic Bags and Table Covers",
+      "أكياس تسوق سميكة، رولات سفرة طعام اقتصادية، ومستلزمات تغليف الوجبات السريعة.":"Heavy-duty shopping bags, economical food table-cover rolls, and fast-food packaging supplies.",
+      "التعبئة: كرتون جملة متعدد المقاسات":"Packaging: Wholesale cartons in multiple sizes",
+      "دواجن مجمدة وبطاطس نصف مقلية":"Frozen Poultry & Par-Fried Potatoes",
+      "دجاج مجمد كامل، صدور فيليه، وبطاطس أصابع سريعة التحضير لقطاع المطاعم.":"Whole frozen chicken, fillets, and quick-preparation French fries for restaurants.",
+      "التعبئة: كرتون 10 كجم":"Packaging: 10 kg carton",
+      "صابون ومطهرات جالونات 5L":"5L Soap & Disinfectant Containers",
+      "سائل غسيل صحون مركز، صابون يدين، ومطهرات أرضيات برائحة الصنوبر للمنشآت.":"Concentrated dishwashing liquid, hand soap, and pine-scented floor disinfectants for businesses.",
+      "التعبئة: كرتون (4 × 5 لتر)":"Packaging: Carton (4 × 5 L)",
+      "قمة الهامات - الدمام":"Qimmah Al Hammat - Dammam",
+      "لألأة النجوم - الأحساء":"LALA STAR - Al Ahsa",
+      "شركة لها مسار واضح":"A Company with a Clear Path",
+      "تأسست شركة لألأة النجوم التجارية في الدمام عام 1993م في مجال بيع المواد الغذائية بالجملة، ثم توسعت أعمالها لتشمل أنشطة تجارية متخصصة تحت مظلة الشركة.":"LALA STAR Trading Company was established in Dammam in 1993 in wholesale food trading, then expanded into specialized commercial activities under the company.",
+      "مستودع لألأة النجوم التجارية للجملة":"LALA STAR wholesale warehouse",
+      "تجارة وتوزيع بالجملة":"Wholesale Trade & Distribution",
+      "من الدمام بدأت الرحلة":"The Journey Began in Dammam",
+      "الدمام هي الفرع الرئيسي للشركة، وفي عام 2018م تم تدشين فرع الأحساء، ثم امتدت العمليات لتشمل قطاعات التغليف والبلاستيك والحلويات عبر مستودعات متخصصة.":"Dammam is the company's main branch. In 2018, the Al Ahsa branch was launched, followed by expansion into packaging, plastics, and confectionery through specialized warehouses.",
+      "بداية الشركة — الدمام":"Company Launch — Dammam",
+      "انطلاق النشاط المركزي في استيراد وتوريد المواد الغذائية بالجملة.":"Launch of the central wholesale food import and supply operation.",
+      "بعد التوسع":"After Expansion",
+      "أنشطة البلاستيك والحلويات":"Plastic & Confectionery Activities",
+      "تأسيس أذرع متخصصة (قمة الهامات للبلاستيك ومذاق راقي للحلويات) لخدمة مختلف القطاعات.":"Establishment of specialized arms (Qimmah Al Hammat for Plastics and Mazaq Raqi for Confectionery) to serve different sectors.",
+      "افتتاح فرع الأحساء":"Al Ahsa Branch Opening",
+      "توسيع نطاق التوزيع الميداني بافتتاح فرع ومستودعات الأحساء وتغطية كامل المحافظة.":"Expanding field distribution by opening the Al Ahsa branch and warehouses to cover the entire governorate.",
+      "مزايا التوريد والتعامل معنا":"Supply & Partnership Advantages",
+      "خدمات وتجربة توريد مصممة لتسهيل التعامل التجاري واللوجستي مع المنشآت في المنطقة الشرقية.":"Supply services and experience designed to simplify commercial and logistics operations for businesses in the Eastern Province.",
+      "أسعار جملة تنافسية":"Competitive Wholesale Prices",
+      "حلول تسعير موجهة للمشتريات الكبرى والكميات التجارية المباشرة.":"Pricing solutions tailored to major purchases and direct commercial quantities.",
+      "أسطول توزيع يغطي الشرقية":"Distribution Fleet Covering the Eastern Province",
+      "شاحنات نقل مجهزة تضمن التوصيل السريع والدوري لكافة العملاء.":"Equipped transport trucks ensuring fast, regular delivery to all customers.",
+      "سلامة التخزين وجودة الأصناف":"Storage Safety & Product Quality",
+      "التزام بأعلى معايير التخزين المبرد والجاف المعتمدة صحياً وتجارياً.":"Compliance with the highest approved standards for chilled and dry storage.",
+      "خبرة تجارية راسخة منذ 1993":"Established Commercial Experience Since 1993",
+      "أكثر من 30 عاماً من الثقة والاستقرار المالي والتجاري في أسواق المملكة.":"More than 30 years of trust and commercial stability in the Saudi market.",
+      "قطاعات وأنشطة التوريد":"Supply Sectors & Activities",
+      "أنشطة مستقلة ومتخصصة تحت مظلة الشركة تخدم احتياجات قطاع الأعمال باحترافية كاملة.":"Independent, specialized activities under the company umbrella serving business-sector needs professionally.",
+      "المواد الغذائية والتموين":"Food & Catering Supplies",
+      "النشاط الأساسي للتوريد الغذائي الشامل والمطابخ الكبرى.":"Core activity for comprehensive food supply and large-scale kitchens.",
+      "البلاستيك ومواد التغليف":"Plastics & Packaging Materials",
+      "قمة الهامات ولألأة النجوم لحلول التعبئة ومستلزمات السفري.":"Qimmah Al Hammat and LALA STAR for packaging solutions and takeaway supplies.",
+      "مستلزمات الحلويات والمخابز":"Confectionery & Bakery Supplies",
+      "مذاق راقي للمواد الخام، الشوكولاتة، حشوات الكيك والمكسرات.":"Mazaq Raqi for raw materials, chocolate, cake fillings, and nuts.",
+      "مستودع التوريد المركزي":"Central Supply Warehouse",
+      "الدمام · الأحساء":"Dammam · Al Ahsa",
+      "الشركاء والقطاعات المستهدفة":"Partners & Target Sectors",
+      "نخدم مجموعة متكاملة من المنشآت التجارية التي تعتمد على انتظام سلاسل الإمداد بالجملة.":"We serve a broad range of commercial establishments that rely on consistent wholesale supply chains.",
+      "متاجر التجزئة والتموينات":"Retail Stores & Groceries",
+      "احتياجات إعادة التوريد اليومية ومخزون السلع الاستهلاكية.":"Daily replenishment needs and consumer-goods inventory.",
+      "المطاعم والمطابخ المركزية":"Restaurants & Central Kitchens",
+      "أصناف وكميات مخصصة للتشغيل التجاري المستمر ومطابخ الولائم.":"Products and quantities tailored for continuous commercial operations and banquet kitchens.",
+      "شركات الإعاشة والفنادق":"Catering Companies & Hotels",
+      "حلول إمداد موثوقة ومجدولة تضمن استمرارية خدمات الإطعام.":"Reliable, scheduled supply solutions ensuring continuity of food-service operations.",
+      "المخابز ومحلات الحلويات":"Bakeries & Confectionery Shops",
+      "مواد خام عالية الجودة، شوكولاتة بلجيكية وحشوات تصنيع متخصصة.":"High-quality raw materials, Belgian chocolate, and specialized production fillings.",
+      "مستودعات مركزية بسعة تخزين ضخمة":"Central warehouses with large storage capacity",
+      "أسطول نقل مجهز بنظام التبريد والتجميد":"Transport fleet equipped with refrigeration and freezing systems",
+      "مطابقة كاملة لاشتراطات هيئة الغذاء والدواء":"Full compliance with Saudi Food and Drug Authority requirements",
+      "شبكة التوزيع الميداني":"Field Distribution Network",
+      "الفروع ومستودعات التوريد":"Branches & Supply Warehouses",
+      "مستودعات مجهزة لتلبية طلبيات الجملة بسرعة في كافة أنحاء المنطقة الشرقية.":"Equipped warehouses for fast wholesale order fulfillment across the Eastern Province.",
+      "مواد غذائية":"Food Products",
+      "مستودعات الدمام المركزية (أغذية)":"Dammam Central Warehouses (Food)",
+      "شارع 42، مقابل سوق الخضار المركزي، الدمام.":"Street 42, opposite the Central Vegetable Market, Dammam.",
+      "طلب تسعيرة وتواصل":"Request a Quote & Contact",
+      "مستودعات الأحساء (أغذية)":"Al Ahsa Warehouses (Food)",
+      "الهفوف - حي الجامعة، شارع العروبة.":"Al Hofuf - Al Jameah District, Al Orouba Street.",
+      "بلاستيك وتغليف":"Plastic & Packaging",
+      "قمة الهامات للبلاستيك (الدمام)":"Qimmah Al Hammat Plastics (Dammam)",
+      "الدمام - شارع الأمير نايف، مقابل سوق الخضار.":"Dammam - Prince Nayef Street, opposite the Vegetable Market.",
+      "لألأة النجوم للبلاستيك (الأحساء)":"LALA STAR Plastics (Al Ahsa)",
+      "المبرز - طريق الملك عبدالله، بجانب البلدية.":"Al Mubarraz - King Abdullah Road, next to the municipality.",
+      "حلويات ومخابز":"Confectionery & Bakery",
+      "مذاق راقي للحلويات والمخابز":"Mazaq Raqi for Confectionery & Bakeries",
+      "توريد خام للمخابز، الشوكولاتة وحشوات الكيك.":"Raw supplies for bakeries, chocolate, and cake fillings.",
+      "الأسئلة المتكررة":"Frequently Asked Questions",
+      "إجابات مباشرة على أكثر استفسارات العملاء والشركات شيوعاً.":"Direct answers to the most common customer and business questions.",
+      "هل يتوفر أسطول توصيل منتظم للدمام والأحساء وضواحيها؟":"Is regular delivery available for Dammam, Al Ahsa, and their surrounding areas?",
+      "نعم، نمتلك أسطولاً مجهزاً ومبرداً يغطي كافة الأنشطة والمطاعم والمتاجر في الدمام، الخبر، الظهران، والأحساء بشكل يومي ودوري.":"Yes. We have an equipped, refrigerated fleet serving businesses, restaurants, and stores in Dammam, Khobar, Dhahran, and Al Ahsa on a daily and regular basis.",
+      "كيف يمكن للمنشآت طلب تسعيرة فورية لكميات الجملة؟":"How can businesses request an instant quote for wholesale quantities?",
+      "يمكنكم تصفح الكتالوج والضغط مباشرة على الفرع المطلوب عبر الواتساب لتصل رسالة الصنف لمدير المبيعات، أو التواصل المباشر مع الإدارة للحصول على عروض أسعار رسمية.":"Browse the catalog and contact the required branch directly via WhatsApp so the product request reaches the sales manager, or contact management for official quotations.",
+      "هل تقدمون فواتير ضريبية إلكترونية معتمدة للشركات؟":"Do you provide approved electronic tax invoices for businesses?",
+      "نعم، جميع معاملاتنا مسجلة وموثقة بفواتير ضريبية نظامية متوافقة بالكامل مع هيئة الزكاة والضريبة والجمارك.":"Yes. All transactions are registered and documented with compliant tax invoices in accordance with the Zakat, Tax and Customs Authority.",
+      "ما هي آلية التوريد والتعاقدات الآجلة للمطاعم والفنادق؟":"What is the supply and credit-contract process for restaurants and hotels?",
+      "نوفر تسهيلات دفع وحسابات آجلة للجهات والشركات المعتمدة بعد دراسة حجم السحب والتعامل الأولي.":"We offer payment facilities and credit accounts to approved entities and companies after reviewing purchase volume and initial dealings.",
+      "شركة لألأة النجوم التجارية":"LALA STAR Trading Company",
+      "شركة سعودية رائدة في استيراد وتوزيع المواد الغذائية والبلاستيك ومستلزمات الحلويات والمخابز بالجملة لقطاع الأعمال منذ 1993م.":"A leading Saudi company importing and distributing food products, plastics, and confectionery and bakery supplies wholesale to businesses since 1993.",
+      "البيانات الرسمية":"Official Information",
+      "السجل التجاري:":"Commercial Registration:",
+      "الرقم الضريبي:":"VAT Number:",
+      "المركز الرئيسي:":"Head Office:",
+      "المنطقة الشرقية - المملكة العربية السعودية":"Eastern Province - Saudi Arabia",
+      "خدمة العملاء والتوريد":"Customer Service & Supply",
+      "هاتف الإدارة:":"Management Phone:",
+      "أوقات العمل:":"Working Hours:",
+      "السبت - الخميس: 7:00 ص - 9:00 م":"Saturday - Thursday: 7:00 AM - 9:00 PM",
+      "جميع الحقوق محفوظة © 2026 شركة لألأة النجوم التجارية | LALA STAR TRADING CO.":"All rights reserved © 2026 LALA STAR Trading Company | LALA STAR TRADING CO.",
+      "فتح القائمة":"Open menu",
+      "إغلاق القائمة":"Close menu"
+    };
+
+    const reverseI18n = Object.fromEntries(Object.entries(i18n).map(([ar, en]) => [en, ar]));
     let isEnglish = false;
+
+    function translateText(lang) {
+      const dictionary = lang === 'en' ? i18n : reverseI18n;
+      const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+      const nodes = [];
+      while (walker.nextNode()) nodes.push(walker.currentNode);
+
+      nodes.forEach(node => {
+        const raw = node.nodeValue;
+        const trimmed = raw.trim();
+        if (!trimmed || !dictionary[trimmed]) return;
+        node.nodeValue = raw.replace(trimmed, dictionary[trimmed]);
+      });
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (i18n[key]) el.textContent = lang === 'en' ? i18n[key] : key;
+      });
+
+      document.querySelectorAll('[alt]').forEach(el => {
+        const value = el.getAttribute('alt');
+        if (dictionary[value]) el.setAttribute('alt', dictionary[value]);
+      });
+
+      document.querySelectorAll('[aria-label]').forEach(el => {
+        const value = el.getAttribute('aria-label');
+        if (dictionary[value]) el.setAttribute('aria-label', dictionary[value]);
+      });
+
+      document.title = lang === 'en'
+        ? 'LALA STAR Trading Company | LALA STAR TRADING CO.'
+        : 'شركة لألأة النجوم التجارية | LALA STAR TRADING CO.';
+    }
+
     function toggleLang() {
       isEnglish = !isEnglish;
       document.documentElement.lang = isEnglish ? 'en' : 'ar';
       document.documentElement.dir = isEnglish ? 'ltr' : 'rtl';
       document.getElementById('langBtn').innerText = isEnglish ? 'عربي' : 'EN';
+      translateText(isEnglish ? 'en' : 'ar');
     }
+
+    const menuBtn = document.getElementById('menuBtn');
+    const siteNav = document.getElementById('site-nav');
+    let menuOpen = false;
+
+    function prepareMobileMenu() {
+      if (!menuBtn || !siteNav) return;
+
+      if (window.innerWidth <= 850) {
+        menuBtn.style.display = 'block';
+        siteNav.style.position = 'absolute';
+        siteNav.style.top = '70px';
+        siteNav.style.left = '0';
+        siteNav.style.right = '0';
+        siteNav.style.background = '#ffffff';
+        siteNav.style.flexDirection = 'column';
+        siteNav.style.alignItems = 'stretch';
+        siteNav.style.gap = '0';
+        siteNav.style.padding = '8px 18px';
+        siteNav.style.borderBottom = '1px solid var(--line)';
+        siteNav.style.boxShadow = '0 10px 25px -5px rgba(15,30,54,.12)';
+        siteNav.style.overflow = 'hidden';
+        siteNav.style.maxHeight = menuOpen ? '500px' : '0';
+        siteNav.style.opacity = menuOpen ? '1' : '0';
+        siteNav.style.transition = 'max-height .25s ease, opacity .2s ease';
+        siteNav.style.pointerEvents = menuOpen ? 'auto' : 'none';
+      } else {
+        menuOpen = false;
+        menuBtn.style.display = '';
+        siteNav.style.cssText = '';
+        menuBtn.setAttribute('aria-expanded', 'false');
+        menuBtn.setAttribute('aria-label', isEnglish ? 'Open menu' : 'فتح القائمة');
+      }
+    }
+
+    function toggleMenu() {
+      if (!siteNav || !menuBtn || window.innerWidth > 850) return;
+      menuOpen = !menuOpen;
+      siteNav.style.maxHeight = menuOpen ? '500px' : '0';
+      siteNav.style.opacity = menuOpen ? '1' : '0';
+      siteNav.style.pointerEvents = menuOpen ? 'auto' : 'none';
+      menuBtn.setAttribute('aria-expanded', String(menuOpen));
+      menuBtn.setAttribute('aria-label', menuOpen
+        ? (isEnglish ? 'Close menu' : 'إغلاق القائمة')
+        : (isEnglish ? 'Open menu' : 'فتح القائمة'));
+    }
+
+    if (menuBtn) menuBtn.addEventListener('click', toggleMenu);
+
+    document.querySelectorAll('#site-nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 850 && menuOpen) toggleMenu();
+      });
+    });
+
+    window.addEventListener('resize', prepareMobileMenu);
+    prepareMobileMenu();
   </script>
 </body>
 </html>
