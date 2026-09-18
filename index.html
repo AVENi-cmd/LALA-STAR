@@ -10,12 +10,12 @@
   <meta name="format-detection" content="telephone=no">
   <meta name="theme-color" content="#b91c1c">
   <link rel="canonical" href="https://aveni-cmd.github.io/LALA-STAR/">
-  <meta name="description" content="شركة لألأة النجوم التجارية — تجارة المواد الغذائية بالجملة منذ 1993.">
+  <meta name="description" content="شركة لألأة النجوم التجارية — تجارة المواد الغذائية والبلاستيك والحلويات بالجملة منذ 1993م في الدمام والأحساء.">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="ar_SA">
   <meta property="og:site_name" content="شركة لألأة النجوم التجارية | LALA STAR TRADING CO.">
-  <meta property="og:title" content="شركة لألأة النجوم التجارية | LALA STAR TRADING CO.">
-  <meta property="og:description" content="شركة لألأة النجوم التجارية — بيع المواد الغذائية بالجملة منذ 1993، مع أنشطة البلاستيك والحلويات والوجبات الخفيفة في الدمام والأحساء.">
+  <meta property="og:title" content="شركة لألأة النجوم التجارية | توريد مواد غذائية وبلاستيك وحلويات بالجملة">
+  <meta property="og:description" content="شريك التوريد المعتمد للتموينات، المطاعم، والمقاهي في الدمام والأحساء منذ 1993م، مع خطوط إمداد تغطي أكثر من 5000 صنف.">
   <meta property="og:url" content="https://aveni-cmd.github.io/LALA-STAR/">
   <title>شركة لألأة النجوم التجارية | LALA STAR TRADING CO.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -32,7 +32,7 @@
       --line: #dbe3ec;
       --bg: #f8fafc;
       --max: 1180px;
-      --card: rgba(255,255,255,.9);
+      --card: rgba(255,255,255,.95);
       --shadow: 0 10px 25px -5px rgba(15,30,54,.06);
     }
     * { box-sizing: border-box; }
@@ -43,23 +43,23 @@
     .container { width: min(calc(100% - 36px), var(--max)); margin: auto; }
 
     /* Topbar */
-    .topbar { height: 75px; background: rgba(255,255,255,.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 1000; }
-    .nav { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 15px; }
-    .brand img { width: 180px; height: 55px; object-fit: contain; }
+    .topbar { height: 75px; background: rgba(255,255,255,.96); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 1000; }
+    .nav { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 15px; position: relative; }
+    .brand img { width: 175px; height: 52px; object-fit: contain; }
     .links { display: flex; gap: 22px; align-items: center; font-size: 13px; font-weight: 700; }
     .links a:hover { color: var(--red); }
     .nav-btns { display: flex; align-items: center; gap: 8px; }
     .lang { border: 1px solid rgba(15,30,54,.15); background: #ffffff; color: var(--navy); border-radius: 6px; padding: 6px 10px; font-weight: 700; font-size: 11px; cursor: pointer; }
     .top-cta { background: var(--red); color: #ffffff !important; padding: 7px 12px; border-radius: 6px; font-weight: 700; font-size: 12px; white-space: nowrap; line-height: 1.2; }
     .top-cta:hover { background: var(--red-hover); }
-    .menu { display: none; border: 0; background: none; font-size: 24px; color: var(--navy); cursor: pointer; }
+    .menu-btn { display: none; border: 0; background: none; font-size: 24px; color: var(--navy); cursor: pointer; padding: 4px; }
 
     /* Hero */
     .hero { min-height: 580px; display: flex; align-items: center; position: relative; background: linear-gradient(135deg, rgba(11,21,36,.82) 0%, rgba(17,34,56,.74) 50%, rgba(8,15,26,.88) 100%), url("assets/optimized/wholesale-warehouse-ahsa-1920.webp?v=20260917-5") center/cover no-repeat !important; color: #ffffff; text-align: center; }
     .hero-inner { position: relative; z-index: 2; width: min(calc(100% - 36px), var(--max)); margin: auto; padding: 70px 0; }
     .hero-badge { display: inline-block; background: var(--red); color: #ffffff; font-size: 13px; font-weight: 800; padding: 6px 18px; border-radius: 20px; margin-bottom: 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
-    .hero h1 { color: #ffffff; font-size: clamp(26px, 4.5vw, 48px); line-height: 1.25; margin: 0 auto 16px; max-width: 850px; font-weight: 800; }
-    .hero .lead { color: #e2e8f0; font-size: clamp(14px, 2vw, 17px); max-width: 700px; margin: 0 auto 28px; }
+    .hero h1 { color: #ffffff; font-size: clamp(25px, 4.2vw, 46px); line-height: 1.25; margin: 0 auto 16px; max-width: 860px; font-weight: 800; }
+    .hero .lead { color: #e2e8f0; font-size: clamp(14px, 2vw, 16.5px); max-width: 780px; margin: 0 auto 28px; line-height: 1.8; }
     .actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
     .btn { min-height: 44px; padding: 0 20px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; }
     .btn.primary { background: var(--red); color: #ffffff; }
@@ -79,7 +79,7 @@
     .head { display: flex; justify-content: space-between; gap: 30px; align-items: flex-end; margin-bottom: 35px; }
     .kicker { font-size: 11px; letter-spacing: .15em; color: var(--red); font-weight: 800; text-transform: uppercase; }
     .section h2 { font-size: clamp(24px, 3.5vw, 36px); line-height: 1.25; color: var(--navy); margin: 6px 0 0; font-weight: 800; }
-    .head p { max-width: 500px; color: var(--muted); margin: 0; font-size: 14px; }
+    .head p { max-width: 540px; color: var(--muted); margin: 0; font-size: 14px; }
 
     /* Story */
     .story { display: grid; grid-template-columns: 1fr 1.1fr; gap: 45px; align-items: center; }
@@ -114,34 +114,34 @@
     .business p { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
     .location { display: inline-block; margin-top: 8px; color: var(--red); font-size: 11px; font-weight: 800; }
 
-    /* Interactive B2B Catalog */
-    .catalog-sec { padding: 70px 0; background-color: #ffffff; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    /* Interactive B2B Sector Catalog (+5,000 items) */
+    .catalog-sec { padding: 75px 0; background-color: #ffffff; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
     .cat-nav { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 30px; }
     .cat-btn { padding: 8px 16px; border-radius: 20px; border: 1px solid var(--line); background: #ffffff; color: var(--muted); cursor: pointer; font-weight: 700; font-size: 12px; font-family: inherit; transition: 0.2s; }
     .cat-btn.active { background: var(--red); color: #ffffff; border-color: var(--red); }
-    .grid-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }
+    .grid-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
     .prod-card { background: #ffffff; border-radius: 12px; border: 1px solid var(--line); overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
-    .prod-body { padding: 16px; }
+    .prod-body { padding: 18px; }
     .prod-tag { font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 4px; display: inline-block; }
     .tag-food { background: #fee2e2; color: #b91c1c; }
     .tag-sweet { background: #fdf2f8; color: #db2777; }
     .tag-pack { background: #fefce8; color: #a16207; }
     .tag-frozen { background: #eff6ff; color: #1d4ed8; }
     .tag-clean { background: #f0fdf4; color: #15803d; }
-    .prod-title { font-size: 15px; font-weight: 700; color: var(--navy); margin: 8px 0 4px; }
-    .prod-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
-    .prod-spec { font-size: 11px; color: var(--navy2); border-top: 1px dashed var(--line); margin-top: 12px; padding-top: 8px; font-weight: 600; }
+    .prod-title { font-size: 16px; font-weight: 700; color: var(--navy); margin: 10px 0 6px; }
+    .prod-desc { font-size: 12.5px; color: var(--muted); line-height: 1.6; }
+    .prod-spec { font-size: 11.5px; color: var(--navy2); border-top: 1px dashed var(--line); margin-top: 14px; padding-top: 10px; font-weight: 600; }
     .prod-footer { padding: 12px 14px; background: #f8fafc; border-top: 1px solid var(--line); display: flex; gap: 8px; }
-    .btn-branch { flex: 1; text-align: center; padding: 8px 6px; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 11px; display: block; line-height: 1.2; }
+    .btn-branch { flex: 1; text-align: center; padding: 9px 6px; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 11.5px; display: block; line-height: 1.2; }
     .btn-dammam { background: #0f172a; color: #ffffff !important; }
     .btn-ahsa { background: var(--red); color: #ffffff !important; }
     .btn-ahsa-pack { background: #a16207; color: #ffffff !important; }
-    .btn-sweet-single { width: 100%; background: #db2777; color: #ffffff !important; text-align: center; padding: 9px; border-radius: 6px; font-weight: 700; font-size: 12px; display: block; }
+    .btn-sweet-single { width: 100%; background: #db2777; color: #ffffff !important; text-align: center; padding: 10px; border-radius: 6px; font-weight: 700; font-size: 12px; display: block; }
 
     /* Corporate Branches Cards */
-    .branches-sec { padding: 70px 0; background: var(--bg); }
-    .branch-card { border: 1px solid var(--line); border-radius: 12px; padding: 20px; background: #ffffff; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow); }
-    .branch-btn { display: flex; justify-content: space-between; align-items: center; padding: 9px 12px; border-radius: 6px; text-decoration: none; font-size: 12px; font-weight: 700; color: #ffffff !important; margin-top: 14px; }
+    .branches-sec { padding: 75px 0; background: var(--bg); }
+    .branch-card { border: 1px solid var(--line); border-radius: 12px; padding: 22px; background: #ffffff; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow); }
+    .branch-btn { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; border-radius: 6px; text-decoration: none; font-size: 12.5px; font-weight: 700; color: #ffffff !important; margin-top: 15px; }
 
     /* Trust Section */
     .trust { background: linear-gradient(135deg, #1e293b, #0f172a); color: #fff; padding: 24px 0; }
@@ -150,12 +150,12 @@
     .trust-item svg { width: 20px; height: 20px; fill: none; stroke: #fff; stroke-width: 2; flex: none; }
 
     /* FAQ */
-    .faq-list { max-width: 850px; margin: auto; display: grid; gap: 10px; }
+    .faq-list { max-width: 850px; margin: auto; display: grid; gap: 12px; }
     .faq-list details { border: 1px solid var(--line); border-radius: 10px; background: #ffffff; overflow: hidden; }
     .faq-list details summary { padding: 16px 20px; font-weight: 700; cursor: pointer; list-style: none; font-size: 14px; color: var(--navy); }
     .faq-list details summary::-webkit-details-marker { display: none; }
     .faq-list details[open] summary { border-bottom: 1px solid var(--line); color: var(--red); }
-    .faq-answer-inner { padding: 14px 20px; font-size: 13px; color: var(--muted); line-height: 1.7; }
+    .faq-answer-inner { padding: 14px 20px; font-size: 13.5px; color: var(--muted); line-height: 1.75; }
 
     /* Footer */
     .site-footer { background: #0b1524; color: #cbd5e1; padding: 50px 0 25px; font-size: 13px; border-top: 1px solid #1e293b; }
@@ -168,11 +168,15 @@
     .clean-wa-float { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: #ffffff !important; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 4px 15px rgba(0,0,0,0.25); z-index: 9999; }
     .clean-wa-float svg { width: 28px; height: 28px; fill: #ffffff; }
 
-    /* Responsive adjustments */
+    /* Responsive adjustments & Mobile Menu */
     @media (max-width: 850px) {
       .topbar { height: 70px; }
-      .brand img { width: 155px; height: 50px; }
-      .links { display: none; }
+      .brand img { width: 155px; height: 48px; }
+      .menu-btn { display: block; }
+      .links { display: none; position: absolute; top: 70px; right: 0; left: 0; background: #ffffff; border-bottom: 1px solid var(--line); box-shadow: 0 10px 20px rgba(0,0,0,0.08); padding: 15px 20px; flex-direction: column; align-items: flex-start; gap: 12px; }
+      .links.open { display: flex; }
+      .links a { width: 100%; padding: 6px 0; border-bottom: 1px solid #f1f5f9; }
+      .links a:last-child { border-bottom: none; }
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
       .stat:nth-child(even) { border-left: 0; }
       .stat:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
@@ -189,194 +193,156 @@
 </head>
 <body>
 
-  <!-- شريط الملاحة الرسمي والمنظم -->
+  <!-- شريط الملاحة الرسمي المطور -->
   <header class="topbar">
     <div class="container nav">
       <a class="brand" href="#home" aria-label="شركة لألأة النجوم التجارية">
         <img loading="eager" fetchpriority="high" src="assets/lala-star-logo.png" alt="شركة لألأة النجوم التجارية" onerror="this.style.display='none'">
       </a>
-      <button class="menu" id="menuBtn" type="button" aria-label="فتح القائمة" aria-expanded="false">☰</button>
       <nav class="links" id="site-nav">
-        <a href="#about" data-i18n="nav.about">من نحن</a>
-        <a href="#benefits">مزايا التوريد</a>
-        <a href="#businesses">أنشطتنا</a>
-        <a href="#catalog">كتالوج الأصناف</a>
-        <a href="#branches">الفروع والمستودعات</a>
-        <a href="#faq">الأسئلة الشائعة</a>
+        <a href="#about" data-i18n="nav_about" onclick="closeMobileMenu()">من نحن</a>
+        <a href="#benefits" data-i18n="nav_benefits" onclick="closeMobileMenu()">مزايا التوريد</a>
+        <a href="#businesses" data-i18n="nav_businesses" onclick="closeMobileMenu()">أنشطتنا</a>
+        <a href="#catalog" data-i18n="nav_catalog" onclick="closeMobileMenu()">قطاعات التوريد</a>
+        <a href="#branches" data-i18n="nav_branches" onclick="closeMobileMenu()">الفروع والمستودعات</a>
+        <a href="#faq" data-i18n="nav_faq" onclick="closeMobileMenu()">الأسئلة الشائعة</a>
       </nav>
       <div class="nav-btns">
         <button class="lang" id="langBtn" type="button" onclick="toggleLang()">EN</button>
-        <a href="#catalog" class="top-cta">الكتالوج والطلب</a>
+        <a href="#catalog" class="top-cta" data-i18n="nav_cta">الكتالوج والطلب</a>
+        <button class="menu-btn" id="menuToggle" type="button" onclick="toggleMobileMenu()" aria-label="فتح القائمة">☰</button>
       </div>
     </div>
   </header>
 
   <main id="main-content">
-    <!-- قسم الهيرو التعريفي المصحح -->
+    <!-- قسم الهيرو التعريفي المصحح مع التموينات ومتاجر التجزئة -->
     <section class="hero" id="home">
       <div class="hero-inner">
-        <span class="hero-badge">حلول التوريد الشاملة لقطاع الأعمال والشركات</span>
-        <h1>موردكم المعتمد للمواد الغذائية والبلاستيك ومستلزمات الحلويات</h1>
-        <p class="lead">نوفر لسلاسل المطاعم، الفنادق، المخابز، وشركات الإعاشة في المنطقة الشرقية (الدمام والأحساء) أعلى معايير الجودة وبأسعار جملة تنافسية منذ 1993م.</p>
+        <span class="hero-badge" data-i18n="hero_badge">حلول التوريد الشاملة لقطاع الأعمال والشركات</span>
+        <h1 data-i18n="hero_title">موردكم المعتمد للمواد الغذائية والبلاستيك والحلويات بالجملة</h1>
+        <p class="lead" data-i18n="hero_desc">نوفر للتموينات ومتاجر التجزئة، وسلاسل المطاعم، الفنادق، المخابز، وشركات الإعاشة في المنطقة الشرقية (الدمام والأحساء) أعلى معايير الجودة وبأسعار جملة تنافسية منذ 1993م.</p>
         <div class="actions">
-          <a class="btn primary" href="#catalog">عرض كتالوج الأصناف</a>
-          <a class="btn secondary" href="#branches">فروع ومستودعات التوزيع</a>
+          <a class="btn primary" href="#catalog" data-i18n="btn_catalog">عرض قطاعات التوريد</a>
+          <a class="btn secondary" href="#branches" data-i18n="btn_branches">فروع ومستودعات التوزيع</a>
         </div>
       </div>
     </section>
 
-    <!-- شريط الإحصائيات المحدث (+5,000 صنف) -->
+    <!-- شريط الإحصائيات المحدث (+5,000 صنف معتمد) -->
     <section class="stats">
       <div class="container stats-grid">
         <div class="stat">
           <strong>+30</strong>
-          <small>عاماً من الخبرة في التوريد</small>
+          <small data-i18n="stat_1">عاماً من الخبرة في التوريد</small>
         </div>
         <div class="stat">
           <strong>+5,000</strong>
-          <small>صنف معتمد بالمستودعات</small>
+          <small data-i18n="stat_2">صنف معتمد بالمستودعات</small>
         </div>
         <div class="stat">
-          <strong>فرعان</strong>
-          <small>مستودعات الدمام والأحساء</small>
+          <strong data-i18n="stat_3_val">فرعان</strong>
+          <small data-i18n="stat_3">مستودعات الدمام والأحساء</small>
         </div>
         <div class="stat">
           <strong>100%</strong>
-          <small>التزام بمواعيد التوصيل</small>
+          <small data-i18n="stat_4">التزام بمواعيد التوصيل</small>
         </div>
       </div>
     </section>
 
-    <!-- كتالوج الأصناف التفاعلي B2B بأزرار الفروع المباشرة -->
+    <!-- كتالوج قطاعات التوريد الشاملة B2B مع رسائل الواتساب المفتوحة -->
     <section id="catalog" class="catalog-sec">
       <div class="container">
         <div class="head" style="justify-content: center; text-align: center; margin-bottom: 25px;">
           <div>
-            <div class="kicker">طلب تسعيرات فورية</div>
-            <h2>كتالوج أصناف التوريد والجملة</h2>
-            <p style="margin: 6px auto 0;">اختر التصنيف واطلب تسعيرتك للفرع الأقرب لنشاطك التجاري بكل سهولة وسرعة.</p>
+            <div class="kicker" data-i18n="cat_kicker">طلب تسعيرات فورية</div>
+            <h2 data-i18n="cat_title">خطوط التوريد وقطاعات الجملة الرئيسية</h2>
+            <p style="margin: 6px auto 0;" data-i18n="cat_desc">نوفر أكثر من 5,000 صنف معتمد بالمستودعات لتغطية احتياجات التموينات، المطاعم، والمقاهي. اختر القطاع واطلب التسعيرة أو الكتالوج الكامل مباشرة.</p>
           </div>
         </div>
 
+        <!-- أزرار التصفية -->
         <div class="cat-nav">
-          <button onclick="filterCatalog('all', this)" class="cat-btn active">الكل</button>
-          <button onclick="filterCatalog('food', this)" class="cat-btn">مواد غذائية وتموين</button>
-          <button onclick="filterCatalog('sweets', this)" class="cat-btn">حلويات ومخابز</button>
-          <button onclick="filterCatalog('packaging', this)" class="cat-btn">بلاستيك وتغليف</button>
-          <button onclick="filterCatalog('frozen', this)" class="cat-btn">مجمدات وإعاشة</button>
-          <button onclick="filterCatalog('hygiene', this)" class="cat-btn">منظفات ومستهلكات</button>
+          <button onclick="filterCatalog('all', this)" class="cat-btn active" data-i18n="tab_all">الكل</button>
+          <button onclick="filterCatalog('food', this)" class="cat-btn" data-i18n="tab_food">المواد الغذائية</button>
+          <button onclick="filterCatalog('frozen', this)" class="cat-btn" data-i18n="tab_frozen">اللحوم والمجمدات</button>
+          <button onclick="filterCatalog('sweets', this)" class="cat-btn" data-i18n="tab_sweets">الحلويات والسناكات</button>
+          <button onclick="filterCatalog('packaging', this)" class="cat-btn" data-i18n="tab_pack">البلاستيك والتغليف</button>
+          <button onclick="filterCatalog('hygiene', this)" class="cat-btn" data-i18n="tab_clean">المنظفات والمطهرات</button>
         </div>
 
         <div class="grid-cards">
-          <!-- صنف 1 -->
+          
+          <!-- قطاع 1: الأغذية الأساسية -->
           <div class="prod-card" data-category="food">
             <div class="prod-body">
-              <span class="prod-tag tag-food">أغذية وتموين</span>
-              <div class="prod-title">أرز بسمتي ومزة درجة أولى</div>
-              <div class="prod-desc">توريد شوالات 40 كجم و10 كجم مخصصة للمطابخ والمطاعم الكبرى والإعاشة.</div>
-              <div class="prod-spec">التعبئة: كيس 40 كجم / طبلية جملة</div>
+              <span class="prod-tag tag-food" data-i18n="tag_food">أغذية وتموين</span>
+              <div class="prod-title" data-i18n="card_food_title">قطاع الأغذية الأساسية والتموين بالجملة</div>
+              <div class="prod-desc" data-i18n="card_food_desc">أرز بأنواعه (أكياس وعبوات تجارية 40 كجم و10 كجم)، زيوت طبخ وقلي، سكر، دقيق، معلبات، وبقوليات بحجوم تجارية للمطاعم والتموينات.</div>
+              <div class="prod-spec" data-i18n="card_food_spec">التوريد: شاحنات توريد بالكرتون والباليت جملة</div>
             </div>
             <div class="prod-footer">
-              <a href="https://wa.me/966567999863?text=السلام%20عليكم،%20أرغب%20بطلب%20تسعيرة%20جملة%20(فرع%20الدمام)%20بخصوص:%20أرز%20بسمتي%20ومزة" target="_blank" class="btn-branch btn-dammam">فرع الدمام</a>
-              <a href="https://wa.me/966533511159?text=السلام%20عليكم،%20أرغب%20بطلب%20تسعيرة%20جملة%20(فرع%20الأحساء)%20بخصوص:%20أرز%20بسمتي%20ومزة" target="_blank" class="btn-branch btn-ahsa">فرع الأحساء</a>
+              <a href="https://wa.me/966567999863?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%AF%D9%85%D8%A7%D9%85)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="btn-branch btn-dammam" data-i18n="btn_dammam">فرع الدمام</a>
+              <a href="https://wa.me/966533511159?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="btn-branch btn-ahsa" data-i18n="btn_ahsa">فرع الأحساء</a>
             </div>
           </div>
 
-          <!-- صنف 2 -->
-          <div class="prod-card" data-category="food">
-            <div class="prod-body">
-              <span class="prod-tag tag-food">أغذية وتموين</span>
-              <div class="prod-title">زيوت قلي وطبخ جملة</div>
-              <div class="prod-desc">زيوت نباتية وزيت دوار الشمس بعبوات اقتصادية للمطاعم ومطابخ الولائم.</div>
-              <div class="prod-spec">التعبئة: كرتون (4×1.5 لتر) / جركل 17 لتر</div>
-            </div>
-            <div class="prod-footer">
-              <a href="https://wa.me/966567999863?text=السلام%20عليكم،%20أرغب%20بطلب%20تسعيرة%20جملة%20(فرع%20الدمام)%20بخصوص:%20زيوت%20قلي%20وطبخ" target="_blank" class="btn-branch btn-dammam">فرع الدمام</a>
-              <a href="https://wa.me/966533511159?text=السلام%20عليكم،%20أرغب%20بطلب%20تسعيرة%20جملة%20(فرع%20الأحساء)%20بخصوص:%20زيوت%20قلي%20وطبخ" target="_blank" class="btn-branch btn-ahsa">فرع الأحساء</a>
-            </div>
-          </div>
-
-          <!-- صنف 3 -->
-          <div class="prod-card" data-category="sweets">
-            <div class="prod-body">
-              <span class="prod-tag tag-sweet">حلويات ومخابز</span>
-              <div class="prod-title">شوكولاتة خام وحشوات كيك</div>
-              <div class="prod-desc">شوكولاتة خام، حشوات مكسرات وفواكه، وزبدة فستق ولوتس للمخابز ومحلات الحلا.</div>
-              <div class="prod-spec">التعبئة: سطل 5 - 10 كجم / كراتين جملة</div>
-            </div>
-            <div class="prod-footer">
-              <a href="https://wa.me/966558423342?text=السلام%20عليكم،%20أرغب%20بطلب%20تسعيرة%20جملة%20من%20مذاق%20راقي%20للحلويات%20بخصوص:%20شوكولاتة%20خام%20وحشوات" target="_blank" class="btn-sweet-single">مذاق راقي للحلويات والمخابز</a>
-            </div>
-          </div>
-
-          <!-- صنف 4 -->
-          <div class="prod-card" data-category="sweets">
-            <div class="prod-body">
-              <span class="prod-tag tag-sweet">حلويات ومخابز</span>
-              <div class="prod-title">مكسرات، سكر ناعم، ودقيق فاخر</div>
-              <div class="prod-desc">لوز شرائح، فستق حلبي، سكر مطحون للمخابز، ونشا ذرة بكميات تجارية لتصنيع الحلويات.</div>
-              <div class="prod-spec">التعبئة: كيس 25 كجم / كرتون 10 كجم</div>
-            </div>
-            <div class="prod-footer">
-              <a href="https://wa.me/966558423342?text=السلام%20عليكم،%20أرغب%20بطلب%20تسعيرة%20جملة%20من%20مذاق%20راقي%20للحلويات%20بخصوص:%20مستلزمات%20المخابز%20والمكسرات" target="_blank" class="btn-sweet-single">مذاق راقي للحلويات والمخابز</a>
-            </div>
-          </div>
-
-          <!-- صنف 5 -->
-          <div class="prod-card" data-category="packaging">
-            <div class="prod-body">
-              <span class="prod-tag tag-pack">بلاستيك وتغليف</span>
-              <div class="prod-title">علب مايكرويف وقصدير سفري</div>
-              <div class="prod-desc">تشكيلة علب حفظ حرارية سوداء وشفافة، وصحون قصدير مخصصة للمطاعم ومحلات المأكولات.</div>
-              <div class="prod-spec">التعبئة: كرتون 250 - 500 حبة</div>
-            </div>
-            <div class="prod-footer">
-              <a href="https://wa.me/966577348040?text=السلام%20عليكم،%20أرغب%20بطلب%20تسعيرة%20بلاستيك%20من%20قمة%20الهامات%20(الدمام)%20بخصوص:%20علب%20مايكرويف%20وقصدير" target="_blank" class="btn-branch btn-dammam">قمة الهامات - الدمام</a>
-              <a href="https://wa.me/966506744437?text=السلام%20عليكم،%20أرغب%20بطلب%20تسعيرة%20بلاستيك%20من%20لألأة%20النجوم%20(الأحساء)%20بخصوص:%20علب%20مايكرويف%20وقصدير" target="_blank" class="btn-branch btn-ahsa-pack">لألأة النجوم - الأحساء</a>
-            </div>
-          </div>
-
-          <!-- صنف 6 -->
-          <div class="prod-card" data-category="packaging">
-            <div class="prod-body">
-              <span class="prod-tag tag-pack">بلاستيك وتغليف</span>
-              <div class="prod-title">أكياس ورقية وبلاستيك وسفرة</div>
-              <div class="prod-desc">أكياس تسوق سميكة، رولات سفرة طعام اقتصادية، ومستلزمات تغليف الوجبات السريعة.</div>
-              <div class="prod-spec">التعبئة: كرتون جملة متعدد المقاسات</div>
-            </div>
-            <div class="prod-footer">
-              <a href="https://wa.me/966577348040?text=السلام%20عليكم،%20أرغب%20بطلب%20تسعيرة%20بلاستيك%20من%20قمة%20الهامات%20(الدمام)%20بخصوص:%20أكياس%20ومواد%20تغليف" target="_blank" class="btn-branch btn-dammam">قمة الهامات - الدمام</a>
-              <a href="https://wa.me/966506744437?text=السلام%20عليكم،%20أرغب%20بطلب%20تسعيرة%20بلاستيك%20من%20لألأة%20النجوم%20(الأحساء)%20بخصوص:%20أكياس%20ومواد%20تغليف" target="_blank" class="btn-branch btn-ahsa-pack">لألأة النجوم - الأحساء</a>
-            </div>
-          </div>
-
-          <!-- صنف 7 -->
+          <!-- قطاع 2: اللحوم والدواجن والمجمدات (تم رفعها في الترتيب) -->
           <div class="prod-card" data-category="frozen">
             <div class="prod-body">
-              <span class="prod-tag tag-frozen">مجمدات وإعاشة</span>
-              <div class="prod-title">دواجن مجمدة وبطاطس نصف مقلية</div>
-              <div class="prod-desc">دجاج مجمد كامل، صدور فيليه، وبطاطس أصابع سريعة التحضير لقطاع المطاعم.</div>
-              <div class="prod-spec">التعبئة: كرتون 10 كجم</div>
+              <span class="prod-tag tag-frozen" data-i18n="tag_frozen">مجمدات وإعاشة</span>
+              <div class="prod-title" data-i18n="card_frozen_title">قطاع الدواجن واللحوم والمجمدات</div>
+              <div class="prod-desc" data-i18n="card_frozen_desc">دواجن كاملة ومقطعة، لحوم مجمدة، صدور فيليه، بطاطس نصف مقلية، وخضروات مجمدة مخصصة لتشغيل المطابخ المركزية وشركات الإعاشة.</div>
+              <div class="prod-spec" data-i18n="card_frozen_spec">التوريد: سيارات نقل وتوزيع مبردة ومجمدة معتمدة</div>
             </div>
             <div class="prod-footer">
-              <a href="https://wa.me/966567999863?text=السلام%20عليكم،%20أرغب%20بطلب%20تسعيرة%20مجمدات%20(فرع%20الدمام)%20بخصوص:%20دواجن%20وبطاطس" target="_blank" class="btn-branch btn-dammam">فرع الدمام</a>
-              <a href="https://wa.me/966533511159?text=السلام%20عليكم،%20أرغب%20بطلب%20تسعيرة%20مجمدات%20(فرع%20الأحساء)%20بخصوص:%20دواجن%20وبطاطس" target="_blank" class="btn-branch btn-ahsa">فرع الأحساء</a>
+              <a href="https://wa.me/966567999863?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%AF%D9%85%D8%A7%D9%85)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="btn-branch btn-dammam" data-i18n="btn_dammam">فرع الدمام</a>
+              <a href="https://wa.me/966533511159?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="btn-branch btn-ahsa" data-i18n="btn_ahsa">فرع الأحساء</a>
             </div>
           </div>
 
-          <!-- صنف 8 -->
-          <div class="prod-card" data-category="hygiene">
+          <!-- قطاع 3: الحلويات والسناكات والشاي والمكسرات (مذاق راقي المحدث بالكامل) -->
+          <div class="prod-card" data-category="sweets">
             <div class="prod-body">
-              <span class="prod-tag tag-clean">منظفات ومستهلكات</span>
-              <div class="prod-title">صابون ومطهرات جالونات 5L</div>
-              <div class="prod-desc">سائل غسيل صحون مركز، صابون يدين، ومطهرات أرضيات برائحة الصنوبر للمنشآت.</div>
-              <div class="prod-spec">التعبئة: كرتون (4 × 5 لتر)</div>
+              <span class="prod-tag tag-sweet" data-i18n="tag_sweet">حلويات وسناكات ومسليات</span>
+              <div class="prod-title" data-i18n="card_sweets_title">قطاع الحلويات، السناكات، الشاي والمكسرات</div>
+              <div class="prod-desc" data-i18n="card_sweets_desc">توريد كراتين الشوكولاتة والحلويات (كندر، سنيكرز، مارس..)، شيبسات وسناكات (ليز، برينجلز..)، جميع أنواع الشاي الفاخر، وتشكيلة مكسرات متنوعة للتموينات والمتاجر والمقاهي.</div>
+              <div class="prod-spec" data-i18n="card_sweets_spec">المنشأة: مذاق راقي للحلويات (كراتين وطرود تجارية)</div>
             </div>
             <div class="prod-footer">
-              <a href="https://wa.me/966577348040?text=السلام%20عليكم،%20أرغب%20بطلب%20تسعيرة%20منظفات%20(الدمام)%20بخصوص:%20مطهرات%20وجالونات" target="_blank" class="btn-branch btn-dammam">قمة الهامات - الدمام</a>
-              <a href="https://wa.me/966506744437?text=السلام%20عليكم،%20أرغب%20بطلب%20تسعيرة%20منظفات%20(الأحساء)%20بخصوص:%20مطهرات%20وجالونات" target="_blank" class="btn-branch btn-ahsa-pack">لألأة النجوم - الأحساء</a>
+              <a href="https://wa.me/966558423342?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20%D9%85%D9%86%20%D9%85%D8%B0%D8%A7%D9%82%20%D8%B1%D8%A7%D9%82%D9%8A%20%D9%84%D9%84%D8%AD%D9%84%D9%88%D9%8A%D8%A7%D8%AA%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="btn-sweet-single" data-i18n="btn_mazaq">مذاق راقي للحلويات - الأحساء</a>
             </div>
           </div>
+
+          <!-- قطاع 4: البلاستيك والتغليف -->
+          <div class="prod-card" data-category="packaging">
+            <div class="prod-body">
+              <span class="prod-tag tag-pack" data-i18n="tag_pack">بلاستيك وتغليف</span>
+              <div class="prod-title" data-i18n="card_pack_title">قطاع البلاستيك ومستلزمات السفري والتغليف</div>
+              <div class="prod-desc" data-i18n="card_pack_desc">تشكيلة علب مايكرويف، صحون قصدير، رولات سفرة طعام، أكياس تسوق بلاستيكية وورقية، ومستلزمات التعبئة والتغليف للمطاعم ومتاجر البيع.</div>
+              <div class="prod-spec" data-i18n="card_pack_spec">التوريد: مستودعات قمة الهامات (الدمام) ولألأة النجوم (الأحساء)</div>
+            </div>
+            <div class="prod-footer">
+              <a href="https://wa.me/966577348040?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20%D9%85%D9%86%20%D9%82%D9%85%D8%A9%20%D8%A7%D9%84%D9%87%D8%A7%D9%85%D8%A7%D8%AA%20%D9%84%D9%84%D8%A8%D9%84%D8%A7%D8%B3%D8%AA%D9%8A%D9%83%20(%D8%A7%D9%84%D8%AF%D9%85%D8%A7%D9%85)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="btn-branch btn-dammam" data-i18n="btn_hamat">قمة الهامات - الدمام</a>
+              <a href="https://wa.me/966506744437?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20%D9%85%D9%86%20%D9%84%D8%A3%D9%84%D8%A3%D8%A9%20%D8%A7%D9%84%D9%86%D8%AC%D9%88%D9%85%20%D9%84%D9%84%D8%A8%D9%84%D8%A7%D8%B3%D8%AA%D9%8A%D9%83%20(%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="btn-branch btn-ahsa-pack" data-i18n="btn_stars_pack">لألأة النجوم - الأحساء</a>
+            </div>
+          </div>
+
+          <!-- قطاع 5: المنظفات والمطهرات التجارية -->
+          <div class="prod-card" data-category="hygiene">
+            <div class="prod-body">
+              <span class="prod-tag tag-clean" data-i18n="tag_clean">منظفات ومستهلكات</span>
+              <div class="prod-title" data-i18n="card_clean_title">قطاع المنظفات والمطهرات بجميع الأحجام</div>
+              <div class="prod-desc" data-i18n="card_clean_desc">سوائل غسيل صحون، صابون يدين، معقمات، ومطهرات أرضيات برائحة الصنوبر بجميع المقاسات وجالونات 5 لتر الكبرى لتلبية تشغيل المنشآت والمطاعم.</div>
+              <div class="prod-spec" data-i18n="card_clean_spec">التعبئة: عبوات تجارية متعددة / كراتين (4 × 5 لتر) / جملة</div>
+            </div>
+            <div class="prod-footer">
+              <a href="https://wa.me/966577348040?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D9%85%D9%86%D8%B8%D9%81%D8%A7%D8%AA%20%D9%85%D9%86%20%D9%82%D9%85%D8%A9%20%D8%A7%D9%84%D9%87%D8%A7%D9%85%D8%A7%D8%AA%20(%D8%A7%D9%84%D8%AF%D9%85%D8%A7%D9%85)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="btn-branch btn-dammam" data-i18n="btn_hamat">قمة الهامات - الدمام</a>
+              <a href="https://wa.me/966506744437?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D9%85%D9%86%D8%B8%D9%81%D8%A7%D8%AA%20%D9%85%D9%86%20%D9%84%D8%A3%D9%84%D8%A3%D8%A9%20%D8%A7%D9%84%D9%86%D8%AC%D9%88%D9%85%20(%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="btn-branch btn-ahsa-pack" data-i18n="btn_stars_pack">لألأة النجوم - الأحساء</a>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
@@ -386,34 +352,34 @@
       <div class="container">
         <div class="head">
           <div>
-            <div class="kicker">من نحن</div>
-            <h2>شركة لها مسار واضح</h2>
+            <div class="kicker" data-i18n="about_kicker">من نحن</div>
+            <h2 data-i18n="about_title">شركة لها مسار تجاري راسخ</h2>
           </div>
-          <p>تأسست شركة لألأة النجوم التجارية في الدمام عام 1993م في مجال بيع المواد الغذائية بالجملة، ثم توسعت أعمالها لتشمل أنشطة تجارية متخصصة تحت مظلة الشركة.</p>
+          <p data-i18n="about_desc">تأسست شركة لألأة النجوم التجارية في الدمام عام 1993م في مجال بيع وتوزيع المواد الغذائية بالجملة، ثم توسعت أعمالها لتشمل أنشطة تجارية متخصصة تحت مظلة الشركة لتغطية كامل أسواق المنطقة الشرقية.</p>
         </div>
         <div class="story">
           <div class="photo">
             <img src="assets/optimized/wholesale-warehouse-ahsa-1280.webp?v=20260917-5" alt="مستودع لألأة النجوم التجارية للجملة" width="1280" height="720" loading="lazy" decoding="async">
-            <div class="caption">تجارة وتوزيع بالجملة</div>
+            <div class="caption" data-i18n="about_caption">تجارة وتوزيع بالجملة</div>
           </div>
           <div class="story-copy">
-            <h3>من الدمام بدأت الرحلة</h3>
-            <p>الدمام هي الفرع الرئيسي للشركة، وفي عام 2018م تم تدشين فرع الأحساء، ثم امتدت العمليات لتشمل قطاعات التغليف والبلاستيك والحلويات عبر مستودعات متخصصة.</p>
+            <h3 data-i18n="story_head">من الدمام بدأت الرحلة</h3>
+            <p data-i18n="story_p">الدمام هي المركز الرئيسي للشركة، وفي عام 2018م تم تدشين فرع الأحساء، ثم امتدت العمليات لتشمل قطاعات التغليف والبلاستيك والحلويات والسناكات عبر مستودعات وفروع مستقلة وواضحة.</p>
             <div class="timeline">
               <div class="event">
                 <strong>1993م</strong>
-                <h4>بداية الشركة — الدمام</h4>
-                <p>انطلاق النشاط المركزي في استيراد وتوريد المواد الغذائية بالجملة.</p>
+                <h4 data-i18n="tl_1_h">بداية الشركة — الدمام</h4>
+                <p data-i18n="tl_1_p">انطلاق النشاط المركزي في استيراد وتوريد المواد الغذائية بالجملة.</p>
               </div>
               <div class="event">
-                <strong>بعد التوسع</strong>
-                <h4>أنشطة البلاستيك والحلويات</h4>
-                <p>تأسيس أذرع متخصصة (قمة الهامات للبلاستيك ومذاق راقي للحلويات) لخدمة مختلف القطاعات.</p>
+                <strong data-i18n="tl_2_y">بعد التوسع</strong>
+                <h4 data-i18n="tl_2_h">أنشطة البلاستيك والحلويات</h4>
+                <p data-i18n="tl_2_p">تأسيس أذرع متخصصة (قمة الهامات للبلاستيك ومذاق راقي للحلويات والسناكات) لخدمة مختلف القطاعات التجارية.</p>
               </div>
               <div class="event">
                 <strong>2018م</strong>
-                <h4>افتتاح فرع الأحساء</h4>
-                <p>توسيع نطاق التوزيع الميداني بافتتاح فرع ومستودعات الأحساء وتغطية كامل المحافظة.</p>
+                <h4 data-i18n="tl_3_h">افتتاح فرع الأحساء</h4>
+                <p data-i18n="tl_3_p">توسيع نطاق التوزيع الميداني بافتتاح فرع ومستودعات الأحساء وتغطية كامل المحافظة.</p>
               </div>
             </div>
           </div>
@@ -421,118 +387,118 @@
       </div>
     </section>
 
-    <!-- مزايا التوريد -->
+    <!-- مزايا التوريد والتعامل معنا -->
     <section class="section alt" id="benefits">
       <div class="container">
         <div class="head">
           <div>
-            <div class="kicker">مزايا التوريد</div>
-            <h2>مزايا التوريد والتعامل معنا</h2>
+            <div class="kicker" data-i18n="ben_kicker">مزايا التوريد</div>
+            <h2 data-i18n="ben_title">مزايا التوريد والتعامل معنا</h2>
           </div>
-          <p>خدمات وتجربة توريد مصممة لتسهيل التعامل التجاري واللوجستي مع المنشآت في المنطقة الشرقية.</p>
+          <p data-i18n="ben_desc">خدمات وتجربة توريد مصممة لتسهيل التعامل التجاري واللوجستي مع المنشآت في المنطقة الشرقية.</p>
         </div>
         <div class="benefits-grid">
           <article class="benefit">
             <div class="icon">
               <svg viewBox="0 0 24 24"><path d="M12 2v20M17 5.5C16 4.6 14.5 4 12 4c-2.8 0-4.5 1.2-4.5 3.1 0 4.8 9 2.1 9 7 0 2.2-2 3.9-4.9 3.9-2.4 0-4.2-.7-5.6-2"/></svg>
             </div>
-            <h3>أسعار جملة تنافسية</h3>
-            <p>حلول تسعير موجهة للمشتريات الكبرى والكميات التجارية المباشرة.</p>
+            <h3 data-i18n="b1_h">أسعار جملة تنافسية</h3>
+            <p data-i18n="b1_p">حلول تسعير موجهة للمشتريات الكبرى والكميات التجارية المباشرة.</p>
           </article>
           <article class="benefit">
             <div class="icon">
               <svg viewBox="0 0 24 24"><path d="M3 17h11V6H3zM14 10h4l3 3v4h-7zM6 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM18 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/></svg>
             </div>
-            <h3>أسطول توزيع يغطي الشرقية</h3>
-            <p>شاحنات نقل مجهزة تضمن التوصيل السريع والدوري لكافة العملاء.</p>
+            <h3 data-i18n="b2_h">أسطول توزيع يغطي الشرقية</h3>
+            <p data-i18n="b2_p">شاحنات نقل مجهزة تضمن التوصيل السريع والدوري لكافة العملاء.</p>
           </article>
           <article class="benefit">
             <div class="icon">
               <svg viewBox="0 0 24 24"><path d="M12 3 20 6v5c0 5-3.3 8.5-8 10-4.7-1.5-8-5-8-10V6zM8 12l2.5 2.5L16 9"/></svg>
             </div>
-            <h3>سلامة التخزين وجودة الأصناف</h3>
-            <p>التزام بأعلى معايير التخزين المبرد والجاف المعتمدة صحياً وتجارياً.</p>
+            <h3 data-i18n="b3_h">سلامة التخزين وجودة الأصناف</h3>
+            <p data-i18n="b3_p">التزام بأعلى معايير التخزين المبرد والجاف المعتمدة صحياً وتجارياً.</p>
           </article>
           <article class="benefit">
             <div class="icon">
               <svg viewBox="0 0 24 24"><path d="M12 3 14.8 8.7 21 9.6l-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg>
             </div>
-            <h3>خبرة تجارية راسخة منذ 1993</h3>
-            <p>أكثر من 30 عاماً من الثقة والاستقرار المالي والتجاري في أسواق المملكة.</p>
+            <h3 data-i18n="b4_h">خبرة تجارية راسخة منذ 1993</h3>
+            <p data-i18n="b4_p">أكثر من 30 عاماً من الثقة والاستقرار المالي والتجاري في أسواق المملكة.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- الأنشطة -->
+    <!-- قطاعات وأنشطة التوريد -->
     <section class="section" id="businesses">
       <div class="container">
         <div class="head">
           <div>
-            <div class="kicker">أنشطتنا</div>
-            <h2>قطاعات وأنشطة التوريد</h2>
+            <div class="kicker" data-i18n="biz_kicker">أنشطتنا</div>
+            <h2 data-i18n="biz_title">قطاعات وأنشطة التوريد المتخصصة</h2>
           </div>
-          <p>أنشطة مستقلة ومتخصصة تحت مظلة الشركة تخدم احتياجات قطاع الأعمال باحترافية كاملة.</p>
+          <p data-i18n="biz_desc">أنشطة متخصصة ومستودعات مستقلة تحت مظلة الشركة تخدم احتياجات قطاع الأعمال باحترافية كاملة.</p>
         </div>
         <div class="businesses">
           <article class="business">
             <img src="assets/optimized/food-products-ahsa-1280.webp?v=20260917-5" alt="المواد الغذائية بالجملة" loading="lazy">
             <div class="business-body">
-              <h3>المواد الغذائية والتموين</h3>
-              <p>النشاط الأساسي للتوريد الغذائي الشامل والمطابخ الكبرى.</p>
-              <span class="location">الدمام · الأحساء</span>
+              <h3 data-i18n="biz1_h">المواد الغذائية والتموين</h3>
+              <p data-i18n="biz1_p">النشاط الأساسي للتوريد الغذائي الشامل، التموينات، والمطابخ الكبرى.</p>
+              <span class="location" data-i18n="loc_both">الدمام · الأحساء</span>
             </div>
           </article>
           <article class="business">
             <img src="assets/wide_high_resolution_supermarket_warehouse_aisle.png" alt="المنتجات البلاستيكية" loading="lazy">
             <div class="business-body">
-              <h3>البلاستيك ومواد التغليف</h3>
-              <p>قمة الهامات ولألأة النجوم لحلول التعبئة ومستلزمات السفري.</p>
-              <span class="location">الدمام · الأحساء</span>
+              <h3 data-i18n="biz2_h">البلاستيك ومواد التغليف</h3>
+              <p data-i18n="biz2_p">قمة الهامات ولألأة النجوم لحلول التعبئة، السفرة، وسفريات المطاعم.</p>
+              <span class="location" data-i18n="loc_both">الدمام · الأحساء</span>
             </div>
           </article>
           <article class="business">
             <img src="assets/sweets-snacks.webp" alt="الحلويات والسناكات" loading="lazy">
             <div class="business-body">
-              <h3>مستلزمات الحلويات والمخابز</h3>
-              <p>مذاق راقي للمواد الخام، الشوكولاتة، حشوات الكيك والمكسرات.</p>
-              <span class="location">مستودع التوريد المركزي</span>
+              <h3 data-i18n="biz3_h">مذاق راقي للحلويات والسناكات</h3>
+              <p data-i18n="biz3_p">حلويات وشوكولاتة عالمية، شيبسات وسناكات، شاي فاخر، ومكسرات متنوعة.</p>
+              <span class="location" data-i18n="loc_ahsa_only">الأحساء فقط</span>
             </div>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- قطاعات العملاء -->
+    <!-- قطاعات العملاء المستهدفة -->
     <section class="section alt" id="clients">
       <div class="container">
         <div class="head">
           <div>
-            <div class="kicker">قطاعات العملاء</div>
-            <h2>الشركاء والقطاعات المستهدفة</h2>
+            <div class="kicker" data-i18n="cli_kicker">قطاعات العملاء</div>
+            <h2 data-i18n="cli_title">الشركاء والقطاعات المستهدفة</h2>
           </div>
-          <p>نخدم مجموعة متكاملة من المنشآت التجارية التي تعتمد على انتظام سلاسل الإمداد بالجملة.</p>
+          <p data-i18n="cli_desc">نخدم شريحة متكاملة من المنشآت التجارية التي تعتمد على انتظام سلاسل الإمداد بالجملة.</p>
         </div>
         <div class="clients-grid">
           <article class="client-card">
             <div class="client-num">01</div>
-            <h3>متاجر التجزئة والتموينات</h3>
-            <p>احتياجات إعادة التوريد اليومية ومخزون السلع الاستهلاكية.</p>
+            <h3 data-i18n="c1_h">متاجر التجزئة والتموينات</h3>
+            <p data-i18n="c1_p">احتياجات إعادة التوريد اليومية ومخزون السلع التموينية والحلويات والمسليات.</p>
           </article>
           <article class="client-card">
             <div class="client-num">02</div>
-            <h3>المطاعم والمطابخ المركزية</h3>
-            <p>أصناف وكميات مخصصة للتشغيل التجاري المستمر ومطابخ الولائم.</p>
+            <h3 data-i18n="c2_h">المطاعم والمطابخ المركزية</h3>
+            <p data-i18n="c2_p">أصناف غذائية، لحوم ودواجن مجمدة، ومستلزمات تغليف وسفري يومية.</p>
           </article>
           <article class="client-card">
             <div class="client-num">03</div>
-            <h3>شركات الإعاشة والفنادق</h3>
-            <p>حلول إمداد موثوقة ومجدولة تضمن استمرارية خدمات الإطعام.</p>
+            <h3 data-i18n="c3_h">شركات الإعاشة والفنادق</h3>
+            <p data-i18n="c3_p">حلول إمداد مجدولة وموثوقة تضمن استمرارية خدمات الإطعام بأعلى المعايير.</p>
           </article>
           <article class="client-card">
             <div class="client-num">04</div>
-            <h3>المخابز ومحلات الحلويات</h3>
-            <p>مواد خام عالية الجودة، شوكولاتة بلجيكية وحشوات تصنيع متخصصة.</p>
+            <h3 data-i18n="c4_h">المقاهي ومحلات بيع البلاستيك</h3>
+            <p data-i18n="c4_p">شاي فاخر، مسليات وسناكات، مع مستلزمات الأكواب والأكياس ومواد التغليف.</p>
           </article>
         </div>
       </div>
@@ -543,40 +509,40 @@
       <div class="container trust-grid">
         <div class="trust-item">
           <svg viewBox="0 0 24 24"><path d="M3 20V9l9-5 9 5v11M6 20v-7h12v7M9 20v-4h6v4"/></svg>
-          <span>مستودعات مركزية بسعة تخزين ضخمة</span>
+          <span data-i18n="tr_1">مستودعات مركزية بسعة تخزين ضخمة</span>
         </div>
         <div class="trust-item">
           <svg viewBox="0 0 24 24"><path d="M3 17h11V6H3zM14 10h4l3 3v4h-7zM6 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM18 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/></svg>
-          <span>أسطول نقل مجهز بنظام التبريد والتجميد</span>
+          <span data-i18n="tr_2">أسطول نقل مجهز بنظام التبريد والتجميد</span>
         </div>
         <div class="trust-item">
           <svg viewBox="0 0 24 24"><path d="M12 3 20 6v5c0 5-3.3 8.5-8 10-4.7-1.5-8-5-8-10V6zM8 12l2.5 2.5L16 9"/></svg>
-          <span>مطابقة كاملة لاشتراطات هيئة الغذاء والدواء</span>
+          <span data-i18n="tr_3">مطابقة كاملة لاشتراطات هيئة الغذاء والدواء</span>
         </div>
       </div>
     </section>
 
-    <!-- الفروع والمستودعات بتصميم مؤسسي نقي وبدون إيموجي -->
+    <!-- الفروع والمستودعات بتصميم مؤسسي نقي -->
     <section class="branches-sec" id="branches">
       <div class="container">
         <div class="head">
           <div>
-            <div class="kicker">شبكة التوزيع الميداني</div>
-            <h2>الفروع ومستودعات التوريد</h2>
+            <div class="kicker" data-i18n="br_kicker">شبكة التوزيع الميداني</div>
+            <h2 data-i18n="br_title">الفروع ومستودعات التوريد المباشر</h2>
           </div>
-          <p>مستودعات مجهزة لتلبية طلبيات الجملة بسرعة في كافة أنحاء المنطقة الشرقية.</p>
+          <p data-i18n="br_desc">مستودعات مجهزة لتلبية طلبيات الجملة بسرعة في كافة أنحاء المنطقة الشرقية.</p>
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px;">
           <!-- فرع الدمام - أغذية -->
           <div class="branch-card">
             <div>
-              <span style="font-size: 11px; background: #fee2e2; color: #b91c1c; font-weight: 700; padding: 3px 8px; border-radius: 4px;">مواد غذائية</span>
-              <h4 style="font-size: 15px; margin: 8px 0 4px; font-weight: 700;">مستودعات الدمام المركزية (أغذية)</h4>
-              <p style="color: var(--muted); font-size: 12px; margin-bottom: 10px;">شارع 42، مقابل سوق الخضار المركزي، الدمام.</p>
+              <span style="font-size: 11px; background: #fee2e2; color: #b91c1c; font-weight: 700; padding: 3px 8px; border-radius: 4px;" data-i18n="tag_food">مواد غذائية</span>
+              <h4 style="font-size: 15px; margin: 8px 0 4px; font-weight: 700;" data-i18n="br_dam_h">مستودعات الدمام المركزية (أغذية)</h4>
+              <p style="color: var(--muted); font-size: 12px; margin-bottom: 10px;" data-i18n="br_dam_p">شارع 42، مقابل سوق الخضار المركزي، الدمام.</p>
             </div>
-            <a href="https://wa.me/966567999863" target="_blank" class="branch-btn" style="background: #0f172a;">
-              <span>طلب تسعيرة وتواصل</span>
+            <a href="https://wa.me/966567999863?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%AF%D9%85%D8%A7%D9%85)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="branch-btn" style="background: #0f172a;">
+              <span data-i18n="btn_quote_contact">طلب تسعيرة وتواصل</span>
               <span style="direction: ltr;">056 799 9863</span>
             </a>
           </div>
@@ -584,12 +550,12 @@
           <!-- فرع الأحساء - أغذية -->
           <div class="branch-card">
             <div>
-              <span style="font-size: 11px; background: #fee2e2; color: #b91c1c; font-weight: 700; padding: 3px 8px; border-radius: 4px;">مواد غذائية</span>
-              <h4 style="font-size: 15px; margin: 8px 0 4px; font-weight: 700;">مستودعات الأحساء (أغذية)</h4>
-              <p style="color: var(--muted); font-size: 12px; margin-bottom: 10px;">الهفوف - حي الجامعة، شارع العروبة.</p>
+              <span style="font-size: 11px; background: #fee2e2; color: #b91c1c; font-weight: 700; padding: 3px 8px; border-radius: 4px;" data-i18n="tag_food">مواد غذائية</span>
+              <h4 style="font-size: 15px; margin: 8px 0 4px; font-weight: 700;" data-i18n="br_ahsa_h">مستودعات الأحساء (أغذية)</h4>
+              <p style="color: var(--muted); font-size: 12px; margin-bottom: 10px;" data-i18n="br_ahsa_p">الهفوف - حي الجامعة، شارع العروبة.</p>
             </div>
-            <a href="https://wa.me/966533511159" target="_blank" class="branch-btn" style="background: var(--red);">
-              <span>طلب تسعيرة وتواصل</span>
+            <a href="https://wa.me/966533511159?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="branch-btn" style="background: var(--red);">
+              <span data-i18n="btn_quote_contact">طلب تسعيرة وتواصل</span>
               <span style="direction: ltr;">053 351 1159</span>
             </a>
           </div>
@@ -597,12 +563,12 @@
           <!-- فرع الدمام - بلاستيك -->
           <div class="branch-card">
             <div>
-              <span style="font-size: 11px; background: #fefce8; color: #a16207; font-weight: 700; padding: 3px 8px; border-radius: 4px;">بلاستيك وتغليف</span>
-              <h4 style="font-size: 15px; margin: 8px 0 4px; font-weight: 700;">قمة الهامات للبلاستيك (الدمام)</h4>
-              <p style="color: var(--muted); font-size: 12px; margin-bottom: 10px;">الدمام - شارع الأمير نايف، مقابل سوق الخضار.</p>
+              <span style="font-size: 11px; background: #fefce8; color: #a16207; font-weight: 700; padding: 3px 8px; border-radius: 4px;" data-i18n="tag_pack">بلاستيك وتغليف</span>
+              <h4 style="font-size: 15px; margin: 8px 0 4px; font-weight: 700;" data-i18n="br_hamat_h">قمة الهامات للبلاستيك (الدمام)</h4>
+              <p style="color: var(--muted); font-size: 12px; margin-bottom: 10px;" data-i18n="br_hamat_p">الدمام - شارع الأمير نايف، مقابل سوق الخضار.</p>
             </div>
-            <a href="https://wa.me/966577348040" target="_blank" class="branch-btn" style="background: #0f172a;">
-              <span>طلب تسعيرة وتواصل</span>
+            <a href="https://wa.me/966577348040?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20%D9%85%D9%86%20%D9%82%D9%85%D8%A9%20%D8%A7%D9%84%D9%87%D8%A7%D9%85%D8%A7%D8%AA%20%D9%84%D9%84%D8%A8%D9%84%D8%A7%D8%B3%D8%AA%D9%8A%D9%83%20(%D8%A7%D9%84%D8%AF%D9%85%D8%A7%D9%85)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="branch-btn" style="background: #0f172a;">
+              <span data-i18n="btn_quote_contact">طلب تسعيرة وتواصل</span>
               <span style="direction: ltr;">057 734 8040</span>
             </a>
           </div>
@@ -610,25 +576,25 @@
           <!-- فرع الأحساء - بلاستيك -->
           <div class="branch-card">
             <div>
-              <span style="font-size: 11px; background: #fefce8; color: #a16207; font-weight: 700; padding: 3px 8px; border-radius: 4px;">بلاستيك وتغليف</span>
-              <h4 style="font-size: 15px; margin: 8px 0 4px; font-weight: 700;">لألأة النجوم للبلاستيك (الأحساء)</h4>
-              <p style="color: var(--muted); font-size: 12px; margin-bottom: 10px;">المبرز - طريق الملك عبدالله، بجانب البلدية.</p>
+              <span style="font-size: 11px; background: #fefce8; color: #a16207; font-weight: 700; padding: 3px 8px; border-radius: 4px;" data-i18n="tag_pack">بلاستيك وتغليف</span>
+              <h4 style="font-size: 15px; margin: 8px 0 4px; font-weight: 700;" data-i18n="br_stars_h">لألأة النجوم للبلاستيك (الأحساء)</h4>
+              <p style="color: var(--muted); font-size: 12px; margin-bottom: 10px;" data-i18n="br_stars_p">المبرز - طريق الملك عبدالله، بجانب البلدية.</p>
             </div>
-            <a href="https://wa.me/966506744437" target="_blank" class="branch-btn" style="background: #a16207;">
-              <span>طلب تسعيرة وتواصل</span>
+            <a href="https://wa.me/966506744437?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20%D9%85%D9%86%20%D9%84%D8%A3%D9%84%D8%A3%D8%A9%20%D8%A7%D9%84%D9%86%D8%AC%D9%88%D9%85%20%D9%84%D9%84%D8%A8%D9%84%D8%A7%D8%B3%D8%AA%D9%8A%D9%83%20(%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="branch-btn" style="background: #a16207;">
+              <span data-i18n="btn_quote_contact">طلب تسعيرة وتواصل</span>
               <span style="direction: ltr;">050 674 4437</span>
             </a>
           </div>
 
-          <!-- مذاق راقي - حلويات -->
+          <!-- مذاق راقي - حلويات وسناكات ومكسرات -->
           <div class="branch-card">
             <div>
-              <span style="font-size: 11px; background: #fdf2f8; color: #db2777; font-weight: 700; padding: 3px 8px; border-radius: 4px;">حلويات ومخابز</span>
-              <h4 style="font-size: 15px; margin: 8px 0 4px; font-weight: 700;">مذاق راقي للحلويات والمخابز</h4>
-              <p style="color: var(--muted); font-size: 12px; margin-bottom: 10px;">توريد خام للمخابز، الشوكولاتة وحشوات الكيك.</p>
+              <span style="font-size: 11px; background: #fdf2f8; color: #db2777; font-weight: 700; padding: 3px 8px; border-radius: 4px;" data-i18n="tag_sweet">حلويات وسناكات</span>
+              <h4 style="font-size: 15px; margin: 8px 0 4px; font-weight: 700;" data-i18n="br_mazaq_h">مذاق راقي للحلويات والسناكات</h4>
+              <p style="color: var(--muted); font-size: 12px; margin-bottom: 10px;" data-i18n="br_mazaq_p">توريد الشوكولاتة والحلويات العالمية، الشيبس، الشاي، والمكسرات.</p>
             </div>
-            <a href="https://wa.me/966558423342" target="_blank" class="branch-btn" style="background: #db2777;">
-              <span>طلب تسعيرة وتواصل</span>
+            <a href="https://wa.me/966558423342?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20%D9%85%D9%86%20%D9%85%D8%B0%D8%A7%D9%82%20%D8%B1%D8%A7%D9%82%D9%8A%20%D9%84%D9%84%D8%AD%D9%84%D9%88%D9%8A%D8%A7%D8%AA%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="branch-btn" style="background: #db2777;">
+              <span data-i18n="btn_quote_contact">طلب تسعيرة وتواصل</span>
               <span style="direction: ltr;">055 842 3342</span>
             </a>
           </div>
@@ -641,27 +607,27 @@
       <div class="container">
         <div class="head">
           <div>
-            <div class="kicker">الأسئلة الشائعة</div>
-            <h2>الأسئلة المتكررة</h2>
+            <div class="kicker" data-i18n="faq_kicker">الأسئلة الشائعة</div>
+            <h2 data-i18n="faq_title">الأسئلة المتكررة</h2>
           </div>
-          <p>إجابات مباشرة على أكثر استفسارات العملاء والشركات شيوعاً.</p>
+          <p data-i18n="faq_desc">إجابات سريعة ومباشرة على أكثر استفسارات المنشآت والشركات شيوعاً.</p>
         </div>
         <div class="faq-list">
           <details>
-            <summary>هل يتوفر أسطول توصيل منتظم للدمام والأحساء وضواحيها؟</summary>
-            <div class="faq-answer-inner">نعم، نمتلك أسطولاً مجهزاً ومبرداً يغطي كافة الأنشطة والمطاعم والمتاجر في الدمام، الخبر، الظهران، والأحساء بشكل يومي ودوري.</div>
+            <summary data-i18n="q1">هل توفرون التوصيل للدمام والأحساء وضواحيها؟</summary>
+            <div class="faq-answer-inner" data-i18n="a1">نعم، نمتلك أسطولاً مجهزاً ومبرداً يغطي كافة الأنشطة والمطاعم والمتاجر والتموينات في الدمام، الخبر، الظهران، والأحساء بشكل يومي ودوري.</div>
           </details>
           <details>
-            <summary>كيف يمكن للمنشآت طلب تسعيرة فورية لكميات الجملة؟</summary>
-            <div class="faq-answer-inner">يمكنكم تصفح الكتالوج والضغط مباشرة على الفرع المطلوب عبر الواتساب لتصل رسالة الصنف لمدير المبيعات، أو التواصل المباشر مع الإدارة للحصول على عروض أسعار رسمية.</div>
+            <summary data-i18n="q2">ما هي آلية الحصول على قائمة الأسعار والكتالوج الكامل؟</summary>
+            <div class="faq-answer-inner" data-i18n="a2">يمكنك الضغط على زر الفرع المطلوب عبر الواتساب لإرسال طلب التسعيرة وقائمتك مباشرة، أو الاتصال بهاتف الإدارة للحصول على عروض أسعار رسمية فورية.</div>
           </details>
           <details>
-            <summary>هل تقدمون فواتير ضريبية إلكترونية معتمدة للشركات؟</summary>
-            <div class="faq-answer-inner">نعم، جميع معاملاتنا مسجلة وموثقة بفواتير ضريبية نظامية متوافقة بالكامل مع هيئة الزكاة والضريبة والجمارك.</div>
+            <summary data-i18n="q3">هل تقدمون فواتير ضريبية إلكترونية معتمدة للشركات؟</summary>
+            <div class="faq-answer-inner" data-i18n="a3">نعم، جميع معاملاتنا مسجلة وموثقة بفواتير ضريبية نظامية متوافقة بالكامل مع هيئة الزكاة والضريبة والجمارك (ZATCA).</div>
           </details>
           <details>
-            <summary>ما هي آلية التوريد والتعاقدات الآجلة للمطاعم والفنادق؟</summary>
-            <div class="faq-answer-inner">نوفر تسهيلات دفع وحسابات آجلة للجهات والشركات المعتمدة بعد دراسة حجم السحب والتعامل الأولي.</div>
+            <summary data-i18n="q4">هل تتوفر تسهيلات توريد وحسابات آجلة للشركات؟</summary>
+            <div class="faq-answer-inner" data-i18n="a4">نوفر تسهيلات دفع وحسابات آجلة للجهات والمنشآت المعتمدة بعد دراسة حجم السحب والتعامل التجاري الأولي.</div>
           </details>
         </div>
       </div>
@@ -673,36 +639,37 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col">
-          <h4>شركة لألأة النجوم التجارية</h4>
-          <p>شركة سعودية رائدة في استيراد وتوزيع المواد الغذائية والبلاستيك ومستلزمات الحلويات والمخابز بالجملة لقطاع الأعمال منذ 1993م.</p>
+          <h4 data-i18n="ft_c_name">شركة لألأة النجوم التجارية</h4>
+          <p data-i18n="ft_c_desc">شركة سعودية رائدة في استيراد وتوزيع المواد الغذائية والبلاستيك والحلويات والسناكات بالجملة لقطاع الأعمال منذ 1993م.</p>
         </div>
         <div class="footer-col">
-          <h4>البيانات الرسمية</h4>
-          <p><strong>السجل التجاري:</strong> <span style="direction: ltr; display: inline-block;">2050026211</span></p>
-          <p><strong>الرقم الضريبي:</strong> <span style="direction: ltr; display: inline-block;">300463283200003</span></p>
-          <p><strong>المركز الرئيسي:</strong> المنطقة الشرقية - المملكة العربية السعودية</p>
+          <h4 data-i18n="ft_legal_h">البيانات الرسمية</h4>
+          <p><strong data-i18n="ft_cr">السجل التجاري:</strong> <span style="direction: ltr; display: inline-block;">2050026211</span></p>
+          <p><strong data-i18n="ft_vat">الرقم الضريبي:</strong> <span style="direction: ltr; display: inline-block;">300463283200003</span></p>
+          <p><strong data-i18n="ft_hq">المركز الرئيسي:</strong> <span data-i18n="ft_hq_val">المنطقة الشرقية - المملكة العربية السعودية</span></p>
         </div>
         <div class="footer-col">
-          <h4>خدمة العملاء والتوريد</h4>
-          <p><strong>هاتف الإدارة:</strong> <span style="direction: ltr; display: inline-block;">0138562508</span></p>
-          <p><strong>أوقات العمل:</strong> السبت - الخميس: 7:00 ص - 9:00 م</p>
+          <h4 data-i18n="ft_contact_h">خدمة العملاء والتوريد</h4>
+          <p><strong data-i18n="ft_phone">هاتف الإدارة:</strong> <span style="direction: ltr; display: inline-block;">0138562508</span></p>
+          <p><strong data-i18n="ft_hours">أوقات العمل:</strong> <span data-i18n="ft_hours_val">السبت - الخميس: 7:00 ص - 9:00 م</span></p>
         </div>
       </div>
-      <div class="footer-bottom">
+      <div class="footer-bottom" data-i18n="ft_rights">
         جميع الحقوق محفوظة © 2026 شركة لألأة النجوم التجارية | LALA STAR TRADING CO.
       </div>
     </div>
   </footer>
 
-  <!-- زر واتساب العائم الوحيد والنظيف والمضبوط -->
-  <a href="https://wa.me/966567999863?text=السلام%20عليكم%20شركة%20لألأة%20النجوم،%20أود%20الاستفسار%20عن%20التوريد" class="clean-wa-float" target="_blank" aria-label="WhatsApp">
+  <!-- زر واتساب العائم الوحيد والنظيف -->
+  <a href="https://wa.me/966567999863?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%20%D8%B4%D8%B1%D9%83%D8%A9%20%D9%84%D8%A3%D9%84%D8%A3%D8%A9%20%D8%A7%D9%84%D9%86%D8%AC%D9%88%D9%85%D8%8C%20%D8%A3%D9%88%D8%AF%20%D8%A7%D9%84%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%A7%D8%B1%20%D8%B9%D9%86%20%D8%A7%D9%84%D8%AA%D9%88%D8%B1%D9%8A%D8%AF" class="clean-wa-float" target="_blank" aria-label="WhatsApp">
     <svg viewBox="0 0 32 32">
       <path d="M16 2a13.9 13.9 0 0 0-12 21L2 30l7.2-1.9A13.9 13.9 0 1 0 16 2zm0 25.5a11.5 11.5 0 0 1-5.9-1.6l-.4-.3-4.3 1.1 1.2-4.2-.3-.4A11.6 11.6 0 1 1 16 27.5zm6.4-8.6c-.3-.2-2-.9-2.3-1.1-.3-.1-.5-.2-.7.2s-.8 1.1-1 1.3-.4.2-.7.1a9.2 9.2 0 0 1-2.7-1.7 10.1 10.1 0 0 1-1.9-2.3c-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.4.3-.6 0-.2 0-.4-.1-.6s-.7-1.7-1-2.3c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4s-1.2 1.2-1.2 2.8 1.2 3.2 1.4 3.4 2.4 3.7 5.8 5.1c.8.4 1.4.6 1.9.7.8.3 1.6.2 2.2.1.7-.1 2-.8 2.3-1.6.3-.8.3-1.5.2-1.6-.1-.2-.3-.3-.6-.5z"/>
     </svg>
   </a>
 
-  <!-- سكربت فلترة الكتالوج والترجمة والقائمة -->
+  <!-- سكربت فلترة الكتالوج والترجمة وقائمة الجوال السلسة -->
   <script>
+    // تصفية الكتالوج
     function filterCatalog(category, clickedBtn) {
       const cards = document.querySelectorAll('.prod-card');
       const buttons = document.querySelectorAll('.cat-btn');
@@ -719,254 +686,314 @@
       });
     }
 
-    const i18n = {
-      "من نحن":"About Us",
-      "مزايا التوريد":"Supply Advantages",
-      "أنشطتنا":"Our Activities",
-      "كتالوج الأصناف":"Product Catalog",
-      "الفروع والمستودعات":"Branches & Warehouses",
-      "الأسئلة الشائعة":"FAQ",
-      "الكتالوج والطلب":"Catalog & Order",
-      "حلول التوريد الشاملة لقطاع الأعمال والشركات":"Comprehensive Supply Solutions for Businesses & Companies",
-      "موردكم المعتمد للمواد الغذائية والبلاستيك ومستلزمات الحلويات":"Your Trusted Supplier of Food Products, Plastics & Confectionery Supplies",
-      "نوفر لسلاسل المطاعم، الفنادق، المخابز، وشركات الإعاشة في المنطقة الشرقية (الدمام والأحساء) أعلى معايير الجودة وبأسعار جملة تنافسية منذ 1993م.":"We supply restaurant chains, hotels, bakeries, and catering companies across the Eastern Province (Dammam and Al Ahsa) with high quality standards and competitive wholesale prices since 1993.",
-      "عرض كتالوج الأصناف":"View Product Catalog",
-      "فروع ومستودعات التوزيع":"Distribution Branches & Warehouses",
-      "عاماً من الخبرة في التوريد":"Years of Supply Experience",
-      "صنف معتمد بالمستودعات":"Approved Products in Warehouses",
-      "فرعان":"Two Branches",
-      "مستودعات الدمام والأحساء":"Dammam & Al Ahsa Warehouses",
-      "التزام بمواعيد التوصيل":"Commitment to Delivery Schedules",
-      "طلب تسعيرات فورية":"Instant Quote Requests",
-      "كتالوج أصناف التوريد والجملة":"Wholesale Supply Product Catalog",
-      "اختر التصنيف واطلب تسعيرتك للفرع الأقرب لنشاطك التجاري بكل سهولة وسرعة.":"Choose a category and request a quote from the branch closest to your business quickly and easily.",
-      "الكل":"All",
-      "مواد غذائية وتموين":"Food & Catering Supplies",
-      "حلويات ومخابز":"Confectionery & Bakery",
-      "بلاستيك وتغليف":"Plastic & Packaging",
-      "مجمدات وإعاشة":"Frozen & Catering",
-      "منظفات ومستهلكات":"Cleaning & Consumables",
-      "أغذية وتموين":"Food & Catering",
-      "أرز بسمتي ومزة درجة أولى":"Premium Basmati & Mazza Rice",
-      "توريد شوالات 40 كجم و10 كجم مخصصة للمطابخ والمطاعم الكبرى والإعاشة.":"Supply of 40 kg and 10 kg sacks for large kitchens, restaurants, and catering operations.",
-      "التعبئة: كيس 40 كجم / طبلية جملة":"Packaging: 40 kg bag / Wholesale pallet",
-      "فرع الدمام":"Dammam Branch",
-      "فرع الأحساء":"Al Ahsa Branch",
-      "زيوت قلي وطبخ جملة":"Wholesale Cooking & Frying Oils",
-      "زيوت نباتية وزيت دوار الشمس بعبوات اقتصادية للمطاعم ومطابخ الولائم.":"Vegetable and sunflower oils in economical packages for restaurants and banquet kitchens.",
-      "التعبئة: كرتون (4×1.5 لتر) / جركل 17 لتر":"Packaging: Carton (4×1.5 L) / 17 L jerrycan",
-      "شوكولاتة خام وحشوات كيك":"Raw Chocolate & Cake Fillings",
-      "شوكولاتة خام، حشوات مكسرات وفواكه، وزبدة فستق ولوتس للمخابز ومحلات الحلا.":"Raw chocolate, nut and fruit fillings, and pistachio and Lotus spreads for bakeries and confectionery shops.",
-      "التعبئة: سطل 5 - 10 كجم / كراتين جملة":"Packaging: 5–10 kg bucket / Wholesale cartons",
-      "مذاق راقي للحلويات والمخابز":"Mazaq Raqi for Confectionery & Bakeries",
-      "مكسرات، سكر ناعم، ودقيق فاخر":"Nuts, Powdered Sugar & Premium Flour",
-      "لوز شرائح، فستق حلبي، سكر مطحون للمخابز، ونشا ذرة بكميات تجارية لتصنيع الحلويات.":"Sliced almonds, pistachios, powdered sugar for bakeries, and corn starch in commercial quantities for confectionery production.",
-      "التعبئة: كيس 25 كجم / كرتون 10 كجم":"Packaging: 25 kg bag / 10 kg carton",
-      "علب مايكرويف وقصدير سفري":"Microwave Containers & Takeaway Foil",
-      "تشكيلة علب حفظ حرارية سوداء وشفافة، وصحون قصدير مخصصة للمطاعم ومحلات المأكولات.":"A range of black and clear thermal food containers and foil trays for restaurants and food outlets.",
-      "التعبئة: كرتون 250 - 500 حبة":"Packaging: Carton of 250–500 pieces",
-      "قمة الهامات - الدمام":"Qimmah Al Hammat - Dammam",
-      "لألأة النجوم - الأحساء":"LALA STAR - Al Ahsa",
-      "أكياس ورقية وبلاستيك وسفرة":"Paper & Plastic Bags and Table Covers",
-      "أكياس تسوق سميكة، رولات سفرة طعام اقتصادية، ومستلزمات تغليف الوجبات السريعة.":"Heavy-duty shopping bags, economical food table-cover rolls, and fast-food packaging supplies.",
-      "التعبئة: كرتون جملة متعدد المقاسات":"Packaging: Wholesale cartons in multiple sizes",
-      "دواجن مجمدة وبطاطس نصف مقلية":"Frozen Poultry & Par-Fried Potatoes",
-      "دجاج مجمد كامل، صدور فيليه، وبطاطس أصابع سريعة التحضير لقطاع المطاعم.":"Whole frozen chicken, fillets, and quick-preparation French fries for restaurants.",
-      "التعبئة: كرتون 10 كجم":"Packaging: 10 kg carton",
-      "صابون ومطهرات جالونات 5L":"5L Soap & Disinfectant Containers",
-      "سائل غسيل صحون مركز، صابون يدين، ومطهرات أرضيات برائحة الصنوبر للمنشآت.":"Concentrated dishwashing liquid, hand soap, and pine-scented floor disinfectants for businesses.",
-      "التعبئة: كرتون (4 × 5 لتر)":"Packaging: Carton (4 × 5 L)",
-      "قمة الهامات - الدمام":"Qimmah Al Hammat - Dammam",
-      "لألأة النجوم - الأحساء":"LALA STAR - Al Ahsa",
-      "شركة لها مسار واضح":"A Company with a Clear Path",
-      "تأسست شركة لألأة النجوم التجارية في الدمام عام 1993م في مجال بيع المواد الغذائية بالجملة، ثم توسعت أعمالها لتشمل أنشطة تجارية متخصصة تحت مظلة الشركة.":"LALA STAR Trading Company was established in Dammam in 1993 in wholesale food trading, then expanded into specialized commercial activities under the company.",
-      "مستودع لألأة النجوم التجارية للجملة":"LALA STAR wholesale warehouse",
-      "تجارة وتوزيع بالجملة":"Wholesale Trade & Distribution",
-      "من الدمام بدأت الرحلة":"The Journey Began in Dammam",
-      "الدمام هي الفرع الرئيسي للشركة، وفي عام 2018م تم تدشين فرع الأحساء، ثم امتدت العمليات لتشمل قطاعات التغليف والبلاستيك والحلويات عبر مستودعات متخصصة.":"Dammam is the company's main branch. In 2018, the Al Ahsa branch was launched, followed by expansion into packaging, plastics, and confectionery through specialized warehouses.",
-      "بداية الشركة — الدمام":"Company Launch — Dammam",
-      "انطلاق النشاط المركزي في استيراد وتوريد المواد الغذائية بالجملة.":"Launch of the central wholesale food import and supply operation.",
-      "بعد التوسع":"After Expansion",
-      "أنشطة البلاستيك والحلويات":"Plastic & Confectionery Activities",
-      "تأسيس أذرع متخصصة (قمة الهامات للبلاستيك ومذاق راقي للحلويات) لخدمة مختلف القطاعات.":"Establishment of specialized arms (Qimmah Al Hammat for Plastics and Mazaq Raqi for Confectionery) to serve different sectors.",
-      "افتتاح فرع الأحساء":"Al Ahsa Branch Opening",
-      "توسيع نطاق التوزيع الميداني بافتتاح فرع ومستودعات الأحساء وتغطية كامل المحافظة.":"Expanding field distribution by opening the Al Ahsa branch and warehouses to cover the entire governorate.",
-      "مزايا التوريد والتعامل معنا":"Supply & Partnership Advantages",
-      "خدمات وتجربة توريد مصممة لتسهيل التعامل التجاري واللوجستي مع المنشآت في المنطقة الشرقية.":"Supply services and experience designed to simplify commercial and logistics operations for businesses in the Eastern Province.",
-      "أسعار جملة تنافسية":"Competitive Wholesale Prices",
-      "حلول تسعير موجهة للمشتريات الكبرى والكميات التجارية المباشرة.":"Pricing solutions tailored to major purchases and direct commercial quantities.",
-      "أسطول توزيع يغطي الشرقية":"Distribution Fleet Covering the Eastern Province",
-      "شاحنات نقل مجهزة تضمن التوصيل السريع والدوري لكافة العملاء.":"Equipped transport trucks ensuring fast, regular delivery to all customers.",
-      "سلامة التخزين وجودة الأصناف":"Storage Safety & Product Quality",
-      "التزام بأعلى معايير التخزين المبرد والجاف المعتمدة صحياً وتجارياً.":"Compliance with the highest approved standards for chilled and dry storage.",
-      "خبرة تجارية راسخة منذ 1993":"Established Commercial Experience Since 1993",
-      "أكثر من 30 عاماً من الثقة والاستقرار المالي والتجاري في أسواق المملكة.":"More than 30 years of trust and commercial stability in the Saudi market.",
-      "قطاعات وأنشطة التوريد":"Supply Sectors & Activities",
-      "أنشطة مستقلة ومتخصصة تحت مظلة الشركة تخدم احتياجات قطاع الأعمال باحترافية كاملة.":"Independent, specialized activities under the company umbrella serving business-sector needs professionally.",
-      "المواد الغذائية والتموين":"Food & Catering Supplies",
-      "النشاط الأساسي للتوريد الغذائي الشامل والمطابخ الكبرى.":"Core activity for comprehensive food supply and large-scale kitchens.",
-      "البلاستيك ومواد التغليف":"Plastics & Packaging Materials",
-      "قمة الهامات ولألأة النجوم لحلول التعبئة ومستلزمات السفري.":"Qimmah Al Hammat and LALA STAR for packaging solutions and takeaway supplies.",
-      "مستلزمات الحلويات والمخابز":"Confectionery & Bakery Supplies",
-      "مذاق راقي للمواد الخام، الشوكولاتة، حشوات الكيك والمكسرات.":"Mazaq Raqi for raw materials, chocolate, cake fillings, and nuts.",
-      "مستودع التوريد المركزي":"Central Supply Warehouse",
-      "الدمام · الأحساء":"Dammam · Al Ahsa",
-      "الشركاء والقطاعات المستهدفة":"Partners & Target Sectors",
-      "نخدم مجموعة متكاملة من المنشآت التجارية التي تعتمد على انتظام سلاسل الإمداد بالجملة.":"We serve a broad range of commercial establishments that rely on consistent wholesale supply chains.",
-      "متاجر التجزئة والتموينات":"Retail Stores & Groceries",
-      "احتياجات إعادة التوريد اليومية ومخزون السلع الاستهلاكية.":"Daily replenishment needs and consumer-goods inventory.",
-      "المطاعم والمطابخ المركزية":"Restaurants & Central Kitchens",
-      "أصناف وكميات مخصصة للتشغيل التجاري المستمر ومطابخ الولائم.":"Products and quantities tailored for continuous commercial operations and banquet kitchens.",
-      "شركات الإعاشة والفنادق":"Catering Companies & Hotels",
-      "حلول إمداد موثوقة ومجدولة تضمن استمرارية خدمات الإطعام.":"Reliable, scheduled supply solutions ensuring continuity of food-service operations.",
-      "المخابز ومحلات الحلويات":"Bakeries & Confectionery Shops",
-      "مواد خام عالية الجودة، شوكولاتة بلجيكية وحشوات تصنيع متخصصة.":"High-quality raw materials, Belgian chocolate, and specialized production fillings.",
-      "مستودعات مركزية بسعة تخزين ضخمة":"Central warehouses with large storage capacity",
-      "أسطول نقل مجهز بنظام التبريد والتجميد":"Transport fleet equipped with refrigeration and freezing systems",
-      "مطابقة كاملة لاشتراطات هيئة الغذاء والدواء":"Full compliance with Saudi Food and Drug Authority requirements",
-      "شبكة التوزيع الميداني":"Field Distribution Network",
-      "الفروع ومستودعات التوريد":"Branches & Supply Warehouses",
-      "مستودعات مجهزة لتلبية طلبيات الجملة بسرعة في كافة أنحاء المنطقة الشرقية.":"Equipped warehouses for fast wholesale order fulfillment across the Eastern Province.",
-      "مواد غذائية":"Food Products",
-      "مستودعات الدمام المركزية (أغذية)":"Dammam Central Warehouses (Food)",
-      "شارع 42، مقابل سوق الخضار المركزي، الدمام.":"Street 42, opposite the Central Vegetable Market, Dammam.",
-      "طلب تسعيرة وتواصل":"Request a Quote & Contact",
-      "مستودعات الأحساء (أغذية)":"Al Ahsa Warehouses (Food)",
-      "الهفوف - حي الجامعة، شارع العروبة.":"Al Hofuf - Al Jameah District, Al Orouba Street.",
-      "بلاستيك وتغليف":"Plastic & Packaging",
-      "قمة الهامات للبلاستيك (الدمام)":"Qimmah Al Hammat Plastics (Dammam)",
-      "الدمام - شارع الأمير نايف، مقابل سوق الخضار.":"Dammam - Prince Nayef Street, opposite the Vegetable Market.",
-      "لألأة النجوم للبلاستيك (الأحساء)":"LALA STAR Plastics (Al Ahsa)",
-      "المبرز - طريق الملك عبدالله، بجانب البلدية.":"Al Mubarraz - King Abdullah Road, next to the municipality.",
-      "حلويات ومخابز":"Confectionery & Bakery",
-      "مذاق راقي للحلويات والمخابز":"Mazaq Raqi for Confectionery & Bakeries",
-      "توريد خام للمخابز، الشوكولاتة وحشوات الكيك.":"Raw supplies for bakeries, chocolate, and cake fillings.",
-      "الأسئلة المتكررة":"Frequently Asked Questions",
-      "إجابات مباشرة على أكثر استفسارات العملاء والشركات شيوعاً.":"Direct answers to the most common customer and business questions.",
-      "هل يتوفر أسطول توصيل منتظم للدمام والأحساء وضواحيها؟":"Is regular delivery available for Dammam, Al Ahsa, and their surrounding areas?",
-      "نعم، نمتلك أسطولاً مجهزاً ومبرداً يغطي كافة الأنشطة والمطاعم والمتاجر في الدمام، الخبر، الظهران، والأحساء بشكل يومي ودوري.":"Yes. We have an equipped, refrigerated fleet serving businesses, restaurants, and stores in Dammam, Khobar, Dhahran, and Al Ahsa on a daily and regular basis.",
-      "كيف يمكن للمنشآت طلب تسعيرة فورية لكميات الجملة؟":"How can businesses request an instant quote for wholesale quantities?",
-      "يمكنكم تصفح الكتالوج والضغط مباشرة على الفرع المطلوب عبر الواتساب لتصل رسالة الصنف لمدير المبيعات، أو التواصل المباشر مع الإدارة للحصول على عروض أسعار رسمية.":"Browse the catalog and contact the required branch directly via WhatsApp so the product request reaches the sales manager, or contact management for official quotations.",
-      "هل تقدمون فواتير ضريبية إلكترونية معتمدة للشركات؟":"Do you provide approved electronic tax invoices for businesses?",
-      "نعم، جميع معاملاتنا مسجلة وموثقة بفواتير ضريبية نظامية متوافقة بالكامل مع هيئة الزكاة والضريبة والجمارك.":"Yes. All transactions are registered and documented with compliant tax invoices in accordance with the Zakat, Tax and Customs Authority.",
-      "ما هي آلية التوريد والتعاقدات الآجلة للمطاعم والفنادق؟":"What is the supply and credit-contract process for restaurants and hotels?",
-      "نوفر تسهيلات دفع وحسابات آجلة للجهات والشركات المعتمدة بعد دراسة حجم السحب والتعامل الأولي.":"We offer payment facilities and credit accounts to approved entities and companies after reviewing purchase volume and initial dealings.",
-      "شركة لألأة النجوم التجارية":"LALA STAR Trading Company",
-      "شركة سعودية رائدة في استيراد وتوزيع المواد الغذائية والبلاستيك ومستلزمات الحلويات والمخابز بالجملة لقطاع الأعمال منذ 1993م.":"A leading Saudi company importing and distributing food products, plastics, and confectionery and bakery supplies wholesale to businesses since 1993.",
-      "البيانات الرسمية":"Official Information",
-      "السجل التجاري:":"Commercial Registration:",
-      "الرقم الضريبي:":"VAT Number:",
-      "المركز الرئيسي:":"Head Office:",
-      "المنطقة الشرقية - المملكة العربية السعودية":"Eastern Province - Saudi Arabia",
-      "خدمة العملاء والتوريد":"Customer Service & Supply",
-      "هاتف الإدارة:":"Management Phone:",
-      "أوقات العمل:":"Working Hours:",
-      "السبت - الخميس: 7:00 ص - 9:00 م":"Saturday - Thursday: 7:00 AM - 9:00 PM",
-      "جميع الحقوق محفوظة © 2026 شركة لألأة النجوم التجارية | LALA STAR TRADING CO.":"All rights reserved © 2026 LALA STAR Trading Company | LALA STAR TRADING CO.",
-      "فتح القائمة":"Open menu",
-      "إغلاق القائمة":"Close menu"
-    };
-
-    const reverseI18n = Object.fromEntries(Object.entries(i18n).map(([ar, en]) => [en, ar]));
-    let isEnglish = false;
-
-    function translateText(lang) {
-      const dictionary = lang === 'en' ? i18n : reverseI18n;
-      const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-      const nodes = [];
-      while (walker.nextNode()) nodes.push(walker.currentNode);
-
-      nodes.forEach(node => {
-        const raw = node.nodeValue;
-        const trimmed = raw.trim();
-        if (!trimmed || !dictionary[trimmed]) return;
-        node.nodeValue = raw.replace(trimmed, dictionary[trimmed]);
-      });
-
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (i18n[key]) el.textContent = lang === 'en' ? i18n[key] : key;
-      });
-
-      document.querySelectorAll('[alt]').forEach(el => {
-        const value = el.getAttribute('alt');
-        if (dictionary[value]) el.setAttribute('alt', dictionary[value]);
-      });
-
-      document.querySelectorAll('[aria-label]').forEach(el => {
-        const value = el.getAttribute('aria-label');
-        if (dictionary[value]) el.setAttribute('aria-label', dictionary[value]);
-      });
-
-      document.title = lang === 'en'
-        ? 'LALA STAR Trading Company | LALA STAR TRADING CO.'
-        : 'شركة لألأة النجوم التجارية | LALA STAR TRADING CO.';
+    // فتح وإغلاق قائمة الجوال
+    function toggleMobileMenu() {
+      const nav = document.getElementById('site-nav');
+      nav.classList.toggle('open');
     }
-
-    function toggleLang() {
-      isEnglish = !isEnglish;
-      document.documentElement.lang = isEnglish ? 'en' : 'ar';
-      document.documentElement.dir = isEnglish ? 'ltr' : 'rtl';
-      document.getElementById('langBtn').innerText = isEnglish ? 'عربي' : 'EN';
-      translateText(isEnglish ? 'en' : 'ar');
-    }
-
-    const menuBtn = document.getElementById('menuBtn');
-    const siteNav = document.getElementById('site-nav');
-    let menuOpen = false;
-
-    function prepareMobileMenu() {
-      if (!menuBtn || !siteNav) return;
-
-      if (window.innerWidth <= 850) {
-        menuBtn.style.display = 'block';
-        siteNav.style.position = 'absolute';
-        siteNav.style.top = '70px';
-        siteNav.style.left = '0';
-        siteNav.style.right = '0';
-        siteNav.style.background = '#ffffff';
-        siteNav.style.flexDirection = 'column';
-        siteNav.style.alignItems = 'stretch';
-        siteNav.style.gap = '0';
-        siteNav.style.padding = '8px 18px';
-        siteNav.style.borderBottom = '1px solid var(--line)';
-        siteNav.style.boxShadow = '0 10px 25px -5px rgba(15,30,54,.12)';
-        siteNav.style.overflow = 'hidden';
-        siteNav.style.maxHeight = menuOpen ? '500px' : '0';
-        siteNav.style.opacity = menuOpen ? '1' : '0';
-        siteNav.style.transition = 'max-height .25s ease, opacity .2s ease';
-        siteNav.style.pointerEvents = menuOpen ? 'auto' : 'none';
-      } else {
-        menuOpen = false;
-        menuBtn.style.display = '';
-        siteNav.style.cssText = '';
-        menuBtn.setAttribute('aria-expanded', 'false');
-        menuBtn.setAttribute('aria-label', isEnglish ? 'Open menu' : 'فتح القائمة');
+    function closeMobileMenu() {
+      const nav = document.getElementById('site-nav');
+      if (nav.classList.contains('open')) {
+        nav.classList.remove('open');
       }
     }
 
-    function toggleMenu() {
-      if (!siteNav || !menuBtn || window.innerWidth > 850) return;
-      menuOpen = !menuOpen;
-      siteNav.style.maxHeight = menuOpen ? '500px' : '0';
-      siteNav.style.opacity = menuOpen ? '1' : '0';
-      siteNav.style.pointerEvents = menuOpen ? 'auto' : 'none';
-      menuBtn.setAttribute('aria-expanded', String(menuOpen));
-      menuBtn.setAttribute('aria-label', menuOpen
-        ? (isEnglish ? 'Close menu' : 'إغلاق القائمة')
-        : (isEnglish ? 'Open menu' : 'فتح القائمة'));
-    }
+    // قاموس الترجمة الفورية عربي / إنجليزي
+    let currentLang = 'ar';
+    const dict = {
+      en: {
+        nav_about: "About Us",
+        nav_benefits: "Supply Benefits",
+        nav_businesses: "Our Businesses",
+        nav_catalog: "Supply Sectors",
+        nav_branches: "Branches & Hubs",
+        nav_faq: "FAQ",
+        nav_cta: "Catalog & Quote",
+        hero_badge: "Comprehensive Supply Solutions for B2B",
+        hero_title: "Certified Supplier for Food, Plastics & Confectionery Wholesale",
+        hero_desc: "Supplying grocery stores, supermarkets, restaurant chains, hotels, bakeries, and catering firms across the Eastern Province (Dammam & Al-Ahsa) with top quality and competitive wholesale prices since 1993.",
+        btn_catalog: "View Supply Sectors",
+        btn_branches: "Warehouses & Branches",
+        stat_1: "Years of Supply Heritage",
+        stat_2: "Certified Items in Warehouses",
+        stat_3_val: "2 Hubs",
+        stat_3: "Dammam & Al-Ahsa Warehouses",
+        stat_4: "Delivery Schedule Commitment",
+        cat_kicker: "Direct Wholesale Quotations",
+        cat_title: "Main Supply Lines & Wholesale Sectors",
+        cat_desc: "Providing over 5,000 certified warehouse items to fulfill supermarkets, restaurants, and cafés. Select your sector and request full price lists via WhatsApp.",
+        tab_all: "All",
+        tab_food: "Food & Staples",
+        tab_frozen: "Meat & Poultry",
+        tab_sweets: "Sweets & Snacks",
+        tab_pack: "Plastics & Packaging",
+        tab_clean: "Cleaning & Hygiene",
+        tag_food: "Food & Staples",
+        tag_frozen: "Frozen & Catering",
+        tag_sweet: "Sweets, Snacks & Tea",
+        tag_pack: "Plastics & Takeaway",
+        tag_clean: "Hygiene & Supplies",
+        card_food_title: "Staples & Bulk Food Supply Sector",
+        card_food_desc: "Basmati & Sella rice (commercial 40kg & 10kg bags), cooking & frying oils, sugar, flour, canned food, and bulk pulses for restaurants and retailers.",
+        card_food_spec: "Supply: Carton and wholesale pallets via fleet trucks",
+        card_frozen_title: "Poultry, Meat & Frozen Food Sector",
+        card_frozen_desc: "Whole & cut poultry, frozen meat, chicken fillets, french fries, and frozen vegetables designated for commercial kitchens and catering companies.",
+        card_frozen_spec: "Supply: Certified refrigerated and frozen logistics fleet",
+        card_sweets_title: "Confectionery, Snacks, Tea & Nuts Sector",
+        card_sweets_desc: "Wholesale cases of chocolates & confectionery (Kinder, Snickers, Mars..), chips & snacks (Lay's, Pringles..), premium teas, and assorted nuts for groceries and cafés.",
+        card_sweets_spec: "Entity: Mazaq Raqi Sweets (Wholesale cases and master cartons)",
+        card_pack_title: "Plastics, Takeaway & Packaging Sector",
+        card_pack_desc: "Microwave containers, aluminum trays, dining rolls, plastic & paper shopping bags, and restaurant packaging consumables.",
+        card_pack_spec: "Supply: Qemat Al-Hamat (Dammam) & Lala Star (Al-Ahsa) Warehouses",
+        card_clean_title: "Commercial Detergents & Sanitizers Sector",
+        card_clean_desc: "Dishwashing liquids, hand soaps, floor disinfectants, and pine sanitizers in all sizes including commercial 5L gallons for institutions.",
+        card_clean_spec: "Packaging: Multi-size commercial packs / (4 × 5L) cases / Bulk",
+        btn_dammam: "Dammam Branch",
+        btn_ahsa: "Al-Ahsa Branch",
+        btn_mazaq: "Mazaq Raqi Sweets - Al-Ahsa",
+        btn_hamat: "Qemat Al-Hamat - Dammam",
+        btn_stars_pack: "Lala Star - Al-Ahsa",
+        about_kicker: "About Us",
+        about_title: "An Established Commercial Track Record",
+        about_desc: "Established in Dammam in 1993 in wholesale food trade, expanding into specialized independent business units to cover all Eastern Province markets.",
+        about_caption: "Wholesale Trade & Distribution",
+        story_head: "From Dammam Began the Journey",
+        story_p: "Dammam is the company's headquarter. In 2018, Al-Ahsa branch was launched, followed by expanding into plastics, packaging, confectionery, and snacks with dedicated facilities.",
+        tl_1_h: "Company Launch — Dammam",
+        tl_1_p: "Starting wholesale importation and distribution of food staples.",
+        tl_2_y: "Post Expansion",
+        tl_2_h: "Plastics & Confectionery Entities",
+        tl_2_p: "Founding specialized arms (Qemat Al-Hamat for plastics & Mazaq Raqi for sweets and snacks) serving broad business sectors.",
+        tl_3_h: "Al-Ahsa Branch Opening",
+        tl_3_p: "Expanding distribution coverage by launching Al-Ahsa warehouse facilities.",
+        ben_kicker: "Supply Advantages",
+        ben_title: "Why Partner With Us",
+        ben_desc: "Supply capabilities engineered to streamline operations and logistics for Eastern Province enterprises.",
+        b1_h: "Competitive Wholesale Pricing",
+        b1_p: "Pricing structures tailored for high-volume purchasing and commercial orders.",
+        b2_h: "Eastern Province Logistics Fleet",
+        b2_p: "Equipped transport trucks ensuring swift and consistent client deliveries.",
+        b3_h: "Storage Integrity & Quality Control",
+        b3_p: "Strict compliance with certified chilled, frozen, and dry storage standards.",
+        b4_h: "Commercial Heritage Since 1993",
+        b4_p: "Over 30 years of stability and trust across Saudi Arabian markets.",
+        biz_kicker: "Our Businesses",
+        biz_title: "Specialized Supply Divisions",
+        biz_desc: "Independent business units under the corporate umbrella serving businesses with full dedication.",
+        biz1_h: "Wholesale Food & Staples",
+        biz1_p: "The core division supplying groceries, food retailers, and catering kitchens.",
+        loc_both: "Dammam · Al-Ahsa",
+        biz2_h: "Plastics & Packaging",
+        biz2_p: "Qemat Al-Hamat & Lala Star for packaging, table rolls, and takeaway items.",
+        biz3_h: "Mazaq Raqi Sweets & Snacks",
+        biz3_p: "Global confectionery, branded chips, premium teas, and assorted nuts.",
+        loc_ahsa_only: "Al-Ahsa Only",
+        cli_kicker: "Client Sectors",
+        cli_title: "Target Sectors & Partners",
+        cli_desc: "Serving a comprehensive spectrum of commercial businesses relying on prompt wholesale supply.",
+        c1_h: "Supermarkets & Grocery Stores",
+        c1_p: "Daily replenishment of staples, confectionery, chips, tea, and packaged goods.",
+        c2_h: "Restaurants & Central Kitchens",
+        c2_p: "Bulk food supplies, frozen meat & poultry, and essential takeaway packaging.",
+        c3_h: "Catering Companies & Hotels",
+        c3_p: "Scheduled bulk deliveries ensuring seamless catering operations.",
+        c4_h: "Cafés & Retail Packaging Outlets",
+        c4_p: "Premium tea, snacks, cups, bags, and daily disposable packaging.",
+        tr_1: "Central Hubs with High Storage Capacity",
+        tr_2: "Refrigerated and Frozen Logistics Fleet",
+        tr_3: "Full Compliance with SFDA Standards",
+        br_kicker: "Distribution Network",
+        br_title: "Direct Supply Branches & Hubs",
+        br_desc: "Fully equipped warehouses ensuring rapid wholesale fulfillment across the Eastern Province.",
+        br_dam_h: "Dammam Central Hub (Food)",
+        br_dam_p: "42nd Street, opposite Central Vegetable Market, Dammam.",
+        br_ahsa_h: "Al-Ahsa Hub (Food)",
+        br_ahsa_p: "Al-Hofuf - University District, Al-Orouba Street.",
+        br_hamat_h: "Qemat Al-Hamat Plastics (Dammam)",
+        br_hamat_p: "Dammam - Prince Nayef Street, opposite Central Market.",
+        br_stars_h: "Lala Star Plastics (Al-Ahsa)",
+        br_stars_p: "Al-Mubarraz - King Abdullah Road, next to Municipality.",
+        br_mazaq_h: "Mazaq Raqi Sweets & Snacks",
+        br_mazaq_p: "Wholesale imported chocolates, snacks, chips, tea, and nuts.",
+        btn_quote_contact: "Direct Quote & Contact",
+        faq_kicker: "FAQ",
+        faq_title: "Frequently Asked Questions",
+        faq_desc: "Direct answers to common client and enterprise inquiries.",
+        q1: "Do you deliver across Dammam, Al-Ahsa, and nearby areas?",
+        a1: "Yes, our refrigerated and dry transport fleet covers all retail businesses and restaurants daily.",
+        q2: "How can businesses obtain price lists and product catalogs?",
+        a2: "You can click on the desired branch WhatsApp button to send your request directly, or call management.",
+        q3: "Do you issue official electronic tax invoices for companies?",
+        a3: "Yes, all transactions are documented with compliant e-invoices under ZATCA regulations.",
+        q4: "Are credit facilities and payment terms available for clients?",
+        a4: "We provide deferred payment accounts for accredited clients following initial assessment.",
+        ft_c_name: "LALA STARS TRADING CO.",
+        ft_c_desc: "Leading Saudi enterprise in importing and distributing wholesale food, plastics, and confectionery since 1993.",
+        ft_legal_h: "Legal Information",
+        ft_cr: "CR Number:",
+        ft_vat: "VAT Number:",
+        ft_hq: "Headquarters:",
+        ft_hq_val: "Eastern Province - Saudi Arabia",
+        ft_contact_h: "Customer Support & Orders",
+        ft_phone: "Management Phone:",
+        ft_hours: "Business Hours:",
+        ft_hours_val: "Saturday - Thursday: 7:00 AM - 9:00 PM",
+        ft_rights: "All Rights Reserved © 2026 Lala Star Trading Co. | LALA STAR TRADING CO."
+      },
+      ar: {
+        nav_about: "من نحن",
+        nav_benefits: "مزايا التوريد",
+        nav_businesses: "أنشطتنا",
+        nav_catalog: "قطاعات التوريد",
+        nav_branches: "الفروع والمستودعات",
+        nav_faq: "الأسئلة الشائعة",
+        nav_cta: "الكتالوج والطلب",
+        hero_badge: "حلول التوريد الشاملة لقطاع الأعمال والشركات",
+        hero_title: "موردكم المعتمد للمواد الغذائية والبلاستيك والحلويات بالجملة",
+        hero_desc: "نوفر للتموينات ومتاجر التجزئة، وسلاسل المطاعم، الفنادق، المخابز، وشركات الإعاشة في المنطقة الشرقية (الدمام والأحساء) أعلى معايير الجودة وبأسعار جملة تنافسية منذ 1993م.",
+        btn_catalog: "عرض قطاعات التوريد",
+        btn_branches: "فروع ومستودعات التوزيع",
+        stat_1: "عاماً من الخبرة في التوريد",
+        stat_2: "صنف معتمد بالمستودعات",
+        stat_3_val: "فرعان",
+        stat_3: "مستودعات الدمام والأحساء",
+        stat_4: "التزام بمواعيد التوصيل",
+        cat_kicker: "طلب تسعيرات فورية",
+        cat_title: "خطوط التوريد وقطاعات الجملة الرئيسية",
+        cat_desc: "نوفر أكثر من 5,000 صنف معتمد بالمستودعات لتغطية احتياجات التموينات، المطاعم، والمقاهي. اختر القطاع واطلب التسعيرة أو الكتالوج الكامل مباشرة.",
+        tab_all: "الكل",
+        tab_food: "المواد الغذائية",
+        tab_frozen: "اللحوم والمجمدات",
+        tab_sweets: "الحلويات والسناكات",
+        tab_pack: "البلاستيك والتغليف",
+        tab_clean: "المنظفات والمطهرات",
+        tag_food: "أغذية وتموين",
+        tag_frozen: "مجمدات وإعاشة",
+        tag_sweet: "حلويات وسناكات ومسليات",
+        tag_pack: "بلاستيك وتغليف",
+        tag_clean: "منظفات ومستهلكات",
+        card_food_title: "قطاع الأغذية الأساسية والتموين بالجملة",
+        card_food_desc: "أرز بأنواعه (أكياس وعبوات تجارية 40 كجم و10 كجم)، زيوت طبخ وقلي، سكر، دقيق، معلبات، وبقوليات بحجوم تجارية للمطاعم والتموينات.",
+        card_food_spec: "التوريد: شاحنات توريد بالكرتون والباليت جملة",
+        card_frozen_title: "قطاع الدواجن واللحوم والمجمدات",
+        card_frozen_desc: "دواجن كاملة ومقطعة، لحوم مجمدة، صدور فيليه، بطاطس نصف مقلية، وخضروات مجمدة مخصصة لتشغيل المطابخ المركزية وشركات الإعاشة.",
+        card_frozen_spec: "التوريد: سيارات نقل وتوزيع مبردة ومجمدة معتمدة",
+        card_sweets_title: "قطاع الحلويات، السناكات، الشاي والمكسرات",
+        card_sweets_desc: "توريد كراتين الشوكولاتة والحلويات (كندر، سنيكرز، مارس..)، شيبسات وسناكات (ليز، برينجلز..)، جميع أنواع الشاي الفاخر، وتشكيلة مكسرات متنوعة للتموينات والمتاجر والمقاهي.",
+        card_sweets_spec: "المنشأة: مذاق راقي للحلويات (كراتين وطرود تجارية)",
+        card_pack_title: "قطاع البلاستيك ومستلزمات السفري والتغليف",
+        card_pack_desc: "تشكيلة علب مايكرويف، صحون قصدير، رولات سفرة طعام، أكياس تسوق بلاستيكية وورقية، ومستلزمات التعبئة والتغليف للمطاعم ومتاجر البيع.",
+        card_pack_spec: "التوريد: مستودعات قمة الهامات (الدمام) ولألأة النجوم (الأحساء)",
+        card_clean_title: "قطاع المنظفات والمطهرات بجميع الأحجام",
+        card_clean_desc: "سوائل غسيل صحون، صابون يدين، معقمات، ومطهرات أرضيات برائحة الصنوبر بجميع المقاسات وجالونات 5 لتر الكبرى لتلبية تشغيل المنشآت والمطاعم.",
+        card_clean_spec: "التعبئة: عبوات تجارية متعددة / كراتين (4 × 5 لتر) / جملة",
+        btn_dammam: "فرع الدمام",
+        btn_ahsa: "فرع الأحساء",
+        btn_mazaq: "مذاق راقي للحلويات - الأحساء",
+        btn_hamat: "قمة الهامات - الدمام",
+        btn_stars_pack: "لألأة النجوم - الأحساء",
+        about_kicker: "من نحن",
+        about_title: "شركة لها مسار تجاري راسخ",
+        about_desc: "تأسست شركة لألأة النجوم التجارية في الدمام عام 1993م في مجال بيع وتوزيع المواد الغذائية بالجملة، ثم توسعت أعمالها لتشمل أنشطة تجارية متخصصة تحت مظلة الشركة لتغطية كامل أسواق المنطقة الشرقية.",
+        about_caption: "تجارة وتوزيع بالجملة",
+        story_head: "من الدمام بدأت الرحلة",
+        story_p: "الدمام هي المركز الرئيسي للشركة، وفي عام 2018م تم تدشين فرع الأحساء، ثم امتدت العمليات لتشمل قطاعات التغليف والبلاستيك والحلويات والسناكات عبر مستودعات وفروع مستقلة وواضحة.",
+        tl_1_h: "بداية الشركة — الدمام",
+        tl_1_p: "انطلاق النشاط المركزي في استيراد وتوريد المواد الغذائية بالجملة.",
+        tl_2_y: "بعد التوسع",
+        tl_2_h: "أنشطة البلاستيك والحلويات",
+        tl_2_p: "تأسيس أذرع متخصصة (قمة الهامات للبلاستيك ومذاق راقي للحلويات والسناكات) لخدمة مختلف القطاعات التجارية.",
+        tl_3_h: "افتتاح فرع الأحساء",
+        tl_3_p: "توسيع نطاق التوزيع الميداني بافتتاح فرع ومستودعات الأحساء وتغطية كامل المحافظة.",
+        ben_kicker: "مزايا التوريد",
+        ben_title: "مزايا التوريد والتعامل معنا",
+        ben_desc: "خدمات وتجربة توريد مصممة لتسهيل التعامل التجاري واللوجستي مع المنشآت في المنطقة الشرقية.",
+        b1_h: "أسعار جملة تنافسية",
+        b1_p: "حلول تسعير موجهة للمشتريات الكبرى والكميات التجارية المباشرة.",
+        b2_h: "أسطول توزيع يغطي الشرقية",
+        b2_p: "شاحنات نقل مجهزة تضمن التوصيل السريع والدوري لكافة العملاء.",
+        b3_h: "سلامة التخزين وجودة الأصناف",
+        b3_p: "التزام بأعلى معايير التخزين المبرد والجاف المعتمدة صحياً وتجارياً.",
+        b4_h: "خبرة تجارية راسخة منذ 1993",
+        b4_p: "أكثر من 30 عاماً من الثقة والاستقرار المالي والتجاري في أسواق المملكة.",
+        biz_kicker: "أنشطتنا",
+        biz_title: "قطاعات وأنشطة التوريد المتخصصة",
+        biz_desc: "أنشطة متخصصة ومستودعات مستقلة تحت مظلة الشركة تخدم احتياجات قطاع الأعمال باحترافية كاملة.",
+        biz1_h: "المواد الغذائية والتموين",
+        biz1_p: "النشاط الأساسي للتوريد الغذائي الشامل، التموينات، والمطابخ الكبرى.",
+        loc_both: "الدمام · الأحساء",
+        biz2_h: "البلاستيك ومواد التغليف",
+        biz2_p: "قمة الهامات ولألأة النجوم لحلول التعبئة، السفرة، وسفريات المطاعم.",
+        biz3_h: "مذاق راقي للحلويات والسناكات",
+        biz3_p: "حلويات وشوكولاتة عالمية، شيبسات وسناكات، شاي فاخر، ومكسرات متنوعة.",
+        loc_ahsa_only: "الأحساء فقط",
+        cli_kicker: "قطاعات العملاء",
+        cli_title: "الشركاء والقطاعات المستهدفة",
+        cli_desc: "نخدم شريحة متكاملة من المنشآت التجارية التي تعتمد على انتظام سلاسل الإمداد بالجملة.",
+        c1_h: "متاجر التجزئة والتموينات",
+        c1_p: "احتياجات إعادة التوريد اليومية ومخزون السلع التموينية والحلويات والمسليات.",
+        c2_h: "المطاعم والمطابخ المركزية",
+        c2_p: "أصناف غذائية، لحوم ودواجن مجمدة، ومستلزمات تغليف وسفري يومية.",
+        c3_h: "شركات الإعاشة والفنادق",
+        c3_p: "حلول إمداد مجدولة وموثوقة تضمن استمرارية خدمات الإطعام بأعلى المعايير.",
+        c4_h: "المقاهي ومحلات بيع البلاستيك",
+        c4_p: "شاي فاخر، مسليات وسناكات، مع مستلزمات الأكواب والأكياس ومواد التغليف.",
+        tr_1: "مستودعات مركزية بسعة تخزين ضخمة",
+        tr_2: "أسطول نقل مجهز بنظام التبريد والتجميد",
+        tr_3: "مطابقة كاملة لاشتراطات هيئة الغذاء والدواء",
+        br_kicker: "شبكة التوزيع الميداني",
+        br_title: "الفروع ومستودعات التوريد المباشر",
+        br_desc: "مستودعات مجهزة لتلبية طلبيات الجملة بسرعة في كافة أنحاء المنطقة الشرقية.",
+        br_dam_h: "مستودعات الدمام المركزية (أغذية)",
+        br_dam_p: "شارع 42، مقابل سوق الخضار المركزي، الدمام.",
+        br_ahsa_h: "مستودعات الأحساء (أغذية)",
+        br_ahsa_p: "الهفوف - حي الجامعة، شارع العروبة.",
+        br_hamat_h: "قمة الهامات للبلاستيك (الدمام)",
+        br_hamat_p: "الدمام - شارع الأمير نايف، مقابل سوق الخضار.",
+        br_stars_h: "لألأة النجوم للبلاستيك (الأحساء)",
+        br_stars_p: "المبرز - طريق الملك عبدالله، بجانب البلدية.",
+        br_mazaq_h: "مذاق راقي للحلويات والسناكات",
+        br_mazaq_p: "توريد الشوكولاتة والحلويات العالمية، الشيبس، الشاي، والمكسرات.",
+        btn_quote_contact: "طلب تسعيرة وتواصل",
+        faq_kicker: "الأسئلة الشائعة",
+        faq_title: "الأسئلة المتكررة",
+        faq_desc: "إجابات سريعة ومباشرة على أكثر استفسارات المنشآت والشركات شيوعاً.",
+        q1: "هل توفرون التوصيل للدمام والأحساء وضواحيها؟",
+        a1: "نعم، نمتلك أسطولاً مجهزاً ومبرداً يغطي كافة الأنشطة والمطاعم والمتاجر والتموينات في الدمام، الخبر، الظهران، والأحساء بشكل يومي ودوري.",
+        q2: "ما هي آلية الحصول على قائمة الأسعار والكتالوج الكامل؟",
+        a2: "يمكنك الضغط على زر الفرع المطلوب عبر الواتساب لإرسال طلب التسعيرة وقائمتك مباشرة، أو الاتصال بهاتف الإدارة للحصول على عروض أسعار رسمية فورية.",
+        q3: "هل تقدمون فواتير ضريبية إلكترونية معتمدة للشركات؟",
+        a3: "نعم، جميع معاملاتنا مسجلة وموثقة بفواتير ضريبية نظامية متوافقة بالكامل مع هيئة الزكاة والضريبة والجمارك (ZATCA).",
+        q4: "هل تتوفر تسهيلات توريد وحسابات آجلة للشركات؟",
+        a4: "نوفر تسهيلات دفع وحسابات آجلة للجهات والمنشآت المعتمدة بعد دراسة حجم السحب والتعامل التجاري الأولي.",
+        ft_c_name: "شركة لألأة النجوم التجارية",
+        ft_c_desc: "شركة سعودية رائدة في استيراد وتوزيع المواد الغذائية والبلاستيك والحلويات والسناكات بالجملة لقطاع الأعمال منذ 1993م.",
+        ft_legal_h: "البيانات الرسمية",
+        ft_cr: "السجل التجاري:",
+        ft_vat: "الرقم الضريبي:",
+        ft_hq: "المركز الرئيسي:",
+        ft_hq_val: "المنطقة الشرقية - المملكة العربية السعودية",
+        ft_contact_h: "خدمة العملاء والتوريد",
+        ft_phone: "هاتف الإدارة:",
+        ft_hours: "أوقات العمل:",
+        ft_hours_val: "السبت - الخميس: 7:00 ص - 9:00 م",
+        ft_rights: "جميع الحقوق محفوظة © 2026 شركة لألأة النجوم التجارية | LALA STAR TRADING CO."
+      }
+    };
 
-    if (menuBtn) menuBtn.addEventListener('click', toggleMenu);
+    function toggleLang() {
+      currentLang = currentLang === 'ar' ? 'en' : 'ar';
+      document.documentElement.lang = currentLang;
+      document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+      document.getElementById('langBtn').innerText = currentLang === 'ar' ? 'EN' : 'عربي';
 
-    document.querySelectorAll('#site-nav a').forEach(link => {
-      link.addEventListener('click', () => {
-        if (window.innerWidth <= 850 && menuOpen) toggleMenu();
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[currentLang] && dict[currentLang][key]) {
+          el.innerText = dict[currentLang][key];
+        }
       });
-    });
-
-    window.addEventListener('resize', prepareMobileMenu);
-    prepareMobileMenu();
+    }
   </script>
 </body>
 </html>
