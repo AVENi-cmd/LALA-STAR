@@ -4,36 +4,35 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>بيب كوب | Beep Cup - قهوة مختصة في الأحساء</title>
-  <meta name="description" content="بيب كوب - قهوة مختصة تعدل كيفك وتراعي جيبك. فروعنا في الأحساء (الهفوف). قهوة سريعة بجودة عالية وبدون تأخير." />
+  <meta name="description" content="بيب كوب - قهوة مختصة تعدل كيفك وتراعي جيبك. فروعنا في الأحساء تخدمك على مدار الساعة." />
 
-  <!-- Google Fonts -->
+  <!-- الخطوط -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
 
-  <!-- Font Awesome Icons -->
+  <!-- الأيقونات -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
   <style>
     :root {
-      /* Obsidian & Modern Carbon Theme (بدون درجات بنية) */
-      --primary: #FF5A00;
-      --primary-glow: rgba(255, 90, 0, 0.4);
-      --primary-hover: #ff7326;
-      --bg-dark: #08090C;
-      --bg-surface-1: #0F1115;
-      --bg-surface-2: #16181F;
-      --border-subtle: #232731;
-      --border-focus: #FF5A00;
-      --text-main: #FFFFFF;
-      --text-muted: #8E95A5;
-      --accent-badge: #FFA23A;
+      --bg-main: #0B0D11;
+      --bg-surface: #12151B;
+      --bg-card: #181C24;
+      --border-color: #262B35;
+      --border-light: #323846;
+      --accent: #E85924;
+      --accent-hover: #ff6e38;
+      --accent-soft: rgba(232, 89, 36, 0.12);
+      --text-title: #FFFFFF;
+      --text-body: #9AA3B2;
+      --text-muted: #6B7485;
       --font-ar: 'Tajawal', sans-serif;
       --font-en: 'Plus Jakarta Sans', sans-serif;
-      --radius-sm: 10px;
-      --radius-md: 16px;
-      --radius-lg: 24px;
-      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --transition: all 0.2s ease-in-out;
     }
 
     * {
@@ -48,650 +47,547 @@
 
     body {
       font-family: var(--font-ar);
-      background-color: var(--bg-dark);
-      color: var(--text-main);
+      background-color: var(--bg-main);
+      color: var(--text-title);
       line-height: 1.6;
       overflow-x: hidden;
-      background-image: radial-gradient(circle at top center, #151822 0%, #08090C 70%);
-      background-attachment: fixed;
     }
 
     body.ltr {
       font-family: var(--font-en);
     }
 
-    /* Scrollbar */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-    ::-webkit-scrollbar-track {
-      background: var(--bg-dark);
-    }
-    ::-webkit-scrollbar-thumb {
-      background: var(--border-subtle);
-      border-radius: 4px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: var(--primary);
-    }
-
     .container {
-      width: 92%;
-      max-width: 1220px;
+      width: 90%;
+      max-width: 1180px;
       margin: 0 auto;
-      padding: 0 1rem;
     }
 
-    /* Announcement Bar */
-    .top-bar {
-      background: linear-gradient(90deg, #d44500, var(--primary), #d44500);
-      color: #fff;
+    /* الشريط العلوي */
+    .top-strip {
+      background: #07080B;
+      border-bottom: 1px solid var(--border-color);
       text-align: center;
-      padding: 0.5rem 1rem;
-      font-size: 0.84rem;
-      font-weight: 700;
-      letter-spacing: 0.5px;
+      padding: 0.4rem 1rem;
+      font-size: 0.8rem;
+      color: var(--text-body);
     }
 
-    /* Navbar */
-    .header {
+    .top-strip strong {
+      color: var(--accent);
+    }
+
+    /* الهيدر والقائمة */
+    .main-nav {
       position: sticky;
       top: 0;
-      z-index: 1000;
-      background: rgba(8, 9, 12, 0.88);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border-subtle);
+      z-index: 999;
+      background: rgba(11, 13, 17, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      height: 60px;
+      display: flex;
+      align-items: center;
     }
 
-    .nav-inner {
+    .nav-wrapper {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 75px;
     }
 
-    .brand-logo {
+    /* اللوقو الصغير الناعم */
+    .brand-wrap {
       display: flex;
       align-items: center;
-      gap: 0.8rem;
+      gap: 0.55rem;
       text-decoration: none;
-      color: inherit;
-    }
-
-    .logo-badge {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      background: #12141C;
-      border: 1px solid var(--border-subtle);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 15px rgba(255, 90, 0, 0.2);
-    }
-
-    .logo-badge svg {
-      width: 24px;
-      height: 24px;
-      stroke: var(--primary);
-    }
-
-    .brand-title {
-      font-family: var(--font-en);
-      font-weight: 900;
-      font-size: 1.35rem;
-      line-height: 1.1;
       color: #fff;
     }
 
-    .brand-title span {
-      color: var(--primary);
-      text-shadow: 0 0 12px var(--primary-glow);
-    }
-
-    .brand-sub {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      font-weight: 600;
-    }
-
-    .nav-links {
+    .logo-mini {
+      width: 32px;
+      height: 32px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
       display: flex;
-      gap: 2rem;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-mini svg {
+      width: 17px;
+      height: 17px;
+      stroke: var(--accent);
+    }
+
+    .brand-name {
+      font-family: var(--font-en);
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: -0.3px;
+    }
+
+    .brand-name span {
+      color: var(--accent);
+    }
+
+    /* روابط الشاشات الكبيرة */
+    .desktop-menu {
+      display: flex;
+      align-items: center;
+      gap: 1.8rem;
       list-style: none;
     }
 
-    .nav-links a {
-      color: var(--text-muted);
+    .desktop-menu a {
+      color: var(--text-body);
       text-decoration: none;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-weight: 600;
       transition: var(--transition);
     }
 
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: var(--primary);
+    .desktop-menu a:hover,
+    .desktop-menu a.active {
+      color: #fff;
     }
 
-    .nav-actions {
+    /* أدوات الهيدر */
+    .nav-controls {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 0.75rem;
     }
 
-    .lang-toggle-btn {
-      background: var(--bg-surface-1);
-      border: 1px solid var(--border-subtle);
-      color: var(--text-main);
-      padding: 0.45rem 0.95rem;
-      border-radius: 20px;
+    /* زر اللغة الصغير المدمج */
+    .lang-compact-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-body);
+      padding: 0.28rem 0.65rem;
+      border-radius: 14px;
+      font-size: 0.75rem;
       font-weight: 700;
-      font-size: 0.85rem;
       cursor: pointer;
-      display: flex;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: var(--transition);
+    }
+
+    .lang-compact-btn:hover {
+      border-color: var(--border-light);
+      color: #fff;
+    }
+
+    .btn-header-call {
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 700;
+      padding: 0.38rem 0.9rem;
+      border-radius: 14px;
+      display: inline-flex;
       align-items: center;
       gap: 0.4rem;
       transition: var(--transition);
     }
 
-    .lang-toggle-btn:hover {
-      border-color: var(--primary);
-      color: var(--primary);
+    .btn-header-call:hover {
+      background: var(--accent-hover);
     }
 
-    .btn-nav-order {
-      background: var(--primary);
-      color: #fff;
-      padding: 0.55rem 1.25rem;
-      border-radius: 25px;
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      box-shadow: 0 4px 15px var(--primary-glow);
-      transition: var(--transition);
+    /* قسم الهيرو */
+    .hero-sec {
+      padding: 4.5rem 0 3.5rem;
+      border-bottom: 1px solid var(--border-color);
+      background: radial-gradient(circle at 50% 10%, rgba(232, 89, 36, 0.08) 0%, transparent 60%);
     }
 
-    .btn-nav-order:hover {
-      background: var(--primary-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px var(--primary-glow);
-    }
-
-    /* Hero Section */
-    .hero {
-      padding: 5.5rem 0 4rem;
-      position: relative;
-    }
-
-    .hero-grid {
+    .hero-layout {
       display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
+      grid-template-columns: 1.2fr 0.8fr;
       align-items: center;
-      gap: 3rem;
+      gap: 2.5rem;
     }
 
-    .hero-tag {
+    .tag-badge {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      background: rgba(255, 90, 0, 0.08);
-      border: 1px solid rgba(255, 90, 0, 0.25);
-      color: var(--primary);
-      padding: 0.4rem 1rem;
-      border-radius: 50px;
-      font-size: 0.85rem;
-      font-weight: 800;
-      margin-bottom: 1.4rem;
-    }
-
-    .hero-title {
-      font-size: 3.2rem;
-      line-height: 1.2;
-      font-weight: 900;
-      margin-bottom: 1.2rem;
-      letter-spacing: -0.5px;
-    }
-
-    .hero-title .glow-text {
-      color: var(--primary);
-      text-shadow: 0 0 25px var(--primary-glow);
-    }
-
-    .hero-slogan {
-      font-size: 1.35rem;
-      font-weight: 800;
-      color: #ff9d66;
+      gap: 0.4rem;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid rgba(232, 89, 36, 0.25);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 700;
       margin-bottom: 1rem;
     }
 
-    .hero-desc {
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      margin-bottom: 2.2rem;
-      max-width: 500px;
-    }
-
-    .hero-buttons {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .btn-main {
-      background: var(--primary);
-      color: #fff;
-      padding: 0.9rem 2rem;
-      border-radius: 30px;
-      font-weight: 800;
-      font-size: 1rem;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      box-shadow: 0 4px 20px var(--primary-glow);
-      transition: var(--transition);
-    }
-
-    .btn-main:hover {
-      background: var(--primary-hover);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 25px var(--primary-glow);
-    }
-
-    .btn-secondary {
-      background: var(--bg-surface-2);
-      border: 1px solid var(--border-subtle);
-      color: #fff;
-      padding: 0.9rem 1.8rem;
-      border-radius: 30px;
-      font-weight: 700;
-      font-size: 1rem;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      transition: var(--transition);
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--primary);
-      color: #fff;
-      transform: translateY(-2px);
-    }
-
-    /* Hero Neon Box */
-    .hero-neon-wrap {
-      display: flex;
-      justify-content: center;
-    }
-
-    .store-neon-box {
-      background: #0E1015;
-      border: 1px solid #20242F;
-      border-radius: var(--radius-lg);
-      padding: 3rem 2rem;
-      text-align: center;
-      width: 100%;
-      max-width: 420px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 90, 0, 0.12);
-    }
-
-    .neon-border-sign {
-      border: 2px solid var(--primary);
-      border-radius: 18px;
-      padding: 1.2rem 2rem;
-      background: #08090C;
-      box-shadow: 0 0 25px var(--primary-glow), inset 0 0 15px rgba(255, 90, 0, 0.2);
-      margin-bottom: 1.5rem;
-    }
-
-    .neon-title-main {
-      font-family: var(--font-en);
-      font-size: 2.7rem;
+    .hero-h1 {
+      font-size: 2.8rem;
+      line-height: 1.2;
       font-weight: 900;
-      color: #fff;
-      letter-spacing: 2px;
-      line-height: 1;
-      text-shadow: 0 0 8px #fff, 0 0 18px var(--primary), 0 0 30px var(--primary);
-    }
-
-    .neon-title-sub {
-      font-family: var(--font-en);
-      font-size: 1.1rem;
-      font-weight: 800;
-      letter-spacing: 4px;
-      color: #ffa475;
-      margin-top: 0.3rem;
-    }
-
-    .store-tags {
-      display: flex;
-      justify-content: center;
-      gap: 0.6rem;
-      flex-wrap: wrap;
-      margin-top: 1.2rem;
-    }
-
-    .tag-chip {
-      background: #14171E;
-      border: 1px solid var(--border-subtle);
-      padding: 0.35rem 0.85rem;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      color: #B5BCCB;
-      font-weight: 600;
-    }
-
-    /* Highlights Bar */
-    .highlights-bar {
-      padding: 2.5rem 0;
-      background: var(--bg-surface-1);
-      border-top: 1px solid var(--border-subtle);
-      border-bottom: 1px solid var(--border-subtle);
-    }
-
-    .highlights-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.5rem;
-    }
-
-    .hl-card {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .hl-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      background: rgba(255, 90, 0, 0.1);
-      border: 1px solid rgba(255, 90, 0, 0.25);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--primary);
-      font-size: 1.25rem;
-      flex-shrink: 0;
-    }
-
-    .hl-text h4 {
-      font-size: 0.98rem;
-      font-weight: 800;
-    }
-
-    .hl-text p {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-    }
-
-    /* Story Section */
-    .story-section {
-      padding: 5.5rem 0;
-    }
-
-    .story-card {
-      background: var(--bg-surface-1);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-lg);
-      padding: 3.5rem 2.5rem;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-    }
-
-    .story-header {
-      text-align: center;
-      max-width: 650px;
-      margin: 0 auto 2rem;
-    }
-
-    .story-badge {
-      display: inline-block;
-      background: rgba(255, 90, 0, 0.1);
-      color: var(--primary);
-      padding: 0.35rem 1rem;
-      border-radius: 20px;
-      font-size: 0.82rem;
-      font-weight: 800;
       margin-bottom: 0.8rem;
-      border: 1px solid rgba(255, 90, 0, 0.3);
+      letter-spacing: -0.5px;
     }
 
-    .story-header h2 {
+    .hero-h1 span {
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-body);
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      max-width: 480px;
+      margin-bottom: 1.8rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+    }
+
+    .btn-solid {
+      background: var(--accent);
+      color: #fff;
+      padding: 0.7rem 1.6rem;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+    }
+
+    .btn-solid:hover {
+      background: var(--accent-hover);
+    }
+
+    .btn-outline {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-body);
+      padding: 0.7rem 1.4rem;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--border-light);
+      color: #fff;
+    }
+
+    .hero-frame {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2.2rem 1.8rem;
+      text-align: center;
+    }
+
+    .hero-frame-title {
+      font-family: var(--font-en);
       font-size: 2.2rem;
       font-weight: 900;
-    }
-
-    .story-body {
-      max-width: 820px;
-      margin: 0 auto;
-      background: #090B0E;
-      border-radius: var(--radius-md);
-      padding: 2.2rem;
-      border: 1px solid var(--border-subtle);
-      font-size: 1.05rem;
-      line-height: 1.9;
-      color: #D3D8E2;
-    }
-
-    .story-body p {
-      margin-bottom: 1.2rem;
-    }
-
-    .story-body p:last-child {
-      margin-bottom: 0;
-    }
-
-    .story-footer-quote {
-      margin-top: 1.8rem;
-      padding-top: 1.5rem;
-      border-top: 1px dashed var(--border-subtle);
-      text-align: center;
-      font-size: 1.2rem;
-      font-weight: 800;
-      color: #ff9e70;
-    }
-
-    /* Menu Section */
-    .menu-section {
-      padding: 5.5rem 0;
-      background: #090A0D;
-    }
-
-    .section-title {
-      text-align: center;
-      margin-bottom: 2.5rem;
-    }
-
-    .section-title h2 {
-      font-size: 2.3rem;
-      font-weight: 900;
+      letter-spacing: 1px;
+      color: #fff;
+      line-height: 1;
       margin-bottom: 0.4rem;
     }
 
-    .section-title p {
+    .hero-frame-title span {
+      color: var(--accent);
+    }
+
+    .hero-frame-badge {
+      font-size: 0.85rem;
       color: var(--text-muted);
-      font-size: 1.02rem;
+      font-weight: 600;
+      margin-bottom: 1.4rem;
     }
 
-    .calorie-badge {
-      display: inline-block;
-      margin-top: 0.75rem;
-      font-size: 0.82rem;
-      background: rgba(255, 90, 0, 0.08);
-      color: #ff915c;
-      padding: 0.3rem 0.9rem;
-      border-radius: 20px;
-      border: 1px solid rgba(255, 90, 0, 0.2);
+    .quick-specs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6rem;
+      margin-top: 1rem;
     }
 
-    .menu-filter-bar {
+    .spec-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      padding: 0.65rem 0.8rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      color: var(--text-body);
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      justify-content: center;
+    }
+
+    .spec-item i {
+      color: var(--accent);
+      font-size: 0.85rem;
+    }
+
+    /* شريط المزايا */
+    .features-strip {
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border-color);
+      background: var(--bg-surface);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.2rem;
+    }
+
+    .feature-box {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .feature-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 1.05rem;
+      flex-shrink: 0;
+    }
+
+    .feature-text h4 {
+      font-size: 0.92rem;
+      font-weight: 800;
+    }
+
+    .feature-text p {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* قصة الاسم */
+    .story-sec {
+      padding: 4.5rem 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .story-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2.8rem 2.2rem;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .sec-badge {
+      display: block;
+      width: fit-content;
+      margin: 0 auto 0.6rem;
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .sec-h2 {
+      font-size: 1.85rem;
+      font-weight: 900;
+      text-align: center;
+      margin-bottom: 1.8rem;
+    }
+
+    .story-card p {
+      color: var(--text-body);
+      font-size: 0.96rem;
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+
+    .story-signature {
+      margin-top: 1.6rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--border-color);
+      text-align: center;
+      font-weight: 800;
+      color: #fff;
+      font-size: 1.05rem;
+    }
+
+    /* قسم المنيو */
+    .menu-sec {
+      padding: 4.5rem 0;
+      border-bottom: 1px solid var(--border-color);
+      background: #0E1015;
+    }
+
+    .menu-tabs {
       display: flex;
       justify-content: center;
-      gap: 0.6rem;
+      gap: 0.5rem;
       flex-wrap: wrap;
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
     }
 
-    .cat-tab {
-      background: var(--bg-surface-1);
-      border: 1px solid var(--border-subtle);
-      color: var(--text-muted);
-      padding: 0.6rem 1.4rem;
-      border-radius: 25px;
+    .tab-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-body);
+      padding: 0.45rem 1.1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
       font-weight: 700;
-      font-size: 0.92rem;
       cursor: pointer;
       transition: var(--transition);
     }
 
-    .cat-tab.active,
-    .cat-tab:hover {
-      background: var(--primary);
+    .tab-btn.active,
+    .tab-btn:hover {
+      background: var(--accent);
+      border-color: var(--accent);
       color: #fff;
-      border-color: var(--primary);
-      box-shadow: 0 4px 15px var(--primary-glow);
     }
 
     .menu-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.1rem;
     }
 
-    .menu-card {
-      background: var(--bg-surface-1);
-      border: 1px solid var(--border-subtle);
+    .menu-item-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
       border-radius: var(--radius-md);
-      padding: 1.5rem;
+      padding: 1.15rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       transition: var(--transition);
     }
 
-    .menu-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--primary);
-      box-shadow: 0 10px 25px rgba(255, 90, 0, 0.15);
+    .menu-item-card:hover {
+      border-color: var(--border-light);
+      transform: translateY(-2px);
     }
 
-    .menu-card-top {
+    .item-header {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 0.9rem;
-    }
-
-    .menu-item-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      background: #141720;
-      display: flex;
       align-items: center;
-      justify-content: center;
-      color: var(--primary);
-      font-size: 1.15rem;
+      margin-bottom: 0.6rem;
     }
 
-    .menu-tag {
-      background: rgba(255, 162, 58, 0.12);
-      color: var(--accent-badge);
+    .item-category-label {
       font-size: 0.72rem;
-      font-weight: 800;
-      padding: 0.25rem 0.6rem;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 162, 58, 0.25);
+      color: var(--accent);
+      font-weight: 700;
     }
 
-    .menu-title {
-      font-size: 1.18rem;
+    .item-name {
+      font-size: 1.05rem;
       font-weight: 800;
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.35rem;
+      color: #fff;
     }
 
-    .menu-desc {
-      font-size: 0.88rem;
+    .item-description {
+      font-size: 0.8rem;
       color: var(--text-muted);
-      margin-bottom: 1.2rem;
+      line-height: 1.5;
+      margin-bottom: 1.1rem;
       flex-grow: 1;
     }
 
-    .menu-card-meta {
+    .item-footer {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 1rem;
       padding-top: 0.8rem;
-      border-top: 1px solid var(--border-subtle);
+      border-top: 1px solid var(--border-color);
     }
 
-    .menu-price {
-      font-size: 1.35rem;
+    .item-price-tag {
+      font-size: 1.15rem;
       font-weight: 900;
-      color: var(--primary);
+      color: #fff;
     }
 
-    .menu-price span {
-      font-size: 0.8rem;
+    .item-price-tag small {
+      font-size: 0.75rem;
       color: var(--text-muted);
       font-weight: 600;
     }
 
-    .menu-cals {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-    }
-
-    .btn-item-order {
-      background: var(--bg-surface-2);
-      border: 1px solid var(--border-subtle);
-      color: #fff;
-      padding: 0.65rem;
-      border-radius: 12px;
-      text-align: center;
+    .btn-item-call {
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
+      color: var(--text-body);
+      padding: 0.4rem 0.75rem;
+      border-radius: 8px;
       text-decoration: none;
-      font-size: 0.88rem;
+      font-size: 0.78rem;
       font-weight: 700;
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
+      gap: 0.35rem;
       transition: var(--transition);
     }
 
-    .btn-item-order:hover {
-      background: var(--primary);
-      border-color: var(--primary);
-      box-shadow: 0 4px 15px var(--primary-glow);
+    .btn-item-call:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
     }
 
-    /* Branches Section (All 6 Branches) */
-    .branches-section {
-      padding: 5.5rem 0;
+    /* قسم الفروع الستة */
+    .branches-sec {
+      padding: 4.5rem 0;
     }
 
     .branches-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1.8rem;
+      gap: 1.2rem;
     }
 
     .branch-card {
-      background: var(--bg-surface-1);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-lg);
-      padding: 1.8rem 1.6rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.4rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -699,313 +595,261 @@
     }
 
     .branch-card:hover {
-      border-color: var(--primary);
-      transform: translateY(-5px);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+      border-color: var(--border-light);
     }
 
-    .branch-card-header {
+    .branch-top-bar {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin-bottom: 1.2rem;
+      justify-content: space-between;
+      margin-bottom: 1rem;
     }
 
-    .branch-name {
-      font-size: 1.3rem;
+    .branch-title {
+      font-size: 1.15rem;
       font-weight: 800;
     }
 
-    .status-badge {
-      padding: 0.3rem 0.8rem;
-      border-radius: 20px;
-      font-size: 0.78rem;
-      font-weight: 800;
+    .status-pill {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.2rem 0.55rem;
+      border-radius: 12px;
     }
 
-    .status-open {
+    .status-pill.open {
       background: rgba(46, 204, 113, 0.12);
       color: #2ecc71;
-      border: 1px solid rgba(46, 204, 113, 0.3);
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
+      border: 1px solid rgba(46, 204, 113, 0.25);
     }
 
-    .status-open::before {
-      content: '';
-      width: 7px;
-      height: 7px;
-      background: #2ecc71;
-      border-radius: 50%;
-      box-shadow: 0 0 8px #2ecc71;
-    }
-
-    .status-soon {
+    .status-pill.soon {
       background: rgba(255, 162, 58, 0.12);
-      color: var(--accent-badge);
-      border: 1px solid rgba(255, 162, 58, 0.3);
+      color: #ffa23a;
+      border: 1px solid rgba(255, 162, 58, 0.25);
     }
 
-    .branch-info-list {
+    .branch-meta {
       list-style: none;
-      margin-bottom: 1.8rem;
       display: flex;
       flex-direction: column;
-      gap: 0.8rem;
+      gap: 0.65rem;
+      margin-bottom: 1.4rem;
+      font-size: 0.85rem;
+      color: var(--text-body);
     }
 
-    .branch-info-list li {
+    .branch-meta li {
       display: flex;
       align-items: flex-start;
-      gap: 0.7rem;
-      color: var(--text-muted);
-      font-size: 0.92rem;
-      line-height: 1.5;
-    }
-
-    .branch-info-list li i {
-      color: var(--primary);
-      margin-top: 0.25rem;
-      font-size: 1rem;
-    }
-
-    .branch-actions-wrap {
-      display: flex;
-      flex-direction: column;
       gap: 0.6rem;
     }
 
-    .branch-btn-group {
+    .branch-meta li i {
+      color: var(--accent);
+      margin-top: 0.2rem;
+      font-size: 0.9rem;
+    }
+
+    .branch-buttons {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 0.6rem;
+      gap: 0.5rem;
     }
 
-    .btn-branch-act {
-      background: var(--bg-surface-2);
-      border: 1px solid var(--border-subtle);
+    .btn-branch-phone {
+      background: var(--bg-card);
+      border: 1px solid var(--border-light);
       color: #fff;
-      padding: 0.65rem;
-      border-radius: 12px;
-      text-align: center;
+      padding: 0.55rem;
+      border-radius: var(--radius-sm);
       text-decoration: none;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 700;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.45rem;
+      gap: 0.4rem;
       transition: var(--transition);
     }
 
-    .btn-branch-act:hover {
-      background: #202430;
-      border-color: var(--primary);
+    .btn-branch-phone:hover {
+      background: var(--accent);
+      border-color: var(--accent);
     }
 
-    .btn-branch-act.wa:hover {
-      background: #25D366;
-      border-color: #25D366;
-    }
-
-    .btn-branch-map {
-      background: var(--primary);
+    .btn-branch-nav {
+      background: var(--border-color);
       color: #fff;
-      border: none;
-      padding: 0.75rem;
-      border-radius: 12px;
-      text-align: center;
+      padding: 0.55rem;
+      border-radius: var(--radius-sm);
       text-decoration: none;
-      font-weight: 800;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
+      font-weight: 700;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
+      gap: 0.4rem;
       transition: var(--transition);
-      box-shadow: 0 4px 15px var(--primary-glow);
     }
 
-    .btn-branch-map:hover {
-      background: var(--primary-hover);
-      box-shadow: 0 6px 20px var(--primary-glow);
+    .btn-branch-nav:hover {
+      background: var(--border-light);
     }
 
-    /* Footer */
-    .footer {
-      background: #050608;
-      border-top: 1px solid var(--border-subtle);
-      padding: 4.5rem 0 2rem;
+    /* الفوتر */
+    .main-footer {
+      background: #07080B;
+      border-top: 1px solid var(--border-color);
+      padding: 3rem 0 1.5rem;
     }
 
     .footer-grid {
       display: grid;
       grid-template-columns: 1.5fr 1fr 1fr;
-      gap: 3rem;
-      margin-bottom: 3.5rem;
+      gap: 2.5rem;
+      margin-bottom: 2.5rem;
     }
 
-    .footer-brand p {
+    .footer-p {
       color: var(--text-muted);
-      margin-top: 1rem;
+      font-size: 0.85rem;
+      margin-top: 0.7rem;
       max-width: 320px;
-      font-size: 0.92rem;
     }
 
-    .footer-col h4 {
-      font-size: 1.15rem;
+    .footer-title {
+      font-size: 0.95rem;
       font-weight: 800;
-      margin-bottom: 1.2rem;
+      margin-bottom: 0.9rem;
       color: #fff;
     }
 
-    .footer-links {
+    .footer-nav {
       list-style: none;
       display: flex;
       flex-direction: column;
-      gap: 0.7rem;
+      gap: 0.5rem;
     }
 
-    .footer-links a {
-      color: var(--text-muted);
+    .footer-nav a {
+      color: var(--text-body);
       text-decoration: none;
-      font-size: 0.92rem;
+      font-size: 0.85rem;
       transition: var(--transition);
     }
 
-    .footer-links a:hover {
-      color: var(--primary);
+    .footer-nav a:hover {
+      color: #fff;
     }
 
-    .social-links {
+    .footer-socials {
       display: flex;
-      gap: 0.8rem;
+      gap: 0.5rem;
     }
 
-    .social-icon {
-      width: 42px;
-      height: 42px;
-      background: var(--bg-surface-1);
-      border: 1px solid var(--border-subtle);
-      border-radius: 12px;
+    .social-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #fff;
+      color: var(--text-body);
       text-decoration: none;
-      font-size: 1.1rem;
+      font-size: 0.9rem;
       transition: var(--transition);
     }
 
-    .social-icon:hover {
-      background: var(--primary);
-      border-color: var(--primary);
-      transform: translateY(-3px);
-      box-shadow: 0 4px 15px var(--primary-glow);
+    .social-btn:hover {
+      border-color: var(--border-light);
+      color: #fff;
     }
 
-    .footer-bottom {
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      padding-top: 1.8rem;
+    .footer-credits {
+      border-top: 1px solid var(--border-color);
+      padding-top: 1.2rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      color: #6C7486;
-      font-size: 0.88rem;
-      flex-wrap: wrap;
-      gap: 1rem;
+      color: var(--text-muted);
+      font-size: 0.8rem;
     }
 
-    /* Floating WhatsApp Button */
-    .floating-wa {
-      position: fixed;
-      bottom: 25px;
-      inset-inline-end: 25px;
-      background: #25D366;
-      color: #fff;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.9rem;
-      text-decoration: none;
-      box-shadow: 0 6px 25px rgba(37, 211, 102, 0.45);
-      z-index: 1000;
-      transition: var(--transition);
-    }
-
-    .floating-wa:hover {
-      transform: scale(1.1) rotate(10deg);
-      box-shadow: 0 8px 30px rgba(37, 211, 102, 0.65);
-    }
-
+    /* التجاوب */
     @media (max-width: 1024px) {
+      .menu-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
       .branches-grid {
         grid-template-columns: repeat(2, 1fr);
       }
-    }
-
-    @media (max-width: 992px) {
-      .hero-grid {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
-      .hero-desc {
-        margin: 0 auto 2rem;
-      }
-      .hero-buttons {
-        justify-content: center;
-      }
-      .highlights-grid {
+      .features-grid {
         grid-template-columns: repeat(2, 1fr);
-      }
-      .footer-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
       }
     }
 
     @media (max-width: 768px) {
-      .nav-links {
+      .desktop-menu {
         display: none;
+      }
+      .hero-layout {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .hero-p {
+        margin: 0 auto 1.6rem;
+      }
+      .hero-cta {
+        justify-content: center;
+      }
+      .hero-h1 {
+        font-size: 2.1rem;
+      }
+      .menu-grid {
+        grid-template-columns: repeat(2, 1fr);
       }
       .branches-grid {
         grid-template-columns: 1fr;
       }
-      .hero-title {
-        font-size: 2.3rem;
-      }
-      .highlights-grid {
+      .features-grid {
         grid-template-columns: 1fr;
       }
-      .story-card {
-        padding: 2rem 1.2rem;
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 1.8rem;
       }
-      .story-body {
-        padding: 1.4rem;
-        font-size: 0.98rem;
+      .footer-credits {
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
       }
-      .story-header h2 {
-        font-size: 1.8rem;
+    }
+
+    @media (max-width: 480px) {
+      .menu-grid {
+        grid-template-columns: 1fr;
+      }
+      .quick-specs {
+        grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Announcement Bar -->
-  <div class="top-bar">
+  <!-- شريط الإعلان العلوي -->
+  <div class="top-strip">
     <span data-i18n="topBar">☕ بيب كوب: قهوة مختصة بجودة عالية وبدون تأخير في الأحساء | فروعنا تخدمك على مدار الساعة</span>
   </div>
 
-  <!-- Header -->
-  <header class="header">
-    <div class="container nav-inner">
-      <a href="#" class="brand-logo">
-        <div class="logo-badge">
+  <!-- الهيدر -->
+  <header class="main-nav">
+    <div class="container nav-wrapper">
+      <a href="#" class="brand-wrap">
+        <div class="logo-mini">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
             <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
@@ -1014,553 +858,534 @@
             <line x1="14" y1="1" x2="14" y2="4"></line>
           </svg>
         </div>
-        <div>
-          <div class="brand-title">Beep<span>Cup</span></div>
-          <div class="brand-sub" data-i18n="tagline">قهوة مختصة</div>
-        </div>
+        <div class="brand-name">Beep<span>Cup</span></div>
       </a>
 
-      <ul class="nav-links">
+      <ul class="desktop-menu">
         <li><a href="#hero" class="active" data-i18n="navHome">الرئيسية</a></li>
         <li><a href="#story" data-i18n="navStory">قصتنا</a></li>
         <li><a href="#menu" data-i18n="navMenu">المنيو</a></li>
         <li><a href="#branches" data-i18n="navBranches">الفروع (6)</a></li>
       </ul>
 
-      <div class="nav-actions">
-        <button id="langToggle" class="lang-toggle-btn" onclick="toggleLanguage()">
+      <div class="nav-controls">
+        <button id="langToggle" class="lang-compact-btn" onclick="toggleLanguage()">
           <i class="fa-solid fa-globe"></i>
           <span id="langText">English</span>
         </button>
-        <a href="https://wa.me/966500265328?text=أهلاً%20بيب%20كوب،%20أود%20تقديم%20طلب" target="_blank" class="btn-nav-order" data-i18n="navOrder">
-          <i class="fa-brands fa-whatsapp"></i>
-          <span>اطلب الآن</span>
+        <a href="tel:0500265328" class="btn-header-call">
+          <i class="fa-solid fa-phone"></i>
+          <span data-i18n="btnCallHeader">اتصل الآن</span>
         </a>
       </div>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero" id="hero">
-    <div class="container hero-grid">
-      <div class="hero-content">
-        <div class="hero-tag">
+  <!-- قسم البداية Hero -->
+  <section class="hero-sec" id="hero">
+    <div class="container hero-layout">
+      <div>
+        <div class="tag-badge">
           <i class="fa-solid fa-bolt"></i>
           <span data-i18n="heroBadge">سرعة فائقة • جودة مختصة</span>
         </div>
-        <h1 class="hero-title">
+        <h1 class="hero-h1">
           <span data-i18n="heroTitle1">كوبك المفضل</span><br />
-          <span class="glow-text" data-i18n="heroTitle2">بسرعة ما تنتظرها!</span>
+          <span>بسرعة ما تنتظرها!</span>
         </h1>
-        <p class="hero-slogan" data-i18n="heroSlogan">"يعدل كيفك، ويراعي جيبك"</p>
-        <p class="hero-desc" data-i18n="heroDesc">
-          اخترنا لك أجود أنواع البن المختص عشان قهوتك ما تكون عادية، تكون قهوتك اليوم وكل يوم وبأسرع خدمة في الأحساء.
+        <div class="hero-sub" data-i18n="heroSlogan">"يعدل كيفك، ويراعي جيبك"</div>
+        <p class="hero-p" data-i18n="heroDesc">
+          اخترنا لك أجود أنواع البن المختص عشان قهوتك ما تكون عادية، تكون قهوتك اليوم وكل يوم وبأسرع خدمة سيارات في الأحساء.
         </p>
-        <div class="hero-buttons">
-          <a href="#menu" class="btn-main">
+        <div class="hero-cta">
+          <a href="#menu" class="btn-solid">
             <i class="fa-solid fa-mug-hot"></i>
             <span data-i18n="btnExploreMenu">استعرض المنيو</span>
           </a>
-          <a href="#branches" class="btn-secondary">
+          <a href="#branches" class="btn-outline">
             <i class="fa-solid fa-location-dot"></i>
-            <span data-i18n="btnFindBranches">فروعنا الـ 6 في الأحساء</span>
+            <span data-i18n="btnFindBranches">فروعنا (6)</span>
           </a>
         </div>
       </div>
 
-      <div class="hero-neon-wrap">
-        <div class="store-neon-box">
-          <div class="neon-border-sign">
-            <div class="neon-title-main">Beep</div>
-            <div class="neon-title-sub">CUP</div>
-          </div>
-          <p style="font-weight: 700; color: #E1E6F0;" data-i18n="neonCaption">نظام طلب واستلام سريع لراحتك</p>
-          <div class="store-tags">
-            <span class="tag-chip"><i class="fa-solid fa-clock"></i> فروع 24/7</span>
-            <span class="tag-chip"><i class="fa-solid fa-fire"></i> بن مختص فاخر</span>
-            <span class="tag-chip"><i class="fa-solid fa-car"></i> استلام سريع بالسيارة</span>
-          </div>
+      <div class="hero-frame">
+        <div class="hero-frame-title">Beep<span>Cup</span></div>
+        <div class="hero-frame-badge" data-i18n="heroFrameSub">Drive-Thru Coffee Experience</div>
+        <div class="quick-specs">
+          <div class="spec-item"><i class="fa-solid fa-clock"></i> <span data-i18n="spec24">خدمة 24 ساعة</span></div>
+          <div class="spec-item"><i class="fa-solid fa-fire"></i> <span data-i18n="specQuality">بن مختص فاخر</span></div>
+          <div class="spec-item"><i class="fa-solid fa-car"></i> <span data-i18n="specDrive">طلب سريع بالسيارة</span></div>
+          <div class="spec-item"><i class="fa-solid fa-tag"></i> <span data-i18n="specPrice">أسعار مناسبة جداً</span></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Highlights Bar -->
-  <section class="highlights-bar">
-    <div class="container highlights-grid">
-      <div class="hl-card">
-        <div class="hl-icon"><i class="fa-solid fa-gauge-high"></i></div>
-        <div class="hl-text">
-          <h4 data-i18n="hl1Title">سرعة بدون تأخير</h4>
-          <p data-i18n="hl1Desc">طلبك جاهز في دقائق معدودة</p>
+  <!-- شريط المزايا السريعة -->
+  <section class="features-strip">
+    <div class="container features-grid">
+      <div class="feature-box">
+        <div class="feature-icon"><i class="fa-solid fa-gauge-high"></i></div>
+        <div class="feature-text">
+          <h4 data-i18n="feat1Title">سرعة الاستلام</h4>
+          <p data-i18n="feat1Desc">طلبك جاهز بدقائق وبدون تأخير</p>
         </div>
       </div>
-      <div class="hl-card">
-        <div class="hl-icon"><i class="fa-solid fa-seedling"></i></div>
-        <div class="hl-text">
-          <h4 data-i18n="hl2Title">بن مختص فاخر</h4>
-          <p data-i18n="hl2Desc">محاصيل منتقاة بعناية لنكهة مثالية</p>
+      <div class="feature-box">
+        <div class="feature-icon"><i class="fa-solid fa-seedling"></i></div>
+        <div class="feature-text">
+          <h4 data-i18n="feat2Title">محاصيل مختصة</h4>
+          <p data-i18n="feat2Desc">بن فاخر بإيحاءات متوازنة</p>
         </div>
       </div>
-      <div class="hl-card">
-        <div class="hl-icon"><i class="fa-solid fa-wallet"></i></div>
-        <div class="hl-text">
-          <h4 data-i18n="hl3Title">يراعي جيبك</h4>
-          <p data-i18n="hl3Desc">أسعار مدروسة تناسب يومك</p>
+      <div class="feature-box">
+        <div class="feature-icon"><i class="fa-solid fa-wallet"></i></div>
+        <div class="feature-text">
+          <h4 data-i18n="feat3Title">يراعي جيبك</h4>
+          <p data-i18n="feat3Desc">أسعار مدروسة لكوب يومي مثالي</p>
         </div>
       </div>
-      <div class="hl-card">
-        <div class="hl-icon"><i class="fa-solid fa-moon"></i></div>
-        <div class="hl-text">
-          <h4 data-i18n="hl4Title">خدمة متواصلة</h4>
-          <p data-i18n="hl4Desc">فروع تعمل على مدار الساعة</p>
+      <div class="feature-box">
+        <div class="feature-icon"><i class="fa-solid fa-moon"></i></div>
+        <div class="feature-text">
+          <h4 data-i18n="feat4Title">متواجدون دائماً</h4>
+          <p data-i18n="feat4Desc">فروع مفتوحة 24 ساعة يومياً</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Story Section -->
-  <section class="story-section" id="story">
+  <!-- قصة الاسم -->
+  <section class="story-sec" id="story">
     <div class="container">
       <div class="story-card">
-        <div class="story-header">
-          <span class="story-badge" data-i18n="storyPill">هويتنا وسر اسمنا</span>
-          <h2 data-i18n="storyTitle">قصة الاسم باختصار</h2>
-        </div>
-        <div class="story-body">
-          <p data-i18n="storyP1">
-            من أيام الطفولة، كنا ننتظر بفارغ الصبر فلم كرتون <strong>"بيب بيب"</strong>، مذهولين بسرعته وخفته. كبرنا وكبرت معنا فكرة أن السرعة بدون تأخير هي حلم كل عميل.
-          </p>
-          <p data-i18n="storyP2">
-            فكرنا نسوي مشروع يشبهه: <strong>سريع، بسيط، ويوصل لك التجربة اللي تتمناها بدون تعقيد</strong>.
-          </p>
-          <p data-i18n="storyP3">
-            ومن هنا ولدت فكرة <strong>بيب كوب</strong>: كوب قهوة سريع وجودته عالية وبدون تأخير. واخترنا لك أجود أنواع البن المختص، عشان قهوتك ما تكون عادية، تكون قهوتك اليوم، وكل يوم.
-          </p>
-          <div class="story-footer-quote">
-            <span data-i18n="storyMotto">بيب كوب .. يعدل كيفك، ويراعي جيبك. وجعلها بالعافية! ❤️</span>
-          </div>
+        <span class="sec-badge" data-i18n="storyPill">هويتنا وسر الاسم</span>
+        <h2 class="sec-h2" data-i18n="storyTitle">قصة الاسم باختصار</h2>
+        <p data-i18n="storyP1">
+          من أيام الطفولة، كنا ننتظر بفارغ الصبر فلم كرتون <strong>"بيب بيب"</strong>، مذهولين بسرعته وخفته. كبرنا وكبرت معنا فكرة أن السرعة بدون تأخير هي حلم كل عميل.
+        </p>
+        <p data-i18n="storyP2">
+          فكرنا نسوي مشروع يشبهه: <strong>سريع، بسيط، ويوصل لك التجربة اللي تتمناها بدون تعقيد</strong>.
+        </p>
+        <p data-i18n="storyP3">
+          ومن هنا ولدت فكرة <strong>بيب كوب</strong>: كوب قهوة سريع وجودته عالية وبدون تأخير. واخترنا لك أجود أنواع البن المختص، عشان قهوتك ما تكون عادية، تكون قهوتك اليوم، وكل يوم.
+        </p>
+        <div class="story-signature">
+          <span data-i18n="storyMotto">بيب كوب .. يعدل كيفك، ويراعي جيبك. وجعلها بالعافية! ❤️</span>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Menu Section -->
-  <section class="menu-section" id="menu">
+  <!-- قائمة الأصناف الكاملة Real Menu -->
+  <section class="menu-sec" id="menu">
     <div class="container">
-      <div class="section-title">
-        <h2 data-i18n="menuTitle">منيو بيب كوب</h2>
-        <p data-i18n="menuSubtitle">نكهات متوازنة تم تحضيرها بحب وشغف</p>
-        <span class="calorie-badge" data-i18n="calNote">يحتاج البالغون إلى 2000 سعرة حرارية في المتوسط يومياً</span>
-      </div>
+      <span class="sec-badge" data-i18n="menuBadge">القائمة الكاملة</span>
+      <h2 class="sec-h2" data-i18n="menuTitle">منيو بيب كوب</h2>
 
-      <div class="menu-filter-bar">
-        <button class="cat-tab active" onclick="filterMenu('all', this)" data-i18n="catAll">الكل</button>
-        <button class="cat-tab" onclick="filterMenu('cold', this)" data-i18n="catCold">مشروبات باردة</button>
-        <button class="cat-tab" onclick="filterMenu('hot', this)" data-i18n="catHot">مشروبات ساخنة</button>
-        <button class="cat-tab" onclick="filterMenu('specialty', this)" data-i18n="catSpecialty">التقطير المختص</button>
-        <button class="cat-tab" onclick="filterMenu('sweets', this)" data-i18n="catSweets">الحلى والآيسكريم</button>
+      <div class="menu-tabs">
+        <button class="tab-btn active" onclick="filterMenu('all', this)" data-i18n="catAll">الكل</button>
+        <button class="tab-btn" onclick="filterMenu('drip', this)" data-i18n="catDrip">التقطير والفلتر</button>
+        <button class="tab-btn" onclick="filterMenu('espresso', this)" data-i18n="catEspresso">الإسبريسو والحليب</button>
+        <button class="tab-btn" onclick="filterMenu('matcha', this)" data-i18n="catMatcha">الماتشا والبارد</button>
+        <button class="tab-btn" onclick="filterMenu('sweets', this)" data-i18n="catSweets">الحلى والكيك</button>
       </div>
 
       <div class="menu-grid" id="menuGrid">
-        <!-- Item 1 -->
-        <div class="menu-card" data-cat="specialty">
+        
+        <!-- 1. في 60 بارد -->
+        <div class="menu-item-card" data-cat="drip">
           <div>
-            <div class="menu-card-top">
-              <div class="menu-item-icon"><i class="fa-solid fa-filter"></i></div>
-              <span class="menu-tag" data-i18n="badgeBest">الأكثر طلباً</span>
+            <div class="item-header">
+              <span class="item-category-label">V60 Drip</span>
             </div>
-            <h3 class="menu-title" data-i18n="v60IceTitle">V60 بارد مختص</h3>
-            <p class="menu-desc" data-i18n="v60IceDesc">تقطير احترافي لمحاصيل مختصة بإيحاءات زهرية وفاكهية منعشة.</p>
+            <h3 class="item-name">V60 بارد مختص</h3>
+            <p class="item-description">تقطير احترافي لمحاصيل مختصة فاخرة بإيحاءات زهرية وفاكهية منعشة.</p>
           </div>
-          <div>
-            <div class="menu-card-meta">
-              <div class="menu-price">15 <span>SAR</span></div>
-              <div class="menu-cals"><i class="fa-solid fa-fire-flame-simple"></i> 5 cal</div>
-            </div>
-            <a href="https://wa.me/966500265328?text=طلب:%20V60%20بارد%20مختص" target="_blank" class="btn-item-order">
-              <i class="fa-brands fa-whatsapp"></i> <span data-i18n="orderItem">طلب فوري</span>
-            </a>
+          <div class="item-footer">
+            <div class="item-price-tag">15 <small>SAR</small></div>
+            <a href="tel:0500265328" class="btn-item-call"><i class="fa-solid fa-phone"></i> <span>اتصال للطلب</span></a>
           </div>
         </div>
 
-        <!-- Item 2 -->
-        <div class="menu-card" data-cat="specialty">
+        <!-- 2. في 60 حار -->
+        <div class="menu-item-card" data-cat="drip">
           <div>
-            <div class="menu-card-top">
-              <div class="menu-item-icon"><i class="fa-solid fa-mug-hot"></i></div>
-              <span class="menu-tag" data-i18n="badgeClassic">كلاسيك</span>
+            <div class="item-header">
+              <span class="item-category-label">V60 Drip</span>
             </div>
-            <h3 class="menu-title" data-i18n="v60HotTitle">V60 حار</h3>
-            <p class="menu-desc" data-i18n="v60HotDesc">تقطير متوازن يبرز حلاوة وقوام البن المختص مع استخلاص مثالي للنكهات.</p>
+            <h3 class="item-name">V60 حار مختص</h3>
+            <p class="item-description">تقطير كلاسيكي يبرز عراقة البن وقوامه المتوازن ونكهاته الصافية.</p>
           </div>
-          <div>
-            <div class="menu-card-meta">
-              <div class="menu-price">14 <span>SAR</span></div>
-              <div class="menu-cals"><i class="fa-solid fa-fire-flame-simple"></i> 4 cal</div>
-            </div>
-            <a href="https://wa.me/966500265328?text=طلب:%20V60%20حار" target="_blank" class="btn-item-order">
-              <i class="fa-brands fa-whatsapp"></i> <span data-i18n="orderItem">طلب فوري</span>
-            </a>
+          <div class="item-footer">
+            <div class="item-price-tag">15 <small>SAR</small></div>
+            <a href="tel:0500265328" class="btn-item-call"><i class="fa-solid fa-phone"></i> <span>اتصال للطلب</span></a>
           </div>
         </div>
 
-        <!-- Item 3 -->
-        <div class="menu-card" data-cat="cold">
+        <!-- 3. قهوة اليوم حار/بارد صغير -->
+        <div class="menu-item-card" data-cat="drip">
           <div>
-            <div class="menu-card-top">
-              <div class="menu-item-icon"><i class="fa-solid fa-snowflake"></i></div>
-              <span class="menu-tag" data-i18n="badgeSig">توقيع بيب</span>
+            <div class="item-header">
+              <span class="item-category-label">Brew of the day</span>
             </div>
-            <h3 class="menu-title" data-i18n="spanishIceTitle">سبانش لاتيه بارد</h3>
-            <p class="menu-desc" data-i18n="spanishIceDesc">مزيج متوازن بين حلاوة السبانش وقوة الإسبريسو الفاخر لجرعة طاقة لا تُقاوم.</p>
+            <h3 class="item-name">قهوة اليوم (صغير)</h3>
+            <p class="item-description">فلتر طازج محضر يومياً بحجم صغير (حار أو بارد حسب رغبتك).</p>
           </div>
-          <div>
-            <div class="menu-card-meta">
-              <div class="menu-price">16 <span>SAR</span></div>
-              <div class="menu-cals"><i class="fa-solid fa-fire-flame-simple"></i> 220 cal</div>
-            </div>
-            <a href="https://wa.me/966500265328?text=طلب:%20سبانش%20لاتيه%20بارد" target="_blank" class="btn-item-order">
-              <i class="fa-brands fa-whatsapp"></i> <span data-i18n="orderItem">طلب فوري</span>
-            </a>
+          <div class="item-footer">
+            <div class="item-price-tag">9 <small>SAR</small></div>
+            <a href="tel:0500265328" class="btn-item-call"><i class="fa-solid fa-phone"></i> <span>اتصال للطلب</span></a>
           </div>
         </div>
 
-        <!-- Item 4 -->
-        <div class="menu-card" data-cat="cold">
+        <!-- 4. قهوة اليوم كبير -->
+        <div class="menu-item-card" data-cat="drip">
           <div>
-            <div class="menu-card-top">
-              <div class="menu-item-icon"><i class="fa-solid fa-leaf"></i></div>
-              <span class="menu-tag" data-i18n="badgeTrend">تريند</span>
+            <div class="item-header">
+              <span class="item-category-label">Brew of the day</span>
             </div>
-            <h3 class="menu-title" data-i18n="matchaTitle">آيس ماتشا لاتيه</h3>
-            <p class="menu-desc" data-i18n="matchaDesc">بودرة ماتشا يابانية فاخرة ومحضرة مع الحليب البارد لنكهة غنية ومنعشة.</p>
+            <h3 class="item-name">قهوة اليوم (كبير)</h3>
+            <p class="item-description">حجم كبير يروق يومك بالكامل، قهوة طازجة ومفلترة بنكهة غنية.</p>
           </div>
-          <div>
-            <div class="menu-card-meta">
-              <div class="menu-price">18 <span>SAR</span></div>
-              <div class="menu-cals"><i class="fa-solid fa-fire-flame-simple"></i> 140 cal</div>
-            </div>
-            <a href="https://wa.me/966500265328?text=طلب:%20آيس%20ماتشا%20لاتيه" target="_blank" class="btn-item-order">
-              <i class="fa-brands fa-whatsapp"></i> <span data-i18n="orderItem">طلب فوري</span>
-            </a>
+          <div class="item-footer">
+            <div class="item-price-tag">11 <small>SAR</small></div>
+            <a href="tel:0500265328" class="btn-item-call"><i class="fa-solid fa-phone"></i> <span>اتصال للطلب</span></a>
           </div>
         </div>
 
-        <!-- Item 5 -->
-        <div class="menu-card" data-cat="hot">
+        <!-- 5. فلات وايت -->
+        <div class="menu-item-card" data-cat="espresso">
           <div>
-            <div class="menu-card-top">
-              <div class="menu-item-icon"><i class="fa-solid fa-mug-saucer"></i></div>
+            <div class="item-header">
+              <span class="item-category-label">Espresso Bar</span>
             </div>
-            <h3 class="menu-title" data-i18n="flatWhiteTitle">فلات وايت</h3>
-            <p class="menu-desc" data-i18n="flatWhiteDesc">جرعتين إسبريسو مع تبخير حليب كريمي مخملي لعشاق الطعم المركز المتناغم.</p>
+            <h3 class="item-name">فلات وايت</h3>
+            <p class="item-description">استخلاص ريستريتو متوازن مع حليب مبخر بقوام مخملي كريمي.</p>
           </div>
-          <div>
-            <div class="menu-card-meta">
-              <div class="menu-price">13 <span>SAR</span></div>
-              <div class="menu-cals"><i class="fa-solid fa-fire-flame-simple"></i> 110 cal</div>
-            </div>
-            <a href="https://wa.me/966500265328?text=طلب:%20فلات%20وايت" target="_blank" class="btn-item-order">
-              <i class="fa-brands fa-whatsapp"></i> <span data-i18n="orderItem">طلب فوري</span>
-            </a>
+          <div class="item-footer">
+            <div class="item-price-tag">12 <small>SAR</small></div>
+            <a href="tel:0500265328" class="btn-item-call"><i class="fa-solid fa-phone"></i> <span>اتصال للطلب</span></a>
           </div>
         </div>
 
-        <!-- Item 6 -->
-        <div class="menu-card" data-cat="hot">
+        <!-- 6. الفريدو إسبريسو -->
+        <div class="menu-item-card" data-cat="espresso">
           <div>
-            <div class="menu-card-top">
-              <div class="menu-item-icon"><i class="fa-solid fa-coffee-pot"></i></div>
-              <span class="menu-tag" data-i18n="badgeDaily">يومي</span>
+            <div class="item-header">
+              <span class="item-category-label">Espresso Bar</span>
             </div>
-            <h3 class="menu-title" data-i18n="todayCoffeeTitle">قهوة اليوم (فلتر)</h3>
-            <p class="menu-desc" data-i18n="todayCoffeeDesc">محضرة يومياً من بن مختص طازج برائحة ونكهة تروق مزاجك في كل وقت.</p>
+            <h3 class="item-name">الفريدو إسبريسو</h3>
+            <p class="item-description">نكهة إسبريسو خاصة ومميزة بنسب موزونة بدقة لعشاق القهوة المركزة.</p>
           </div>
-          <div>
-            <div class="menu-card-meta">
-              <div class="menu-price">8 <span>SAR</span></div>
-              <div class="menu-cals"><i class="fa-solid fa-fire-flame-simple"></i> 2 cal</div>
-            </div>
-            <a href="https://wa.me/966500265328?text=طلب:%20قهوة%20اليوم" target="_blank" class="btn-item-order">
-              <i class="fa-brands fa-whatsapp"></i> <span data-i18n="orderItem">طلب فوري</span>
-            </a>
+          <div class="item-footer">
+            <div class="item-price-tag">11 <small>SAR</small></div>
+            <a href="tel:0500265328" class="btn-item-call"><i class="fa-solid fa-phone"></i> <span>اتصال للطلب</span></a>
           </div>
         </div>
 
-        <!-- Item 7 -->
-        <div class="menu-card" data-cat="cold">
+        <!-- 7. سبانش لاتيه -->
+        <div class="menu-item-card" data-cat="espresso">
           <div>
-            <div class="menu-card-top">
-              <div class="menu-item-icon"><i class="fa-solid fa-wine-glass-empty"></i></div>
+            <div class="item-header">
+              <span class="item-category-label">Espresso Bar</span>
             </div>
-            <h3 class="menu-title" data-i18n="hibiscusTitle">آيس كركديه بيب</h3>
-            <p class="menu-desc" data-i18n="hibiscusDesc">منعش وطبيعي 100% بنكهة حامضة حلوة تبرد حر الصيف وتنعش يومك.</p>
+            <h3 class="item-name">سبانش لاتيه (حار/بارد)</h3>
+            <p class="item-description">توازن مثالي بين حلاوة السبانش وقوة الإسبريسو الفاخر المنعش.</p>
           </div>
-          <div>
-            <div class="menu-card-meta">
-              <div class="menu-price">12 <span>SAR</span></div>
-              <div class="menu-cals"><i class="fa-solid fa-fire-flame-simple"></i> 85 cal</div>
-            </div>
-            <a href="https://wa.me/966500265328?text=طلب:%20آيس%20كركديه" target="_blank" class="btn-item-order">
-              <i class="fa-brands fa-whatsapp"></i> <span data-i18n="orderItem">طلب فوري</span>
-            </a>
+          <div class="item-footer">
+            <div class="item-price-tag">15 <small>SAR</small></div>
+            <a href="tel:0500265328" class="btn-item-call"><i class="fa-solid fa-phone"></i> <span>اتصال للطلب</span></a>
           </div>
         </div>
 
-        <!-- Item 8 -->
-        <div class="menu-card" data-cat="sweets">
+        <!-- 8. كورتادو -->
+        <div class="menu-item-card" data-cat="espresso">
           <div>
-            <div class="menu-card-top">
-              <div class="menu-item-icon"><i class="fa-solid fa-ice-cream"></i></div>
-              <span class="menu-tag" data-i18n="badgeSpecial">مميز</span>
+            <div class="item-header">
+              <span class="item-category-label">Espresso Bar</span>
             </div>
-            <h3 class="menu-title" data-i18n="iceCreamTitle">آيسكريم ماتشا</h3>
-            <p class="menu-desc" data-i18n="iceCreamDesc">سوفت آيسكريم بنكهة الماتشا اليابانية الفاخرة بقوام كريمي ولذيذ.</p>
+            <h3 class="item-name">كورتادو</h3>
+            <p class="item-description">نسبة متساوية من الإسبريسو والحليب المبخر لطعم متناغم وقوي.</p>
           </div>
-          <div>
-            <div class="menu-card-meta">
-              <div class="menu-price">12 <span>SAR</span></div>
-              <div class="menu-cals"><i class="fa-solid fa-fire-flame-simple"></i> 180 cal</div>
-            </div>
-            <a href="https://wa.me/966500265328?text=طلب:%20آيسكريم%20ماتشا" target="_blank" class="btn-item-order">
-              <i class="fa-brands fa-whatsapp"></i> <span data-i18n="orderItem">طلب فوري</span>
-            </a>
+          <div class="item-footer">
+            <div class="item-price-tag">12 <small>SAR</small></div>
+            <a href="tel:0500265328" class="btn-item-call"><i class="fa-solid fa-phone"></i> <span>اتصال للطلب</span></a>
           </div>
         </div>
+
+        <!-- 9. كافيه لاتيه -->
+        <div class="menu-item-card" data-cat="espresso">
+          <div>
+            <div class="item-header">
+              <span class="item-category-label">Espresso Bar</span>
+            </div>
+            <h3 class="item-name">لاتيه (حار/بارد)</h3>
+            <p class="item-description">المشروب الكلاسيكي المحبب بنعومة الحليب الطازج ونكهة القهوة.</p>
+          </div>
+          <div class="item-footer">
+            <div class="item-price-tag">11 <small>SAR</small></div>
+            <a href="tel:0500265328" class="btn-item-call"><i class="fa-solid fa-phone"></i> <span>اتصال للطلب</span></a>
+          </div>
+        </div>
+
+        <!-- 10. أمريكانو -->
+        <div class="menu-item-card" data-cat="espresso">
+          <div>
+            <div class="item-header">
+              <span class="item-category-label">Espresso Bar</span>
+            </div>
+            <h3 class="item-name">أمريكانو (حار/بارد)</h3>
+            <p class="item-description">إسبريسو نقي ممدد بالماء لنكهة نقية وصافية وبدون إضافات.</p>
+          </div>
+          <div class="item-footer">
+            <div class="item-price-tag">12 <small>SAR</small></div>
+            <a href="tel:0500265328" class="btn-item-call"><i class="fa-solid fa-phone"></i> <span>اتصال للطلب</span></a>
+          </div>
+        </div>
+
+        <!-- 11. ماتشا بارد -->
+        <div class="menu-item-card" data-cat="matcha">
+          <div>
+            <div class="item-header">
+              <span class="item-category-label">Matcha & Cold</span>
+            </div>
+            <h3 class="item-name">ماتشا بارد</h3>
+            <p class="item-description">بودرة ماتشا يابانية أصلية محضرة مع الحليب البارد والثلج.</p>
+          </div>
+          <div class="item-footer">
+            <div class="item-price-tag">14 <small>SAR</small></div>
+            <a href="tel:0500265328" class="btn-item-call"><i class="fa-solid fa-phone"></i> <span>اتصال للطلب</span></a>
+          </div>
+        </div>
+
+        <!-- 12. ماتشا كراميل مملح -->
+        <div class="menu-item-card" data-cat="matcha">
+          <div>
+            <div class="item-header">
+              <span class="item-category-label">Matcha & Cold</span>
+            </div>
+            <h3 class="item-name">ماتشا كراميل مملح</h3>
+            <p class="item-description">نكهة مبتكرة تمزج أصالة الماتشا مع لمسة السولتيد كراميل الفاخر.</p>
+          </div>
+          <div class="item-footer">
+            <div class="item-price-tag">18 <small>SAR</small></div>
+            <a href="tel:0500265328" class="btn-item-call"><i class="fa-solid fa-phone"></i> <span>اتصال للطلب</span></a>
+          </div>
+        </div>
+
+        <!-- 13. كركديه بيب -->
+        <div class="menu-item-card" data-cat="matcha">
+          <div>
+            <div class="item-header">
+              <span class="item-category-label">Matcha & Cold</span>
+            </div>
+            <h3 class="item-name">كركديه بيب الخاص</h3>
+            <p class="item-description">منعش وطبيعي 100% بتوازن ممتع بين الحلاوة والحموضة.</p>
+          </div>
+          <div class="item-footer">
+            <div class="item-price-tag">14 <small>SAR</small></div>
+            <a href="tel:0500265328" class="btn-item-call"><i class="fa-solid fa-phone"></i> <span>اتصال للطلب</span></a>
+          </div>
+        </div>
+
+        <!-- 14. آيس تي خوخ -->
+        <div class="menu-item-card" data-cat="matcha">
+          <div>
+            <div class="item-header">
+              <span class="item-category-label">Matcha & Cold</span>
+            </div>
+            <h3 class="item-name">آيس تي خوخ</h3>
+            <p class="item-description">شاي مثلج بنكهة الخوخ الطبيعية لترطيب وانتعاش فوري.</p>
+          </div>
+          <div class="item-footer">
+            <div class="item-price-tag">13 <small>SAR</small></div>
+            <a href="tel:0500265328" class="btn-item-call"><i class="fa-solid fa-phone"></i> <span>اتصال للطلب</span></a>
+          </div>
+        </div>
+
+        <!-- 15. بودينق الشوكولاتة -->
+        <div class="menu-item-card" data-cat="sweets">
+          <div>
+            <div class="item-header">
+              <span class="item-category-label">Sweets & Bakery</span>
+            </div>
+            <h3 class="item-name">بودينق الشوكولاتة</h3>
+            <p class="item-description">الحلى الأكثر شهرة في بيب كوب بقوام دافئ وغني بالكاكاو الفاخر.</p>
+          </div>
+          <div class="item-footer">
+            <div class="item-price-tag">21 <small>SAR</small></div>
+            <a href="tel:0500265328" class="btn-item-call"><i class="fa-solid fa-phone"></i> <span>اتصال للطلب</span></a>
+          </div>
+        </div>
+
+        <!-- 16. كوكيز هش -->
+        <div class="menu-item-card" data-cat="sweets">
+          <div>
+            <div class="item-header">
+              <span class="item-category-label">Sweets & Bakery</span>
+            </div>
+            <h3 class="item-name">كوكيز بيب الهش</h3>
+            <p class="item-description">مخبوز طازج ومحشو بقطع الشوكولاتة الذائبة المناسبة للقهوة.</p>
+          </div>
+          <div class="item-footer">
+            <div class="item-price-tag">9.5 <small>SAR</small></div>
+            <a href="tel:0500265328" class="btn-item-call"><i class="fa-solid fa-phone"></i> <span>اتصال للطلب</span></a>
+          </div>
+        </div>
+
+        <!-- 17. كيك كنافة البستاشيو -->
+        <div class="menu-item-card" data-cat="sweets">
+          <div>
+            <div class="item-header">
+              <span class="item-category-label">Sweets & Bakery</span>
+            </div>
+            <h3 class="item-name">كيك كنافة البستاشيو</h3>
+            <p class="item-description">طبقات مقرمشة من الكنافة مع صوص البستاشيو الفاخر والغني.</p>
+          </div>
+          <div class="item-footer">
+            <div class="item-price-tag">23 <small>SAR</small></div>
+            <a href="tel:0500265328" class="btn-item-call"><i class="fa-solid fa-phone"></i> <span>اتصال للطلب</span></a>
+          </div>
+        </div>
+
+        <!-- 18. تشيز كيك بيكان -->
+        <div class="menu-item-card" data-cat="sweets">
+          <div>
+            <div class="item-header">
+              <span class="item-category-label">Sweets & Bakery</span>
+            </div>
+            <h3 class="item-name">تشيز كيك بيكان</h3>
+            <p class="item-description">تشيز كيك نيويوركي كريمي مغطى بحبات البيكان المكرملة اللذيذة.</p>
+          </div>
+          <div class="item-footer">
+            <div class="item-price-tag">21 <small>SAR</small></div>
+            <a href="tel:0500265328" class="btn-item-call"><i class="fa-solid fa-phone"></i> <span>اتصال للطلب</span></a>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- Branches Section (All 6 Branches) -->
-  <section class="branches-section" id="branches">
+  <!-- فروع بيب كوب الـ 6 -->
+  <section class="branches-sec" id="branches">
     <div class="container">
-      <div class="section-title">
-        <h2 data-i18n="branchesTitle">فروع بيب كوب (6 فروع)</h2>
-        <p data-i18n="branchesSubtitle">أينما كنت في الأحساء، بيب كوب يخدمك بنفس الجودة والسرعة</p>
-      </div>
+      <span class="sec-badge" data-i18n="branchesBadge">فروع الأحساء</span>
+      <h2 class="sec-h2" data-i18n="branchesTitle">فروع بيب كوب (6 فروع)</h2>
 
       <div class="branches-grid">
-
-        <!-- Branch 1: Al Naithiyah -->
+        <!-- 1. النايفية -->
         <div class="branch-card">
           <div>
-            <div class="branch-card-header">
-              <h3 class="branch-name" data-i18n="brNaithiyahTitle">فرع النايفية</h3>
-              <span class="status-badge status-open" data-i18n="statusOpen24">مفتوح (24/7)</span>
+            <div class="branch-top-bar">
+              <h3 class="branch-title" data-i18n="br1Title">فرع النايفية</h3>
+              <span class="status-pill open" data-i18n="statusOpen24">مفتوح 24 ساعة</span>
             </div>
-            <ul class="branch-info-list">
-              <li>
-                <i class="fa-solid fa-location-dot"></i>
-                <span data-i18n="brNaithiyahAddr">حي النايفية، الهفوف، الأحساء</span>
-              </li>
-              <li>
-                <i class="fa-solid fa-phone"></i>
-                <span dir="ltr">050 026 5328</span>
-              </li>
-              <li>
-                <i class="fa-solid fa-clock"></i>
-                <span data-i18n="hours24">مفتوح على مدار 24 ساعة يومياً</span>
-              </li>
+            <ul class="branch-meta">
+              <li><i class="fa-solid fa-location-dot"></i> <span data-i18n="br1Addr">حي النايفية، الهفوف، الأحساء</span></li>
+              <li><i class="fa-solid fa-phone"></i> <span dir="ltr">050 026 5328</span></li>
+              <li><i class="fa-solid fa-clock"></i> <span data-i18n="status24">خدمة على مدار 24 ساعة</span></li>
             </ul>
           </div>
-          <div class="branch-actions-wrap">
-            <div class="branch-btn-group">
-              <a href="tel:0500265328" class="btn-branch-act">
-                <i class="fa-solid fa-phone"></i> <span data-i18n="callBtn">اتصال</span>
-              </a>
-              <a href="https://wa.me/966500265328" target="_blank" class="btn-branch-act wa">
-                <i class="fa-brands fa-whatsapp"></i> <span data-i18n="waBtn">واتساب</span>
-              </a>
-            </div>
-            <a href="https://maps.app.goo.gl/8ERmmU5DrhjwK9o97" target="_blank" class="btn-branch-map">
-              <i class="fa-solid fa-diamond-turn-right"></i> <span data-i18n="mapBtn">الوصول للموقع عبر الخريطة</span>
-            </a>
+          <div class="branch-buttons">
+            <a href="tel:0500265328" class="btn-branch-phone"><i class="fa-solid fa-phone"></i> <span data-i18n="btnCall">اتصال</span></a>
+            <a href="https://maps.app.goo.gl/8ERmmU5DrhjwK9o97" target="_blank" class="btn-branch-nav"><i class="fa-solid fa-map-pin"></i> <span data-i18n="btnMap">الخريطة</span></a>
           </div>
         </div>
 
-        <!-- Branch 2: Al Ruqaiqah -->
+        <!-- 2. الرقيقة -->
         <div class="branch-card">
           <div>
-            <div class="branch-card-header">
-              <h3 class="branch-name" data-i18n="brRuqaiqahTitle">فرع الرقيقة</h3>
-              <span class="status-badge status-open" data-i18n="statusOpen24">مفتوح (24/7)</span>
+            <div class="branch-top-bar">
+              <h3 class="branch-title" data-i18n="br2Title">فرع الرقيقة</h3>
+              <span class="status-pill open" data-i18n="statusOpen24">مفتوح 24 ساعة</span>
             </div>
-            <ul class="branch-info-list">
-              <li>
-                <i class="fa-solid fa-location-dot"></i>
-                <span data-i18n="brRuqaiqahAddr">حي الرقيقة، الهفوف، الأحساء</span>
-              </li>
-              <li>
-                <i class="fa-solid fa-phone"></i>
-                <span dir="ltr">050 026 1468</span>
-              </li>
-              <li>
-                <i class="fa-solid fa-clock"></i>
-                <span data-i18n="hours24">مفتوح على مدار 24 ساعة يومياً</span>
-              </li>
+            <ul class="branch-meta">
+              <li><i class="fa-solid fa-location-dot"></i> <span data-i18n="br2Addr">حي الرقيقة، الهفوف، الأحساء</span></li>
+              <li><i class="fa-solid fa-phone"></i> <span dir="ltr">050 026 1468</span></li>
+              <li><i class="fa-solid fa-clock"></i> <span data-i18n="status24">خدمة على مدار 24 ساعة</span></li>
             </ul>
           </div>
-          <div class="branch-actions-wrap">
-            <div class="branch-btn-group">
-              <a href="tel:0500261468" class="btn-branch-act">
-                <i class="fa-solid fa-phone"></i> <span data-i18n="callBtn">اتصال</span>
-              </a>
-              <a href="https://wa.me/966500261468" target="_blank" class="btn-branch-act wa">
-                <i class="fa-brands fa-whatsapp"></i> <span data-i18n="waBtn">واتساب</span>
-              </a>
-            </div>
-            <a href="https://maps.app.goo.gl/42LQo2tqTp3TVkzQ7" target="_blank" class="btn-branch-map">
-              <i class="fa-solid fa-diamond-turn-right"></i> <span data-i18n="mapBtn">الوصول للموقع عبر الخريطة</span>
-            </a>
+          <div class="branch-buttons">
+            <a href="tel:0500261468" class="btn-branch-phone"><i class="fa-solid fa-phone"></i> <span data-i18n="btnCall">اتصال</span></a>
+            <a href="https://maps.app.goo.gl/42LQo2tqTp3TVkzQ7" target="_blank" class="btn-branch-nav"><i class="fa-solid fa-map-pin"></i> <span data-i18n="btnMap">الخريطة</span></a>
           </div>
         </div>
 
-        <!-- Branch 3: Al Hamra -->
+        <!-- 3. الحمراء -->
         <div class="branch-card">
           <div>
-            <div class="branch-card-header">
-              <h3 class="branch-name" data-i18n="brHamraTitle">فرع الحمراء</h3>
-              <span class="status-badge status-open" data-i18n="statusOpen24">مفتوح (24/7)</span>
+            <div class="branch-top-bar">
+              <h3 class="branch-title" data-i18n="br3Title">فرع الحمراء</h3>
+              <span class="status-pill open" data-i18n="statusOpen24">مفتوح 24 ساعة</span>
             </div>
-            <ul class="branch-info-list">
-              <li>
-                <i class="fa-solid fa-location-dot"></i>
-                <span data-i18n="brHamraAddr">حي الحمراء، الهفوف، الأحساء</span>
-              </li>
-              <li>
-                <i class="fa-solid fa-phone"></i>
-                <span dir="ltr">056 100 5311</span>
-              </li>
-              <li>
-                <i class="fa-solid fa-clock"></i>
-                <span data-i18n="hours24">مفتوح على مدار 24 ساعة يومياً</span>
-              </li>
+            <ul class="branch-meta">
+              <li><i class="fa-solid fa-location-dot"></i> <span data-i18n="br3Addr">حي الحمراء، الهفوف، الأحساء</span></li>
+              <li><i class="fa-solid fa-phone"></i> <span dir="ltr">056 100 5311</span></li>
+              <li><i class="fa-solid fa-clock"></i> <span data-i18n="status24">خدمة على مدار 24 ساعة</span></li>
             </ul>
           </div>
-          <div class="branch-actions-wrap">
-            <div class="branch-btn-group">
-              <a href="tel:0561005311" class="btn-branch-act">
-                <i class="fa-solid fa-phone"></i> <span data-i18n="callBtn">اتصال</span>
-              </a>
-              <a href="https://wa.me/966561005311" target="_blank" class="btn-branch-act wa">
-                <i class="fa-brands fa-whatsapp"></i> <span data-i18n="waBtn">واتساب</span>
-              </a>
-            </div>
-            <a href="https://maps.app.goo.gl/CSvbJRvpHhPmExMbA" target="_blank" class="btn-branch-map">
-              <i class="fa-solid fa-diamond-turn-right"></i> <span data-i18n="mapBtn">الوصول للموقع عبر الخريطة</span>
-            </a>
+          <div class="branch-buttons">
+            <a href="tel:0561005311" class="btn-branch-phone"><i class="fa-solid fa-phone"></i> <span data-i18n="btnCall">اتصال</span></a>
+            <a href="https://maps.app.goo.gl/CSvbJRvpHhPmExMbA" target="_blank" class="btn-branch-nav"><i class="fa-solid fa-map-pin"></i> <span data-i18n="btnMap">الخريطة</span></a>
           </div>
         </div>
 
-        <!-- Branch 4: Al Hufaira -->
+        <!-- 4. الحفيرة -->
         <div class="branch-card">
           <div>
-            <div class="branch-card-header">
-              <h3 class="branch-name" data-i18n="brHufairaTitle">فرع الحفيرة</h3>
-              <span class="status-badge status-open" data-i18n="statusOpen24">مفتوح (24/7)</span>
+            <div class="branch-top-bar">
+              <h3 class="branch-title" data-i18n="br4Title">فرع الحفيرة</h3>
+              <span class="status-pill open" data-i18n="statusOpen24">مفتوح 24 ساعة</span>
             </div>
-            <ul class="branch-info-list">
-              <li>
-                <i class="fa-solid fa-location-dot"></i>
-                <span data-i18n="brHufairaAddr">حي الحفيرة، طريق الملك عبدالله، الهفوف</span>
-              </li>
-              <li>
-                <i class="fa-solid fa-phone"></i>
-                <span dir="ltr">054 603 0480</span>
-              </li>
-              <li>
-                <i class="fa-solid fa-clock"></i>
-                <span data-i18n="hours24">مفتوح على مدار 24 ساعة يومياً</span>
-              </li>
+            <ul class="branch-meta">
+              <li><i class="fa-solid fa-location-dot"></i> <span data-i18n="br4Addr">حي الحفيرة، طريق الملك عبدالله، الهفوف</span></li>
+              <li><i class="fa-solid fa-phone"></i> <span dir="ltr">054 603 0480</span></li>
+              <li><i class="fa-solid fa-clock"></i> <span data-i18n="status24">خدمة على مدار 24 ساعة</span></li>
             </ul>
           </div>
-          <div class="branch-actions-wrap">
-            <div class="branch-btn-group">
-              <a href="tel:0546030480" class="btn-branch-act">
-                <i class="fa-solid fa-phone"></i> <span data-i18n="callBtn">اتصال</span>
-              </a>
-              <a href="https://wa.me/966546030480" target="_blank" class="btn-branch-act wa">
-                <i class="fa-brands fa-whatsapp"></i> <span data-i18n="waBtn">واتساب</span>
-              </a>
-            </div>
-            <a href="https://maps.app.goo.gl/s1JQS1FzHJXe4egQ6" target="_blank" class="btn-branch-map">
-              <i class="fa-solid fa-diamond-turn-right"></i> <span data-i18n="mapBtn">الوصول للموقع عبر الخريطة</span>
-            </a>
+          <div class="branch-buttons">
+            <a href="tel:0546030480" class="btn-branch-phone"><i class="fa-solid fa-phone"></i> <span data-i18n="btnCall">اتصال</span></a>
+            <a href="https://maps.app.goo.gl/s1JQS1FzHJXe4egQ6" target="_blank" class="btn-branch-nav"><i class="fa-solid fa-map-pin"></i> <span data-i18n="btnMap">الخريطة</span></a>
           </div>
         </div>
 
-        <!-- Branch 5: Al Salmaniyah (Coming Soon) -->
+        <!-- 5. السلمانية (قريباً) -->
         <div class="branch-card">
           <div>
-            <div class="branch-card-header">
-              <h3 class="branch-name" data-i18n="brSalmaniyahTitle">فرع السلمانية</h3>
-              <span class="status-badge status-soon" data-i18n="statusSoon">قريباً</span>
+            <div class="branch-top-bar">
+              <h3 class="branch-title" data-i18n="br5Title">فرع السلمانية</h3>
+              <span class="status-pill soon" data-i18n="statusSoon">قريباً</span>
             </div>
-            <ul class="branch-info-list">
-              <li>
-                <i class="fa-solid fa-location-dot"></i>
-                <span data-i18n="brSalmaniyahAddr">حي السلمانية، الهفوف، طريق الرياض، الأحساء</span>
-              </li>
-              <li>
-                <i class="fa-solid fa-hourglass-half"></i>
-                <span data-i18n="soonText">قريباً لخدمتكم بأعلى معايير السرعة</span>
-              </li>
-              <li>
-                <i class="fa-solid fa-phone"></i>
-                <span data-i18n="inquiriesText">الاستفسارات: 0500265328</span>
-              </li>
+            <ul class="branch-meta">
+              <li><i class="fa-solid fa-location-dot"></i> <span data-i18n="br5Addr">حي السلمانية، طريق الرياض، الهفوف</span></li>
+              <li><i class="fa-solid fa-phone"></i> <span dir="ltr">050 026 5328</span></li>
+              <li><i class="fa-solid fa-hourglass-half"></i> <span data-i18n="soonDesc">الافتتاح قريباً لخدمتكم</span></li>
             </ul>
           </div>
-          <div class="branch-actions-wrap">
-            <div class="branch-btn-group">
-              <a href="tel:0500265328" class="btn-branch-act">
-                <i class="fa-solid fa-phone"></i> <span data-i18n="callBtn">استفسار</span>
-              </a>
-              <a href="https://wa.me/966500265328" target="_blank" class="btn-branch-act wa">
-                <i class="fa-brands fa-whatsapp"></i> <span data-i18n="waBtn">واتساب</span>
-              </a>
-            </div>
-            <a href="https://maps.app.goo.gl/dhVtg57ttuKnxLQH7" target="_blank" class="btn-branch-map">
-              <i class="fa-solid fa-diamond-turn-right"></i> <span data-i18n="mapBtn">موقع الفرع على الخريطة</span>
-            </a>
+          <div class="branch-buttons">
+            <a href="tel:0500265328" class="btn-branch-phone"><i class="fa-solid fa-phone"></i> <span data-i18n="btnCall">استفسار</span></a>
+            <a href="https://maps.app.goo.gl/dhVtg57ttuKnxLQH7" target="_blank" class="btn-branch-nav"><i class="fa-solid fa-map-pin"></i> <span data-i18n="btnMap">الموقع</span></a>
           </div>
         </div>
 
-        <!-- Branch 6: Mahasen (Coming Soon) -->
+        <!-- 6. محاسن (قريباً) -->
         <div class="branch-card">
           <div>
-            <div class="branch-card-header">
-              <h3 class="branch-name" data-i18n="brMahasenTitle">فرع محاسن</h3>
-              <span class="status-badge status-soon" data-i18n="statusSoon">قريباً</span>
+            <div class="branch-top-bar">
+              <h3 class="branch-title" data-i18n="br6Title">فرع محاسن</h3>
+              <span class="status-pill soon" data-i18n="statusSoon">قريباً</span>
             </div>
-            <ul class="branch-info-list">
-              <li>
-                <i class="fa-solid fa-location-dot"></i>
-                <span data-i18n="brMahasenAddr">محاسن البلدية، الهفوف، طريق الأمير طلال بن عبدالعزيز</span>
-              </li>
-              <li>
-                <i class="fa-solid fa-hourglass-half"></i>
-                <span data-i18n="soonText">قريباً لخدمتكم بأعلى معايير السرعة</span>
-              </li>
-              <li>
-                <i class="fa-solid fa-phone"></i>
-                <span data-i18n="inquiriesText">الاستفسارات: 0500265328</span>
-              </li>
+            <ul class="branch-meta">
+              <li><i class="fa-solid fa-location-dot"></i> <span data-i18n="br6Addr">محاسن البلدية، طريق الأمير طلال</span></li>
+              <li><i class="fa-solid fa-phone"></i> <span dir="ltr">050 026 5328</span></li>
+              <li><i class="fa-solid fa-hourglass-half"></i> <span data-i18n="soonDesc">الافتتاح قريباً لخدمتكم</span></li>
             </ul>
           </div>
-          <div class="branch-actions-wrap">
-            <div class="branch-btn-group">
-              <a href="tel:0500265328" class="btn-branch-act">
-                <i class="fa-solid fa-phone"></i> <span data-i18n="callBtn">استفسار</span>
-              </a>
-              <a href="https://wa.me/966500265328" target="_blank" class="btn-branch-act wa">
-                <i class="fa-brands fa-whatsapp"></i> <span data-i18n="waBtn">واتساب</span>
-              </a>
-            </div>
-            <a href="https://maps.app.goo.gl/UqEuwgNCDAt3P6QCA" target="_blank" class="btn-branch-map">
-              <i class="fa-solid fa-diamond-turn-right"></i> <span data-i18n="mapBtn">موقع الفرع على الخريطة</span>
-            </a>
+          <div class="branch-buttons">
+            <a href="tel:0500265328" class="btn-branch-phone"><i class="fa-solid fa-phone"></i> <span data-i18n="btnCall">استفسار</span></a>
+            <a href="https://maps.app.goo.gl/UqEuwgNCDAt3P6QCA" target="_blank" class="btn-branch-nav"><i class="fa-solid fa-map-pin"></i> <span data-i18n="btnMap">الموقع</span></a>
           </div>
         </div>
 
@@ -1568,279 +1393,230 @@
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="footer">
+  <!-- الفوتر -->
+  <footer class="main-footer">
     <div class="container">
       <div class="footer-grid">
-        <div class="footer-brand">
-          <div class="brand-logo">
-            <div class="logo-badge">
-              <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2">
+        <div>
+          <a href="#" class="brand-wrap">
+            <div class="logo-mini">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
                 <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
               </svg>
             </div>
-            <div>
-              <div class="brand-title">Beep<span>Cup</span></div>
-              <div class="brand-sub" data-i18n="tagline">قهوة مختصة</div>
-            </div>
-          </div>
-          <p data-i18n="footerText">
-            بيب كوب (Beep Cup) علامة تجارية سعودية نشأت في الأحساء لتقديم تجربة قهوة استثنائية وسريعة تجمع بين فخامة البن المختص واعتدال السعر.
+            <div class="brand-name">Beep<span>Cup</span></div>
+          </a>
+          <p class="footer-p" data-i18n="footerText">
+            علامة سعودية نشأت في الأحساء لنقدم أسرع تجربة قهوة مختصة بجودة تلبي ذوقك وسعر يناسب يومك.
           </p>
         </div>
 
-        <div class="footer-col">
-          <h4 data-i18n="quickLinks">روابط سريعة</h4>
-          <ul class="footer-links">
+        <div>
+          <h4 class="footer-title" data-i18n="footerNavTitle">أقسام الموقع</h4>
+          <ul class="footer-nav">
             <li><a href="#hero" data-i18n="navHome">الرئيسية</a></li>
-            <li><a href="#story" data-i18n="navStory">قصتنا والاسم</a></li>
+            <li><a href="#story" data-i18n="navStory">قصة الاسم</a></li>
             <li><a href="#menu" data-i18n="navMenu">قائمة المشروبات</a></li>
-            <li><a href="#branches" data-i18n="navBranches">فروعنا (6 فروع)</a></li>
+            <li><a href="#branches" data-i18n="navBranches">فروع الأحساء (6)</a></li>
           </ul>
         </div>
 
-        <div class="footer-col">
-          <h4 data-i18n="followUs">تابعنا وتواصل معنا</h4>
-          <div class="social-links">
-            <a href="https://instagram.com" target="_blank" class="social-icon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://twitter.com" target="_blank" class="social-icon" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
-            <a href="https://tiktok.com" target="_blank" class="social-icon" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-            <a href="https://wa.me/966500265328" target="_blank" class="social-icon" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+        <div>
+          <h4 class="footer-title" data-i18n="footerContactTitle">التواصل المباشر</h4>
+          <div class="footer-socials">
+            <a href="tel:0500265328" class="social-btn" aria-label="Phone"><i class="fa-solid fa-phone"></i></a>
+            <a href="https://instagram.com" target="_blank" class="social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://tiktok.com" target="_blank" class="social-btn" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
           </div>
-          <p style="margin-top: 1.2rem; font-size: 0.85rem; color: #8E95A5;" data-i18n="locationHofuf">
-            المملكة العربية السعودية - الأحساء (الهفوف)
+          <p style="margin-top: 1rem; font-size: 0.8rem; color: var(--text-muted);" data-i18n="location">
+            المملكة العربية السعودية - الأحساء
           </p>
         </div>
       </div>
 
-      <div class="footer-bottom">
-        <div>
-          &copy; <span id="year">2026</span> BeepCup. <span data-i18n="copyRights">جميع الحقوق محفوظة.</span>
-        </div>
-        <div style="font-weight: 700; color: #9AA1B2;">
-          "يعدل كيفك، ويراعي جيبك"
-        </div>
+      <div class="footer-credits">
+        <div>&copy; <span id="year">2026</span> BeepCup. <span data-i18n="rights">جميع الحقوق محفوظة.</span></div>
+        <div style="color: var(--accent); font-weight: 700;">"يعدل كيفك، ويراعي جيبك"</div>
       </div>
     </div>
   </footer>
 
-  <!-- Floating WhatsApp Action -->
-  <a href="https://wa.me/966500265328?text=أهلاً%20بيب%20كوب،%20أود%20الطلب%20من%20الفرع" target="_blank" class="floating-wa" aria-label="WhatsApp Order">
-    <i class="fa-brands fa-whatsapp"></i>
-  </a>
-
-  <!-- JS Logic for Language & Filtering -->
+  <!-- السكربت -->
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    const translations = {
+    const i18n = {
       ar: {
         topBar: "☕ بيب كوب: قهوة مختصة بجودة عالية وبدون تأخير في الأحساء | فروعنا تخدمك على مدار الساعة",
-        tagline: "قهوة مختصة",
         navHome: "الرئيسية",
         navStory: "قصتنا",
         navMenu: "المنيو",
         navBranches: "الفروع (6)",
-        navOrder: "اطلب الآن",
+        btnCallHeader: "اتصل الآن",
         heroBadge: "سرعة فائقة • جودة مختصة",
         heroTitle1: "كوبك المفضل",
-        heroTitle2: "بسرعة ما تنتظرها!",
         heroSlogan: "\"يعدل كيفك، ويراعي جيبك\"",
-        heroDesc: "اخترنا لك أجود أنواع البن المختص عشان قهوتك ما تكون عادية، تكون قهوتك اليوم وكل يوم وبأسرع خدمة في الأحساء.",
+        heroDesc: "اخترنا لك أجود أنواع البن المختص عشان قهوتك ما تكون عادية، تكون قهوتك اليوم وكل يوم وبأسرع خدمة سيارات في الأحساء.",
         btnExploreMenu: "استعرض المنيو",
-        btnFindBranches: "فروعنا الـ 6 في الأحساء",
-        neonCaption: "نظام طلب واستلام سريع لراحتك",
-        hl1Title: "سرعة بدون تأخير",
-        hl1Desc: "طلبك جاهز في دقائق معدودة",
-        hl2Title: "بن مختص فاخر",
-        hl2Desc: "محاصيل منتقاة بعناية لنكهة مثالية",
-        hl3Title: "يراعي جيبك",
-        hl3Desc: "أسعار مدروسة تناسب يومك",
-        hl4Title: "خدمة متواصلة",
-        hl4Desc: "فروع تعمل على مدار الساعة",
-        storyPill: "هويتنا وسر اسمنا",
+        btnFindBranches: "فروعنا (6)",
+        heroFrameSub: "Drive-Thru Coffee Experience",
+        spec24: "خدمة 24 ساعة",
+        specQuality: "بن مختص فاخر",
+        specDrive: "طلب سريع بالسيارة",
+        specPrice: "أسعار مناسبة جداً",
+        feat1Title: "سرعة الاستلام",
+        feat1Desc: "طلبك جاهز بدقائق وبدون تأخير",
+        feat2Title: "محاصيل مختصة",
+        feat2Desc: "بن فاخر بإيحاءات متوازنة",
+        feat3Title: "يراعي جيبك",
+        feat3Desc: "أسعار مدروسة لكوب يومي مثالي",
+        feat4Title: "متواجدون دائماً",
+        feat4Desc: "فروع مفتوحة 24 ساعة يومياً",
+        storyPill: "هويتنا وسر الاسم",
         storyTitle: "قصة الاسم باختصار",
         storyP1: "من أيام الطفولة، كنا ننتظر بفارغ الصبر فلم كرتون \"بيب بيب\"، مذهولين بسرعته وخفته. كبرنا وكبرت معنا فكرة أن السرعة بدون تأخير هي حلم كل عميل.",
         storyP2: "فكرنا نسوي مشروع يشبهه: سريع، بسيط، ويوصل لك التجربة اللي تتمناها بدون تعقيد.",
         storyP3: "ومن هنا ولدت فكرة بيب كوب: كوب قهوة سريع وجودته عالية وبدون تأخير. واخترنا لك أجود أنواع البن المختص، عشان قهوتك ما تكون عادية، تكون قهوتك اليوم، وكل يوم.",
         storyMotto: "بيب كوب .. يعدل كيفك، ويراعي جيبك. وجعلها بالعافية! ❤️",
+        menuBadge: "القائمة الكاملة",
         menuTitle: "منيو بيب كوب",
-        menuSubtitle: "نكهات متوازنة تم تحضيرها بحب وشغف",
-        calNote: "يحتاج البالغون إلى 2000 سعرة حرارية في المتوسط يومياً",
         catAll: "الكل",
-        catCold: "مشروبات باردة",
-        catHot: "مشروبات ساخنة",
-        catSpecialty: "التقطير المختص",
-        catSweets: "الحلى والآيسكريم",
-        v60IceTitle: "V60 بارد مختص",
-        v60IceDesc: "تقطير احترافي لمحاصيل مختصة بإيحاءات زهرية وفاكهية منعشة.",
-        v60HotTitle: "V60 حار",
-        v60HotDesc: "تقطير متوازن يبرز حلاوة وقوام البن المختص مع استخلاص مثالي للنكهات.",
-        spanishIceTitle: "سبانش لاتيه بارد",
-        spanishIceDesc: "مزيج متوازن بين حلاوة السبانش وقوة الإسبريسو الفاخر لجرعة طاقة لا تُقاوم.",
-        matchaTitle: "آيس ماتشا لاتيه",
-        matchaDesc: "بودرة ماتشا يابانية فاخرة ومحضرة مع الحليب البارد لنكهة غنية ومنعشة.",
-        flatWhiteTitle: "فلات وايت",
-        flatWhiteDesc: "جرعتين إسبريسو مع تبخير حليب كريمي مخملي لعشاق الطعم المركز المتناغم.",
-        todayCoffeeTitle: "قهوة اليوم (فلتر)",
-        todayCoffeeDesc: "محضرة يومياً من بن مختص طازج برائحة ونكهة تروق مزاجك في كل وقت.",
-        hibiscusTitle: "آيس كركديه بيب",
-        hibiscusDesc: "منعش وطبيعي 100% بنكهة حامضة حلوة تبرد حر الصيف وتنعش يومك.",
-        iceCreamTitle: "آيسكريم ماتشا",
-        iceCreamDesc: "سوفت آيسكريم بنكهة الماتشا اليابانية الفاخرة بقوام كريمي ولذيذ.",
-        orderItem: "طلب فوري",
+        catDrip: "التقطير والفلتر",
+        catEspresso: "الإسبريسو والحليب",
+        catMatcha: "الماتشا والبارد",
+        catSweets: "الحلى والكيك",
+        branchesBadge: "فروع الأحساء",
         branchesTitle: "فروع بيب كوب (6 فروع)",
-        branchesSubtitle: "أينما كنت في الأحساء، بيب كوب يخدمك بنفس الجودة والسرعة",
-        brNaithiyahTitle: "فرع النايفية",
-        brNaithiyahAddr: "حي النايفية، الهفوف، الأحساء",
-        brRuqaiqahTitle: "فرع الرقيقة",
-        brRuqaiqahAddr: "حي الرقيقة، الهفوف، الأحساء",
-        brHamraTitle: "فرع الحمراء",
-        brHamraAddr: "حي الحمراء، الهفوف، الأحساء",
-        brHufairaTitle: "فرع الحفيرة",
-        brHufairaAddr: "حي الحفيرة، طريق الملك عبدالله، الهفوف",
-        brSalmaniyahTitle: "فرع السلمانية",
-        brSalmaniyahAddr: "حي السلمانية، الهفوف، طريق الرياض، الأحساء",
-        brMahasenTitle: "فرع محاسن",
-        brMahasenAddr: "محاسن البلدية، الهفوف، طريق الأمير طلال بن عبدالعزيز",
-        statusOpen24: "مفتوح (24/7)",
+        br1Title: "فرع النايفية",
+        br1Addr: "حي النايفية، الهفوف، الأحساء",
+        br2Title: "فرع الرقيقة",
+        br2Addr: "حي الرقيقة، الهفوف، الأحساء",
+        br3Title: "فرع الحمراء",
+        br3Addr: "حي الحمراء، الهفوف، الأحساء",
+        br4Title: "فرع الحفيرة",
+        br4Addr: "حي الحفيرة، طريق الملك عبدالله، الهفوف",
+        br5Title: "فرع السلمانية",
+        br5Addr: "حي السلمانية، طريق الرياض، الهفوف",
+        br6Title: "فرع محاسن",
+        br6Addr: "محاسن البلدية، طريق الأمير طلال",
+        statusOpen24: "مفتوح 24 ساعة",
         statusSoon: "قريباً",
-        hours24: "مفتوح على مدار 24 ساعة يومياً",
-        soonText: "قريباً لخدمتكم بأعلى معايير السرعة",
-        inquiriesText: "الاستفسارات: 0500265328",
-        callBtn: "اتصال",
-        waBtn: "واتساب",
-        mapBtn: "الوصول للموقع عبر الخريطة",
-        footerText: "بيب كوب (Beep Cup) علامة تجارية سعودية نشأت في الأحساء لتقديم تجربة قهوة استثنائية وسريعة تجمع بين فخامة البن المختص واعتدال السعر.",
-        quickLinks: "روابط سريعة",
-        followUs: "تابعنا وتواصل معنا",
-        locationHofuf: "المملكة العربية السعودية - الأحساء (الهفوف)",
-        copyRights: "جميع الحقوق محفوظة."
+        status24: "خدمة على مدار 24 ساعة",
+        soonDesc: "الافتتاح قريباً لخدمتكم",
+        btnCall: "اتصال",
+        btnMap: "الخريطة",
+        footerText: "علامة سعودية نشأت في الأحساء لنقدم أسرع تجربة قهوة مختصة بجودة تلبي ذوقك وسعر يناسب يومك.",
+        footerNavTitle: "أقسام الموقع",
+        footerContactTitle: "التواصل المباشر",
+        location: "المملكة العربية السعودية - الأحساء",
+        rights: "جميع الحقوق محفوظة."
       },
       en: {
-        topBar: "☕ Beep Cup: Premium Specialty Coffee without delay in Al-Ahsa | 24/7 Branches",
-        tagline: "Specialty Coffee",
+        topBar: "☕ Beep Cup: Fast Specialty Coffee in Al-Ahsa | 24/7 Service",
         navHome: "Home",
-        navStory: "Our Story",
+        navStory: "Story",
         navMenu: "Menu",
         navBranches: "Branches (6)",
-        navOrder: "Order Now",
-        heroBadge: "Ultra Fast • Specialty Quality",
+        btnCallHeader: "Call Us",
+        heroBadge: "High Speed • Specialty Beans",
         heroTitle1: "Your Favorite Cup",
-        heroTitle2: "Faster Than You Think!",
-        heroSlogan: "\"Adjusts your mood, respects your budget\"",
-        heroDesc: "We select the highest grade specialty coffee beans so your cup is never ordinary—it's your everyday coffee with the fastest drive-thru service in Al-Ahsa.",
+        heroSlogan: "\"Fits your mood, fits your wallet\"",
+        heroDesc: "Carefully sourced specialty coffee roasted for an everyday experience with the fastest drive-thru in Al-Ahsa.",
         btnExploreMenu: "Explore Menu",
-        btnFindBranches: "Our 6 Branches in Al-Ahsa",
-        neonCaption: "Express Drive-thru & Takeaway System",
-        hl1Title: "Speed Without Delay",
-        hl1Desc: "Your coffee ready in record minutes",
-        hl2Title: "Specialty Beans",
-        hl2Desc: "Carefully roasted for flawless tasting notes",
-        hl3Title: "Smart Value",
-        hl3Desc: "Great everyday coffee prices",
-        hl4Title: "Continuous Service",
-        hl4Desc: "Branches open around the clock",
-        storyPill: "Brand Story & Heritage",
-        storyTitle: "The Story Behind Beep Cup",
-        storyP1: "Since childhood, we eagerly awaited the cartoon character \"Beep Beep\" (Road Runner), fascinated by his lightning speed. As we grew up, we realized that speed without delay is every customer's dream.",
-        storyP2: "So we created a concept just like it: fast, straightforward, and delivering the exact experience you crave without any complexity.",
-        storyP3: "That's how Beep Cup was born: a swift, top-grade specialty cup delivered with zero delay. We sourced exceptional coffee so your cup feels extraordinary every single day.",
-        storyMotto: "Beep Cup: Adjusts your mood, respects your budget. Enjoy every sip! ❤️",
+        btnFindBranches: "Branches (6)",
+        heroFrameSub: "Drive-Thru Coffee Experience",
+        spec24: "24/7 Service",
+        specQuality: "Specialty Beans",
+        specDrive: "Express Drive-Thru",
+        specPrice: "Best Value",
+        feat1Title: "Express Speed",
+        feat1Desc: "Ready in minutes with zero delay",
+        feat2Title: "Specialty Beans",
+        feat2Desc: "Flawlessly roasted tasting notes",
+        feat3Title: "Smart Value",
+        feat3Desc: "Affordable everyday coffee",
+        feat4Title: "Always Open",
+        feat4Desc: "Open 24 hours around the clock",
+        storyPill: "Heritage & Identity",
+        storyTitle: "The Story of Beep Cup",
+        storyP1: "Since childhood, we loved the cartoon character \"Beep Beep\" (Road Runner) for his swiftness. We realized instant service is everyone's dream.",
+        storyP2: "We built an experience just like it: swift, pure, and delivering what you love without delay.",
+        storyP3: "That is how Beep Cup was created: a specialty cup crafted with top beans that fits your daily routine.",
+        storyMotto: "Beep Cup: Fits your mood, fits your wallet. Enjoy! ❤️",
+        menuBadge: "Official Menu",
         menuTitle: "Beep Cup Menu",
-        menuSubtitle: "Carefully balanced drinks crafted with passion",
-        calNote: "Adults need an average of 2,000 calories per day",
         catAll: "All",
-        catCold: "Cold Drinks",
-        catHot: "Hot Drinks",
-        catSpecialty: "Specialty Brew",
-        catSweets: "Desserts & Ice Cream",
-        v60IceTitle: "Iced V60 Drip",
-        v60IceDesc: "Handcrafted pour-over using premium beans with floral and fruity hints.",
-        v60HotTitle: "Hot V60 Drip",
-        v60HotDesc: "Balanced extraction highlighting sweetness and delicate aroma.",
-        spanishIceTitle: "Iced Spanish Latte",
-        spanishIceDesc: "Silky balance between rich condensed milk and our signature espresso punch.",
-        matchaTitle: "Iced Matcha Latte",
-        matchaDesc: "Ceremonial grade Japanese matcha whisked freshly over chilled milk.",
-        flatWhiteTitle: "Flat White",
-        flatWhiteDesc: "Double ristretto shots paired with velvet micro-foam milk.",
-        todayCoffeeTitle: "Today's Brew (Filter)",
-        todayCoffeeDesc: "Freshly brewed daily filter coffee with smooth, rich notes.",
-        hibiscusTitle: "Beep Iced Hibiscus",
-        hibiscusDesc: "100% natural infusion with sweet and tangy floral notes.",
-        iceCreamTitle: "Matcha Soft Serve",
-        iceCreamDesc: "Creamy soft ice cream infused with authentic Japanese matcha.",
-        orderItem: "Instant Order",
-        branchesTitle: "Beep Cup Branches (6 Locations)",
-        branchesSubtitle: "Wherever you are in Al-Ahsa, Beep Cup is right near you",
-        brNaithiyahTitle: "Al Naithiyah Branch",
-        brNaithiyahAddr: "Al Naithiyah Dist, Hofuf, Al-Ahsa",
-        brRuqaiqahTitle: "Al Ruqaiqah Branch",
-        brRuqaiqahAddr: "Al Ruqaiqah Dist, Hofuf, Al-Ahsa",
-        brHamraTitle: "Al Hamra Branch",
-        brHamraAddr: "Al Hamra Dist, Hofuf, Al-Ahsa",
-        brHufairaTitle: "Al Hufaira Branch",
-        brHufairaAddr: "Al Hufaira Dist, King Abdullah Rd, Hofuf, Al-Ahsa",
-        brSalmaniyahTitle: "Al Salmaniyah Branch",
-        brSalmaniyahAddr: "Al Salmaniyah Dist, Riyadh Rd, Hofuf, Al-Ahsa",
-        brMahasenTitle: "Mahasen Branch",
-        brMahasenAddr: "Mahasen Al Baladiya, Prince Talal Rd, Hofuf",
-        statusOpen24: "Open (24/7)",
-        statusSoon: "Opening Soon",
-        hours24: "Open 24 hours daily",
-        soonText: "Opening soon with the highest speed standards",
-        inquiriesText: "Inquiries: 0500265328",
-        callBtn: "Call",
-        waBtn: "WhatsApp",
-        mapBtn: "Get Directions on Map",
-        footerText: "Beep Cup is a homegrown Saudi specialty coffee brand born in Al-Ahsa, committed to serving fast, premium coffee that delights your mood and respects your wallet.",
-        quickLinks: "Quick Links",
-        followUs: "Follow & Connect",
-        locationHofuf: "Kingdom of Saudi Arabia - Al-Ahsa (Hofuf)",
-        copyRights: "All rights reserved."
+        catDrip: "Drip & Filter",
+        catEspresso: "Espresso & Milk",
+        catMatcha: "Matcha & Cold",
+        catSweets: "Desserts & Cakes",
+        branchesBadge: "Locations",
+        branchesTitle: "Beep Cup Branches (6)",
+        br1Title: "Al Naithiyah Branch",
+        br1Addr: "Al Naithiyah Dist, Hofuf",
+        br2Title: "Al Ruqaiqah Branch",
+        br2Addr: "Al Ruqaiqah Dist, Hofuf",
+        br3Title: "Al Hamra Branch",
+        br3Addr: "Al Hamra Dist, Hofuf",
+        br4Title: "Al Hufaira Branch",
+        br4Addr: "King Abdullah Rd, Al Hufaira",
+        br5Title: "Al Salmaniyah Branch",
+        br5Addr: "Riyadh Rd, Al Salmaniyah",
+        br6Title: "Mahasen Branch",
+        br6Addr: "Prince Talal Rd, Mahasen",
+        statusOpen24: "Open 24/7",
+        statusSoon: "Coming Soon",
+        status24: "Open 24 hours daily",
+        soonDesc: "Opening soon for your service",
+        btnCall: "Call",
+        btnMap: "Map",
+        footerText: "Saudi homegrown coffee brand founded in Al-Ahsa to deliver swift specialty coffee at exceptional everyday value.",
+        footerNavTitle: "Quick Links",
+        footerContactTitle: "Direct Contact",
+        location: "Kingdom of Saudi Arabia - Al-Ahsa",
+        rights: "All rights reserved."
       }
     };
 
-    let currentLang = 'ar';
+    let curLang = 'ar';
 
     function toggleLanguage() {
-      currentLang = currentLang === 'ar' ? 'en' : 'ar';
+      curLang = curLang === 'ar' ? 'en' : 'ar';
       const html = document.documentElement;
       const body = document.body;
-      const langBtnText = document.getElementById('langText');
+      const langTxt = document.getElementById('langText');
 
-      if (currentLang === 'en') {
+      if (curLang === 'en') {
         html.setAttribute('lang', 'en');
         html.setAttribute('dir', 'ltr');
         body.classList.add('ltr');
-        langBtnText.textContent = 'العربية';
+        langTxt.textContent = 'العربية';
       } else {
         html.setAttribute('lang', 'ar');
         html.setAttribute('dir', 'rtl');
         body.classList.remove('ltr');
-        langBtnText.textContent = 'English';
+        langTxt.textContent = 'English';
       }
 
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
-        if (translations[currentLang][key]) {
-          el.textContent = translations[currentLang][key];
+        if (i18n[curLang][key]) {
+          el.textContent = i18n[curLang][key];
         }
       });
     }
 
     function filterMenu(category, btn) {
-      document.querySelectorAll('.cat-tab').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
-      const cards = document.querySelectorAll('.menu-card');
-      cards.forEach(card => {
-        if (category === 'all' || card.getAttribute('data-cat') === category) {
-          card.style.display = 'flex';
+      const items = document.querySelectorAll('.menu-item-card');
+      items.forEach(item => {
+        if (category === 'all' || item.getAttribute('data-cat') === category) {
+          item.style.display = 'flex';
         } else {
-          card.style.display = 'none';
+          item.style.display = 'none';
         }
       });
     }
