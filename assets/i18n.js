@@ -65,7 +65,6 @@
       if(!trigger||trigger.dataset.faqBound==='1')return;
       trigger.dataset.faqBound='1';
       trigger.addEventListener('click',e=>{
-        if(trigger.tagName==='SUMMARY')return;
         e.preventDefault();
         const was=item.classList.contains('active')||item.classList.contains('open');
         items.forEach(x=>x.classList.remove('active','open'));
