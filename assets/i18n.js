@@ -51,6 +51,28 @@
       const img=document.createElement('img'); img.src=src; img.alt=alt; img.width=1536; img.height=1024; img.loading='lazy'; img.decoding='async'; img.style.width='100%'; img.style.height='100%'; img.style.objectFit='cover'; img.style.display='block'; box.textContent=''; box.appendChild(img);
     });
   };
+  const faqFix=()=>{
+    if(document.querySelector('style[data-faq-fix]'))return;
+    const s=document.createElement('style');s.dataset.faqFix='1';s.textContent=`
+.faq-answer,.faq-item p,[data-faq-answer]{display:none !important;overflow:hidden !important;}
+.faq-item.active .faq-answer,.faq-item.active p,.faq-item.open p{display:block !important;overflow:visible !important;}
+.faq-item summary{cursor:pointer;}
+.faq-item.active summary::after,.faq-item.open summary::after{transform:rotate(180deg);}
+`;document.head.appendChild(s);
+    const items=[...document.querySelectorAll('.faq-item')];
+    items.forEach(item=>{
+      const trigger=item.querySelector('summary,.faq-question');
+      if(!trigger||trigger.dataset.faqBound==='1')return;
+      trigger.dataset.faqBound='1';
+      trigger.addEventListener('click',e=>{
+        if(trigger.tagName==='SUMMARY')return;
+        e.preventDefault();
+        const was=item.classList.contains('active')||item.classList.contains('open');
+        items.forEach(x=>x.classList.remove('active','open'));
+        if(!was)item.classList.add('active');
+      });
+    });
+  };
   const style=()=>{if(document.querySelector('style[data-b2b-hero-polish]'))return;const s=document.createElement('style');s.dataset.b2bHeroPolish='1';s.textContent=`
 .hero, #hero, .hero-section { background: linear-gradient(135deg, #0b1524 0%, #112238 50%, #080f1a 100%) !important; color: #ffffff !important; }
 .hero h1, .hero h2, .hero p, .hero span { color: #ffffff !important; }
@@ -109,6 +131,7 @@
     document.querySelectorAll('a[href*="wa.me"]').forEach(a=>{if(!a.textContent.trim())return;a.setAttribute('data-ar','واتساب');a.setAttribute('data-en','WhatsApp');setText(a,lang==='en'?'WhatsApp':'واتساب');});
   };
   const boot=()=>{
+    faqFix();
     const original=window.setLanguage;
     if(typeof original==='function')window.setLanguage=(lang)=>{original(lang);setTimeout(mark,0);setTimeout(mark,120);};
     const originalToggle=window.toggleLanguage;
