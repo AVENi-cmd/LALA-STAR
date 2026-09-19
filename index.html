@@ -137,10 +137,14 @@
     .btn-ahsa-pack { background: #a16207; color: #ffffff !important; }
     .btn-sweet-single { width: 100%; background: #db2777; color: #ffffff !important; text-align: center; padding: 10px; border-radius: 6px; font-weight: 700; font-size: 12px; display: block; }
 
-    /* Corporate Branches Cards */
+    /* Corporate Branches Cards with Sales Phone Chips */
     .branches-sec { padding: 75px 0; background: var(--bg); }
     .branch-card { border: 1px solid var(--line); border-radius: 12px; padding: 22px; background: #ffffff; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow); }
     .branch-btn { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; border-radius: 6px; text-decoration: none; font-size: 12.5px; font-weight: 700; color: #ffffff !important; margin-top: 15px; }
+    .phone-chips { display: flex; flex-wrap: wrap; gap: 5px; margin: 10px 0; }
+    .phone-chip { font-size: 11px; font-family: Inter, Arial, sans-serif; background: #f1f5f9; padding: 3px 7px; border-radius: 4px; color: var(--navy); border: 1px solid var(--line); text-decoration: none; direction: ltr; font-weight: 600; }
+    .phone-chip:hover { background: #fee2e2; border-color: var(--red); color: var(--red); }
+    .email-link { display: inline-block; font-size: 11.5px; color: var(--red); direction: ltr; font-weight: 600; word-break: break-all; margin-top: 4px; }
 
     /* Trust Section */
     .trust { background: linear-gradient(135deg, #1e293b, #0f172a); color: #fff; padding: 24px 0; }
@@ -168,13 +172,14 @@
     .clean-wa-float { width: 52px; height: 52px; border-radius: 50%; background: #25d366; color: #ffffff; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.25); border: none; cursor: pointer; transition: transform 0.2s; outline: none; }
     .clean-wa-float:hover { transform: scale(1.05); }
     .clean-wa-float svg { width: 30px; height: 30px; fill: #ffffff; }
-    .wa-popup-menu { display: none; position: absolute; bottom: 62px; right: 0; width: 290px; background: #ffffff; border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); padding: 12px; flex-direction: column; gap: 8px; z-index: 100000; animation: fadeIn 0.2s ease; }
+    .wa-popup-menu { display: none; position: absolute; bottom: 62px; right: 0; width: 300px; max-height: 80vh; overflow-y: auto; background: #ffffff; border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); padding: 12px; flex-direction: column; gap: 7px; z-index: 100000; animation: fadeIn 0.2s ease; }
     .wa-popup-menu.show { display: flex; }
     .wa-menu-header { font-size: 12px; font-weight: 800; color: var(--navy); border-bottom: 1px solid var(--line); padding-bottom: 6px; margin-bottom: 2px; text-align: center; }
-    .wa-menu-item { display: flex; flex-direction: column; padding: 7px 10px; border-radius: 6px; background: #f8fafc; border: 1px solid #edf2f7; text-decoration: none; transition: background 0.15s; }
+    .wa-menu-sub { font-size: 11px; font-weight: 800; color: var(--red); margin-top: 4px; padding: 2px 4px; background: #fef2f2; border-radius: 4px; }
+    .wa-menu-item { display: flex; justify-content: space-between; align-items: center; padding: 6px 10px; border-radius: 6px; background: #f8fafc; border: 1px solid #edf2f7; text-decoration: none; transition: background 0.15s; }
     .wa-menu-item:hover { background: #fee2e2; }
-    .wa-item-name { font-size: 12px; font-weight: 700; color: var(--navy); }
-    .wa-item-num { font-size: 11px; font-family: Inter, Arial, sans-serif; color: var(--red); direction: ltr; text-align: left; }
+    .wa-item-name { font-size: 11.5px; font-weight: 700; color: var(--navy); }
+    .wa-item-num { font-size: 11px; font-family: Inter, Arial, sans-serif; color: var(--red); direction: ltr; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
     /* Responsive adjustments & Mobile Menu */
@@ -202,7 +207,7 @@
 </head>
 <body>
 
-  <!-- شريط الملاحة الرسمي المطور -->
+  <!-- شريط الملاحة الرسمي -->
   <header class="topbar">
     <div class="container nav">
       <a class="brand" href="#home" aria-label="شركة لألأة النجوم التجارية">
@@ -260,7 +265,7 @@
       </div>
     </section>
 
-    <!-- كتالوج قطاعات التوريد الشاملة B2B المحدث بعد الدمج وإلغاء بطاقة المنظفات المنفصلة -->
+    <!-- كتالوج قطاعات التوريد الشاملة B2B المحدث -->
     <section id="catalog" class="catalog-sec">
       <div class="container">
         <div class="head" style="justify-content: center; text-align: center; margin-bottom: 25px;">
@@ -271,7 +276,7 @@
           </div>
         </div>
 
-        <!-- أزرار التصفية المحدثة -->
+        <!-- أزرار التصفية -->
         <div class="cat-nav">
           <button onclick="filterCatalog('all', this)" class="cat-btn active" data-i18n="tab_all">الكل</button>
           <button onclick="filterCatalog('food', this)" class="cat-btn" data-i18n="tab_food">المواد الغذائية</button>
@@ -282,7 +287,7 @@
 
         <div class="grid-cards">
           
-          <!-- قطاع 1: المواد الغذائية (تعديل النص و4000 صنف) -->
+          <!-- قطاع 1: المواد الغذائية -->
           <div class="prod-card" data-category="food">
             <div class="prod-body">
               <span class="prod-tag tag-food" data-i18n="tag_food">أغذية وتموين</span>
@@ -296,7 +301,7 @@
             </div>
           </div>
 
-          <!-- قطاع 2: الدواجن واللحوم والمجمدات (تعديل المقليات والشركات بأرخص الأسعار) -->
+          <!-- قطاع 2: الدواجن واللحوم والمجمدات -->
           <div class="prod-card" data-category="frozen">
             <div class="prod-body">
               <span class="prod-tag tag-frozen" data-i18n="tag_frozen">مجمدات وإعاشة</span>
@@ -310,7 +315,7 @@
             </div>
           </div>
 
-          <!-- قطاع 3: الحلويات والسناكات والشاي والمكسرات (مذاق راقي) -->
+          <!-- قطاع 3: الحلويات والسناكات والشاي والمكسرات -->
           <div class="prod-card" data-category="sweets">
             <div class="prod-body">
               <span class="prod-tag tag-sweet" data-i18n="tag_sweet">حلويات وسناكات ومسليات</span>
@@ -323,7 +328,7 @@
             </div>
           </div>
 
-          <!-- قطاع 4: البلاستيك والمنظفات ومستلزمات المطاعم (المدمج الشامل) -->
+          <!-- قطاع 4: البلاستيك والمنظفات ومستلزمات المطاعم -->
           <div class="prod-card" data-category="packaging">
             <div class="prod-body">
               <span class="prod-tag tag-pack" data-i18n="tag_pack">بلاستيك وتغليف ومنظفات</span>
@@ -358,7 +363,7 @@
           </div>
           <div class="story-copy">
             <h3 data-i18n="story_head">من الدمام بدأت الرحلة</h3>
-            <p data-i18n="story_p">الدمام هي المركز الرئيسي للشركة، وفي عام 2018م تم تدشين فرع الأحساء، ثم امتدت العمليات لتشمل قطاعات التغليف والبلاستيك والحلويات والسناكات عبر مستودعات وفروع مستقلة وواضحة.</p>
+            <p data-i18n="story_p">الدمام هي المركز الرئيسي للشركة، وفي عام 2018م تم تدشين فرع ومستودعات الأحساء، ثم امتدت العمليات لتشمل قطاعات التغليف والبلاستيك والحلويات والسناكات عبر مستودعات وفروع مستقلة وواضحة.</p>
             <div class="timeline">
               <div class="event">
                 <strong>1993م</strong>
@@ -516,7 +521,7 @@
       </div>
     </section>
 
-    <!-- الفروع والمستودعات بتصميم مؤسسي نقي -->
+    <!-- الفروع والمستودعات بتفاصيل العنوان الرسمي الكامل لفرع الأحساء وأرقام المبيعات -->
     <section class="branches-sec" id="branches">
       <div class="container">
         <div class="head">
@@ -528,6 +533,36 @@
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px;">
+          
+          <!-- فرع الأحساء - أغذية (بيانات الكرت الرسمية كاملة) -->
+          <div class="branch-card" style="border-color: var(--red); border-width: 2px;">
+            <div>
+              <span style="font-size: 11px; background: #fee2e2; color: #b91c1c; font-weight: 700; padding: 3px 8px; border-radius: 4px;" data-i18n="tag_food">مواد غذائية بالجملة</span>
+              <h4 style="font-size: 16px; margin: 8px 0 4px; font-weight: 800; color: var(--navy);" data-i18n="br_ahsa_h">شركة لألأة النجوم التجارية — فرع الأحساء</h4>
+              <p style="color: var(--muted); font-size: 12.5px; margin-bottom: 6px; line-height: 1.6;" data-i18n="br_ahsa_p">
+                المبرز - شارع الملك عبدالله، محاسن (بجانب مبنى البلدية)<br>
+                ص.ب 8201 - الرمز البريدي: 31482
+              </p>
+              
+              <div style="font-size: 11.5px; font-weight: 700; color: var(--navy); margin-top: 8px;" data-i18n="lbl_sales_contact">أرقام المبيعات والتواصل:</div>
+              <div class="phone-chips">
+                <a href="https://wa.me/966533511159?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="phone-chip">0533511159</a>
+                <a href="https://wa.me/966500603880?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="phone-chip">0500603880</a>
+                <a href="https://wa.me/966500517660?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="phone-chip">0500517660</a>
+                <a href="https://wa.me/966507662117?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="phone-chip">0507662117</a>
+                <a href="https://wa.me/966547277188?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="phone-chip">0547277188</a>
+              </div>
+              <div>
+                <strong style="font-size: 11.5px; color: var(--navy);">الإيميل:</strong>
+                <a href="mailto:starcoldstorehasa@gmail.com" class="email-link">starcoldstorehasa@gmail.com</a>
+              </div>
+            </div>
+            <a href="https://wa.me/966533511159?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="branch-btn" style="background: var(--red);">
+              <span data-i18n="btn_quote_contact">مراسلة مبيعات الأحساء</span>
+              <span style="direction: ltr;">053 351 1159</span>
+            </a>
+          </div>
+
           <!-- فرع الدمام - أغذية -->
           <div class="branch-card">
             <div>
@@ -541,23 +576,10 @@
             </a>
           </div>
 
-          <!-- فرع الأحساء - أغذية -->
-          <div class="branch-card">
-            <div>
-              <span style="font-size: 11px; background: #fee2e2; color: #b91c1c; font-weight: 700; padding: 3px 8px; border-radius: 4px;" data-i18n="tag_food">مواد غذائية</span>
-              <h4 style="font-size: 15px; margin: 8px 0 4px; font-weight: 700;" data-i18n="br_ahsa_h">مستودعات الأحساء (أغذية)</h4>
-              <p style="color: var(--muted); font-size: 12px; margin-bottom: 10px;" data-i18n="br_ahsa_p">الهفوف - حي الجامعة، شارع العروبة.</p>
-            </div>
-            <a href="https://wa.me/966533511159?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="branch-btn" style="background: var(--red);">
-              <span data-i18n="btn_quote_contact">طلب تسعيرة وتواصل</span>
-              <span style="direction: ltr;">053 351 1159</span>
-            </a>
-          </div>
-
           <!-- فرع الدمام - بلاستيك -->
           <div class="branch-card">
             <div>
-              <span style="font-size: 11px; background: #fefce8; color: #a16207; font-weight: 700; padding: 3px 8px; border-radius: 4px;" data-i18n="tag_pack">بلاستيك وتغليف</span>
+              <span style="font-size: 11px; background: #fefce8; color: #a16207; font-weight: 700; padding: 3px 8px; border-radius: 4px;" data-i18n="tag_pack">بلاستيك وتغليف ومنظفات</span>
               <h4 style="font-size: 15px; margin: 8px 0 4px; font-weight: 700;" data-i18n="br_hamat_h">قمة الهامات للبلاستيك (الدمام)</h4>
               <p style="color: var(--muted); font-size: 12px; margin-bottom: 10px;" data-i18n="br_hamat_p">الدمام - شارع الأمير نايف، مقابل سوق الخضار.</p>
             </div>
@@ -570,7 +592,7 @@
           <!-- فرع الأحساء - بلاستيك -->
           <div class="branch-card">
             <div>
-              <span style="font-size: 11px; background: #fefce8; color: #a16207; font-weight: 700; padding: 3px 8px; border-radius: 4px;" data-i18n="tag_pack">بلاستيك وتغليف</span>
+              <span style="font-size: 11px; background: #fefce8; color: #a16207; font-weight: 700; padding: 3px 8px; border-radius: 4px;" data-i18n="tag_pack">بلاستيك وتغليف ومنظفات</span>
               <h4 style="font-size: 15px; margin: 8px 0 4px; font-weight: 700;" data-i18n="br_stars_h">لألأة النجوم للبلاستيك (الأحساء)</h4>
               <p style="color: var(--muted); font-size: 12px; margin-bottom: 10px;" data-i18n="br_stars_p">المبرز - طريق الملك عبدالله، بجانب البلدية.</p>
             </div>
@@ -613,7 +635,7 @@
           </details>
           <details>
             <summary data-i18n="q2">ما هي آلية الحصول على قائمة الأسعار والكتالوج الكامل؟</summary>
-            <div class="faq-answer-inner" data-i18n="a2">يمكنك الضغط على زر الفرع المطلوب عبر الواتساب لإرسال طلب التسعيرة وقائمتك مباشرة، أو الاتصال بهاتف الإدارة للحصول على عروض أسعار رسمية فورية.</div>
+            <div class="faq-answer-inner" data-i18n="a2">يمكنك الضغط على أرقام المبيعات عبر الواتساب لإرسال طلب التسعيرة وقائمتك مباشرة، أو الاتصال بهاتف الإدارة للحصول على عروض أسعار رسمية فورية.</div>
           </details>
           <details>
             <summary data-i18n="q3">هل تقدمون فواتير ضريبية إلكترونية معتمدة للشركات؟</summary>
@@ -628,13 +650,14 @@
     </section>
   </main>
 
-  <!-- الفوتر الرسمي المتكامل مع أوقات العمل المحدثة (السبت - الخميس والجمعة) -->
+  <!-- الفوتر الرسمي مع البريد الرسمي والمواعيد المحدثة -->
   <footer class="site-footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col">
           <h4 data-i18n="ft_c_name">شركة لألأة النجوم التجارية</h4>
           <p data-i18n="ft_c_desc">شركة سعودية رائدة في استيراد وتوزيع المواد الغذائية والبلاستيك والحلويات والسناكات بالجملة لقطاع الأعمال منذ 1993م.</p>
+          <p style="margin-top: 10px;"><strong data-i18n="ft_email">البريد الإلكتروني:</strong><br><a href="mailto:starcoldstorehasa@gmail.com" style="color: #cbd5e1; direction: ltr; display: inline-block;">starcoldstorehasa@gmail.com</a></p>
         </div>
         <div class="footer-col">
           <h4 data-i18n="ft_legal_h">البيانات الرسمية</h4>
@@ -654,34 +677,49 @@
     </div>
   </footer>
 
-  <!-- قائمة الواتساب العائمة المتعددة لجميع الفروع والمحلات -->
+  <!-- قائمة الواتساب العائمة المتعددة لجميع مسؤولي المبيعات والفروع -->
   <div class="wa-widget-container">
     <div class="wa-popup-menu" id="waPopup">
-      <div class="wa-menu-header" data-i18n="wa_popup_title">اختر الفرع للتواصل المباشر</div>
+      <div class="wa-menu-header" data-i18n="wa_popup_title">اختر جهة التواصل المباشر عبر واتساب</div>
       
+      <div class="wa-menu-sub" data-i18n="wa_group_ahsa">مبيعات المواد الغذائية (الأحساء):</div>
+      <a href="https://wa.me/966533511159?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="wa-menu-item">
+        <span class="wa-item-name">مبيعات الأحساء (1)</span>
+        <span class="wa-item-num">0533511159</span>
+      </a>
+      <a href="https://wa.me/966500603880?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="wa-menu-item">
+        <span class="wa-item-name">مبيعات الأحساء (2)</span>
+        <span class="wa-item-num">0500603880</span>
+      </a>
+      <a href="https://wa.me/966500517660?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="wa-menu-item">
+        <span class="wa-item-name">مبيعات الأحساء (3)</span>
+        <span class="wa-item-num">0500517660</span>
+      </a>
+      <a href="https://wa.me/966507662117?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="wa-menu-item">
+        <span class="wa-item-name">مبيعات الأحساء (4)</span>
+        <span class="wa-item-num">0507662117</span>
+      </a>
+      <a href="https://wa.me/966547277188?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="wa-menu-item">
+        <span class="wa-item-name">مبيعات الأحساء (5)</span>
+        <span class="wa-item-num">0547277188</span>
+      </a>
+
+      <div class="wa-menu-sub" data-i18n="wa_group_other">الفروع والأنشطة الأخرى:</div>
       <a href="https://wa.me/966567999863?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%AF%D9%85%D8%A7%D9%85)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="wa-menu-item">
         <span class="wa-item-name" data-i18n="wa_m_dam">المواد الغذائية — فرع الدمام</span>
-        <span class="wa-item-num">056 799 9863</span>
+        <span class="wa-item-num">0567999863</span>
       </a>
-
-      <a href="https://wa.me/966533511159?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="wa-menu-item">
-        <span class="wa-item-name" data-i18n="wa_m_ahsa">المواد الغذائية — فرع الأحساء</span>
-        <span class="wa-item-num">053 351 1159</span>
-      </a>
-
       <a href="https://wa.me/966577348040?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20%D9%85%D9%86%20%D9%82%D9%85%D8%A9%20%D8%A7%D9%84%D9%87%D8%A7%D9%85%D8%A7%D8%AA%20%D9%84%D9%84%D8%A8%D9%84%D8%A7%D8%B3%D8%AA%D9%8A%D9%83%20(%D8%A7%D9%84%D8%AF%D9%85%D8%A7%D9%85)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="wa-menu-item">
         <span class="wa-item-name" data-i18n="wa_m_hamat">قمة الهامات للبلاستيك — الدمام</span>
-        <span class="wa-item-num">057 734 8040</span>
+        <span class="wa-item-num">0577348040</span>
       </a>
-
       <a href="https://wa.me/966506744437?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20%D9%85%D9%86%20%D9%84%D8%A3%D9%84%D8%A3%D8%A9%20%D8%A7%D9%84%D9%86%D8%AC%D9%88%D9%85%20%D9%84%D9%84%D8%A8%D9%84%D8%A7%D8%B3%D8%AA%D9%8A%D9%83%20(%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="wa-menu-item">
         <span class="wa-item-name" data-i18n="wa_m_stars">لألأة النجوم للبلاستيك — الأحساء</span>
-        <span class="wa-item-num">050 674 4437</span>
+        <span class="wa-item-num">0506744437</span>
       </a>
-
       <a href="https://wa.me/966558423342?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20%D9%85%D9%86%20%D9%85%D8%B0%D8%A7%D9%82%20%D8%B1%D8%A7%D9%82%D9%8A%20%D9%84%D9%84%D8%AD%D9%84%D9%88%D9%8A%D8%A7%D8%AA%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="wa-menu-item">
         <span class="wa-item-name" data-i18n="wa_m_mazaq">مذاق راقي للحلويات — الأحساء</span>
-        <span class="wa-item-num">055 842 3342</span>
+        <span class="wa-item-num">0558423342</span>
       </a>
     </div>
 
@@ -723,14 +761,14 @@
       }
     }
 
-    // فتح وإغلاق قائمة الواتساب المتعددة الفروع
+    // فتح وإغلاق قائمة الواتساب
     function toggleWaMenu(e) {
       if (e) e.stopPropagation();
       const popup = document.getElementById('waPopup');
       popup.classList.toggle('show');
     }
 
-    // إغلاق قائمة الواتساب عند النقر خارجها
+    // إغلاق قائمة الواتساب عند النقر بالخارج
     document.addEventListener('click', function(e) {
       const popup = document.getElementById('waPopup');
       const btn = document.getElementById('waBtn');
@@ -843,28 +881,30 @@
         br_desc: "Fully equipped warehouses ensuring rapid wholesale fulfillment across the Eastern Province.",
         br_dam_h: "Dammam Central Hub (Food)",
         br_dam_p: "42nd Street, opposite Central Vegetable Market, Dammam.",
-        br_ahsa_h: "Al-Ahsa Hub (Food)",
-        br_ahsa_p: "Al-Hofuf - University District, Al-Orouba Street.",
+        br_ahsa_h: "Lala Star Trading Co. — Al-Ahsa Branch",
+        br_ahsa_p: "Al-Mubarraz - King Abdullah Road, Mahasin (Next to Municipality)<br>P.O. Box 8201 - Postal Code: 31482",
+        lbl_sales_contact: "Sales & Inquiries Contacts:",
         br_hamat_h: "Qemat Al-Hamat Plastics (Dammam)",
         br_hamat_p: "Dammam - Prince Nayef Street, opposite Central Market.",
         br_stars_h: "Lala Star Plastics (Al-Ahsa)",
         br_stars_p: "Al-Mubarraz - King Abdullah Road, next to Municipality.",
         br_mazaq_h: "Mazaq Raqi Sweets & Snacks",
         br_mazaq_p: "Wholesale imported chocolates, snacks, chips, tea, and nuts.",
-        btn_quote_contact: "Direct Quote & Contact",
+        btn_quote_contact: "Contact Al-Ahsa Sales",
         faq_kicker: "FAQ",
         faq_title: "Frequently Asked Questions",
         faq_desc: "Direct answers to common client and enterprise inquiries.",
         q1: "Do you deliver across Dammam, Al-Ahsa, and nearby areas?",
         a1: "Yes, our refrigerated and dry transport fleet covers all retail businesses and restaurants daily.",
         q2: "How can businesses obtain price lists and product catalogs?",
-        a2: "You can click on the desired branch WhatsApp button to send your request directly, or call management.",
+        a2: "You can click directly on sales numbers via WhatsApp or call our administration phone for fast quotations.",
         q3: "Do you issue official electronic tax invoices for companies?",
         a3: "Yes, all transactions are documented with compliant e-invoices under ZATCA regulations.",
         q4: "Are credit facilities and payment terms available for clients?",
         a4: "We provide deferred payment accounts for accredited clients following initial assessment.",
         ft_c_name: "LALA STARS TRADING CO.",
         ft_c_desc: "Leading Saudi enterprise in importing and distributing wholesale food, plastics, and confectionery since 1993.",
+        ft_email: "Official Email:",
         ft_legal_h: "Legal Information",
         ft_cr: "CR Number:",
         ft_vat: "VAT Number:",
@@ -875,9 +915,10 @@
         ft_hours: "Business Hours:",
         ft_hours_val: "Sat - Thu: 7:00 AM - 9:00 PM<br>Fri: 4:00 PM - 9:00 PM",
         ft_rights: "All Rights Reserved © 2026 Lala Star Trading Co. | LALA STAR TRADING CO.",
-        wa_popup_title: "Choose Branch for WhatsApp Contact",
+        wa_popup_title: "Select Contact via WhatsApp",
+        wa_group_ahsa: "Food Sales (Al-Ahsa):",
+        wa_group_other: "Other Hubs & Divisions:",
         wa_m_dam: "Food Supplies — Dammam Branch",
-        wa_m_ahsa: "Food Supplies — Al-Ahsa Branch",
         wa_m_hamat: "Qemat Al-Hamat Plastics — Dammam",
         wa_m_stars: "Lala Star Plastics — Al-Ahsa",
         wa_m_mazaq: "Mazaq Raqi Sweets — Al-Ahsa"
@@ -934,7 +975,7 @@
         about_desc: "تأسست شركة لألأة النجوم التجارية في الدمام عام 1993م في مجال بيع وتوزيع المواد الغذائية بالجملة، ثم توسعت أعمالها لتشمل أنشطة تجارية متخصصة تحت مظلة الشركة لتغطية كامل أسواق المنطقة الشرقية.",
         about_caption: "تجارة وتوزيع بالجملة",
         story_head: "من الدمام بدأت الرحلة",
-        story_p: "الدمام هي المركز الرئيسي للشركة، وفي عام 2018م تم تدشين فرع الأحساء، ثم امتدت العمليات لتشمل قطاعات التغليف والبلاستيك والحلويات والسناكات عبر مستودعات وفروع مستقلة وواضحة.",
+        story_p: "الدمام هي المركز الرئيسي للشركة، وفي عام 2018م تم تدشين فرع ومستودعات الأحساء، ثم امتدت العمليات لتشمل قطاعات التغليف والبلاستيك والحلويات والسناكات عبر مستودعات وفروع مستقلة وواضحة.",
         tl_1_h: "بداية الشركة — الدمام",
         tl_1_p: "انطلاق النشاط المركزي في استيراد وتوريد المواد الغذائية بالجملة.",
         tl_2_y: "بعد التوسع",
@@ -983,28 +1024,30 @@
         br_desc: "مستودعات مجهزة لتلبية طلبيات الجملة بسرعة في كافة أنحاء المنطقة الشرقية.",
         br_dam_h: "مستودعات الدمام المركزية (أغذية)",
         br_dam_p: "شارع 42، مقابل سوق الخضار المركزي، الدمام.",
-        br_ahsa_h: "مستودعات الأحساء (أغذية)",
-        br_ahsa_p: "الهفوف - حي الجامعة، شارع العروبة.",
+        br_ahsa_h: "شركة لألأة النجوم التجارية — فرع الأحساء",
+        br_ahsa_p: "المبرز - شارع الملك عبدالله، محاسن (بجانب مبنى البلدية)<br>ص.ب 8201 - الرمز البريدي: 31482",
+        lbl_sales_contact: "أرقام المبيعات والتواصل:",
         br_hamat_h: "قمة الهامات للبلاستيك (الدمام)",
         br_hamat_p: "الدمام - شارع الأمير نايف، مقابل سوق الخضار.",
         br_stars_h: "لألأة النجوم للبلاستيك (الأحساء)",
         br_stars_p: "المبرز - طريق الملك عبدالله، بجانب البلدية.",
         br_mazaq_h: "مذاق راقي للحلويات والسناكات",
         br_mazaq_p: "توريد الشوكولاتة والحلويات العالمية، الشيبس، الشاي، والمكسرات.",
-        btn_quote_contact: "طلب تسعيرة وتواصل",
+        btn_quote_contact: "مراسلة مبيعات الأحساء",
         faq_kicker: "الأسئلة الشائعة",
         faq_title: "الأسئلة المتكررة",
         faq_desc: "إجابات سريعة ومباشرة على أكثر استفسارات المنشآت والشركات شيوعاً.",
         q1: "هل توفرون التوصيل للدمام والأحساء وضواحيها؟",
         a1: "نعم، نمتلك أسطولاً مجهزاً ومبرداً يغطي كافة الأنشطة والمطاعم والمتاجر والتموينات في الدمام، الخبر، الظهران، والأحساء بشكل يومي ودوري.",
         q2: "ما هي آلية الحصول على قائمة الأسعار والكتالوج الكامل؟",
-        a2: "يمكنك الضغط على زر الفرع المطلوب عبر الواتساب لإرسال طلب التسعيرة وقائمتك مباشرة، أو الاتصال بهاتف الإدارة للحصول على عروض أسعار رسمية فورية.",
+        a2: "يمكنك الضغط مباشرة على أرقام مسؤولي المبيعات عبر الواتساب لإرسال قائمتك، أو الاتصال بهاتف الإدارة.",
         q3: "هل تقدمون فواتير ضريبية إلكترونية معتمدة للشركات؟",
         a3: "نعم، جميع معاملاتنا مسجلة وموثقة بفواتير ضريبية نظامية متوافقة بالكامل مع هيئة الزكاة والضريبة والجمارك (ZATCA).",
         q4: "هل تتوفر تسهيلات توريد وحسابات آجلة للشركات؟",
         a4: "نوفر تسهيلات دفع وحسابات آجلة للجهات والمنشآت المعتمدة بعد دراسة حجم السحب والتعامل التجاري الأولي.",
         ft_c_name: "شركة لألأة النجوم التجارية",
         ft_c_desc: "شركة سعودية رائدة في استيراد وتوزيع المواد الغذائية والبلاستيك والحلويات والسناكات بالجملة لقطاع الأعمال منذ 1993م.",
+        ft_email: "البريد الإلكتروني:",
         ft_legal_h: "البيانات الرسمية",
         ft_cr: "السجل التجاري:",
         ft_vat: "الرقم الضريبي:",
@@ -1015,9 +1058,10 @@
         ft_hours: "أوقات العمل:",
         ft_hours_val: "السبت - الخميس: 7:00 ص - 9:00 م<br>الجمعة: 4:00 عصراً - 9:00 م",
         ft_rights: "جميع الحقوق محفوظة © 2026 شركة لألأة النجوم التجارية | LALA STAR TRADING CO.",
-        wa_popup_title: "اختر الفرع للتواصل المباشر",
+        wa_popup_title: "اختر جهة التواصل المباشر عبر واتساب",
+        wa_group_ahsa: "مبيعات المواد الغذائية (الأحساء):",
+        wa_group_other: "الفروع والأنشطة الأخرى:",
         wa_m_dam: "المواد الغذائية — فرع الدمام",
-        wa_m_ahsa: "المواد الغذائية — فرع الأحساء",
         wa_m_hamat: "قمة الهامات للبلاستيك — الدمام",
         wa_m_stars: "لألأة النجوم للبلاستيك — الأحساء",
         wa_m_mazaq: "مذاق راقي للحلويات — الأحساء"
