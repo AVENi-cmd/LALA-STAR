@@ -1,1222 +1,1846 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="utf-8">
-  <meta name="lalastar-seo-v1" content="managed-by-build-webp">
-  <meta name="robots" content="index,follow,max-image-preview:large">
-  <link rel="preload" as="image" href="assets/optimized/wholesale-warehouse-ahsa-1920.webp?v=20260917-1" fetchpriority="high" media="(min-width:851px)">
-  <link rel="preload" as="image" href="assets/optimized/wholesale-warehouse-ahsa-640.webp?v=20260917-1" fetchpriority="high" media="(max-width:850px)">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="format-detection" content="telephone=no">
-  <meta name="theme-color" content="#b91c1c">
-  <link rel="canonical" href="https://aveni-cmd.github.io/LALA-STAR/">
-  <meta name="description" content="شركة لألأة النجوم التجارية — تجارة وتوريد المواد الغذائية والبلاستيك والحلويات بالجملة منذ 1993م في الدمام والأحساء.">
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="ar_SA">
-  <meta property="og:site_name" content="شركة لألأة النجوم التجارية | LALA STAR TRADING CO.">
-  <meta property="og:title" content="شركة لألأة النجوم التجارية | توريد مواد غذائية وبلاستيك وحلويات بالجملة">
-  <meta property="og:description" content="شريك التوريد المعتمد للتموينات، المطاعم، والمقاهي في الدمام والأحساء منذ 1993م، مع خطوط إمداد تغطي أكثر من 5000 صنف.">
-  <meta property="og:url" content="https://aveni-cmd.github.io/LALA-STAR/">
-  <title>شركة لألأة النجوم التجارية | LALA STAR TRADING CO.</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700;800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>بيب كوب | Beep Cup - قهوة مختصة في الأحساء</title>
+  <meta name="description" content="بيب كوب - قهوة مختصة تعدل كيفك وتراعي جيبك. فروعنا في الأحساء (الهفوف). قهوة سريعة بجودة عالية وبدون تأخير." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
   <style>
     :root {
-      --navy: #0f172a;
-      --navy2: #1e293b;
-      --red: #b91c1c;
-      --red-hover: #991b1b;
-      --ink: #1e293b;
-      --muted: #475569;
-      --line: #dbe3ec;
-      --bg: #f8fafc;
-      --max: 1180px;
-      --card: rgba(255,255,255,.95);
-      --shadow: 0 10px 25px -5px rgba(15,30,54,.06);
+      /* Obsidian & Modern Carbon Theme (بدون درجات بنية) */
+      --primary: #FF5A00;
+      --primary-glow: rgba(255, 90, 0, 0.4);
+      --primary-hover: #ff7326;
+      --bg-dark: #08090C;
+      --bg-surface-1: #0F1115;
+      --bg-surface-2: #16181F;
+      --border-subtle: #232731;
+      --border-focus: #FF5A00;
+      --text-main: #FFFFFF;
+      --text-muted: #8E95A5;
+      --accent-badge: #FFA23A;
+      --font-ar: 'Tajawal', sans-serif;
+      --font-en: 'Plus Jakarta Sans', sans-serif;
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { margin: 0; min-height: 100vh; background-color: var(--bg); color: var(--navy); font-family: "IBM Plex Sans Arabic", Arial, sans-serif; line-height: 1.7; overflow-x: hidden; }
-    a { text-decoration: none; color: inherit; }
-    img { display: block; max-width: 100%; }
-    .container { width: min(calc(100% - 36px), var(--max)); margin: auto; }
 
-    /* Topbar */
-    .topbar { height: 75px; background: rgba(255,255,255,.96); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 1000; }
-    .nav { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 15px; position: relative; }
-    .brand img { width: 175px; height: 52px; object-fit: contain; }
-    .links { display: flex; gap: 22px; align-items: center; font-size: 13px; font-weight: 700; }
-    .links a:hover { color: var(--red); }
-    .nav-btns { display: flex; align-items: center; gap: 8px; }
-    .lang { border: 1px solid rgba(15,30,54,.15); background: #ffffff; color: var(--navy); border-radius: 6px; padding: 6px 10px; font-weight: 700; font-size: 11px; cursor: pointer; }
-    .top-cta { background: var(--red); color: #ffffff !important; padding: 7px 12px; border-radius: 6px; font-weight: 700; font-size: 12px; white-space: nowrap; line-height: 1.2; }
-    .top-cta:hover { background: var(--red-hover); }
-    .menu-btn { display: none; border: 0; background: none; font-size: 24px; color: var(--navy); cursor: pointer; padding: 4px; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    /* Hero */
-    .hero { min-height: 580px; display: flex; align-items: center; position: relative; background: linear-gradient(135deg, rgba(11,21,36,.82) 0%, rgba(17,34,56,.74) 50%, rgba(8,15,26,.88) 100%), url("assets/optimized/wholesale-warehouse-ahsa-1920.webp?v=20260917-5") center/cover no-repeat !important; color: #ffffff; text-align: center; }
-    .hero-inner { position: relative; z-index: 2; width: min(calc(100% - 36px), var(--max)); margin: auto; padding: 70px 0; }
-    .hero-badge { display: inline-block; background: var(--red); color: #ffffff; font-size: 13px; font-weight: 800; padding: 6px 18px; border-radius: 20px; margin-bottom: 18px; box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
-    .hero h1 { color: #ffffff; font-size: clamp(25px, 4.2vw, 46px); line-height: 1.25; margin: 0 auto 16px; max-width: 860px; font-weight: 800; }
-    .hero .lead { color: #e2e8f0; font-size: clamp(14px, 2vw, 16.5px); max-width: 780px; margin: 0 auto 28px; line-height: 1.8; }
-    .actions { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
-    .btn { min-height: 44px; padding: 0 20px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; }
-    .btn.primary { background: var(--red); color: #ffffff; }
-    .btn.secondary { border: 1px solid rgba(255,255,255,.8); color: #ffffff; background: rgba(255,255,255,0.08); }
+    html {
+      scroll-behavior: smooth;
+    }
 
-    /* Stats Bar */
-    .stats { border-bottom: 1px solid var(--line); background: #ffffff; box-shadow: 0 4px 15px rgba(15,30,54,.03); }
-    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
-    .stat { min-height: 110px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-left: 1px solid var(--line); text-align: center; padding: 15px; }
-    .stat:first-child { border-left: 0; }
-    .stat strong { font-size: 30px; color: var(--red); line-height: 1.1; font-weight: 800; font-family: Inter, Arial, sans-serif; }
-    .stat small { color: var(--muted); font-weight: 600; font-size: 12px; margin-top: 5px; }
+    body {
+      font-family: var(--font-ar);
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-image: radial-gradient(circle at top center, #151822 0%, #08090C 70%);
+      background-attachment: fixed;
+    }
 
-    /* Standard Sections */
-    .section { padding: 75px 0; }
-    .alt { background: rgba(241,245,249,.65); }
-    .head { display: flex; justify-content: space-between; gap: 30px; align-items: flex-end; margin-bottom: 35px; }
-    .kicker { font-size: 11px; letter-spacing: .15em; color: var(--red); font-weight: 800; text-transform: uppercase; }
-    .section h2 { font-size: clamp(24px, 3.5vw, 36px); line-height: 1.25; color: var(--navy); margin: 6px 0 0; font-weight: 800; }
-    .head p { max-width: 540px; color: var(--muted); margin: 0; font-size: 14px; }
+    body.ltr {
+      font-family: var(--font-en);
+    }
 
-    /* Story */
-    .story { display: grid; grid-template-columns: 1fr 1.1fr; gap: 45px; align-items: center; }
-    .photo { height: 400px; border-radius: 14px; overflow: hidden; position: relative; background: var(--navy); box-shadow: var(--shadow); }
-    .photo img { width: 100%; height: 100%; object-fit: cover; }
-    .photo:after { content: ""; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(0,0,0,.6), transparent 50%); }
-    .caption { position: absolute; z-index: 2; bottom: 20px; right: 20px; color: #fff; font-size: 20px; font-weight: 800; }
-    .story h3 { font-size: 24px; margin: 0 0 14px; color: var(--navy); font-weight: 800; }
-    .story p { color: var(--muted); font-size: 15px; }
-    .timeline { border-right: 2px solid var(--line); padding-right: 20px; margin-top: 25px; }
-    .event { position: relative; margin-bottom: 18px; }
-    .event:before { content: ""; position: absolute; right: -27px; top: 8px; width: 12px; height: 12px; background: var(--red); border-radius: 50%; box-shadow: 0 0 0 4px #fff; }
-    .event strong { color: var(--red); font-size: 13px; font-weight: 800; }
-    .event h4 { margin: 2px 0; color: var(--navy); font-size: 16px; font-weight: 700; }
-    .event p { font-size: 13px; margin: 0; color: var(--muted); }
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-dark);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--border-subtle);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--primary);
+    }
 
-    /* Benefits & Clients */
-    .benefits-grid, .clients-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-    .benefit, .client-card { background: var(--card); border: 1px solid var(--line); border-right: 3.5px solid var(--red); border-radius: 14px; padding: 22px 18px; box-shadow: var(--shadow); }
-    .icon { width: 42px; height: 42px; border-radius: 10px; background: rgba(185,28,28,.08); display: grid; place-items: center; color: var(--red); margin-bottom: 15px; }
-    .icon svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; }
-    .benefit h3, .client-card h3 { font-size: 16px; color: var(--navy); margin: 0 0 6px; font-weight: 700; }
-    .benefit p, .client-card p { font-size: 13px; color: var(--muted); margin: 0; }
-    .client-card .client-num { font-family: Inter, Arial, sans-serif; font-size: 12px; font-weight: 800; color: var(--red); margin-bottom: 6px; }
+    .container {
+      width: 92%;
+      max-width: 1220px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
 
-    /* Businesses */
-    .businesses { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-    .business { background: var(--card); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; box-shadow: var(--shadow); }
-    .business img { width: 100%; height: 220px; object-fit: cover; }
-    .business-body { padding: 16px 18px; }
-    .business h3 { margin: 0; color: var(--navy); font-size: 17px; font-weight: 700; }
-    .business p { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
-    .location { display: inline-block; margin-top: 8px; color: var(--red); font-size: 11px; font-weight: 800; }
+    /* Announcement Bar */
+    .top-bar {
+      background: linear-gradient(90deg, #d44500, var(--primary), #d44500);
+      color: #fff;
+      text-align: center;
+      padding: 0.5rem 1rem;
+      font-size: 0.84rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
 
-    /* Interactive B2B Sector Catalog */
-    .catalog-sec { padding: 75px 0; background-color: #ffffff; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-    .cat-nav { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 30px; }
-    .cat-btn { padding: 8px 16px; border-radius: 20px; border: 1px solid var(--line); background: #ffffff; color: var(--muted); cursor: pointer; font-weight: 700; font-size: 12px; font-family: inherit; transition: 0.2s; }
-    .cat-btn.active { background: var(--red); color: #ffffff; border-color: var(--red); }
-    .grid-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-    .prod-card { background: #ffffff; border-radius: 12px; border: 1px solid var(--line); overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
-    .prod-body { padding: 18px; }
-    .prod-tag { font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 4px; display: inline-block; }
-    .tag-food { background: #fee2e2; color: #b91c1c; }
-    .tag-sweet { background: #fdf2f8; color: #db2777; }
-    .tag-pack { background: #fefce8; color: #a16207; }
-    .tag-frozen { background: #eff6ff; color: #1d4ed8; }
-    .prod-title { font-size: 16px; font-weight: 700; color: var(--navy); margin: 10px 0 6px; }
-    .prod-desc { font-size: 12.5px; color: var(--muted); line-height: 1.6; }
-    .prod-spec { font-size: 11.5px; color: var(--navy2); border-top: 1px dashed var(--line); margin-top: 14px; padding-top: 10px; font-weight: 600; }
-    .prod-footer { padding: 12px 14px; background: #f8fafc; border-top: 1px solid var(--line); display: flex; gap: 8px; }
-    .btn-branch { flex: 1; text-align: center; padding: 9px 6px; border-radius: 6px; border: none; font-family: inherit; font-weight: 700; font-size: 11.5px; display: block; line-height: 1.2; cursor: pointer; }
-    .btn-dammam { background: #0f172a; color: #ffffff !important; }
-    .btn-ahsa { background: var(--red); color: #ffffff !important; }
-    .btn-ahsa-pack { background: #a16207; color: #ffffff !important; }
-    .btn-sweet-single { width: 100%; background: #db2777; color: #ffffff !important; text-align: center; padding: 10px; border-radius: 6px; font-weight: 700; font-size: 12px; display: block; border: none; font-family: inherit; cursor: pointer; }
+    /* Navbar */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(8, 9, 12, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
 
-    /* Corporate Branches Cards */
-    .branches-sec { padding: 75px 0; background: var(--bg); }
-    .branch-card { border: 1px solid var(--line); border-radius: 12px; padding: 22px; background: #ffffff; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow); }
-    .branch-btn { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; border-radius: 6px; text-decoration: none; font-size: 12.5px; font-weight: 700; color: #ffffff !important; margin-top: 15px; }
-    .phone-chips { display: flex; flex-wrap: wrap; gap: 5px; margin: 10px 0; }
-    .phone-chip { font-size: 11px; font-family: Inter, Arial, sans-serif; background: #f1f5f9; padding: 3px 7px; border-radius: 4px; color: var(--navy); border: 1px solid var(--line); text-decoration: none; direction: ltr; font-weight: 600; }
-    .phone-chip:hover { background: #fee2e2; border-color: var(--red); color: var(--red); }
-    .email-link { display: inline-block; font-size: 11.5px; color: var(--red); direction: ltr; font-weight: 600; word-break: break-all; margin-top: 4px; }
-    .postal-badge { display: inline-block; font-size: 10.5px; font-family: Inter, Arial, sans-serif; background: #e2e8f0; color: #334155; padding: 1px 6px; border-radius: 3px; font-weight: 700; margin-top: 4px; }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 75px;
+    }
 
-    /* Trust Section */
-    .trust { background: linear-gradient(135deg, #1e293b, #0f172a); color: #fff; padding: 24px 0; }
-    .trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.12); border-radius: 12px; overflow: hidden; }
-    .trust-item { min-height: 70px; display: flex; align-items: center; justify-content: center; gap: 10px; padding: 10px 16px; background: rgba(255,255,255,.03); font-size: 13px; font-weight: 700; }
-    .trust-item svg { width: 20px; height: 20px; fill: none; stroke: #fff; stroke-width: 2; flex: none; }
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      text-decoration: none;
+      color: inherit;
+    }
 
-    /* FAQ */
-    .faq-list { max-width: 850px; margin: auto; display: grid; gap: 12px; }
-    .faq-list details { border: 1px solid var(--line); border-radius: 10px; background: #ffffff; overflow: hidden; }
-    .faq-list details summary { padding: 16px 20px; font-weight: 700; cursor: pointer; list-style: none; font-size: 14px; color: var(--navy); }
-    .faq-list details summary::-webkit-details-marker { display: none; }
-    .faq-list details[open] summary { border-bottom: 1px solid var(--line); color: var(--red); }
-    .faq-answer-inner { padding: 14px 20px; font-size: 13.5px; color: var(--muted); line-height: 1.75; }
+    .logo-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: #12141C;
+      border: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 15px rgba(255, 90, 0, 0.2);
+    }
+
+    .logo-badge svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--primary);
+    }
+
+    .brand-title {
+      font-family: var(--font-en);
+      font-weight: 900;
+      font-size: 1.35rem;
+      line-height: 1.1;
+      color: #fff;
+    }
+
+    .brand-title span {
+      color: var(--primary);
+      text-shadow: 0 0 12px var(--primary-glow);
+    }
+
+    .brand-sub {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--primary);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .lang-toggle-btn {
+      background: var(--bg-surface-1);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 0.45rem 0.95rem;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: var(--transition);
+    }
+
+    .lang-toggle-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+
+    .btn-nav-order {
+      background: var(--primary);
+      color: #fff;
+      padding: 0.55rem 1.25rem;
+      border-radius: 25px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 15px var(--primary-glow);
+      transition: var(--transition);
+    }
+
+    .btn-nav-order:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px var(--primary-glow);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 5.5rem 0 4rem;
+      position: relative;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      align-items: center;
+      gap: 3rem;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 90, 0, 0.08);
+      border: 1px solid rgba(255, 90, 0, 0.25);
+      color: var(--primary);
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 800;
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-title {
+      font-size: 3.2rem;
+      line-height: 1.2;
+      font-weight: 900;
+      margin-bottom: 1.2rem;
+      letter-spacing: -0.5px;
+    }
+
+    .hero-title .glow-text {
+      color: var(--primary);
+      text-shadow: 0 0 25px var(--primary-glow);
+    }
+
+    .hero-slogan {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #ff9d66;
+      margin-bottom: 1rem;
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      margin-bottom: 2.2rem;
+      max-width: 500px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-main {
+      background: var(--primary);
+      color: #fff;
+      padding: 0.9rem 2rem;
+      border-radius: 30px;
+      font-weight: 800;
+      font-size: 1rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      box-shadow: 0 4px 20px var(--primary-glow);
+      transition: var(--transition);
+    }
+
+    .btn-main:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px var(--primary-glow);
+    }
+
+    .btn-secondary {
+      background: var(--bg-surface-2);
+      border: 1px solid var(--border-subtle);
+      color: #fff;
+      padding: 0.9rem 1.8rem;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 1rem;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      transition: var(--transition);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--primary);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    /* Hero Neon Box */
+    .hero-neon-wrap {
+      display: flex;
+      justify-content: center;
+    }
+
+    .store-neon-box {
+      background: #0E1015;
+      border: 1px solid #20242F;
+      border-radius: var(--radius-lg);
+      padding: 3rem 2rem;
+      text-align: center;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 90, 0, 0.12);
+    }
+
+    .neon-border-sign {
+      border: 2px solid var(--primary);
+      border-radius: 18px;
+      padding: 1.2rem 2rem;
+      background: #08090C;
+      box-shadow: 0 0 25px var(--primary-glow), inset 0 0 15px rgba(255, 90, 0, 0.2);
+      margin-bottom: 1.5rem;
+    }
+
+    .neon-title-main {
+      font-family: var(--font-en);
+      font-size: 2.7rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: 2px;
+      line-height: 1;
+      text-shadow: 0 0 8px #fff, 0 0 18px var(--primary), 0 0 30px var(--primary);
+    }
+
+    .neon-title-sub {
+      font-family: var(--font-en);
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: 4px;
+      color: #ffa475;
+      margin-top: 0.3rem;
+    }
+
+    .store-tags {
+      display: flex;
+      justify-content: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-top: 1.2rem;
+    }
+
+    .tag-chip {
+      background: #14171E;
+      border: 1px solid var(--border-subtle);
+      padding: 0.35rem 0.85rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      color: #B5BCCB;
+      font-weight: 600;
+    }
+
+    /* Highlights Bar */
+    .highlights-bar {
+      padding: 2.5rem 0;
+      background: var(--bg-surface-1);
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .highlights-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+
+    .hl-card {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .hl-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(255, 90, 0, 0.1);
+      border: 1px solid rgba(255, 90, 0, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    .hl-text h4 {
+      font-size: 0.98rem;
+      font-weight: 800;
+    }
+
+    .hl-text p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    /* Story Section */
+    .story-section {
+      padding: 5.5rem 0;
+    }
+
+    .story-card {
+      background: var(--bg-surface-1);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 3.5rem 2.5rem;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    }
+
+    .story-header {
+      text-align: center;
+      max-width: 650px;
+      margin: 0 auto 2rem;
+    }
+
+    .story-badge {
+      display: inline-block;
+      background: rgba(255, 90, 0, 0.1);
+      color: var(--primary);
+      padding: 0.35rem 1rem;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      margin-bottom: 0.8rem;
+      border: 1px solid rgba(255, 90, 0, 0.3);
+    }
+
+    .story-header h2 {
+      font-size: 2.2rem;
+      font-weight: 900;
+    }
+
+    .story-body {
+      max-width: 820px;
+      margin: 0 auto;
+      background: #090B0E;
+      border-radius: var(--radius-md);
+      padding: 2.2rem;
+      border: 1px solid var(--border-subtle);
+      font-size: 1.05rem;
+      line-height: 1.9;
+      color: #D3D8E2;
+    }
+
+    .story-body p {
+      margin-bottom: 1.2rem;
+    }
+
+    .story-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    .story-footer-quote {
+      margin-top: 1.8rem;
+      padding-top: 1.5rem;
+      border-top: 1px dashed var(--border-subtle);
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #ff9e70;
+    }
+
+    /* Menu Section */
+    .menu-section {
+      padding: 5.5rem 0;
+      background: #090A0D;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .section-title h2 {
+      font-size: 2.3rem;
+      font-weight: 900;
+      margin-bottom: 0.4rem;
+    }
+
+    .section-title p {
+      color: var(--text-muted);
+      font-size: 1.02rem;
+    }
+
+    .calorie-badge {
+      display: inline-block;
+      margin-top: 0.75rem;
+      font-size: 0.82rem;
+      background: rgba(255, 90, 0, 0.08);
+      color: #ff915c;
+      padding: 0.3rem 0.9rem;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 90, 0, 0.2);
+    }
+
+    .menu-filter-bar {
+      display: flex;
+      justify-content: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+
+    .cat-tab {
+      background: var(--bg-surface-1);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      padding: 0.6rem 1.4rem;
+      border-radius: 25px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .cat-tab.active,
+    .cat-tab:hover {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+      box-shadow: 0 4px 15px var(--primary-glow);
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .menu-card {
+      background: var(--bg-surface-1);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: var(--transition);
+    }
+
+    .menu-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--primary);
+      box-shadow: 0 10px 25px rgba(255, 90, 0, 0.15);
+    }
+
+    .menu-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.9rem;
+    }
+
+    .menu-item-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: #141720;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      font-size: 1.15rem;
+    }
+
+    .menu-tag {
+      background: rgba(255, 162, 58, 0.12);
+      color: var(--accent-badge);
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 0.25rem 0.6rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 162, 58, 0.25);
+    }
+
+    .menu-title {
+      font-size: 1.18rem;
+      font-weight: 800;
+      margin-bottom: 0.4rem;
+    }
+
+    .menu-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 1.2rem;
+      flex-grow: 1;
+    }
+
+    .menu-card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      padding-top: 0.8rem;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .menu-price {
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: var(--primary);
+    }
+
+    .menu-price span {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .menu-cals {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .btn-item-order {
+      background: var(--bg-surface-2);
+      border: 1px solid var(--border-subtle);
+      color: #fff;
+      padding: 0.65rem;
+      border-radius: 12px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+    }
+
+    .btn-item-order:hover {
+      background: var(--primary);
+      border-color: var(--primary);
+      box-shadow: 0 4px 15px var(--primary-glow);
+    }
+
+    /* Branches Section (All 6 Branches) */
+    .branches-section {
+      padding: 5.5rem 0;
+    }
+
+    .branches-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.8rem;
+    }
+
+    .branch-card {
+      background: var(--bg-surface-1);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.8rem 1.6rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: var(--transition);
+    }
+
+    .branch-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    }
+
+    .branch-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.2rem;
+    }
+
+    .branch-name {
+      font-size: 1.3rem;
+      font-weight: 800;
+    }
+
+    .status-badge {
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 800;
+    }
+
+    .status-open {
+      background: rgba(46, 204, 113, 0.12);
+      color: #2ecc71;
+      border: 1px solid rgba(46, 204, 113, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .status-open::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      background: #2ecc71;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #2ecc71;
+    }
+
+    .status-soon {
+      background: rgba(255, 162, 58, 0.12);
+      color: var(--accent-badge);
+      border: 1px solid rgba(255, 162, 58, 0.3);
+    }
+
+    .branch-info-list {
+      list-style: none;
+      margin-bottom: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .branch-info-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    .branch-info-list li i {
+      color: var(--primary);
+      margin-top: 0.25rem;
+      font-size: 1rem;
+    }
+
+    .branch-actions-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .branch-btn-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6rem;
+    }
+
+    .btn-branch-act {
+      background: var(--bg-surface-2);
+      border: 1px solid var(--border-subtle);
+      color: #fff;
+      padding: 0.65rem;
+      border-radius: 12px;
+      text-align: center;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      transition: var(--transition);
+    }
+
+    .btn-branch-act:hover {
+      background: #202430;
+      border-color: var(--primary);
+    }
+
+    .btn-branch-act.wa:hover {
+      background: #25D366;
+      border-color: #25D366;
+    }
+
+    .btn-branch-map {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 0.75rem;
+      border-radius: 12px;
+      text-align: center;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+      box-shadow: 0 4px 15px var(--primary-glow);
+    }
+
+    .btn-branch-map:hover {
+      background: var(--primary-hover);
+      box-shadow: 0 6px 20px var(--primary-glow);
+    }
 
     /* Footer */
-    .site-footer { background: #0b1524; color: #cbd5e1; padding: 50px 0 25px; font-size: 13px; border-top: 1px solid #1e293b; }
-    .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 35px; margin-bottom: 35px; }
-    .footer-col h4 { color: #ffffff; font-size: 15px; font-weight: 700; margin-bottom: 12px; border-right: 3px solid var(--red); padding-right: 10px; }
-    .footer-col p { line-height: 1.8; margin-bottom: 6px; font-size: 13px; color: #94a3b8; }
-    .footer-bottom { border-top: 1px solid #1e293b; padding-top: 20px; text-align: center; font-size: 12px; color: #64748b; }
-
-    /* Multi-branch WhatsApp Floating Menu & Modal */
-    .wa-widget-container { position: fixed; bottom: 20px; right: 20px; z-index: 99999; }
-    .clean-wa-float { width: 52px; height: 52px; border-radius: 50%; background: #25d366; color: #ffffff; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.25); border: none; cursor: pointer; transition: transform 0.2s; outline: none; }
-    .clean-wa-float:hover { transform: scale(1.05); }
-    .clean-wa-float svg { width: 30px; height: 30px; fill: #ffffff; }
-    .wa-popup-menu { display: none; position: absolute; bottom: 62px; right: 0; width: 300px; max-height: 80vh; overflow-y: auto; background: #ffffff; border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); padding: 12px; flex-direction: column; gap: 7px; z-index: 100000; animation: fadeIn 0.2s ease; }
-    .wa-popup-menu.show { display: flex; }
-    .wa-menu-header { font-size: 12px; font-weight: 800; color: var(--navy); border-bottom: 1px solid var(--line); padding-bottom: 6px; margin-bottom: 2px; text-align: center; }
-    .wa-menu-sub { font-size: 11px; font-weight: 800; color: var(--red); margin-top: 4px; padding: 2px 4px; background: #fef2f2; border-radius: 4px; }
-    .wa-menu-item { display: flex; justify-content: space-between; align-items: center; padding: 6px 10px; border-radius: 6px; background: #f8fafc; border: 1px solid #edf2f7; text-decoration: none; transition: background 0.15s; }
-    .wa-menu-item:hover { background: #fee2e2; }
-    .wa-item-name { font-size: 11.5px; font-weight: 700; color: var(--navy); }
-    .wa-item-num { font-size: 11px; font-family: Inter, Arial, sans-serif; color: var(--red); direction: ltr; }
-
-    /* Direct Branch Modal */
-    .branch-modal { display: none; position: fixed; inset: 0; background: rgba(15,23,42,0.6); backdrop-filter: blur(4px); z-index: 100001; align-items: center; justify-content: center; padding: 15px; }
-    .branch-modal.show { display: flex; }
-    .branch-modal-content { background: #ffffff; width: 100%; max-width: 400px; border-radius: 14px; padding: 20px; box-shadow: 0 20px 30px rgba(0,0,0,0.25); animation: fadeIn 0.2s ease; }
-    .branch-modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line); padding-bottom: 10px; margin-bottom: 12px; }
-    .branch-modal-header h3 { font-size: 15px; font-weight: 800; margin: 0; color: var(--navy); }
-    .branch-modal-close { background: none; border: none; font-size: 20px; font-weight: 700; color: var(--muted); cursor: pointer; }
-    .branch-modal-body { display: flex; flex-direction: column; gap: 8px; }
-    .branch-modal-body p { font-size: 12.5px; color: var(--muted); margin: 0 0 6px; }
-
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-
-    /* Responsive adjustments & Mobile Menu */
-    @media (max-width: 850px) {
-      .topbar { height: 70px; }
-      .brand img { width: 155px; height: 48px; }
-      .menu-btn { display: block; }
-      .links { display: none; position: absolute; top: 70px; right: 0; left: 0; background: #ffffff; border-bottom: 1px solid var(--line); box-shadow: 0 10px 20px rgba(0,0,0,0.08); padding: 15px 20px; flex-direction: column; align-items: flex-start; gap: 12px; }
-      .links.open { display: flex; }
-      .links a { width: 100%; padding: 6px 0; border-bottom: 1px solid #f1f5f9; }
-      .links a:last-child { border-bottom: none; }
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .stat:nth-child(even) { border-left: 0; }
-      .stat:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
-      .story, .businesses, .trust-grid { grid-template-columns: 1fr; }
-      .benefits-grid, .clients-grid { grid-template-columns: repeat(2, 1fr); }
-      .head { display: block; }
-      .head p { margin-top: 8px; }
+    .footer {
+      background: #050608;
+      border-top: 1px solid var(--border-subtle);
+      padding: 4.5rem 0 2rem;
     }
-    @media (max-width: 520px) {
-      .benefits-grid, .clients-grid { grid-template-columns: 1fr; }
-      .stat strong { font-size: 26px; }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .footer-brand p {
+      color: var(--text-muted);
+      margin-top: 1rem;
+      max-width: 320px;
+      font-size: 0.92rem;
+    }
+
+    .footer-col h4 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      margin-bottom: 1.2rem;
+      color: #fff;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.92rem;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 0.8rem;
+    }
+
+    .social-icon {
+      width: 42px;
+      height: 42px;
+      background: var(--bg-surface-1);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: var(--transition);
+    }
+
+    .social-icon:hover {
+      background: var(--primary);
+      border-color: var(--primary);
+      transform: translateY(-3px);
+      box-shadow: 0 4px 15px var(--primary-glow);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 1.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #6C7486;
+      font-size: 0.88rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    /* Floating WhatsApp Button */
+    .floating-wa {
+      position: fixed;
+      bottom: 25px;
+      inset-inline-end: 25px;
+      background: #25D366;
+      color: #fff;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.9rem;
+      text-decoration: none;
+      box-shadow: 0 6px 25px rgba(37, 211, 102, 0.45);
+      z-index: 1000;
+      transition: var(--transition);
+    }
+
+    .floating-wa:hover {
+      transform: scale(1.1) rotate(10deg);
+      box-shadow: 0 8px 30px rgba(37, 211, 102, 0.65);
+    }
+
+    @media (max-width: 1024px) {
+      .branches-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 992px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .hero-desc {
+        margin: 0 auto 2rem;
+      }
+      .hero-buttons {
+        justify-content: center;
+      }
+      .highlights-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      .branches-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-title {
+        font-size: 2.3rem;
+      }
+      .highlights-grid {
+        grid-template-columns: 1fr;
+      }
+      .story-card {
+        padding: 2rem 1.2rem;
+      }
+      .story-body {
+        padding: 1.4rem;
+        font-size: 0.98rem;
+      }
+      .story-header h2 {
+        font-size: 1.8rem;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- شريط الملاحة الرسمي -->
-  <header class="topbar">
-    <div class="container nav">
-      <a class="brand" href="#home" aria-label="شركة لألأة النجوم التجارية">
-        <img loading="eager" fetchpriority="high" src="assets/lala-star-logo.png" alt="شركة لألأة النجوم التجارية" onerror="this.style.display='none'">
+  <!-- Top Announcement Bar -->
+  <div class="top-bar">
+    <span data-i18n="topBar">☕ بيب كوب: قهوة مختصة بجودة عالية وبدون تأخير في الأحساء | فروعنا تخدمك على مدار الساعة</span>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container nav-inner">
+      <a href="#" class="brand-logo">
+        <div class="logo-badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+            <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
+            <line x1="6" y1="1" x2="6" y2="4"></line>
+            <line x1="10" y1="1" x2="10" y2="4"></line>
+            <line x1="14" y1="1" x2="14" y2="4"></line>
+          </svg>
+        </div>
+        <div>
+          <div class="brand-title">Beep<span>Cup</span></div>
+          <div class="brand-sub" data-i18n="tagline">قهوة مختصة</div>
+        </div>
       </a>
-      <nav class="links" id="site-nav">
-        <a href="#about" data-i18n="nav_about" onclick="closeMobileMenu()">من نحن</a>
-        <a href="#benefits" data-i18n="nav_benefits" onclick="closeMobileMenu()">مزايا التوريد</a>
-        <a href="#businesses" data-i18n="nav_businesses" onclick="closeMobileMenu()">أنشطتنا</a>
-        <a href="#catalog" data-i18n="nav_catalog" onclick="closeMobileMenu()">قطاعات التوريد</a>
-        <a href="#branches" data-i18n="nav_branches" onclick="closeMobileMenu()">الفروع والمستودعات</a>
-        <a href="#faq" data-i18n="nav_faq" onclick="closeMobileMenu()">الأسئلة الشائعة</a>
-      </nav>
-      <div class="nav-btns">
-        <button class="lang" id="langBtn" type="button" onclick="toggleLang()">EN</button>
-        <a href="#catalog" class="top-cta" data-i18n="nav_cta">الكتالوج والطلب</a>
-        <button class="menu-btn" id="menuToggle" type="button" onclick="toggleMobileMenu()" aria-label="فتح القائمة">☰</button>
+
+      <ul class="nav-links">
+        <li><a href="#hero" class="active" data-i18n="navHome">الرئيسية</a></li>
+        <li><a href="#story" data-i18n="navStory">قصتنا</a></li>
+        <li><a href="#menu" data-i18n="navMenu">المنيو</a></li>
+        <li><a href="#branches" data-i18n="navBranches">الفروع (6)</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button id="langToggle" class="lang-toggle-btn" onclick="toggleLanguage()">
+          <i class="fa-solid fa-globe"></i>
+          <span id="langText">English</span>
+        </button>
+        <a href="https://wa.me/966500265328?text=أهلاً%20بيب%20كوب،%20أود%20تقديم%20طلب" target="_blank" class="btn-nav-order" data-i18n="navOrder">
+          <i class="fa-brands fa-whatsapp"></i>
+          <span>اطلب الآن</span>
+        </a>
       </div>
     </div>
   </header>
 
-  <main id="main-content">
-    <!-- قسم الهيرو التعريفي -->
-    <section class="hero" id="home">
-      <div class="hero-inner">
-        <span class="hero-badge" data-i18n="hero_badge">حلول التوريد الشاملة لقطاع الأعمال والشركات</span>
-        <h1 data-i18n="hero_title">موردكم المعتمد للمواد الغذائية والبلاستيك والحلويات بالجملة</h1>
-        <p class="lead" data-i18n="hero_desc">نوفر للتموينات ومتاجر التجزئة، وسلاسل المطاعم، الفنادق، المخابز، وشركات الإعاشة في المنطقة الشرقية (الدمام والأحساء) أعلى معايير الجودة وبأسعار جملة تنافسية منذ 1993م.</p>
-        <div class="actions">
-          <a class="btn primary" href="#catalog" data-i18n="btn_catalog">عرض قطاعات التوريد</a>
-          <a class="btn secondary" href="#branches" data-i18n="btn_branches">فروع ومستودعات التوزيع</a>
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-tag">
+          <i class="fa-solid fa-bolt"></i>
+          <span data-i18n="heroBadge">سرعة فائقة • جودة مختصة</span>
+        </div>
+        <h1 class="hero-title">
+          <span data-i18n="heroTitle1">كوبك المفضل</span><br />
+          <span class="glow-text" data-i18n="heroTitle2">بسرعة ما تنتظرها!</span>
+        </h1>
+        <p class="hero-slogan" data-i18n="heroSlogan">"يعدل كيفك، ويراعي جيبك"</p>
+        <p class="hero-desc" data-i18n="heroDesc">
+          اخترنا لك أجود أنواع البن المختص عشان قهوتك ما تكون عادية، تكون قهوتك اليوم وكل يوم وبأسرع خدمة في الأحساء.
+        </p>
+        <div class="hero-buttons">
+          <a href="#menu" class="btn-main">
+            <i class="fa-solid fa-mug-hot"></i>
+            <span data-i18n="btnExploreMenu">استعرض المنيو</span>
+          </a>
+          <a href="#branches" class="btn-secondary">
+            <i class="fa-solid fa-location-dot"></i>
+            <span data-i18n="btnFindBranches">فروعنا الـ 6 في الأحساء</span>
+          </a>
         </div>
       </div>
-    </section>
 
-    <!-- شريط الإحصائيات -->
-    <section class="stats">
-      <div class="container stats-grid">
-        <div class="stat">
-          <strong>+30</strong>
-          <small data-i18n="stat_1">عاماً من الخبرة في التوريد</small>
-        </div>
-        <div class="stat">
-          <strong>+5,000</strong>
-          <small data-i18n="stat_2">صنف معتمد بالمستودعات</small>
-        </div>
-        <div class="stat">
-          <strong data-i18n="stat_3_val">فرعان</strong>
-          <small data-i18n="stat_3">مستودعات الدمام والأحساء</small>
-        </div>
-        <div class="stat">
-          <strong>100%</strong>
-          <small data-i18n="stat_4">التزام بمواعيد التوصيل</small>
+      <div class="hero-neon-wrap">
+        <div class="store-neon-box">
+          <div class="neon-border-sign">
+            <div class="neon-title-main">Beep</div>
+            <div class="neon-title-sub">CUP</div>
+          </div>
+          <p style="font-weight: 700; color: #E1E6F0;" data-i18n="neonCaption">نظام طلب واستلام سريع لراحتك</p>
+          <div class="store-tags">
+            <span class="tag-chip"><i class="fa-solid fa-clock"></i> فروع 24/7</span>
+            <span class="tag-chip"><i class="fa-solid fa-fire"></i> بن مختص فاخر</span>
+            <span class="tag-chip"><i class="fa-solid fa-car"></i> استلام سريع بالسيارة</span>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- كتالوج قطاعات التوريد الشاملة B2B -->
-    <section id="catalog" class="catalog-sec">
-      <div class="container">
-        <div class="head" style="justify-content: center; text-align: center; margin-bottom: 25px;">
-          <div>
-            <div class="kicker" data-i18n="cat_kicker">طلب تسعيرات فورية</div>
-            <h2 data-i18n="cat_title">خطوط التوريد وقطاعات الجملة الرئيسية</h2>
-            <p style="margin: 6px auto 0;" data-i18n="cat_desc">نوفر أكثر من 5,000 صنف معتمد بالمستودعات لتغطية احتياجات التموينات، المطاعم، والمقاهي. اختر القطاع واطلب التسعيرة أو الكتالوج الكامل مباشرة.</p>
-          </div>
-        </div>
-
-        <!-- أزرار التصفية -->
-        <div class="cat-nav">
-          <button onclick="filterCatalog('all', this)" class="cat-btn active" data-i18n="tab_all">الكل</button>
-          <button onclick="filterCatalog('food', this)" class="cat-btn" data-i18n="tab_food">المواد الغذائية</button>
-          <button onclick="filterCatalog('frozen', this)" class="cat-btn" data-i18n="tab_frozen">الدواجن واللحوم والمجمدات</button>
-          <button onclick="filterCatalog('sweets', this)" class="cat-btn" data-i18n="tab_sweets">الحلويات والسناكات</button>
-          <button onclick="filterCatalog('packaging', this)" class="cat-btn" data-i18n="tab_pack">البلاستيك والمنظفات</button>
-        </div>
-
-        <div class="grid-cards">
-          
-          <!-- قطاع 1: المواد الغذائية -->
-          <div class="prod-card" data-category="food">
-            <div class="prod-body">
-              <span class="prod-tag tag-food" data-i18n="tag_food">أغذية وتموين</span>
-              <div class="prod-title" data-i18n="card_food_title">قطاع الأغذية الأساسية والتموين بالجملة</div>
-              <div class="prod-desc" data-i18n="card_food_desc">جميع المواد الغذائية المنزلية والتجارية بالجملة بأقل الاسعار</div>
-              <div class="prod-spec" data-i18n="card_food_spec">يوجد أكثر من 4000 صنف مواد غذائية لدينا</div>
-            </div>
-            <div class="prod-footer">
-              <button type="button" onclick="openBranchModal('dam_food')" class="btn-branch btn-dammam" data-i18n="btn_dammam">فرع الدمام</button>
-              <button type="button" onclick="openBranchModal('ahsa_food')" class="btn-branch btn-ahsa" data-i18n="btn_ahsa">فرع الأحساء</button>
-            </div>
-          </div>
-
-          <!-- قطاع 2: الدواجن واللحوم والمجمدات -->
-          <div class="prod-card" data-category="frozen">
-            <div class="prod-body">
-              <span class="prod-tag tag-frozen" data-i18n="tag_frozen">مجمدات وإعاشة</span>
-              <div class="prod-title" data-i18n="card_frozen_title">الدواجن واللحوم والمجمدات</div>
-              <div class="prod-desc" data-i18n="card_frozen_desc">يوجد لدينا دواجن كاملة ومقطعة، لحوم مجمدة، مقليات مجمدة ، وخضروات مجمدة من شركات متنوعة</div>
-              <div class="prod-spec" data-i18n="card_frozen_spec">لدينا العديد من شركات الدواجن واللحوم بأرخص الاسعار</div>
-            </div>
-            <div class="prod-footer">
-              <button type="button" onclick="openBranchModal('dam_food')" class="btn-branch btn-dammam" data-i18n="btn_dammam">فرع الدمام</button>
-              <button type="button" onclick="openBranchModal('ahsa_food')" class="btn-branch btn-ahsa" data-i18n="btn_ahsa">فرع الأحساء</button>
-            </div>
-          </div>
-
-          <!-- قطاع 3: الحلويات والسناكات والشاي والمكسرات -->
-          <div class="prod-card" data-category="sweets">
-            <div class="prod-body">
-              <span class="prod-tag tag-sweet" data-i18n="tag_sweet">حلويات وسناكات ومسليات</span>
-              <div class="prod-title" data-i18n="card_sweets_title">قطاع الحلويات، السناكات، الشاي والمكسرات</div>
-              <div class="prod-desc" data-i18n="card_sweets_desc">توريد كراتين الشوكولاتة والحلويات (كندر، سنيكرز، مارس..)، شيبسات وسناكات (ليز، برينجلز..)، جميع أنواع الشاي الفاخر، وتشكيلة مكسرات متنوعة للتموينات والمتاجر والمقاهي.</div>
-              <div class="prod-spec" data-i18n="card_sweets_spec">المنشأة: مذاق راقي للحلويات (كراتين وطرود تجارية)</div>
-            </div>
-            <div class="prod-footer">
-              <button type="button" onclick="openBranchModal('mazaq')" class="btn-sweet-single" data-i18n="btn_mazaq">مذاق راقي للحلويات - الأحساء</button>
-            </div>
-          </div>
-
-          <!-- قطاع 4: البلاستيك والمنظفات ومستلزمات المطاعم -->
-          <div class="prod-card" data-category="packaging">
-            <div class="prod-body">
-              <span class="prod-tag tag-pack" data-i18n="tag_pack">بلاستيك وتغليف ومنظفات</span>
-              <div class="prod-title" data-i18n="card_pack_title">قطاع البلاستيك والمنظفات ومستلزمات المطاعم</div>
-              <div class="prod-desc" data-i18n="card_pack_desc">تشكيلة متكاملة من، صحون ، قصدير، رولات ، سفرة طعام، أكياس تسوق بلاستيكية وورقية، ومستلزمات التعبئة والتغليف للمطاعم ومتاجر البيع.</div>
-              <div class="prod-spec" data-i18n="card_pack_spec">التوريد: مستودعات قمة الهامات (الدمام) ولألأة النجوم (الأحساء)</div>
-            </div>
-            <div class="prod-footer">
-              <button type="button" onclick="openBranchModal('hamat')" class="btn-branch btn-dammam" data-i18n="btn_hamat">قمة الهامات - الدمام</button>
-              <button type="button" onclick="openBranchModal('stars_pack')" class="btn-branch btn-ahsa-pack" data-i18n="btn_stars_pack">لألأة النجوم - الأحساء</button>
-            </div>
-          </div>
-
+  <!-- Highlights Bar -->
+  <section class="highlights-bar">
+    <div class="container highlights-grid">
+      <div class="hl-card">
+        <div class="hl-icon"><i class="fa-solid fa-gauge-high"></i></div>
+        <div class="hl-text">
+          <h4 data-i18n="hl1Title">سرعة بدون تأخير</h4>
+          <p data-i18n="hl1Desc">طلبك جاهز في دقائق معدودة</p>
         </div>
       </div>
-    </section>
-
-    <!-- نافذة منبثقة تفاعلية لاختيار أرقام التواصل -->
-    <div class="branch-modal" id="branchModal" onclick="closeBranchModal(event)">
-      <div class="branch-modal-content" onclick="event.stopPropagation()">
-        <div class="branch-modal-header">
-          <h3 id="modalTitle">أرقام التواصل والمبيعات</h3>
-          <button class="branch-modal-close" type="button" onclick="closeBranchModal()">&times;</button>
+      <div class="hl-card">
+        <div class="hl-icon"><i class="fa-solid fa-seedling"></i></div>
+        <div class="hl-text">
+          <h4 data-i18n="hl2Title">بن مختص فاخر</h4>
+          <p data-i18n="hl2Desc">محاصيل منتقاة بعناية لنكهة مثالية</p>
         </div>
-        <div class="branch-modal-body" id="modalBody"></div>
+      </div>
+      <div class="hl-card">
+        <div class="hl-icon"><i class="fa-solid fa-wallet"></i></div>
+        <div class="hl-text">
+          <h4 data-i18n="hl3Title">يراعي جيبك</h4>
+          <p data-i18n="hl3Desc">أسعار مدروسة تناسب يومك</p>
+        </div>
+      </div>
+      <div class="hl-card">
+        <div class="hl-icon"><i class="fa-solid fa-moon"></i></div>
+        <div class="hl-text">
+          <h4 data-i18n="hl4Title">خدمة متواصلة</h4>
+          <p data-i18n="hl4Desc">فروع تعمل على مدار الساعة</p>
+        </div>
       </div>
     </div>
+  </section>
 
-    <!-- قسم من نحن -->
-    <section class="section" id="about">
-      <div class="container">
-        <div class="head">
-          <div>
-            <div class="kicker" data-i18n="about_kicker">من نحن</div>
-            <h2 data-i18n="about_title">شركة لها مسار تجاري راسخ</h2>
-          </div>
-          <p data-i18n="about_desc">تأسست شركة لألأة النجوم التجارية في الدمام عام 1993م في مجال بيع وتوزيع المواد الغذائية بالجملة، ثم توسعت أعمالها لتشمل أنشطة تجارية متخصصة تحت مظلة الشركة لتغطية كامل أسواق المنطقة الشرقية.</p>
+  <!-- Story Section -->
+  <section class="story-section" id="story">
+    <div class="container">
+      <div class="story-card">
+        <div class="story-header">
+          <span class="story-badge" data-i18n="storyPill">هويتنا وسر اسمنا</span>
+          <h2 data-i18n="storyTitle">قصة الاسم باختصار</h2>
         </div>
-        <div class="story">
-          <div class="photo">
-            <img src="assets/optimized/wholesale-warehouse-ahsa-1280.webp?v=20260917-5" alt="مستودع لألأة النجوم التجارية للجملة" width="1280" height="720" loading="lazy" decoding="async">
-            <div class="caption" data-i18n="about_caption">تجارة وتوزيع بالجملة</div>
-          </div>
-          <div class="story-copy">
-            <h3 data-i18n="story_head">من الدمام بدأت الرحلة</h3>
-            <p data-i18n="story_p">الدمام هي المركز الرئيسي للشركة، وفي عام 2018م تم تدشين فرع ومستودعات الأحساء، ثم امتدت العمليات لتشمل قطاعات التغليف والبلاستيك والحلويات والسناكات عبر مستودعات وفروع مستقلة وواضحة.</p>
-            <div class="timeline">
-              <div class="event">
-                <strong>1993م</strong>
-                <h4 data-i18n="tl_1_h">بداية الشركة — الدمام</h4>
-                <p data-i18n="tl_1_p">انطلاق النشاط المركزي في استيراد وتوريد المواد الغذائية بالجملة.</p>
-              </div>
-              <div class="event">
-                <strong data-i18n="tl_2_y">بعد التوسع</strong>
-                <h4 data-i18n="tl_2_h">أنشطة البلاستيك والحلويات</h4>
-                <p data-i18n="tl_2_p">تأسيس أذرع متخصصة (قمة الهامات للبلاستيك ومذاق راقي للحلويات والسناكات) لخدمة مختلف القطاعات التجارية.</p>
-              </div>
-              <div class="event">
-                <strong>2018م</strong>
-                <h4 data-i18n="tl_3_h">افتتاح فرع الأحساء</h4>
-                <p data-i18n="tl_3_p">توسيع نطاق التوزيع الميداني بافتتاح فرع ومستودعات الأحساء وتغطية كامل المحافظة.</p>
-              </div>
-            </div>
+        <div class="story-body">
+          <p data-i18n="storyP1">
+            من أيام الطفولة، كنا ننتظر بفارغ الصبر فلم كرتون <strong>"بيب بيب"</strong>، مذهولين بسرعته وخفته. كبرنا وكبرت معنا فكرة أن السرعة بدون تأخير هي حلم كل عميل.
+          </p>
+          <p data-i18n="storyP2">
+            فكرنا نسوي مشروع يشبهه: <strong>سريع، بسيط، ويوصل لك التجربة اللي تتمناها بدون تعقيد</strong>.
+          </p>
+          <p data-i18n="storyP3">
+            ومن هنا ولدت فكرة <strong>بيب كوب</strong>: كوب قهوة سريع وجودته عالية وبدون تأخير. واخترنا لك أجود أنواع البن المختص، عشان قهوتك ما تكون عادية، تكون قهوتك اليوم، وكل يوم.
+          </p>
+          <div class="story-footer-quote">
+            <span data-i18n="storyMotto">بيب كوب .. يعدل كيفك، ويراعي جيبك. وجعلها بالعافية! ❤️</span>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- مزايا التوريد والتعامل معنا -->
-    <section class="section alt" id="benefits">
-      <div class="container">
-        <div class="head">
-          <div>
-            <div class="kicker" data-i18n="ben_kicker">مزايا التوريد</div>
-            <h2 data-i18n="ben_title">مزايا التوريد والتعامل معنا</h2>
-          </div>
-          <p data-i18n="ben_desc">خدمات وتجربة توريد مصممة لتسهيل التعامل التجاري واللوجستي مع المنشآت في المنطقة الشرقية.</p>
-        </div>
-        <div class="benefits-grid">
-          <article class="benefit">
-            <div class="icon">
-              <svg viewBox="0 0 24 24"><path d="M12 2v20M17 5.5C16 4.6 14.5 4 12 4c-2.8 0-4.5 1.2-4.5 3.1 0 4.8 9 2.1 9 7 0 2.2-2 3.9-4.9 3.9-2.4 0-4.2-.7-5.6-2"/></svg>
-            </div>
-            <h3 data-i18n="b1_h">أسعار جملة تنافسية</h3>
-            <p data-i18n="b1_p">حلول تسعير موجهة للمشتريات الكبرى والكميات التجارية المباشرة بأقل التكاليف.</p>
-          </article>
-          <article class="benefit">
-            <div class="icon">
-              <svg viewBox="0 0 24 24"><path d="M3 17h11V6H3zM14 10h4l3 3v4h-7zM6 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM18 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/></svg>
-            </div>
-            <h3 data-i18n="b2_h">أسطول توزيع يغطي الشرقية</h3>
-            <p data-i18n="b2_p">شاحنات نقل مجهزة تضمن التوصيل السريع والدوري لكافة العملاء.</p>
-          </article>
-          <article class="benefit">
-            <div class="icon">
-              <svg viewBox="0 0 24 24"><path d="M12 3 20 6v5c0 5-3.3 8.5-8 10-4.7-1.5-8-5-8-10V6zM8 12l2.5 2.5L16 9"/></svg>
-            </div>
-            <h3 data-i18n="b3_h">سلامة التخزين وجودة الأصناف</h3>
-            <p data-i18n="b3_p">التزام بأعلى معايير التخزين المبرد والجاف المعتمدة صحياً وتجارياً.</p>
-          </article>
-          <article class="benefit">
-            <div class="icon">
-              <svg viewBox="0 0 24 24"><path d="M12 3 14.8 8.7 21 9.6l-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9z"/></svg>
-            </div>
-            <h3 data-i18n="b4_h">خبرة تجارية راسخة منذ 1993</h3>
-            <p data-i18n="b4_p">أكثر من 30 عاماً من الثقة والاستقرار المالي والتجاري في أسواق المملكة.</p>
-          </article>
-        </div>
+  <!-- Menu Section -->
+  <section class="menu-section" id="menu">
+    <div class="container">
+      <div class="section-title">
+        <h2 data-i18n="menuTitle">منيو بيب كوب</h2>
+        <p data-i18n="menuSubtitle">نكهات متوازنة تم تحضيرها بحب وشغف</p>
+        <span class="calorie-badge" data-i18n="calNote">يحتاج البالغون إلى 2000 سعرة حرارية في المتوسط يومياً</span>
       </div>
-    </section>
 
-    <!-- قطاعات وأنشطة التوريد -->
-    <section class="section" id="businesses">
-      <div class="container">
-        <div class="head">
-          <div>
-            <div class="kicker" data-i18n="biz_kicker">أنشطتنا</div>
-            <h2 data-i18n="biz_title">قطاعات وأنشطة التوريد المتخصصة</h2>
-          </div>
-          <p data-i18n="biz_desc">أنشطة متخصصة ومستودعات مستقلة تحت مظلة الشركة تخدم احتياجات قطاع الأعمال باحترافية كاملة.</p>
-        </div>
-        <div class="businesses">
-          <article class="business">
-            <img src="assets/optimized/food-products-ahsa-1280.webp?v=20260917-5" alt="المواد الغذائية بالجملة" loading="lazy">
-            <div class="business-body">
-              <h3 data-i18n="biz1_h">المواد الغذائية والتموين</h3>
-              <p data-i18n="biz1_p">النشاط الأساسي للتوريد الغذائي الشامل، التموينات، والمطابخ الكبرى.</p>
-              <span class="location" data-i18n="loc_both">الدمام · الأحساء</span>
-            </div>
-          </article>
-          <article class="business">
-            <img src="assets/wide_high_resolution_supermarket_warehouse_aisle.png" alt="المنتجات البلاستيكية والمنظفات" loading="lazy">
-            <div class="business-body">
-              <h3 data-i18n="biz2_h">البلاستيك والمنظفات</h3>
-              <p data-i18n="biz2_p">قمة الهامات ولألأة النجوم لحلول التعبئة، السفرة، والمنظفات ومستلزمات المطاعم.</p>
-              <span class="location" data-i18n="loc_both">الدمام · الأحساء</span>
-            </div>
-          </article>
-          <article class="business">
-            <img src="assets/sweets-snacks.webp" alt="الحلويات والسناكات" loading="lazy">
-            <div class="business-body">
-              <h3 data-i18n="biz3_h">مذاق راقي للحلويات والسناكات</h3>
-              <p data-i18n="biz3_p">حلويات وشوكولاتة عالمية، شيبسات وسناكات، شاي فاخر، ومكسرات متنوعة.</p>
-              <span class="location" data-i18n="loc_ahsa_only">الأحساء فقط</span>
-            </div>
-          </article>
-        </div>
+      <div class="menu-filter-bar">
+        <button class="cat-tab active" onclick="filterMenu('all', this)" data-i18n="catAll">الكل</button>
+        <button class="cat-tab" onclick="filterMenu('cold', this)" data-i18n="catCold">مشروبات باردة</button>
+        <button class="cat-tab" onclick="filterMenu('hot', this)" data-i18n="catHot">مشروبات ساخنة</button>
+        <button class="cat-tab" onclick="filterMenu('specialty', this)" data-i18n="catSpecialty">التقطير المختص</button>
+        <button class="cat-tab" onclick="filterMenu('sweets', this)" data-i18n="catSweets">الحلى والآيسكريم</button>
       </div>
-    </section>
 
-    <!-- قطاعات العملاء والشركاء المستهدفة بالترتيب الجديد -->
-    <section class="section alt" id="clients">
-      <div class="container">
-        <div class="head">
+      <div class="menu-grid" id="menuGrid">
+        <!-- Item 1 -->
+        <div class="menu-card" data-cat="specialty">
           <div>
-            <div class="kicker" data-i18n="cli_kicker">قطاعات العملاء</div>
-            <h2 data-i18n="cli_title">الشركاء والقطاعات المستهدفة</h2>
-          </div>
-          <p data-i18n="cli_desc">نخدم شريحة متكاملة من المنشآت التجارية التي تعتمد على انتظام سلاسل الإمداد بالجملة.</p>
-        </div>
-        <div class="clients-grid">
-          <article class="client-card">
-            <div class="client-num">01</div>
-            <h3 data-i18n="c1_h">المطاعم والمقاهي</h3>
-            <p data-i18n="c1_p">تأمين المواد الغذائية، اللحوم والدواجن والمجمدات، ومستلزمات السفري والتغليف اليومية.</p>
-          </article>
-          <article class="client-card">
-            <div class="client-num">02</div>
-            <h3 data-i18n="c2_h">البقالات والمواد الغذائية المنزلية</h3>
-            <p data-i18n="c2_p">توريد المواد والسلع التموينية والغذائية الأساسية بالجملة بأقل الأسعار للمتاجر والمنازل.</p>
-          </article>
-          <article class="client-card">
-            <div class="client-num">03</div>
-            <h3 data-i18n="c3_h">البلاستيك والمنظفات بجميع أنواعها</h3>
-            <p data-i18n="c3_p">تشكيلة متكاملة من الصحون، القصدير، الرولات، سفر الطعام، الأكياس، والمنظفات والمطهرات.</p>
-          </article>
-          <article class="client-card">
-            <div class="client-num">04</div>
-            <h3 data-i18n="c4_h">الحلويات والسناكات بجميع أنواعها</h3>
-            <p data-i18n="c4_p">توريد كراتين الشوكولاتة العالمية، الشيبسات، أجود أنواع الشاي الفاخر، والمكسرات المتنوعة.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- شريط الثقة والموثوقية -->
-    <section class="trust">
-      <div class="container trust-grid">
-        <div class="trust-item">
-          <svg viewBox="0 0 24 24"><path d="M3 20V9l9-5 9 5v11M6 20v-7h12v7M9 20v-4h6v4"/></svg>
-          <span data-i18n="tr_1">مستودعات مركزية بسعة تخزين ضخمة</span>
-        </div>
-        <div class="trust-item">
-          <svg viewBox="0 0 24 24"><path d="M3 17h11V6H3zM14 10h4l3 3v4h-7zM6 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM18 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/></svg>
-          <span data-i18n="tr_2">أسطول نقل مجهز بنظام التبريد والتجميد</span>
-        </div>
-        <div class="trust-item">
-          <svg viewBox="0 0 24 24"><path d="M12 3 20 6v5c0 5-3.3 8.5-8 10-4.7-1.5-8-5-8-10V6zM8 12l2.5 2.5L16 9"/></svg>
-          <span data-i18n="tr_3">مطابقة كاملة لاشتراطات هيئة الغذاء والدواء</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- الفروع والمستودعات -->
-    <section class="branches-sec" id="branches">
-      <div class="container">
-        <div class="head">
-          <div>
-            <div class="kicker" data-i18n="br_kicker">شبكة التوزيع الميداني</div>
-            <h2 data-i18n="br_title">الفروع ومستودعات التوريد المباشر</h2>
-          </div>
-          <p data-i18n="br_desc">مستودعات وفروع مجهزة لتلبية طلبيات الجملة بسرعة في كافة أنحاء المنطقة الشرقية.</p>
-        </div>
-
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px;">
-          
-          <!-- فرع 1: لألأة النجوم للمواد الغذائية - الأحساء -->
-          <div class="branch-card" style="border-color: var(--red); border-width: 2px;">
-            <div>
-              <span style="font-size: 11px; background: #fee2e2; color: #b91c1c; font-weight: 700; padding: 3px 8px; border-radius: 4px;" data-i18n="tag_food">مواد غذائية بالجملة</span>
-              <h4 style="font-size: 16px; margin: 8px 0 4px; font-weight: 800; color: var(--navy);" data-i18n="br_ahsa_h">لألأة النجوم للمواد الغذائية — الأحساء</h4>
-              <p style="color: var(--muted); font-size: 12.5px; margin-bottom: 6px; line-height: 1.6;" data-i18n="br_ahsa_p">
-                شارع الملك عبدالله - محاسن، بجانب مبنى بلدية المبرز<br>
-                ص.ب 8201 - <span class="postal-badge">الرمز البريدي: 31482</span>
-              </p>
-              
-              <div style="font-size: 11.5px; font-weight: 700; color: var(--navy); margin-top: 8px;" data-i18n="lbl_sales_contact">أرقام المبيعات والتواصل:</div>
-              <div class="phone-chips">
-                <a href="https://wa.me/966533511159?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="phone-chip">0533511159</a>
-                <a href="https://wa.me/966500603880?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="phone-chip">0500603880</a>
-                <a href="https://wa.me/966500517660?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="phone-chip">0500517660</a>
-                <a href="https://wa.me/966507662117?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="phone-chip">0507662117</a>
-                <a href="https://wa.me/966547277188?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="phone-chip">0547277188</a>
-              </div>
-              <div>
-                <strong style="font-size: 11.5px; color: var(--navy);">الإيميل:</strong>
-                <a href="mailto:starcoldstorehasa@gmail.com" class="email-link">starcoldstorehasa@gmail.com</a>
-              </div>
+            <div class="menu-card-top">
+              <div class="menu-item-icon"><i class="fa-solid fa-filter"></i></div>
+              <span class="menu-tag" data-i18n="badgeBest">الأكثر طلباً</span>
             </div>
-            <a href="https://wa.me/966533511159?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="branch-btn" style="background: var(--red);">
-              <span data-i18n="btn_quote_contact">مراسلة مبيعات الأحساء</span>
-              <span style="direction: ltr;">053 351 1159</span>
+            <h3 class="menu-title" data-i18n="v60IceTitle">V60 بارد مختص</h3>
+            <p class="menu-desc" data-i18n="v60IceDesc">تقطير احترافي لمحاصيل مختصة بإيحاءات زهرية وفاكهية منعشة.</p>
+          </div>
+          <div>
+            <div class="menu-card-meta">
+              <div class="menu-price">15 <span>SAR</span></div>
+              <div class="menu-cals"><i class="fa-solid fa-fire-flame-simple"></i> 5 cal</div>
+            </div>
+            <a href="https://wa.me/966500265328?text=طلب:%20V60%20بارد%20مختص" target="_blank" class="btn-item-order">
+              <i class="fa-brands fa-whatsapp"></i> <span data-i18n="orderItem">طلب فوري</span>
             </a>
           </div>
-
-          <!-- فرع 2: لألأة النجوم للمواد الغذائية - الدمام -->
-          <div class="branch-card">
-            <div>
-              <span style="font-size: 11px; background: #fee2e2; color: #b91c1c; font-weight: 700; padding: 3px 8px; border-radius: 4px;" data-i18n="tag_food">مواد غذائية</span>
-              <h4 style="font-size: 15px; margin: 8px 0 4px; font-weight: 700;" data-i18n="br_dam_h">لألأة النجوم للمواد الغذائية — الدمام</h4>
-              <p style="color: var(--muted); font-size: 12.5px; margin-bottom: 6px; line-height: 1.6;" data-i18n="br_dam_p">
-                طريق الأمير نايف بن عبدالعزيز، مقابل سوق الخضار المركزي<br>
-                <span class="postal-badge">الرمز البريدي: 32432</span>
-              </p>
-              <div style="font-size: 11.5px; font-weight: 700; color: var(--navy); margin-top: 8px;" data-i18n="lbl_sales_contact">أرقام المبيعات والتواصل:</div>
-              <div class="phone-chips">
-                <a href="https://wa.me/966567999863?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%AF%D9%85%D8%A7%D9%85)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="phone-chip">0567999863</a>
-                <a href="https://wa.me/966506667518?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%AF%D9%85%D8%A7%D9%85)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="phone-chip">0506667518</a>
-              </div>
-            </div>
-            <a href="https://wa.me/966567999863?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%AF%D9%85%D8%A7%D9%85)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="branch-btn" style="background: #0f172a;">
-              <span data-i18n="btn_quote_contact">طلب تسعيرة وتواصل</span>
-              <span style="direction: ltr;">056 799 9863</span>
-            </a>
-          </div>
-
-          <!-- فرع 3: الهامات للبلاستيك والمنظفات - الدمام -->
-          <div class="branch-card">
-            <div>
-              <span style="font-size: 11px; background: #fefce8; color: #a16207; font-weight: 700; padding: 3px 8px; border-radius: 4px;" data-i18n="tag_pack">بلاستيك وتغليف ومنظفات</span>
-              <h4 style="font-size: 15px; margin: 8px 0 4px; font-weight: 700;" data-i18n="br_hamat_h">الهامات للبلاستيك والمنظفات — الدمام</h4>
-              <p style="color: var(--muted); font-size: 12.5px; margin-bottom: 6px; line-height: 1.6;" data-i18n="br_hamat_p">
-                حي المحمدية، طريق الأمير نايف بن عبدالعزيز، الدمام<br>
-                <span class="postal-badge">الرمز البريدي: 32432</span>
-              </p>
-              <div style="font-size: 11.5px; font-weight: 700; color: var(--navy); margin-top: 8px;" data-i18n="lbl_sales_contact">أرقام المبيعات والتواصل:</div>
-              <div class="phone-chips">
-                <a href="https://wa.me/966577348040?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20%D9%85%D9%86%20%D9%82%D9%85%D8%A9%20%D8%A7%D9%84%D9%87%D8%A7%D9%85%D8%A7%D8%AA%20%D9%84%D9%84%D8%A8%D9%84%D8%A7%D8%B3%D8%AA%D9%8A%D9%83%20(%D8%A7%D9%84%D8%AF%D9%85%D8%A7%D9%85)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="phone-chip">0577348040</a>
-                <a href="https://wa.me/966539298713?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20%D9%85%D9%86%20%D9%82%D9%85%D8%A9%20%D8%A7%D9%84%D9%87%D8%A7%D9%85%D8%A7%D8%AA%20%D9%84%D9%84%D8%A8%D9%84%D8%A7%D8%B3%D8%AA%D9%8A%D9%83%20(%D8%A7%D9%84%D8%AF%D9%85%D8%A7%D9%85)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="phone-chip">0539298713</a>
-              </div>
-            </div>
-            <a href="https://wa.me/966577348040?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20%D9%85%D9%86%20%D9%82%D9%85%D8%A9%20%D8%A7%D9%84%D9%87%D8%A7%D9%85%D8%A7%D8%AA%20%D9%84%D9%84%D8%A8%D9%84%D8%A7%D8%B3%D8%AA%D9%8A%D9%83%20(%D8%A7%D9%84%D8%AF%D9%85%D8%A7%D9%85)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="branch-btn" style="background: #0f172a;">
-              <span data-i18n="btn_quote_contact">طلب تسعيرة وتواصل</span>
-              <span style="direction: ltr;">057 734 8040</span>
-            </a>
-          </div>
-
-          <!-- فرع 4: لألأة النجوم للبلاستيك - الأحساء -->
-          <div class="branch-card">
-            <div>
-              <span style="font-size: 11px; background: #fefce8; color: #a16207; font-weight: 700; padding: 3px 8px; border-radius: 4px;" data-i18n="tag_pack">بلاستيك وتغليف ومنظفات</span>
-              <h4 style="font-size: 15px; margin: 8px 0 4px; font-weight: 700;" data-i18n="br_stars_h">لألأة النجوم للبلاستيك — الأحساء</h4>
-              <p style="color: var(--muted); font-size: 12.5px; margin-bottom: 6px; line-height: 1.6;" data-i18n="br_stars_p">
-                شارع الملك عبدالله - محاسن، بجانب مبنى بلدية المبرز<br>
-                <span class="postal-badge">الرمز البريدي: 36422</span>
-              </p>
-              <div style="font-size: 11.5px; font-weight: 700; color: var(--navy); margin-top: 8px;" data-i18n="lbl_sales_contact">أرقام المبيعات والتواصل:</div>
-              <div class="phone-chips">
-                <a href="https://wa.me/966506744437?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20%D9%85%D9%86%20%D9%84%D8%A3%D9%84%D8%A3%D8%A9%20%D8%A7%D9%84%D9%86%D8%AC%D9%88%D9%85%20%D9%84%D9%84%D8%A8%D9%84%D8%A7%D8%B3%D8%AA%D9%8A%D9%83%20(%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="phone-chip">0506744437</a>
-              </div>
-              <div>
-                <strong style="font-size: 11.5px; color: var(--navy);">الإيميل:</strong>
-                <a href="mailto:najoomplastic@gmail.com" class="email-link">najoomplastic@gmail.com</a>
-              </div>
-            </div>
-            <a href="https://wa.me/966506744437?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20%D9%85%D9%86%20%D9%84%D8%A3%D9%84%D8%A3%D8%A9%20%D8%A7%D9%84%D9%86%D8%AC%D9%88%D9%85%20%D9%84%D9%84%D8%A8%D9%84%D8%A7%D8%B3%D8%AA%D9%8A%D9%83%20(%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="branch-btn" style="background: #a16207;">
-              <span data-i18n="btn_quote_contact">طلب تسعيرة وتواصل</span>
-              <span style="direction: ltr;">050 674 4437</span>
-            </a>
-          </div>
-
-          <!-- فرع 5: مذاق راقي للحلويات - الأحساء -->
-          <div class="branch-card">
-            <div>
-              <span style="font-size: 11px; background: #fdf2f8; color: #db2777; font-weight: 700; padding: 3px 8px; border-radius: 4px;" data-i18n="tag_sweet">حلويات وسناكات ومكسرات</span>
-              <h4 style="font-size: 15px; margin: 8px 0 4px; font-weight: 700;" data-i18n="br_mazaq_h">مذاق راقي للحلويات — الأحساء</h4>
-              <p style="color: var(--muted); font-size: 12.5px; margin-bottom: 6px; line-height: 1.6;" data-i18n="br_mazaq_p">
-                شارع الملك عبدالله - محاسن، بجانب مبنى بلدية المبرز<br>
-                <span class="postal-badge">الرمز البريدي: 36422</span>
-              </p>
-              <div style="font-size: 11.5px; font-weight: 700; color: var(--navy); margin-top: 8px;" data-i18n="lbl_sales_contact">أرقام المبيعات والتواصل:</div>
-              <div class="phone-chips">
-                <a href="https://wa.me/966558423342?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20%D9%85%D9%86%20%D9%85%D8%B0%D8%A7%D9%82%20%D8%B1%D8%A7%D9%82%D9%8A%20%D9%84%D9%84%D8%AD%D9%84%D9%88%D9%8A%D8%A7%D8%AA%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="phone-chip">0558423342</a>
-              </div>
-            </div>
-            <a href="https://wa.me/966558423342?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20%D9%85%D9%86%20%D9%85%D8%B0%D8%A7%D9%82%20%D8%B1%D8%A7%D9%82%D9%8A%20%D9%84%D9%84%D8%AD%D9%84%D9%88%D9%8A%D8%A7%D8%AA%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="branch-btn" style="background: #db2777;">
-              <span data-i18n="btn_quote_contact">طلب تسعيرة وتواصل</span>
-              <span style="direction: ltr;">055 842 3342</span>
-            </a>
-          </div>
-
         </div>
-      </div>
-    </section>
 
-    <!-- الأسئلة الشائعة -->
-    <section class="section alt" id="faq">
-      <div class="container">
-        <div class="head">
+        <!-- Item 2 -->
+        <div class="menu-card" data-cat="specialty">
           <div>
-            <div class="kicker" data-i18n="faq_kicker">الأسئلة الشائعة</div>
-            <h2 data-i18n="faq_title">الأسئلة المتكررة</h2>
+            <div class="menu-card-top">
+              <div class="menu-item-icon"><i class="fa-solid fa-mug-hot"></i></div>
+              <span class="menu-tag" data-i18n="badgeClassic">كلاسيك</span>
+            </div>
+            <h3 class="menu-title" data-i18n="v60HotTitle">V60 حار</h3>
+            <p class="menu-desc" data-i18n="v60HotDesc">تقطير متوازن يبرز حلاوة وقوام البن المختص مع استخلاص مثالي للنكهات.</p>
           </div>
-          <p data-i18n="faq_desc">إجابات سريعة ومباشرة على أكثر استفسارات المنشآت والشركات شيوعاً.</p>
+          <div>
+            <div class="menu-card-meta">
+              <div class="menu-price">14 <span>SAR</span></div>
+              <div class="menu-cals"><i class="fa-solid fa-fire-flame-simple"></i> 4 cal</div>
+            </div>
+            <a href="https://wa.me/966500265328?text=طلب:%20V60%20حار" target="_blank" class="btn-item-order">
+              <i class="fa-brands fa-whatsapp"></i> <span data-i18n="orderItem">طلب فوري</span>
+            </a>
+          </div>
         </div>
-        <div class="faq-list">
-          <details>
-            <summary data-i18n="q1">هل توفرون التوصيل للدمام والأحساء وضواحيها؟</summary>
-            <div class="faq-answer-inner" data-i18n="a1">نعم، نمتلك أسطولاً مجهزاً ومبرداً يغطي كافة الأنشطة والمطاعم والمتاجر والتموينات في الدمام، الخبر، الظهران، والأحساء بشكل يومي ودوري.</div>
-          </details>
-          <details>
-            <summary data-i18n="q2">ما هي آلية الحصول على قائمة الأسعار والكتالوج الكامل؟</summary>
-            <div class="faq-answer-inner" data-i18n="a2">يمكنك الضغط مباشرة على أزرار الفروع أو أرقام مسؤولي المبيعات عبر الواتساب لإرسال قائمتك، أو الاتصال بهاتف الإدارة.</div>
-          </details>
-          <details>
-            <summary data-i18n="q3">هل تقدمون فواتير ضريبية إلكترونية معتمدة للشركات؟</summary>
-            <div class="faq-answer-inner" data-i18n="a3">نعم، جميع معاملاتنا مسجلة وموثقة بفواتير ضريبية نظامية متوافقة بالكامل مع هيئة الزكاة والضريبة والجمارك (ZATCA).</div>
-          </details>
-          <details>
-            <summary data-i18n="q4">هل تتوفر تسهيلات توريد وحسابات آجلة للشركات؟</summary>
-            <div class="faq-answer-inner" data-i18n="a4">نوفر تسهيلات دفع وحسابات آجلة للجهات والمنشآت المعتمدة بعد دراسة حجم السحب والتعامل التجاري الأولي.</div>
-          </details>
+
+        <!-- Item 3 -->
+        <div class="menu-card" data-cat="cold">
+          <div>
+            <div class="menu-card-top">
+              <div class="menu-item-icon"><i class="fa-solid fa-snowflake"></i></div>
+              <span class="menu-tag" data-i18n="badgeSig">توقيع بيب</span>
+            </div>
+            <h3 class="menu-title" data-i18n="spanishIceTitle">سبانش لاتيه بارد</h3>
+            <p class="menu-desc" data-i18n="spanishIceDesc">مزيج متوازن بين حلاوة السبانش وقوة الإسبريسو الفاخر لجرعة طاقة لا تُقاوم.</p>
+          </div>
+          <div>
+            <div class="menu-card-meta">
+              <div class="menu-price">16 <span>SAR</span></div>
+              <div class="menu-cals"><i class="fa-solid fa-fire-flame-simple"></i> 220 cal</div>
+            </div>
+            <a href="https://wa.me/966500265328?text=طلب:%20سبانش%20لاتيه%20بارد" target="_blank" class="btn-item-order">
+              <i class="fa-brands fa-whatsapp"></i> <span data-i18n="orderItem">طلب فوري</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="menu-card" data-cat="cold">
+          <div>
+            <div class="menu-card-top">
+              <div class="menu-item-icon"><i class="fa-solid fa-leaf"></i></div>
+              <span class="menu-tag" data-i18n="badgeTrend">تريند</span>
+            </div>
+            <h3 class="menu-title" data-i18n="matchaTitle">آيس ماتشا لاتيه</h3>
+            <p class="menu-desc" data-i18n="matchaDesc">بودرة ماتشا يابانية فاخرة ومحضرة مع الحليب البارد لنكهة غنية ومنعشة.</p>
+          </div>
+          <div>
+            <div class="menu-card-meta">
+              <div class="menu-price">18 <span>SAR</span></div>
+              <div class="menu-cals"><i class="fa-solid fa-fire-flame-simple"></i> 140 cal</div>
+            </div>
+            <a href="https://wa.me/966500265328?text=طلب:%20آيس%20ماتشا%20لاتيه" target="_blank" class="btn-item-order">
+              <i class="fa-brands fa-whatsapp"></i> <span data-i18n="orderItem">طلب فوري</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Item 5 -->
+        <div class="menu-card" data-cat="hot">
+          <div>
+            <div class="menu-card-top">
+              <div class="menu-item-icon"><i class="fa-solid fa-mug-saucer"></i></div>
+            </div>
+            <h3 class="menu-title" data-i18n="flatWhiteTitle">فلات وايت</h3>
+            <p class="menu-desc" data-i18n="flatWhiteDesc">جرعتين إسبريسو مع تبخير حليب كريمي مخملي لعشاق الطعم المركز المتناغم.</p>
+          </div>
+          <div>
+            <div class="menu-card-meta">
+              <div class="menu-price">13 <span>SAR</span></div>
+              <div class="menu-cals"><i class="fa-solid fa-fire-flame-simple"></i> 110 cal</div>
+            </div>
+            <a href="https://wa.me/966500265328?text=طلب:%20فلات%20وايت" target="_blank" class="btn-item-order">
+              <i class="fa-brands fa-whatsapp"></i> <span data-i18n="orderItem">طلب فوري</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Item 6 -->
+        <div class="menu-card" data-cat="hot">
+          <div>
+            <div class="menu-card-top">
+              <div class="menu-item-icon"><i class="fa-solid fa-coffee-pot"></i></div>
+              <span class="menu-tag" data-i18n="badgeDaily">يومي</span>
+            </div>
+            <h3 class="menu-title" data-i18n="todayCoffeeTitle">قهوة اليوم (فلتر)</h3>
+            <p class="menu-desc" data-i18n="todayCoffeeDesc">محضرة يومياً من بن مختص طازج برائحة ونكهة تروق مزاجك في كل وقت.</p>
+          </div>
+          <div>
+            <div class="menu-card-meta">
+              <div class="menu-price">8 <span>SAR</span></div>
+              <div class="menu-cals"><i class="fa-solid fa-fire-flame-simple"></i> 2 cal</div>
+            </div>
+            <a href="https://wa.me/966500265328?text=طلب:%20قهوة%20اليوم" target="_blank" class="btn-item-order">
+              <i class="fa-brands fa-whatsapp"></i> <span data-i18n="orderItem">طلب فوري</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Item 7 -->
+        <div class="menu-card" data-cat="cold">
+          <div>
+            <div class="menu-card-top">
+              <div class="menu-item-icon"><i class="fa-solid fa-wine-glass-empty"></i></div>
+            </div>
+            <h3 class="menu-title" data-i18n="hibiscusTitle">آيس كركديه بيب</h3>
+            <p class="menu-desc" data-i18n="hibiscusDesc">منعش وطبيعي 100% بنكهة حامضة حلوة تبرد حر الصيف وتنعش يومك.</p>
+          </div>
+          <div>
+            <div class="menu-card-meta">
+              <div class="menu-price">12 <span>SAR</span></div>
+              <div class="menu-cals"><i class="fa-solid fa-fire-flame-simple"></i> 85 cal</div>
+            </div>
+            <a href="https://wa.me/966500265328?text=طلب:%20آيس%20كركديه" target="_blank" class="btn-item-order">
+              <i class="fa-brands fa-whatsapp"></i> <span data-i18n="orderItem">طلب فوري</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Item 8 -->
+        <div class="menu-card" data-cat="sweets">
+          <div>
+            <div class="menu-card-top">
+              <div class="menu-item-icon"><i class="fa-solid fa-ice-cream"></i></div>
+              <span class="menu-tag" data-i18n="badgeSpecial">مميز</span>
+            </div>
+            <h3 class="menu-title" data-i18n="iceCreamTitle">آيسكريم ماتشا</h3>
+            <p class="menu-desc" data-i18n="iceCreamDesc">سوفت آيسكريم بنكهة الماتشا اليابانية الفاخرة بقوام كريمي ولذيذ.</p>
+          </div>
+          <div>
+            <div class="menu-card-meta">
+              <div class="menu-price">12 <span>SAR</span></div>
+              <div class="menu-cals"><i class="fa-solid fa-fire-flame-simple"></i> 180 cal</div>
+            </div>
+            <a href="https://wa.me/966500265328?text=طلب:%20آيسكريم%20ماتشا" target="_blank" class="btn-item-order">
+              <i class="fa-brands fa-whatsapp"></i> <span data-i18n="orderItem">طلب فوري</span>
+            </a>
+          </div>
         </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
-  <!-- الفوتر الرسمي -->
-  <footer class="site-footer">
+  <!-- Branches Section (All 6 Branches) -->
+  <section class="branches-section" id="branches">
+    <div class="container">
+      <div class="section-title">
+        <h2 data-i18n="branchesTitle">فروع بيب كوب (6 فروع)</h2>
+        <p data-i18n="branchesSubtitle">أينما كنت في الأحساء، بيب كوب يخدمك بنفس الجودة والسرعة</p>
+      </div>
+
+      <div class="branches-grid">
+
+        <!-- Branch 1: Al Naithiyah -->
+        <div class="branch-card">
+          <div>
+            <div class="branch-card-header">
+              <h3 class="branch-name" data-i18n="brNaithiyahTitle">فرع النايفية</h3>
+              <span class="status-badge status-open" data-i18n="statusOpen24">مفتوح (24/7)</span>
+            </div>
+            <ul class="branch-info-list">
+              <li>
+                <i class="fa-solid fa-location-dot"></i>
+                <span data-i18n="brNaithiyahAddr">حي النايفية، الهفوف، الأحساء</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-phone"></i>
+                <span dir="ltr">050 026 5328</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-clock"></i>
+                <span data-i18n="hours24">مفتوح على مدار 24 ساعة يومياً</span>
+              </li>
+            </ul>
+          </div>
+          <div class="branch-actions-wrap">
+            <div class="branch-btn-group">
+              <a href="tel:0500265328" class="btn-branch-act">
+                <i class="fa-solid fa-phone"></i> <span data-i18n="callBtn">اتصال</span>
+              </a>
+              <a href="https://wa.me/966500265328" target="_blank" class="btn-branch-act wa">
+                <i class="fa-brands fa-whatsapp"></i> <span data-i18n="waBtn">واتساب</span>
+              </a>
+            </div>
+            <a href="https://maps.app.goo.gl/8ERmmU5DrhjwK9o97" target="_blank" class="btn-branch-map">
+              <i class="fa-solid fa-diamond-turn-right"></i> <span data-i18n="mapBtn">الوصول للموقع عبر الخريطة</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Branch 2: Al Ruqaiqah -->
+        <div class="branch-card">
+          <div>
+            <div class="branch-card-header">
+              <h3 class="branch-name" data-i18n="brRuqaiqahTitle">فرع الرقيقة</h3>
+              <span class="status-badge status-open" data-i18n="statusOpen24">مفتوح (24/7)</span>
+            </div>
+            <ul class="branch-info-list">
+              <li>
+                <i class="fa-solid fa-location-dot"></i>
+                <span data-i18n="brRuqaiqahAddr">حي الرقيقة، الهفوف، الأحساء</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-phone"></i>
+                <span dir="ltr">050 026 1468</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-clock"></i>
+                <span data-i18n="hours24">مفتوح على مدار 24 ساعة يومياً</span>
+              </li>
+            </ul>
+          </div>
+          <div class="branch-actions-wrap">
+            <div class="branch-btn-group">
+              <a href="tel:0500261468" class="btn-branch-act">
+                <i class="fa-solid fa-phone"></i> <span data-i18n="callBtn">اتصال</span>
+              </a>
+              <a href="https://wa.me/966500261468" target="_blank" class="btn-branch-act wa">
+                <i class="fa-brands fa-whatsapp"></i> <span data-i18n="waBtn">واتساب</span>
+              </a>
+            </div>
+            <a href="https://maps.app.goo.gl/42LQo2tqTp3TVkzQ7" target="_blank" class="btn-branch-map">
+              <i class="fa-solid fa-diamond-turn-right"></i> <span data-i18n="mapBtn">الوصول للموقع عبر الخريطة</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Branch 3: Al Hamra -->
+        <div class="branch-card">
+          <div>
+            <div class="branch-card-header">
+              <h3 class="branch-name" data-i18n="brHamraTitle">فرع الحمراء</h3>
+              <span class="status-badge status-open" data-i18n="statusOpen24">مفتوح (24/7)</span>
+            </div>
+            <ul class="branch-info-list">
+              <li>
+                <i class="fa-solid fa-location-dot"></i>
+                <span data-i18n="brHamraAddr">حي الحمراء، الهفوف، الأحساء</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-phone"></i>
+                <span dir="ltr">056 100 5311</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-clock"></i>
+                <span data-i18n="hours24">مفتوح على مدار 24 ساعة يومياً</span>
+              </li>
+            </ul>
+          </div>
+          <div class="branch-actions-wrap">
+            <div class="branch-btn-group">
+              <a href="tel:0561005311" class="btn-branch-act">
+                <i class="fa-solid fa-phone"></i> <span data-i18n="callBtn">اتصال</span>
+              </a>
+              <a href="https://wa.me/966561005311" target="_blank" class="btn-branch-act wa">
+                <i class="fa-brands fa-whatsapp"></i> <span data-i18n="waBtn">واتساب</span>
+              </a>
+            </div>
+            <a href="https://maps.app.goo.gl/CSvbJRvpHhPmExMbA" target="_blank" class="btn-branch-map">
+              <i class="fa-solid fa-diamond-turn-right"></i> <span data-i18n="mapBtn">الوصول للموقع عبر الخريطة</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Branch 4: Al Hufaira -->
+        <div class="branch-card">
+          <div>
+            <div class="branch-card-header">
+              <h3 class="branch-name" data-i18n="brHufairaTitle">فرع الحفيرة</h3>
+              <span class="status-badge status-open" data-i18n="statusOpen24">مفتوح (24/7)</span>
+            </div>
+            <ul class="branch-info-list">
+              <li>
+                <i class="fa-solid fa-location-dot"></i>
+                <span data-i18n="brHufairaAddr">حي الحفيرة، طريق الملك عبدالله، الهفوف</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-phone"></i>
+                <span dir="ltr">054 603 0480</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-clock"></i>
+                <span data-i18n="hours24">مفتوح على مدار 24 ساعة يومياً</span>
+              </li>
+            </ul>
+          </div>
+          <div class="branch-actions-wrap">
+            <div class="branch-btn-group">
+              <a href="tel:0546030480" class="btn-branch-act">
+                <i class="fa-solid fa-phone"></i> <span data-i18n="callBtn">اتصال</span>
+              </a>
+              <a href="https://wa.me/966546030480" target="_blank" class="btn-branch-act wa">
+                <i class="fa-brands fa-whatsapp"></i> <span data-i18n="waBtn">واتساب</span>
+              </a>
+            </div>
+            <a href="https://maps.app.goo.gl/s1JQS1FzHJXe4egQ6" target="_blank" class="btn-branch-map">
+              <i class="fa-solid fa-diamond-turn-right"></i> <span data-i18n="mapBtn">الوصول للموقع عبر الخريطة</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Branch 5: Al Salmaniyah (Coming Soon) -->
+        <div class="branch-card">
+          <div>
+            <div class="branch-card-header">
+              <h3 class="branch-name" data-i18n="brSalmaniyahTitle">فرع السلمانية</h3>
+              <span class="status-badge status-soon" data-i18n="statusSoon">قريباً</span>
+            </div>
+            <ul class="branch-info-list">
+              <li>
+                <i class="fa-solid fa-location-dot"></i>
+                <span data-i18n="brSalmaniyahAddr">حي السلمانية، الهفوف، طريق الرياض، الأحساء</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-hourglass-half"></i>
+                <span data-i18n="soonText">قريباً لخدمتكم بأعلى معايير السرعة</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-phone"></i>
+                <span data-i18n="inquiriesText">الاستفسارات: 0500265328</span>
+              </li>
+            </ul>
+          </div>
+          <div class="branch-actions-wrap">
+            <div class="branch-btn-group">
+              <a href="tel:0500265328" class="btn-branch-act">
+                <i class="fa-solid fa-phone"></i> <span data-i18n="callBtn">استفسار</span>
+              </a>
+              <a href="https://wa.me/966500265328" target="_blank" class="btn-branch-act wa">
+                <i class="fa-brands fa-whatsapp"></i> <span data-i18n="waBtn">واتساب</span>
+              </a>
+            </div>
+            <a href="https://maps.app.goo.gl/dhVtg57ttuKnxLQH7" target="_blank" class="btn-branch-map">
+              <i class="fa-solid fa-diamond-turn-right"></i> <span data-i18n="mapBtn">موقع الفرع على الخريطة</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Branch 6: Mahasen (Coming Soon) -->
+        <div class="branch-card">
+          <div>
+            <div class="branch-card-header">
+              <h3 class="branch-name" data-i18n="brMahasenTitle">فرع محاسن</h3>
+              <span class="status-badge status-soon" data-i18n="statusSoon">قريباً</span>
+            </div>
+            <ul class="branch-info-list">
+              <li>
+                <i class="fa-solid fa-location-dot"></i>
+                <span data-i18n="brMahasenAddr">محاسن البلدية، الهفوف، طريق الأمير طلال بن عبدالعزيز</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-hourglass-half"></i>
+                <span data-i18n="soonText">قريباً لخدمتكم بأعلى معايير السرعة</span>
+              </li>
+              <li>
+                <i class="fa-solid fa-phone"></i>
+                <span data-i18n="inquiriesText">الاستفسارات: 0500265328</span>
+              </li>
+            </ul>
+          </div>
+          <div class="branch-actions-wrap">
+            <div class="branch-btn-group">
+              <a href="tel:0500265328" class="btn-branch-act">
+                <i class="fa-solid fa-phone"></i> <span data-i18n="callBtn">استفسار</span>
+              </a>
+              <a href="https://wa.me/966500265328" target="_blank" class="btn-branch-act wa">
+                <i class="fa-brands fa-whatsapp"></i> <span data-i18n="waBtn">واتساب</span>
+              </a>
+            </div>
+            <a href="https://maps.app.goo.gl/UqEuwgNCDAt3P6QCA" target="_blank" class="btn-branch-map">
+              <i class="fa-solid fa-diamond-turn-right"></i> <span data-i18n="mapBtn">موقع الفرع على الخريطة</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
     <div class="container">
       <div class="footer-grid">
-        <div class="footer-col">
-          <h4 data-i18n="ft_c_name">شركة لألأة النجوم التجارية</h4>
-          <p data-i18n="ft_c_desc">شركة سعودية رائدة في استيراد وتوزيع المواد الغذائية والبلاستيك والحلويات والسناكات بالجملة لقطاع الأعمال منذ 1993م.</p>
-          <p style="margin-top: 10px;"><strong data-i18n="ft_email">البريد الإلكتروني للإدارة:</strong><br><a href="mailto:starcoldstorehasa@gmail.com" style="color: #cbd5e1; direction: ltr; display: inline-block;">starcoldstorehasa@gmail.com</a></p>
+        <div class="footer-brand">
+          <div class="brand-logo">
+            <div class="logo-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2">
+                <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
+                <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
+              </svg>
+            </div>
+            <div>
+              <div class="brand-title">Beep<span>Cup</span></div>
+              <div class="brand-sub" data-i18n="tagline">قهوة مختصة</div>
+            </div>
+          </div>
+          <p data-i18n="footerText">
+            بيب كوب (Beep Cup) علامة تجارية سعودية نشأت في الأحساء لتقديم تجربة قهوة استثنائية وسريعة تجمع بين فخامة البن المختص واعتدال السعر.
+          </p>
         </div>
+
         <div class="footer-col">
-          <h4 data-i18n="ft_legal_h">البيانات الرسمية</h4>
-          <p><strong data-i18n="ft_cr">السجل التجاري:</strong> <span style="direction: ltr; display: inline-block;">2050026211</span></p>
-          <p><strong data-i18n="ft_vat">الرقم الضريبي:</strong> <span style="direction: ltr; display: inline-block;">300463283200003</span></p>
-          <p><strong data-i18n="ft_hq">المركز الرئيسي:</strong> <span data-i18n="ft_hq_val">المنطقة الشرقية - المملكة العربية السعودية</span></p>
+          <h4 data-i18n="quickLinks">روابط سريعة</h4>
+          <ul class="footer-links">
+            <li><a href="#hero" data-i18n="navHome">الرئيسية</a></li>
+            <li><a href="#story" data-i18n="navStory">قصتنا والاسم</a></li>
+            <li><a href="#menu" data-i18n="navMenu">قائمة المشروبات</a></li>
+            <li><a href="#branches" data-i18n="navBranches">فروعنا (6 فروع)</a></li>
+          </ul>
         </div>
+
         <div class="footer-col">
-          <h4 data-i18n="ft_contact_h">خدمة العملاء والتوريد</h4>
-          <p><strong data-i18n="ft_phone">هاتف الإدارة:</strong> <span style="direction: ltr; display: inline-block;">0138562508</span></p>
-          <p><strong data-i18n="ft_hours">أوقات العمل:</strong> <br><span data-i18n="ft_hours_val">السبت - الخميس: (شفت صباحي: 7:00 ص - 11:00 ص | شفت مسائي: 4:00 م - 9:30 م)<br>الجمعة: 4:00 عصراً - 9:30 م</span></p>
+          <h4 data-i18n="followUs">تابعنا وتواصل معنا</h4>
+          <div class="social-links">
+            <a href="https://instagram.com" target="_blank" class="social-icon" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://twitter.com" target="_blank" class="social-icon" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://tiktok.com" target="_blank" class="social-icon" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://wa.me/966500265328" target="_blank" class="social-icon" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+          <p style="margin-top: 1.2rem; font-size: 0.85rem; color: #8E95A5;" data-i18n="locationHofuf">
+            المملكة العربية السعودية - الأحساء (الهفوف)
+          </p>
         </div>
       </div>
-      <div class="footer-bottom" data-i18n="ft_rights">
-        جميع الحقوق محفوظة © 2026 شركة لألأة النجوم التجارية | LALA STAR TRADING CO.
+
+      <div class="footer-bottom">
+        <div>
+          &copy; <span id="year">2026</span> BeepCup. <span data-i18n="copyRights">جميع الحقوق محفوظة.</span>
+        </div>
+        <div style="font-weight: 700; color: #9AA1B2;">
+          "يعدل كيفك، ويراعي جيبك"
+        </div>
       </div>
     </div>
   </footer>
 
-  <!-- قائمة الواتساب العائمة المتعددة -->
-  <div class="wa-widget-container">
-    <div class="wa-popup-menu" id="waPopup">
-      <div class="wa-menu-header" data-i18n="wa_popup_title">اختر جهة التواصل المباشر عبر واتساب</div>
-      
-      <div class="wa-menu-sub" data-i18n="wa_group_ahsa">مبيعات المواد الغذائية (الأحساء):</div>
-      <a href="https://wa.me/966533511159?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="wa-menu-item">
-        <span class="wa-item-name">مبيعات الأحساء (1)</span>
-        <span class="wa-item-num">0533511159</span>
-      </a>
-      <a href="https://wa.me/966500603880?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="wa-menu-item">
-        <span class="wa-item-name">مبيعات الأحساء (2)</span>
-        <span class="wa-item-num">0500603880</span>
-      </a>
-      <a href="https://wa.me/966500517660?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="wa-menu-item">
-        <span class="wa-item-name">مبيعات الأحساء (3)</span>
-        <span class="wa-item-num">0500517660</span>
-      </a>
-      <a href="https://wa.me/966507662117?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="wa-menu-item">
-        <span class="wa-item-name">مبيعات الأحساء (4)</span>
-        <span class="wa-item-num">0507662117</span>
-      </a>
-      <a href="https://wa.me/966547277188?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="wa-menu-item">
-        <span class="wa-item-name">مبيعات الأحساء (5)</span>
-        <span class="wa-item-num">0547277188</span>
-      </a>
+  <!-- Floating WhatsApp Action -->
+  <a href="https://wa.me/966500265328?text=أهلاً%20بيب%20كوب،%20أود%20الطلب%20من%20الفرع" target="_blank" class="floating-wa" aria-label="WhatsApp Order">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
 
-      <div class="wa-menu-sub" data-i18n="wa_group_other">الفروع والأنشطة الأخرى:</div>
-      <a href="https://wa.me/966567999863?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%AF%D9%85%D8%A7%D9%85)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="wa-menu-item">
-        <span class="wa-item-name" data-i18n="wa_m_dam">المواد الغذائية — الدمام</span>
-        <span class="wa-item-num">0567999863</span>
-      </a>
-      <a href="https://wa.me/966577348040?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20%D9%85%D9%86%20%D9%82%D9%85%D8%A9%20%D8%A7%D9%84%D9%87%D8%A7%D9%85%D8%A7%D8%AA%20%D9%84%D9%84%D8%A8%D9%84%D8%A7%D8%B3%D8%AA%D9%8A%D9%83%20(%D8%A7%D9%84%D8%AF%D9%85%D8%A7%D9%85)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="wa-menu-item">
-        <span class="wa-item-name" data-i18n="wa_m_hamat">الهامات للبلاستيك — الدمام</span>
-        <span class="wa-item-num">0577348040</span>
-      </a>
-      <a href="https://wa.me/966506744437?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20%D9%85%D9%86%20%D9%84%D8%A3%D9%84%D8%A3%D8%A9%20%D8%A7%D9%84%D9%86%D8%AC%D9%88%D9%85%20%D9%84%D9%84%D8%A8%D9%84%D8%A7%D8%B3%D8%AA%D9%8A%D9%83%20(%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="wa-menu-item">
-        <span class="wa-item-name" data-i18n="wa_m_stars">لألأة النجوم للبلاستيك — الأحساء</span>
-        <span class="wa-item-num">0506744437</span>
-      </a>
-      <a href="https://wa.me/966558423342?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20%D9%85%D9%86%20%D9%85%D8%B0%D8%A7%D9%82%20%D8%B1%D8%A7%D9%82%D9%8A%20%D9%84%D9%84%D8%AD%D9%84%D9%88%D9%8A%D8%A7%D8%AA%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="wa-menu-item">
-        <span class="wa-item-name" data-i18n="wa_m_mazaq">مذاق راقي للحلويات — الأحساء</span>
-        <span class="wa-item-num">0558423342</span>
-      </a>
-    </div>
-
-    <button class="clean-wa-float" type="button" id="waBtn" onclick="toggleWaMenu(event)" aria-label="WhatsApp">
-      <svg viewBox="0 0 32 32">
-        <path d="M16 2a13.9 13.9 0 0 0-12 21L2 30l7.2-1.9A13.9 13.9 0 1 0 16 2zm0 25.5a11.5 11.5 0 0 1-5.9-1.6l-.4-.3-4.3 1.1 1.2-4.2-.3-.4A11.6 11.6 0 1 1 16 27.5zm6.4-8.6c-.3-.2-2-.9-2.3-1.1-.3-.1-.5-.2-.7.2s-.8 1.1-1 1.3-.4.2-.7.1a9.2 9.2 0 0 1-2.7-1.7 10.1 10.1 0 0 1-1.9-2.3c-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.4.3-.6 0-.2 0-.4-.1-.6s-.7-1.7-1-2.3c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4s-1.2 1.2-1.2 2.8 1.2 3.2 1.4 3.4 2.4 3.7 5.8 5.1c.8.4 1.4.6 1.9.7.8.3 1.6.2 2.2.1.7-.1 2-.8 2.3-1.6.3-.8.3-1.5.2-1.6-.1-.2-.3-.3-.6-.5z"/>
-      </svg>
-    </button>
-  </div>
-
-  <!-- سكربت التفاعل والترجمة وقائمة الواتساب والنافذة المنبثقة للأرقام -->
+  <!-- JS Logic for Language & Filtering -->
   <script>
-    // تصفية الكتالوج
-    function filterCatalog(category, clickedBtn) {
-      const cards = document.querySelectorAll('.prod-card');
-      const buttons = document.querySelectorAll('.cat-btn');
-      
-      buttons.forEach(btn => btn.classList.remove('active'));
-      if (clickedBtn) clickedBtn.classList.add('active');
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-      cards.forEach(card => {
-        if (category === 'all' || card.getAttribute('data-category') === category) {
-          card.style.display = 'flex';
-        } else {
-          card.style.display = 'none';
+    const translations = {
+      ar: {
+        topBar: "☕ بيب كوب: قهوة مختصة بجودة عالية وبدون تأخير في الأحساء | فروعنا تخدمك على مدار الساعة",
+        tagline: "قهوة مختصة",
+        navHome: "الرئيسية",
+        navStory: "قصتنا",
+        navMenu: "المنيو",
+        navBranches: "الفروع (6)",
+        navOrder: "اطلب الآن",
+        heroBadge: "سرعة فائقة • جودة مختصة",
+        heroTitle1: "كوبك المفضل",
+        heroTitle2: "بسرعة ما تنتظرها!",
+        heroSlogan: "\"يعدل كيفك، ويراعي جيبك\"",
+        heroDesc: "اخترنا لك أجود أنواع البن المختص عشان قهوتك ما تكون عادية، تكون قهوتك اليوم وكل يوم وبأسرع خدمة في الأحساء.",
+        btnExploreMenu: "استعرض المنيو",
+        btnFindBranches: "فروعنا الـ 6 في الأحساء",
+        neonCaption: "نظام طلب واستلام سريع لراحتك",
+        hl1Title: "سرعة بدون تأخير",
+        hl1Desc: "طلبك جاهز في دقائق معدودة",
+        hl2Title: "بن مختص فاخر",
+        hl2Desc: "محاصيل منتقاة بعناية لنكهة مثالية",
+        hl3Title: "يراعي جيبك",
+        hl3Desc: "أسعار مدروسة تناسب يومك",
+        hl4Title: "خدمة متواصلة",
+        hl4Desc: "فروع تعمل على مدار الساعة",
+        storyPill: "هويتنا وسر اسمنا",
+        storyTitle: "قصة الاسم باختصار",
+        storyP1: "من أيام الطفولة، كنا ننتظر بفارغ الصبر فلم كرتون \"بيب بيب\"، مذهولين بسرعته وخفته. كبرنا وكبرت معنا فكرة أن السرعة بدون تأخير هي حلم كل عميل.",
+        storyP2: "فكرنا نسوي مشروع يشبهه: سريع، بسيط، ويوصل لك التجربة اللي تتمناها بدون تعقيد.",
+        storyP3: "ومن هنا ولدت فكرة بيب كوب: كوب قهوة سريع وجودته عالية وبدون تأخير. واخترنا لك أجود أنواع البن المختص، عشان قهوتك ما تكون عادية، تكون قهوتك اليوم، وكل يوم.",
+        storyMotto: "بيب كوب .. يعدل كيفك، ويراعي جيبك. وجعلها بالعافية! ❤️",
+        menuTitle: "منيو بيب كوب",
+        menuSubtitle: "نكهات متوازنة تم تحضيرها بحب وشغف",
+        calNote: "يحتاج البالغون إلى 2000 سعرة حرارية في المتوسط يومياً",
+        catAll: "الكل",
+        catCold: "مشروبات باردة",
+        catHot: "مشروبات ساخنة",
+        catSpecialty: "التقطير المختص",
+        catSweets: "الحلى والآيسكريم",
+        v60IceTitle: "V60 بارد مختص",
+        v60IceDesc: "تقطير احترافي لمحاصيل مختصة بإيحاءات زهرية وفاكهية منعشة.",
+        v60HotTitle: "V60 حار",
+        v60HotDesc: "تقطير متوازن يبرز حلاوة وقوام البن المختص مع استخلاص مثالي للنكهات.",
+        spanishIceTitle: "سبانش لاتيه بارد",
+        spanishIceDesc: "مزيج متوازن بين حلاوة السبانش وقوة الإسبريسو الفاخر لجرعة طاقة لا تُقاوم.",
+        matchaTitle: "آيس ماتشا لاتيه",
+        matchaDesc: "بودرة ماتشا يابانية فاخرة ومحضرة مع الحليب البارد لنكهة غنية ومنعشة.",
+        flatWhiteTitle: "فلات وايت",
+        flatWhiteDesc: "جرعتين إسبريسو مع تبخير حليب كريمي مخملي لعشاق الطعم المركز المتناغم.",
+        todayCoffeeTitle: "قهوة اليوم (فلتر)",
+        todayCoffeeDesc: "محضرة يومياً من بن مختص طازج برائحة ونكهة تروق مزاجك في كل وقت.",
+        hibiscusTitle: "آيس كركديه بيب",
+        hibiscusDesc: "منعش وطبيعي 100% بنكهة حامضة حلوة تبرد حر الصيف وتنعش يومك.",
+        iceCreamTitle: "آيسكريم ماتشا",
+        iceCreamDesc: "سوفت آيسكريم بنكهة الماتشا اليابانية الفاخرة بقوام كريمي ولذيذ.",
+        orderItem: "طلب فوري",
+        branchesTitle: "فروع بيب كوب (6 فروع)",
+        branchesSubtitle: "أينما كنت في الأحساء، بيب كوب يخدمك بنفس الجودة والسرعة",
+        brNaithiyahTitle: "فرع النايفية",
+        brNaithiyahAddr: "حي النايفية، الهفوف، الأحساء",
+        brRuqaiqahTitle: "فرع الرقيقة",
+        brRuqaiqahAddr: "حي الرقيقة، الهفوف، الأحساء",
+        brHamraTitle: "فرع الحمراء",
+        brHamraAddr: "حي الحمراء، الهفوف، الأحساء",
+        brHufairaTitle: "فرع الحفيرة",
+        brHufairaAddr: "حي الحفيرة، طريق الملك عبدالله، الهفوف",
+        brSalmaniyahTitle: "فرع السلمانية",
+        brSalmaniyahAddr: "حي السلمانية، الهفوف، طريق الرياض، الأحساء",
+        brMahasenTitle: "فرع محاسن",
+        brMahasenAddr: "محاسن البلدية، الهفوف، طريق الأمير طلال بن عبدالعزيز",
+        statusOpen24: "مفتوح (24/7)",
+        statusSoon: "قريباً",
+        hours24: "مفتوح على مدار 24 ساعة يومياً",
+        soonText: "قريباً لخدمتكم بأعلى معايير السرعة",
+        inquiriesText: "الاستفسارات: 0500265328",
+        callBtn: "اتصال",
+        waBtn: "واتساب",
+        mapBtn: "الوصول للموقع عبر الخريطة",
+        footerText: "بيب كوب (Beep Cup) علامة تجارية سعودية نشأت في الأحساء لتقديم تجربة قهوة استثنائية وسريعة تجمع بين فخامة البن المختص واعتدال السعر.",
+        quickLinks: "روابط سريعة",
+        followUs: "تابعنا وتواصل معنا",
+        locationHofuf: "المملكة العربية السعودية - الأحساء (الهفوف)",
+        copyRights: "جميع الحقوق محفوظة."
+      },
+      en: {
+        topBar: "☕ Beep Cup: Premium Specialty Coffee without delay in Al-Ahsa | 24/7 Branches",
+        tagline: "Specialty Coffee",
+        navHome: "Home",
+        navStory: "Our Story",
+        navMenu: "Menu",
+        navBranches: "Branches (6)",
+        navOrder: "Order Now",
+        heroBadge: "Ultra Fast • Specialty Quality",
+        heroTitle1: "Your Favorite Cup",
+        heroTitle2: "Faster Than You Think!",
+        heroSlogan: "\"Adjusts your mood, respects your budget\"",
+        heroDesc: "We select the highest grade specialty coffee beans so your cup is never ordinary—it's your everyday coffee with the fastest drive-thru service in Al-Ahsa.",
+        btnExploreMenu: "Explore Menu",
+        btnFindBranches: "Our 6 Branches in Al-Ahsa",
+        neonCaption: "Express Drive-thru & Takeaway System",
+        hl1Title: "Speed Without Delay",
+        hl1Desc: "Your coffee ready in record minutes",
+        hl2Title: "Specialty Beans",
+        hl2Desc: "Carefully roasted for flawless tasting notes",
+        hl3Title: "Smart Value",
+        hl3Desc: "Great everyday coffee prices",
+        hl4Title: "Continuous Service",
+        hl4Desc: "Branches open around the clock",
+        storyPill: "Brand Story & Heritage",
+        storyTitle: "The Story Behind Beep Cup",
+        storyP1: "Since childhood, we eagerly awaited the cartoon character \"Beep Beep\" (Road Runner), fascinated by his lightning speed. As we grew up, we realized that speed without delay is every customer's dream.",
+        storyP2: "So we created a concept just like it: fast, straightforward, and delivering the exact experience you crave without any complexity.",
+        storyP3: "That's how Beep Cup was born: a swift, top-grade specialty cup delivered with zero delay. We sourced exceptional coffee so your cup feels extraordinary every single day.",
+        storyMotto: "Beep Cup: Adjusts your mood, respects your budget. Enjoy every sip! ❤️",
+        menuTitle: "Beep Cup Menu",
+        menuSubtitle: "Carefully balanced drinks crafted with passion",
+        calNote: "Adults need an average of 2,000 calories per day",
+        catAll: "All",
+        catCold: "Cold Drinks",
+        catHot: "Hot Drinks",
+        catSpecialty: "Specialty Brew",
+        catSweets: "Desserts & Ice Cream",
+        v60IceTitle: "Iced V60 Drip",
+        v60IceDesc: "Handcrafted pour-over using premium beans with floral and fruity hints.",
+        v60HotTitle: "Hot V60 Drip",
+        v60HotDesc: "Balanced extraction highlighting sweetness and delicate aroma.",
+        spanishIceTitle: "Iced Spanish Latte",
+        spanishIceDesc: "Silky balance between rich condensed milk and our signature espresso punch.",
+        matchaTitle: "Iced Matcha Latte",
+        matchaDesc: "Ceremonial grade Japanese matcha whisked freshly over chilled milk.",
+        flatWhiteTitle: "Flat White",
+        flatWhiteDesc: "Double ristretto shots paired with velvet micro-foam milk.",
+        todayCoffeeTitle: "Today's Brew (Filter)",
+        todayCoffeeDesc: "Freshly brewed daily filter coffee with smooth, rich notes.",
+        hibiscusTitle: "Beep Iced Hibiscus",
+        hibiscusDesc: "100% natural infusion with sweet and tangy floral notes.",
+        iceCreamTitle: "Matcha Soft Serve",
+        iceCreamDesc: "Creamy soft ice cream infused with authentic Japanese matcha.",
+        orderItem: "Instant Order",
+        branchesTitle: "Beep Cup Branches (6 Locations)",
+        branchesSubtitle: "Wherever you are in Al-Ahsa, Beep Cup is right near you",
+        brNaithiyahTitle: "Al Naithiyah Branch",
+        brNaithiyahAddr: "Al Naithiyah Dist, Hofuf, Al-Ahsa",
+        brRuqaiqahTitle: "Al Ruqaiqah Branch",
+        brRuqaiqahAddr: "Al Ruqaiqah Dist, Hofuf, Al-Ahsa",
+        brHamraTitle: "Al Hamra Branch",
+        brHamraAddr: "Al Hamra Dist, Hofuf, Al-Ahsa",
+        brHufairaTitle: "Al Hufaira Branch",
+        brHufairaAddr: "Al Hufaira Dist, King Abdullah Rd, Hofuf, Al-Ahsa",
+        brSalmaniyahTitle: "Al Salmaniyah Branch",
+        brSalmaniyahAddr: "Al Salmaniyah Dist, Riyadh Rd, Hofuf, Al-Ahsa",
+        brMahasenTitle: "Mahasen Branch",
+        brMahasenAddr: "Mahasen Al Baladiya, Prince Talal Rd, Hofuf",
+        statusOpen24: "Open (24/7)",
+        statusSoon: "Opening Soon",
+        hours24: "Open 24 hours daily",
+        soonText: "Opening soon with the highest speed standards",
+        inquiriesText: "Inquiries: 0500265328",
+        callBtn: "Call",
+        waBtn: "WhatsApp",
+        mapBtn: "Get Directions on Map",
+        footerText: "Beep Cup is a homegrown Saudi specialty coffee brand born in Al-Ahsa, committed to serving fast, premium coffee that delights your mood and respects your wallet.",
+        quickLinks: "Quick Links",
+        followUs: "Follow & Connect",
+        locationHofuf: "Kingdom of Saudi Arabia - Al-Ahsa (Hofuf)",
+        copyRights: "All rights reserved."
+      }
+    };
+
+    let currentLang = 'ar';
+
+    function toggleLanguage() {
+      currentLang = currentLang === 'ar' ? 'en' : 'ar';
+      const html = document.documentElement;
+      const body = document.body;
+      const langBtnText = document.getElementById('langText');
+
+      if (currentLang === 'en') {
+        html.setAttribute('lang', 'en');
+        html.setAttribute('dir', 'ltr');
+        body.classList.add('ltr');
+        langBtnText.textContent = 'العربية';
+      } else {
+        html.setAttribute('lang', 'ar');
+        html.setAttribute('dir', 'rtl');
+        body.classList.remove('ltr');
+        langBtnText.textContent = 'English';
+      }
+
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (translations[currentLang][key]) {
+          el.textContent = translations[currentLang][key];
         }
       });
     }
 
-    // فتح وإغلاق قائمة الجوال
-    function toggleMobileMenu() {
-      const nav = document.getElementById('site-nav');
-      nav.classList.toggle('open');
-    }
-    function closeMobileMenu() {
-      const nav = document.getElementById('site-nav');
-      if (nav.classList.contains('open')) {
-        nav.classList.remove('open');
-      }
-    }
+    function filterMenu(category, btn) {
+      document.querySelectorAll('.cat-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
 
-    // فتح وإغلاق قائمة الواتساب
-    function toggleWaMenu(e) {
-      if (e) e.stopPropagation();
-      const popup = document.getElementById('waPopup');
-      popup.classList.toggle('show');
-    }
-
-    // إغلاق قائمة الواتساب عند النقر بالخارج
-    document.addEventListener('click', function(e) {
-      const popup = document.getElementById('waPopup');
-      const btn = document.getElementById('waBtn');
-      if (popup && popup.classList.contains('show') && !popup.contains(e.target) && e.target !== btn && !btn.contains(e.target)) {
-        popup.classList.remove('show');
-      }
-    });
-
-    // بيانات أرقام التواصل للفروع لفتحها عند النقر على أيقونات الفروع في الكتالوج
-    const branchContactData = {
-      ahsa_food: {
-        title: "لألأة النجوم للمواد الغذائية — الأحساء",
-        desc: "اختر رقم مسؤول المبيعات للتواصل الفوري عبر واتساب:",
-        phones: [
-          { name: "مبيعات الأحساء (1)", num: "0533511159" },
-          { name: "مبيعات الأحساء (2)", num: "0500603880" },
-          { name: "مبيعات الأحساء (3)", num: "0500517660" },
-          { name: "مبيعات الأحساء (4)", num: "0507662117" },
-          { name: "مبيعات الأحساء (5)", num: "0547277188" }
-        ],
-        textPrefix: "السلام عليكم، أرغب بطلب تسعيرة جملة (فرع الأحساء) بخصوص: "
-      },
-      dam_food: {
-        title: "لألأة النجوم للمواد الغذائية — الدمام",
-        desc: "اختر رقم مسؤول المبيعات للتواصل الفوري عبر واتساب:",
-        phones: [
-          { name: "مبيعات الدمام (1)", num: "0567999863" },
-          { name: "مبيعات الدمام (2)", num: "0506667518" }
-        ],
-        textPrefix: "السلام عليكم، أرغب بطلب تسعيرة جملة (فرع الدمام) بخصوص: "
-      },
-      hamat: {
-        title: "الهامات للبلاستيك والمنظفات — الدمام",
-        desc: "اختر رقم مسؤول المبيعات للتواصل الفوري عبر واتساب:",
-        phones: [
-          { name: "مبيعات الهامات (1)", num: "0577348040" },
-          { name: "مبيعات الهامات (2)", num: "0539298713" }
-        ],
-        textPrefix: "السلام عليكم، أرغب بطلب تسعيرة جملة من قمة الهامات للبلاستيك (الدمام) بخصوص: "
-      },
-      stars_pack: {
-        title: "لألأة النجوم للبلاستيك — الأحساء",
-        desc: "تواصل مع مسؤول المبيعات والتوريد عبر واتساب:",
-        phones: [
-          { name: "مبيعات بلاستيك الأحساء", num: "0506744437" }
-        ],
-        textPrefix: "السلام عليكم، أرغب بطلب تسعيرة جملة من لألأة النجوم للبلاستيك (الأحساء) بخصوص: "
-      },
-      mazaq: {
-        title: "مذاق راقي للحلويات والسناكات — الأحساء",
-        desc: "تواصل مع مسؤول المبيعات والتوريد عبر واتساب:",
-        phones: [
-          { name: "مبيعات مذاق راقي", num: "0558423342" }
-        ],
-        textPrefix: "السلام عليكم، أرغب بطلب تسعيرة جملة من مذاق راقي للحلويات بخصوص: "
-      }
-    };
-
-    // فتح النافذة المنبثقة لأرقام الفرع
-    function openBranchModal(branchKey) {
-      const data = branchContactData[branchKey];
-      if (!data) return;
-
-      document.getElementById('modalTitle').innerText = data.title;
-      const modalBody = document.getElementById('modalBody');
-      modalBody.innerHTML = `<p>${data.desc}</p>`;
-
-      data.phones.forEach(item => {
-        const link = document.createElement('a');
-        link.className = 'wa-menu-item';
-        link.target = '_blank';
-        link.href = `https://wa.me/966${item.num.replace(/^0/, '')}?text=${encodeURIComponent(data.textPrefix)}`;
-        link.innerHTML = `
-          <span class="wa-item-name">${item.name}</span>
-          <span class="wa-item-num">${item.num}</span>
-        `;
-        modalBody.appendChild(link);
-      });
-
-      document.getElementById('branchModal').classList.add('show');
-    }
-
-    // إغلاق النافذة المنبثقة
-    function closeBranchModal(e) {
-      if (!e || e.target.id === 'branchModal' || e.target.classList.contains('branch-modal-close')) {
-        document.getElementById('branchModal').classList.remove('show');
-      }
-    }
-
-    // قاموس الترجمة الفورية الكامل (عربي / English)
-    let currentLang = 'ar';
-    const dict = {
-      en: {
-        nav_about: "About Us",
-        nav_benefits: "Supply Benefits",
-        nav_businesses: "Our Businesses",
-        nav_catalog: "Supply Sectors",
-        nav_branches: "Branches & Hubs",
-        nav_faq: "FAQ",
-        nav_cta: "Catalog & Quote",
-        hero_badge: "Comprehensive Supply Solutions for B2B",
-        hero_title: "Certified Supplier for Food, Plastics & Confectionery Wholesale",
-        hero_desc: "Supplying grocery stores, supermarkets, restaurant chains, hotels, bakeries, and catering firms across the Eastern Province (Dammam & Al-Ahsa) with top quality and competitive wholesale prices since 1993.",
-        btn_catalog: "View Supply Sectors",
-        btn_branches: "Warehouses & Branches",
-        stat_1: "Years of Supply Heritage",
-        stat_2: "Certified Items in Warehouses",
-        stat_3_val: "2 Hubs",
-        stat_3: "Dammam & Al-Ahsa Warehouses",
-        stat_4: "Delivery Schedule Commitment",
-        cat_kicker: "Direct Wholesale Quotations",
-        cat_title: "Main Supply Lines & Wholesale Sectors",
-        cat_desc: "Providing over 5,000 certified warehouse items to fulfill supermarkets, restaurants, and cafés. Select your sector and request full price lists via WhatsApp.",
-        tab_all: "All",
-        tab_food: "Food & Staples",
-        tab_frozen: "Meat & Poultry",
-        tab_sweets: "Sweets & Snacks",
-        tab_pack: "Plastics & Detergents",
-        tag_food: "Food & Staples",
-        tag_frozen: "Frozen & Catering",
-        tag_sweet: "Sweets, Snacks & Tea",
-        tag_pack: "Plastics, Packaging & Hygiene",
-        card_food_title: "Staples & Bulk Food Supply Sector",
-        card_food_desc: "All household and commercial food products in bulk at the lowest wholesale prices.",
-        card_food_spec: "More than 4,000 food items available in our warehouses.",
-        card_frozen_title: "Poultry, Meat & Frozen Food Sector",
-        card_frozen_desc: "Whole and cut poultry, frozen meat, frozen appetizers, and frozen vegetables from diverse certified brands.",
-        card_frozen_spec: "Multiple poultry and meat suppliers at competitive prices.",
-        card_sweets_title: "Confectionery, Snacks, Tea & Nuts Sector",
-        card_sweets_desc: "Wholesale cases of chocolates & confectionery (Kinder, Snickers, Mars..), chips & snacks (Lay's, Pringles..), premium teas, and assorted nuts for groceries and cafés.",
-        card_sweets_spec: "Entity: Mazaq Raqi Sweets (Wholesale cases and master cartons)",
-        card_pack_title: "Plastics, Detergents & Restaurant Packaging",
-        card_pack_desc: "Complete selection of plates, aluminum foils, table rolls, shopping bags, and restaurant packaging consumables.",
-        card_pack_spec: "Supply: Qemat Al-Hamat (Dammam) & Lala Star (Al-Ahsa) Warehouses",
-        btn_dammam: "Dammam Branch",
-        btn_ahsa: "Al-Ahsa Branch",
-        btn_mazaq: "Mazaq Raqi Sweets - Al-Ahsa",
-        btn_hamat: "Qemat Al-Hamat - Dammam",
-        btn_stars_pack: "Lala Star - Al-Ahsa",
-        about_kicker: "About Us",
-        about_title: "An Established Commercial Track Record",
-        about_desc: "Established in Dammam in 1993 in wholesale food trade, expanding into specialized independent business units to cover all Eastern Province markets.",
-        about_caption: "Wholesale Trade & Distribution",
-        story_head: "From Dammam Began the Journey",
-        story_p: "Dammam is the company's headquarter. In 2018, Al-Ahsa branch was launched, followed by expanding into plastics, packaging, confectionery, and snacks with dedicated facilities.",
-        tl_1_h: "Company Launch — Dammam",
-        tl_1_p: "Starting wholesale importation and distribution of food staples.",
-        tl_2_y: "Post Expansion",
-        tl_2_h: "Plastics & Confectionery Entities",
-        tl_2_p: "Founding specialized arms (Qemat Al-Hamat for plastics & Mazaq Raqi for sweets and snacks) serving broad business sectors.",
-        tl_3_h: "Al-Ahsa Branch Opening",
-        tl_3_p: "Expanding distribution coverage by launching Al-Ahsa warehouse facilities.",
-        ben_kicker: "Supply Advantages",
-        ben_title: "Why Partner With Us",
-        ben_desc: "Supply capabilities engineered to streamline operations and logistics for Eastern Province enterprises.",
-        b1_h: "Competitive Wholesale Pricing",
-        b1_p: "Pricing structures tailored for high-volume purchasing and commercial orders at optimal rates.",
-        b2_h: "Eastern Province Logistics Fleet",
-        b2_p: "Equipped transport trucks ensuring swift and consistent client deliveries.",
-        b3_h: "Storage Integrity & Quality Control",
-        b3_p: "Strict compliance with certified chilled, frozen, and dry storage standards.",
-        b4_h: "Commercial Heritage Since 1993",
-        b4_p: "Over 30 years of stability and trust across Saudi Arabian markets.",
-        biz_kicker: "Our Businesses",
-        biz_title: "Specialized Supply Divisions",
-        biz_desc: "Independent business units under the corporate umbrella serving businesses with full dedication.",
-        biz1_h: "Wholesale Food & Staples",
-        biz1_p: "The core division supplying groceries, food retailers, and catering kitchens.",
-        loc_both: "Dammam · Al-Ahsa",
-        biz2_h: "Plastics & Detergents",
-        biz2_p: "Qemat Al-Hamat & Lala Star for packaging, table rolls, detergents, and takeaway supplies.",
-        biz3_h: "Mazaq Raqi Sweets & Snacks",
-        biz3_p: "Global confectionery, branded chips, premium teas, and assorted nuts.",
-        loc_ahsa_only: "Al-Ahsa Only",
-        cli_kicker: "Client Sectors",
-        cli_title: "Target Sectors & Partners",
-        cli_desc: "Serving a comprehensive spectrum of commercial businesses relying on prompt wholesale supply.",
-        c1_h: "Restaurants & Cafés",
-        c1_p: "Supplying bulk food staples, frozen meats & poultry, and essential daily takeaway packaging.",
-        c2_h: "Grocery Stores & Household Food Staples",
-        c2_p: "Supplying primary food staples and consumer goods at the lowest wholesale prices.",
-        c3_h: "Plastics & Detergents of All Types",
-        c3_p: "Full array of plates, foils, dining rolls, bags, and commercial cleaning sanitizers.",
-        c4_h: "Confectionery & Snacks of All Varieties",
-        c4_p: "Wholesale imported chocolates, snacks, branded chips, premium teas, and assorted nuts.",
-        tr_1: "Central Hubs with High Storage Capacity",
-        tr_2: "Refrigerated and Frozen Logistics Fleet",
-        tr_3: "Full Compliance with SFDA Standards",
-        br_kicker: "Distribution Network",
-        br_title: "Direct Supply Branches & Hubs",
-        br_desc: "Fully equipped warehouses ensuring rapid wholesale fulfillment across the Eastern Province.",
-        br_dam_h: "Lala Star Food Trading — Dammam",
-        br_dam_p: "Prince Nayef bin Abdulaziz Road, opposite Central Vegetable Market<br><span class=\"postal-badge\">Postal Code: 32432</span>",
-        br_ahsa_h: "Lala Star Food Trading — Al-Ahsa",
-        br_ahsa_p: "King Abdullah Road - Mahasin, next to Al-Mubarraz Municipality<br>P.O. Box 8201 - <span class=\"postal-badge\">Postal Code: 31482</span>",
-        lbl_sales_contact: "Sales & Inquiries Contacts:",
-        br_hamat_h: "Al-Hamat Plastics & Detergents — Dammam",
-        br_hamat_p: "Al-Muhammadiyah Dist., Prince Nayef bin Abdulaziz Road, Dammam<br><span class=\"postal-badge\">Postal Code: 32432</span>",
-        br_stars_h: "Lala Star Plastics — Al-Ahsa",
-        br_stars_p: "King Abdullah Road - Mahasin, next to Al-Mubarraz Municipality<br><span class=\"postal-badge\">Postal Code: 36422</span>",
-        br_mazaq_h: "Mazaq Raqi Sweets — Al-Ahsa",
-        br_mazaq_p: "King Abdullah Road - Mahasin, next to Al-Mubarraz Municipality<br><span class=\"postal-badge\">Postal Code: 36422</span>",
-        btn_quote_contact: "Contact Sales via WhatsApp",
-        faq_kicker: "FAQ",
-        faq_title: "Frequently Asked Questions",
-        faq_desc: "Direct answers to common client and enterprise inquiries.",
-        q1: "Do you deliver across Dammam, Al-Ahsa, and nearby areas?",
-        a1: "Yes, our refrigerated and dry transport fleet covers all retail businesses and restaurants daily.",
-        q2: "How can businesses obtain price lists and product catalogs?",
-        a2: "You can click on branch buttons to view all sales reps numbers via WhatsApp or call management.",
-        q3: "Do you issue official electronic tax invoices for companies?",
-        a3: "Yes, all transactions are documented with compliant e-invoices under ZATCA regulations.",
-        q4: "Are credit facilities and payment terms available for clients?",
-        a4: "We provide deferred payment accounts for accredited clients following initial assessment.",
-        ft_c_name: "LALA STARS TRADING CO.",
-        ft_c_desc: "Leading Saudi enterprise in importing and distributing wholesale food, plastics, and confectionery since 1993.",
-        ft_email: "Official Administration Email:",
-        ft_legal_h: "Legal Information",
-        ft_cr: "CR Number:",
-        ft_vat: "VAT Number:",
-        ft_hq: "Headquarters:",
-        ft_hq_val: "Eastern Province - Saudi Arabia",
-        ft_contact_h: "Customer Support & Orders",
-        ft_phone: "Management Phone:",
-        ft_hours: "Business Hours:",
-        ft_hours_val: "Sat - Thu: (Morning: 7:00 AM - 11:00 AM | Evening: 4:00 PM - 9:30 PM)<br>Fri: 4:00 PM - 9:30 PM",
-        ft_rights: "All Rights Reserved © 2026 Lala Star Trading Co. | LALA STAR TRADING CO.",
-        wa_popup_title: "Select Contact via WhatsApp",
-        wa_group_ahsa: "Food Sales (Al-Ahsa):",
-        wa_group_other: "Other Hubs & Divisions:",
-        wa_m_dam: "Food Supplies — Dammam",
-        wa_m_hamat: "Al-Hamat Plastics — Dammam",
-        wa_m_stars: "Lala Star Plastics — Al-Ahsa",
-        wa_m_mazaq: "Mazaq Raqi Sweets — Al-Ahsa"
-      },
-      ar: {
-        nav_about: "من نحن",
-        nav_benefits: "مزايا التوريد",
-        nav_businesses: "أنشطتنا",
-        nav_catalog: "قطاعات التوريد",
-        nav_branches: "الفروع والمستودعات",
-        nav_faq: "الأسئلة الشائعة",
-        nav_cta: "الكتالوج والطلب",
-        hero_badge: "حلول التوريد الشاملة لقطاع الأعمال والشركات",
-        hero_title: "موردكم المعتمد للمواد الغذائية والبلاستيك والحلويات بالجملة",
-        hero_desc: "نوفر للتموينات ومتاجر التجزئة، وسلاسل المطاعم، الفنادق، المخابز، وشركات الإعاشة في المنطقة الشرقية (الدمام والأحساء) أعلى معايير الجودة وبأسعار جملة تنافسية منذ 1993م.",
-        btn_catalog: "عرض قطاعات التوريد",
-        btn_branches: "فروع ومستودعات التوزيع",
-        stat_1: "عاماً من الخبرة في التوريد",
-        stat_2: "صنف معتمد بالمستودعات",
-        stat_3_val: "فرعان",
-        stat_3: "مستودعات الدمام والأحساء",
-        stat_4: "التزام بمواعيد التوصيل",
-        cat_kicker: "طلب تسعيرات فورية",
-        cat_title: "خطوط التوريد وقطاعات الجملة الرئيسية",
-        cat_desc: "نوفر أكثر من 5,000 صنف معتمد بالمستودعات لتغطية احتياجات التموينات، المطاعم، والمقاهي. اختر القطاع واطلب التسعيرة أو الكتالوج الكامل مباشرة.",
-        tab_all: "الكل",
-        tab_food: "المواد الغذائية",
-        tab_frozen: "الدواجن واللحوم والمجمدات",
-        tab_sweets: "الحلويات والسناكات",
-        tab_pack: "البلاستيك والمنظفات",
-        tag_food: "أغذية وتموين",
-        tag_frozen: "مجمدات وإعاشة",
-        tag_sweet: "حلويات وسناكات ومسليات",
-        tag_pack: "بلاستيك وتغليف ومنظفات",
-        card_food_title: "قطاع الأغذية الأساسية والتموين بالجملة",
-        card_food_desc: "جميع المواد الغذائية المنزلية والتجارية بالجملة بأقل الاسعار",
-        card_food_spec: "يوجد أكثر من 4000 صنف مواد غذائية لدينا",
-        card_frozen_title: "الدواجن واللحوم والمجمدات",
-        card_frozen_desc: "يوجد لدينا دواجن كاملة ومقطعة، لحوم مجمدة، مقليات مجمدة ، وخضروات مجمدة من شركات متنوعة",
-        card_frozen_spec: "لدينا العديد من شركات الدواجن واللحوم بأرخص الاسعار",
-        card_sweets_title: "قطاع الحلويات، السناكات، الشاي والمكسرات",
-        card_sweets_desc: "توريد كراتين الشوكولاتة والحلويات (كندر، سنيكرز، مارس..)، شيبسات وسناكات (ليز، برينجلز..)، جميع أنواع الشاي الفاخر، وتشكيلة مكسرات متنوعة للتموينات والمتاجر والمقاهي.",
-        card_sweets_spec: "المنشأة: مذاق راقي للحلويات (كراتين وطرود تجارية)",
-        card_pack_title: "قطاع البلاستيك والمنظفات ومستلزمات المطاعم",
-        card_pack_desc: "تشكيلة متكاملة من، صحون ، قصدير، رولات ، سفرة طعام، أكياس تسوق بلاستيكية وورقية، ومستلزمات التعبئة والتغليف للمطاعم ومتاجر البيع.",
-        card_pack_spec: "التوريد: مستودعات قمة الهامات (الدمام) ولألأة النجوم (الأحساء)",
-        btn_dammam: "فرع الدمام",
-        btn_ahsa: "فرع الأحساء",
-        btn_mazaq: "مذاق راقي للحلويات - الأحساء",
-        btn_hamat: "قمة الهامات - الدمام",
-        btn_stars_pack: "لألأة النجوم - الأحساء",
-        about_kicker: "من نحن",
-        about_title: "شركة لها مسار تجاري راسخ",
-        about_desc: "تأسست شركة لألأة النجوم التجارية في الدمام عام 1993م في مجال بيع وتوزيع المواد الغذائية بالجملة، ثم توسعت أعمالها لتشمل أنشطة تجارية متخصصة تحت مظلة الشركة لتغطية كامل أسواق المنطقة الشرقية.",
-        about_caption: "تجارة وتوزيع بالجملة",
-        story_head: "من الدمام بدأت الرحلة",
-        story_p: "الدمام هي المركز الرئيسي للشركة، وفي عام 2018م تم تدشين فرع ومستودعات الأحساء، ثم امتدت العمليات لتشمل قطاعات التغليف والبلاستيك والحلويات والسناكات عبر مستودعات وفروع مستقلة وواضحة.",
-        tl_1_h: "بداية الشركة — الدمام",
-        tl_1_p: "انطلاق النشاط المركزي في استيراد وتوريد المواد الغذائية بالجملة.",
-        tl_2_y: "بعد التوسع",
-        tl_2_h: "أنشطة البلاستيك والحلويات",
-        tl_2_p: "تأسيس أذرع متخصصة (قمة الهامات للبلاستيك ومذاق راقي للحلويات والسناكات) لخدمة مختلف القطاعات التجارية.",
-        tl_3_h: "افتتاح فرع الأحساء",
-        tl_3_p: "توسيع نطاق التوزيع الميداني بافتتاح فرع ومستودعات الأحساء وتغطية كامل المحافظة.",
-        ben_kicker: "مزايا التوريد",
-        ben_title: "مزايا التوريد والتعامل معنا",
-        ben_desc: "خدمات وتجربة توريد مصممة لتسهيل التعامل التجاري واللوجستي مع المنشآت في المنطقة الشرقية.",
-        b1_h: "أسعار جملة تنافسية",
-        b1_p: "حلول تسعير موجهة للمشتريات الكبرى والكميات التجارية المباشرة بأقل التكاليف.",
-        b2_h: "أسطول توزيع يغطي الشرقية",
-        b2_p: "شاحنات نقل مجهزة تضمن التوصيل السريع والدوري لكافة العملاء.",
-        b3_h: "سلامة التخزين وجودة الأصناف",
-        b3_p: "التزام بأعلى معايير التخزين المبرد والجاف المعتمدة صحياً وتجارياً.",
-        b4_h: "خبرة تجارية راسخة منذ 1993",
-        b4_p: "أكثر من 30 عاماً من الثقة والاستقرار المالي والتجاري في أسواق المملكة.",
-        biz_kicker: "أنشطتنا",
-        biz_title: "قطاعات وأنشطة التوريد المتخصصة",
-        biz_desc: "أنشطة متخصصة ومستودعات مستقلة تحت مظلة الشركة تخدم احتياجات قطاع الأعمال باحترافية كاملة.",
-        biz1_h: "المواد الغذائية والتموين",
-        biz1_p: "النشاط الأساسي للتوريد الغذائي الشامل، التموينات، والمطابخ الكبرى.",
-        loc_both: "الدمام · الأحساء",
-        biz2_h: "البلاستيك والمنظفات",
-        biz2_p: "قمة الهامات ولألأة النجوم لحلول التعبئة، السفرة، والمنظفات ومستلزمات المطاعم.",
-        biz3_h: "مذاق راقي للحلويات والسناكات",
-        biz3_p: "حلويات وشوكولاتة عالمية، شيبسات وسناكات، شاي فاخر، ومكسرات متنوعة.",
-        loc_ahsa_only: "الأحساء فقط",
-        cli_kicker: "قطاعات العملاء",
-        cli_title: "الشركاء والقطاعات المستهدفة",
-        cli_desc: "نخدم شريحة متكاملة من المنشآت التجارية التي تعتمد على انتظام سلاسل الإمداد بالجملة.",
-        c1_h: "المطاعم والمقاهي",
-        c1_p: "تأمين المواد الغذائية، اللحوم والدواجن والمجمدات، ومستلزمات السفري والتغليف اليومية.",
-        c2_h: "البقالات والمواد الغذائية المنزلية",
-        c2_p: "توريد المواد والسلع التموينية والغذائية الأساسية بالجملة بأقل الأسعار للمتاجر والمنازل.",
-        c3_h: "البلاستيك والمنظفات بجميع أنواعها",
-        c3_p: "تشكيلة متكاملة من الصحون، القصدير، الرولات، سفر الطعام، الأكياس، والمنظفات والمطهرات.",
-        c4_h: "الحلويات والسناكات بجميع أنواعها",
-        c4_p: "توريد كراتين الشوكولاتة العالمية، الشيبسات، أجود أنواع الشاي الفاخر، والمكسرات المتنوعة.",
-        tr_1: "مستودعات مركزية بسعة تخزين ضخمة",
-        tr_2: "أسطول نقل مجهز بنظام التبريد والتجميد",
-        tr_3: "مطابقة كاملة لاشتراطات هيئة الغذاء والدواء",
-        br_kicker: "شبكة التوزيع الميداني",
-        br_title: "الفروع ومستودعات التوريد المباشر",
-        br_desc: "مستودعات وفروع مجهزة لتلبية طلبيات الجملة بسرعة في كافة أنحاء المنطقة الشرقية.",
-        br_dam_h: "لألأة النجوم للمواد الغذائية — الدمام",
-        br_dam_p: "طريق الأمير نايف بن عبدالعزيز، مقابل سوق الخضار المركزي<br><span class=\"postal-badge\">الرمز البريدي: 32432</span>",
-        br_ahsa_h: "لألأة النجوم للمواد الغذائية — الأحساء",
-        br_ahsa_p: "شارع الملك عبدالله - محاسن، بجانب مبنى بلدية المبرز<br>ص.ب 8201 - <span class=\"postal-badge\">الرمز البريدي: 31482</span>",
-        lbl_sales_contact: "أرقام المبيعات والتواصل:",
-        br_hamat_h: "الهامات للبلاستيك والمنظفات — الدمام",
-        br_hamat_p: "حي المحمدية، طريق الأمير نايف بن عبدالعزيز، الدمام<br><span class=\"postal-badge\">الرمز البريدي: 32432</span>",
-        br_stars_h: "لألأة النجوم للبلاستيك — الأحساء",
-        br_stars_p: "شارع الملك عبدالله - محاسن، بجانب مبنى بلدية المبرز<br><span class=\"postal-badge\">الرمز البريدي: 36422</span>",
-        br_mazaq_h: "مذاق راقي للحلويات — الأحساء",
-        br_mazaq_p: "شارع الملك عبدالله - محاسن، بجانب مبنى بلدية المبرز<br><span class=\"postal-badge\">الرمز البريدي: 36422</span>",
-        btn_quote_contact: "مراسلة المبيعات وتواصل",
-        faq_kicker: "الأسئلة الشائعة",
-        faq_title: "الأسئلة المتكررة",
-        faq_desc: "إجابات سريعة ومباشرة على أكثر استفسارات المنشآت والشركات شيوعاً.",
-        q1: "هل توفرون التوصيل للدمام والأحساء وضواحيها؟",
-        a1: "نعم، نمتلك أسطولاً مجهزاً ومبرداً يغطي كافة الأنشطة والمطاعم والمتاجر والتموينات في الدمام، الخبر، الظهران، والأحساء بشكل يومي ودوري.",
-        q2: "ما هي آلية الحصول على قائمة الأسعار والكتالوج الكامل؟",
-        a2: "يمكنك الضغط مباشرة على أزرار الفروع لعرض كافة أرقام المبيعات عبر الواتساب، أو الاتصال بهاتف الإدارة.",
-        q3: "هل تقدمون فواتير ضريبية إلكترونية معتمدة للشركات؟",
-        a3: "نعم، جميع معاملاتنا مسجلة وموثقة بفواتير ضريبية نظامية متوافقة بالكامل مع هيئة الزكاة والضريبة والجمارك (ZATCA).",
-        q4: "هل تتوفر تسهيلات توريد وحسابات آجلة للشركات؟",
-        a4: "نوفر تسهيلات دفع وحسابات آجلة للجهات والمنشآت المعتمدة بعد دراسة حجم السحب والتعامل التجاري الأولي.",
-        ft_c_name: "شركة لألأة النجوم التجارية",
-        ft_c_desc: "شركة سعودية رائدة في استيراد وتوزيع المواد الغذائية والبلاستيك والحلويات والسناكات بالجملة لقطاع الأعمال منذ 1993م.",
-        ft_email: "البريد الإلكتروني للإدارة:",
-        ft_legal_h: "البيانات الرسمية",
-        ft_cr: "السجل التجاري:",
-        ft_vat: "الرقم الضريبي:",
-        ft_hq: "المركز الرئيسي:",
-        ft_hq_val: "المنطقة الشرقية - المملكة العربية السعودية",
-        ft_contact_h: "خدمة العملاء والتوريد",
-        ft_phone: "هاتف الإدارة:",
-        ft_hours: "أوقات العمل:",
-        ft_hours_val: "السبت - الخميس: (شفت صباحي: 7:00 ص - 11:00 ص | شفت مسائي: 4:00 م - 9:30 م)<br>الجمعة: 4:00 عصراً - 9:30 م",
-        ft_rights: "جميع الحقوق محفوظة © 2026 شركة لألأة النجوم التجارية | LALA STAR TRADING CO.",
-        wa_popup_title: "اختر جهة التواصل المباشر عبر واتساب",
-        wa_group_ahsa: "مبيعات المواد الغذائية (الأحساء):",
-        wa_group_other: "الفروع والأنشطة الأخرى:",
-        wa_m_dam: "المواد الغذائية — الدمام",
-        wa_m_hamat: "الهامات للبلاستيك — الدمام",
-        wa_m_stars: "لألأة النجوم للبلاستيك — الأحساء",
-        wa_m_mazaq: "مذاق راقي للحلويات — الأحساء"
-      }
-    };
-
-    function toggleLang() {
-      currentLang = currentLang === 'ar' ? 'en' : 'ar';
-      document.documentElement.lang = currentLang;
-      document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
-      document.getElementById('langBtn').innerText = currentLang === 'ar' ? 'EN' : 'عربي';
-
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (dict[currentLang] && dict[currentLang][key]) {
-          el.innerHTML = dict[currentLang][key];
+      const cards = document.querySelectorAll('.menu-card');
+      cards.forEach(card => {
+        if (category === 'all' || card.getAttribute('data-cat') === category) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
         }
       });
     }
