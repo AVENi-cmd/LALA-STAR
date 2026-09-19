@@ -65,7 +65,7 @@
     .btn.primary { background: var(--red); color: #ffffff; }
     .btn.secondary { border: 1px solid rgba(255,255,255,.8); color: #ffffff; background: rgba(255,255,255,0.08); }
 
-    /* Stats Bar (+5,000) */
+    /* Stats Bar */
     .stats { border-bottom: 1px solid var(--line); background: #ffffff; box-shadow: 0 4px 15px rgba(15,30,54,.03); }
     .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); }
     .stat { min-height: 110px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-left: 1px solid var(--line); text-align: center; padding: 15px; }
@@ -114,7 +114,7 @@
     .business p { margin: 4px 0 0; color: var(--muted); font-size: 13px; }
     .location { display: inline-block; margin-top: 8px; color: var(--red); font-size: 11px; font-weight: 800; }
 
-    /* Interactive B2B Sector Catalog (+5,000 items) */
+    /* Interactive B2B Sector Catalog */
     .catalog-sec { padding: 75px 0; background-color: #ffffff; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
     .cat-nav { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 30px; }
     .cat-btn { padding: 8px 16px; border-radius: 20px; border: 1px solid var(--line); background: #ffffff; color: var(--muted); cursor: pointer; font-weight: 700; font-size: 12px; font-family: inherit; transition: 0.2s; }
@@ -137,7 +137,7 @@
     .btn-ahsa-pack { background: #a16207; color: #ffffff !important; }
     .btn-sweet-single { width: 100%; background: #db2777; color: #ffffff !important; text-align: center; padding: 10px; border-radius: 6px; font-weight: 700; font-size: 12px; display: block; border: none; font-family: inherit; cursor: pointer; }
 
-    /* Corporate Branches Cards with Full Addresses */
+    /* Corporate Branches Cards */
     .branches-sec { padding: 75px 0; background: var(--bg); }
     .branch-card { border: 1px solid var(--line); border-radius: 12px; padding: 22px; background: #ffffff; display: flex; flex-direction: column; justify-content: space-between; box-shadow: var(--shadow); }
     .branch-btn { display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; border-radius: 6px; text-decoration: none; font-size: 12.5px; font-weight: 700; color: #ffffff !important; margin-top: 15px; }
@@ -255,7 +255,7 @@
       </div>
     </section>
 
-    <!-- شريط الإحصائيات (+5,000 صنف معتمد) -->
+    <!-- شريط الإحصائيات -->
     <section class="stats">
       <div class="container stats-grid">
         <div class="stat">
@@ -277,7 +277,7 @@
       </div>
     </section>
 
-    <!-- كتالوج قطاعات التوريد الشاملة B2B مع إظهار أرقام التواصل عند الضغط على الأزرار -->
+    <!-- كتالوج قطاعات التوريد الشاملة B2B -->
     <section id="catalog" class="catalog-sec">
       <div class="container">
         <div class="head" style="justify-content: center; text-align: center; margin-bottom: 25px;">
@@ -358,16 +358,14 @@
       </div>
     </section>
 
-    <!-- نافذة منبثقة تفاعلية لاختيار أرقام التواصل عند النقر على أيقونات الفروع -->
+    <!-- نافذة منبثقة تفاعلية لاختيار أرقام التواصل -->
     <div class="branch-modal" id="branchModal" onclick="closeBranchModal(event)">
       <div class="branch-modal-content" onclick="event.stopPropagation()">
         <div class="branch-modal-header">
           <h3 id="modalTitle">أرقام التواصل والمبيعات</h3>
           <button class="branch-modal-close" type="button" onclick="closeBranchModal()">&times;</button>
         </div>
-        <div class="branch-modal-body" id="modalBody">
-          <!-- محتوى الأرقام يتغير ديناميكياً بواسطة الجافاسكربت -->
-        </div>
+        <div class="branch-modal-body" id="modalBody"></div>
       </div>
     </div>
 
@@ -493,7 +491,7 @@
       </div>
     </section>
 
-    <!-- قطاعات العملاء والشركاء المستهدفة المحدثة بالترتيب الجديد المطلوب -->
+    <!-- قطاعات العملاء والشركاء المستهدفة بالترتيب الجديد -->
     <section class="section alt" id="clients">
       <div class="container">
         <div class="head">
@@ -546,7 +544,7 @@
       </div>
     </section>
 
-    <!-- الفروع والمستودعات بتفاصيل العناوين الدقيقة وأرقام المبيعات والإيميلات -->
+    <!-- الفروع والمستودعات -->
     <section class="branches-sec" id="branches">
       <div class="container">
         <div class="head">
@@ -565,26 +563,26 @@
               <span style="font-size: 11px; background: #fee2e2; color: #b91c1c; font-weight: 700; padding: 3px 8px; border-radius: 4px;" data-i18n="tag_food">مواد غذائية بالجملة</span>
               <h4 style="font-size: 16px; margin: 8px 0 4px; font-weight: 800; color: var(--navy);" data-i18n="br_ahsa_h">لألأة النجوم للمواد الغذائية — الأحساء</h4>
               <p style="color: var(--muted); font-size: 12.5px; margin-bottom: 6px; line-height: 1.6;" data-i18n="br_ahsa_p">
-                شارع الملك عبدالله - محاسن، بجانب مبنى بلدية المبرز[span_0](start_span)[span_0](end_span)<br>
-                ص.ب 8201 - <span class="postal-badge">الرمز البريدي: 31482</span>[span_1](start_span)[span_1](end_span)
+                شارع الملك عبدالله - محاسن، بجانب مبنى بلدية المبرز<br>
+                ص.ب 8201 - <span class="postal-badge">الرمز البريدي: 31482</span>
               </p>
               
               <div style="font-size: 11.5px; font-weight: 700; color: var(--navy); margin-top: 8px;" data-i18n="lbl_sales_contact">أرقام المبيعات والتواصل:</div>
               <div class="phone-chips">
-                <a href="https://wa.me/966533511159?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="phone-chip">0533511159</a>[span_2](start_span)[span_2](end_span)
-                <a href="https://wa.me/966500603880?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="phone-chip">0500603880</a>[span_3](start_span)[span_3](end_span)
-                <a href="https://wa.me/966500517660?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="phone-chip">0500517660</a>[span_4](start_span)[span_4](end_span)
-                <a href="https://wa.me/966507662117?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="phone-chip">0507662117</a>[span_5](start_span)[span_5](end_span)
-                <a href="https://wa.me/966547277188?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="phone-chip">0547277188</a>[span_6](start_span)[span_6](end_span)
+                <a href="https://wa.me/966533511159?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="phone-chip">0533511159</a>
+                <a href="https://wa.me/966500603880?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="phone-chip">0500603880</a>
+                <a href="https://wa.me/966500517660?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="phone-chip">0500517660</a>
+                <a href="https://wa.me/966507662117?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="phone-chip">0507662117</a>
+                <a href="https://wa.me/966547277188?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="phone-chip">0547277188</a>
               </div>
               <div>
                 <strong style="font-size: 11.5px; color: var(--navy);">الإيميل:</strong>
-                <a href="mailto:starcoldstorehasa@gmail.com" class="email-link">starcoldstorehasa@gmail.com</a>[span_7](start_span)[span_7](end_span)
+                <a href="mailto:starcoldstorehasa@gmail.com" class="email-link">starcoldstorehasa@gmail.com</a>
               </div>
             </div>
             <a href="https://wa.me/966533511159?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="branch-btn" style="background: var(--red);">
               <span data-i18n="btn_quote_contact">مراسلة مبيعات الأحساء</span>
-              <span style="direction: ltr;">053 351 1159</span>[span_8](start_span)[span_8](end_span)
+              <span style="direction: ltr;">053 351 1159</span>
             </a>
           </div>
 
@@ -600,7 +598,7 @@
               <div style="font-size: 11.5px; font-weight: 700; color: var(--navy); margin-top: 8px;" data-i18n="lbl_sales_contact">أرقام المبيعات والتواصل:</div>
               <div class="phone-chips">
                 <a href="https://wa.me/966567999863?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%AF%D9%85%D8%A7%D9%85)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="phone-chip">0567999863</a>
-                <a href="https://wa.me/966506667518?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%AF%D9%85%D8%A7%D9%85)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="phone-chip">0506667518</a>[span_9](start_span)[span_9](end_span)
+                <a href="https://wa.me/966506667518?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%AF%D9%85%D8%A7%D9%85)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="phone-chip">0506667518</a>
               </div>
             </div>
             <a href="https://wa.me/966567999863?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%AF%D9%85%D8%A7%D9%85)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="branch-btn" style="background: #0f172a;">
@@ -621,7 +619,7 @@
               <div style="font-size: 11.5px; font-weight: 700; color: var(--navy); margin-top: 8px;" data-i18n="lbl_sales_contact">أرقام المبيعات والتواصل:</div>
               <div class="phone-chips">
                 <a href="https://wa.me/966577348040?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20%D9%85%D9%86%20%D9%82%D9%85%D8%A9%20%D8%A7%D9%84%D9%87%D8%A7%D9%85%D8%A7%D8%AA%20%D9%84%D9%84%D8%A8%D9%84%D8%A7%D8%B3%D8%AA%D9%8A%D9%83%20(%D8%A7%D9%84%D8%AF%D9%85%D8%A7%D9%85)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="phone-chip">0577348040</a>
-                <a href="https://wa.me/966539298713?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20%D9%85%D9%86%20%D9%82%D9%85%D8%A9%20%D8%A7%D9%84%D9%87%D8%A7%D9%85%D8%A7%D8%AA%20%D9%84%D9%84%D8%A8%D9%84%D8%A7%D8%B3%D8%AA%D9%8A%D9%83%20(%D8%A7%D9%84%D8%AF%D9%85%D8%A7%D9%85)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="phone-chip">0539298713</a>[span_10](start_span)[span_10](end_span)
+                <a href="https://wa.me/966539298713?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20%D9%85%D9%86%20%D9%82%D9%85%D8%A9%20%D8%A7%D9%84%D9%87%D8%A7%D9%85%D8%A7%D8%AA%20%D9%84%D9%84%D8%A8%D9%84%D8%A7%D8%B3%D8%AA%D9%8A%D9%83%20(%D8%A7%D9%84%D8%AF%D9%85%D8%A7%D9%85)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="phone-chip">0539298713</a>
               </div>
             </div>
             <a href="https://wa.me/966577348040?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20%D9%85%D9%86%20%D9%82%D9%85%D8%A9%20%D8%A7%D9%84%D9%87%D8%A7%D9%85%D8%A7%D8%AA%20%D9%84%D9%84%D8%A8%D9%84%D8%A7%D8%B3%D8%AA%D9%8A%D9%83%20(%D8%A7%D9%84%D8%AF%D9%85%D8%A7%D9%85)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="branch-btn" style="background: #0f172a;">
@@ -645,7 +643,7 @@
               </div>
               <div>
                 <strong style="font-size: 11.5px; color: var(--navy);">الإيميل:</strong>
-                <a href="mailto:najoomplastic@gmail.com" class="email-link">najoomplastic@gmail.com</a>[span_11](start_span)[span_11](end_span)
+                <a href="mailto:najoomplastic@gmail.com" class="email-link">najoomplastic@gmail.com</a>
               </div>
             </div>
             <a href="https://wa.me/966506744437?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20%D9%85%D9%86%20%D9%84%D8%A3%D9%84%D8%A3%D8%A9%20%D8%A7%D9%84%D9%86%D8%AC%D9%88%D9%85%20%D9%84%D9%84%D8%A8%D9%84%D8%A7%D8%B3%D8%AA%D9%8A%D9%83%20(%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="branch-btn" style="background: #a16207;">
@@ -710,14 +708,14 @@
     </section>
   </main>
 
-  <!-- الفوتر الرسمي مع نظام أوقات العمل بالشفتين -->
+  <!-- الفوتر الرسمي -->
   <footer class="site-footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-col">
           <h4 data-i18n="ft_c_name">شركة لألأة النجوم التجارية</h4>
           <p data-i18n="ft_c_desc">شركة سعودية رائدة في استيراد وتوزيع المواد الغذائية والبلاستيك والحلويات والسناكات بالجملة لقطاع الأعمال منذ 1993م.</p>
-          <p style="margin-top: 10px;"><strong data-i18n="ft_email">البريد الإلكتروني للإدارة:</strong><br><a href="mailto:starcoldstorehasa@gmail.com" style="color: #cbd5e1; direction: ltr; display: inline-block;">starcoldstorehasa@gmail.com</a></p>[span_12](start_span)[span_12](end_span)
+          <p style="margin-top: 10px;"><strong data-i18n="ft_email">البريد الإلكتروني للإدارة:</strong><br><a href="mailto:starcoldstorehasa@gmail.com" style="color: #cbd5e1; direction: ltr; display: inline-block;">starcoldstorehasa@gmail.com</a></p>
         </div>
         <div class="footer-col">
           <h4 data-i18n="ft_legal_h">البيانات الرسمية</h4>
@@ -737,7 +735,7 @@
     </div>
   </footer>
 
-  <!-- قائمة الواتساب العائمة المتعددة لجميع مسؤولي المبيعات والفروع -->
+  <!-- قائمة الواتساب العائمة المتعددة -->
   <div class="wa-widget-container">
     <div class="wa-popup-menu" id="waPopup">
       <div class="wa-menu-header" data-i18n="wa_popup_title">اختر جهة التواصل المباشر عبر واتساب</div>
@@ -745,23 +743,23 @@
       <div class="wa-menu-sub" data-i18n="wa_group_ahsa">مبيعات المواد الغذائية (الأحساء):</div>
       <a href="https://wa.me/966533511159?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="wa-menu-item">
         <span class="wa-item-name">مبيعات الأحساء (1)</span>
-        <span class="wa-item-num">0533511159</span>[span_13](start_span)[span_13](end_span)
+        <span class="wa-item-num">0533511159</span>
       </a>
       <a href="https://wa.me/966500603880?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="wa-menu-item">
         <span class="wa-item-name">مبيعات الأحساء (2)</span>
-        <span class="wa-item-num">0500603880</span>[span_14](start_span)[span_14](end_span)
+        <span class="wa-item-num">0500603880</span>
       </a>
       <a href="https://wa.me/966500517660?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="wa-menu-item">
         <span class="wa-item-name">مبيعات الأحساء (3)</span>
-        <span class="wa-item-num">0500517660</span>[span_15](start_span)[span_15](end_span)
+        <span class="wa-item-num">0500517660</span>
       </a>
       <a href="https://wa.me/966507662117?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="wa-menu-item">
         <span class="wa-item-name">مبيعات الأحساء (4)</span>
-        <span class="wa-item-num">0507662117</span>[span_16](start_span)[span_16](end_span)
+        <span class="wa-item-num">0507662117</span>
       </a>
       <a href="https://wa.me/966547277188?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%B1%D8%BA%D8%A8%20%D8%A8%D8%B7%D9%84%D8%A8%20%D8%AA%D8%B3%D8%B9%D9%8A%D8%B1%D8%A9%20%D8%AC%D9%85%D9%84%D8%A9%20(%D9%81%D8%B1%D8%B9%20%D8%A7%D9%84%D8%A3%D8%AD%D8%B3%D8%A7%D8%A1)%20%D8%A8%D8%AE%D8%B5%D9%88%D8%B5:%20" target="_blank" class="wa-menu-item">
         <span class="wa-item-name">مبيعات الأحساء (5)</span>
-        <span class="wa-item-num">0547277188</span>[span_17](start_span)[span_17](end_span)
+        <span class="wa-item-num">0547277188</span>
       </a>
 
       <div class="wa-menu-sub" data-i18n="wa_group_other">الفروع والأنشطة الأخرى:</div>
@@ -1166,7 +1164,7 @@
         br_dam_h: "لألأة النجوم للمواد الغذائية — الدمام",
         br_dam_p: "طريق الأمير نايف بن عبدالعزيز، مقابل سوق الخضار المركزي<br><span class=\"postal-badge\">الرمز البريدي: 32432</span>",
         br_ahsa_h: "لألأة النجوم للمواد الغذائية — الأحساء",
-        br_ahsa_p: "شارع الملك عبدالله - محاسن، بجانب مبنى بلدية المبرز[span_18](start_span)[span_18](end_span)<br>ص.ب 8201 - <span class=\"postal-badge\">الرمز البريدي: 31482</span>[span_19](start_span)[span_19](end_span)",
+        br_ahsa_p: "شارع الملك عبدالله - محاسن، بجانب مبنى بلدية المبرز<br>ص.ب 8201 - <span class=\"postal-badge\">الرمز البريدي: 31482</span>",
         lbl_sales_contact: "أرقام المبيعات والتواصل:",
         br_hamat_h: "الهامات للبلاستيك والمنظفات — الدمام",
         br_hamat_p: "حي المحمدية، طريق الأمير نايف بن عبدالعزيز، الدمام<br><span class=\"postal-badge\">الرمز البريدي: 32432</span>",
